@@ -2,7 +2,7 @@
 
   (general
     (thickness 1.6)
-    (drawings 55)
+    (drawings 56)
     (tracks 696)
     (zones 0)
     (modules 41)
@@ -2102,6 +2102,9 @@
     )
   )
 
+  (gr_text "JLCJLC\nJLCJLC" (at 160.3 99.5) (layer F.SilkS) (tstamp 5DF98407)
+    (effects (font (size 0.75 0.75) (thickness 0.15)))
+  )
   (gr_text A5 (at 158.5 109.4) (layer F.SilkS) (tstamp 5DD7E967)
     (effects (font (size 0.75 0.75) (thickness 0.15)))
   )
@@ -2231,7 +2234,7 @@
   (gr_text MOSI (at 163.5 109.4) (layer B.SilkS) (tstamp 5DD7D978)
     (effects (font (size 0.75 0.75) (thickness 0.15)) (justify mirror))
   )
-  (gr_text MISO (at 166.2 109.4) (layer B.SilkS) (tstamp 5DD7D974)
+  (gr_text MISO (at 166.4 109.4) (layer B.SilkS) (tstamp 5DD7D974)
     (effects (font (size 0.75 0.75) (thickness 0.15)) (justify mirror))
   )
   (gr_text 0 (at 168.7 109.4) (layer B.SilkS) (tstamp 5DD7D971)
