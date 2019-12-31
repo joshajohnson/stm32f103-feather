@@ -1,0 +1,34 @@
+{
+  "tasks": [
+    {
+      "label": "Build STM",
+      "type": "process",
+      "command": "${command:stm32-for-vscode.build}",
+      "options": {
+        "cwd": "${workspaceRoot}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "Flash STM",
+      "type": "process",
+      "command": "${command:stm32-for-vscode.flash}",
+      "options": {
+        "cwd": "${workspaceRoot}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [
+        "$gcc"
+      ]
+    }
+  ]
+}
