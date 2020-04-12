@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccj37QNY.s 			page 1
+ARM GAS  /tmp/cc72PT8r.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
   31:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   *
   32:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   ******************************************************************************
   33:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   */
-ARM GAS  /tmp/ccj37QNY.s 			page 2
+ARM GAS  /tmp/cc72PT8r.s 			page 2
 
 
   34:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c **** 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
   88:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c **** /** @defgroup HAL_Exported_Functions HAL Exported Functions
   89:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   * @{
   90:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   */
-ARM GAS  /tmp/ccj37QNY.s 			page 3
+ARM GAS  /tmp/cc72PT8r.s 			page 3
 
 
   91:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c **** 
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  145:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c **** #if (PREFETCH_ENABLE != 0)
  146:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c **** #if defined(STM32F101x6) || defined(STM32F101xB) || defined(STM32F101xE) || defined(STM32F101xG) ||
  147:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****     defined(STM32F102x6) || defined(STM32F102xB) || \
-ARM GAS  /tmp/ccj37QNY.s 			page 4
+ARM GAS  /tmp/cc72PT8r.s 			page 4
 
 
  148:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****     defined(STM32F103x6) || defined(STM32F103xB) || defined(STM32F103xE) || defined(STM32F103xG) ||
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
   26              		.loc 1 201 0
   27              		.cfi_startproc
   28              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/ccj37QNY.s 			page 5
+ARM GAS  /tmp/cc72PT8r.s 			page 5
 
 
   29              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
   71              	.LCFI0:
   72              		.cfi_def_cfa_offset 8
   73              		.cfi_offset 4, -8
-ARM GAS  /tmp/ccj37QNY.s 			page 6
+ARM GAS  /tmp/cc72PT8r.s 			page 6
 
 
   74              		.cfi_offset 14, -4
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  232:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   * @retval HAL status
  233:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   */
  234:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c **** __weak HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
-ARM GAS  /tmp/ccj37QNY.s 			page 7
+ARM GAS  /tmp/cc72PT8r.s 			page 7
 
 
  235:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c **** {
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  145              		.loc 1 246 0
  146 0032 054B     		ldr	r3, .L13+8
  147 0034 1C60     		str	r4, [r3]
-ARM GAS  /tmp/ccj37QNY.s 			page 8
+ARM GAS  /tmp/cc72PT8r.s 			page 8
 
 
  251:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   }
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  160:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c **** 
  195              		.loc 1 160 0
  196 0012 0020     		movs	r0, #0
-ARM GAS  /tmp/ccj37QNY.s 			page 9
+ARM GAS  /tmp/cc72PT8r.s 			page 9
 
 
  197 0014 FFF7FEFF 		bl	HAL_InitTick
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  285:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   * @brief This function is called to increment  a global variable "uwTick"
  286:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   *        used as application time base.
  287:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   * @note In the default implementation, this variable is incremented each 1ms
-ARM GAS  /tmp/ccj37QNY.s 			page 10
+ARM GAS  /tmp/cc72PT8r.s 			page 10
 
 
  288:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   *       in SysTick ISR.
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  259              		.loc 1 306 0
  260 0000 014B     		ldr	r3, .L23
  261 0002 1868     		ldr	r0, [r3]
-ARM GAS  /tmp/ccj37QNY.s 			page 11
+ARM GAS  /tmp/cc72PT8r.s 			page 11
 
 
  307:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c **** }
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  320:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   * @retval status
  321:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   */
  322:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c **** HAL_StatusTypeDef HAL_SetTickFreq(HAL_TickFreqTypeDef Freq)
-ARM GAS  /tmp/ccj37QNY.s 			page 12
+ARM GAS  /tmp/cc72PT8r.s 			page 12
 
 
  323:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c **** {
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  344              		.cfi_def_cfa_offset 0
  345              		.cfi_restore 4
  346              		.cfi_restore 14
-ARM GAS  /tmp/ccj37QNY.s 			page 13
+ARM GAS  /tmp/cc72PT8r.s 			page 13
 
 
  324:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   assert_param(IS_TICKFREQ(Freq));
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  394              		.fpu softvfp
  396              	HAL_Delay:
  397              	.LFB75:
-ARM GAS  /tmp/ccj37QNY.s 			page 14
+ARM GAS  /tmp/cc72PT8r.s 			page 14
 
 
  348:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c **** 
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  428 001a 401B     		subs	r0, r0, r5
  429 001c A042     		cmp	r0, r4
  430 001e FAD3     		bcc	.L42
-ARM GAS  /tmp/ccj37QNY.s 			page 15
+ARM GAS  /tmp/cc72PT8r.s 			page 15
 
 
  372:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   {
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  468              	.LFE76:
  470              		.section	.text.HAL_ResumeTick,"ax",%progbits
  471              		.align	1
-ARM GAS  /tmp/ccj37QNY.s 			page 16
+ARM GAS  /tmp/cc72PT8r.s 			page 16
 
 
  472              		.weak	HAL_ResumeTick
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  411:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   */
  412:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c **** uint32_t HAL_GetHalVersion(void)
  413:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c **** {
-ARM GAS  /tmp/ccj37QNY.s 			page 17
+ARM GAS  /tmp/cc72PT8r.s 			page 17
 
 
  509              		.loc 1 413 0
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  547              	.L56:
  548 0008 002004E0 		.word	-536600576
  549              		.cfi_endproc
-ARM GAS  /tmp/ccj37QNY.s 			page 18
+ARM GAS  /tmp/cc72PT8r.s 			page 18
 
 
  550              	.LFE79:
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  450:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   * @brief  Returns first word of the unique device identifier (UID based on 96 bits)
  451:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   * @retval Device identifier
  452:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   */
-ARM GAS  /tmp/ccj37QNY.s 			page 19
+ARM GAS  /tmp/cc72PT8r.s 			page 19
 
 
  453:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c **** uint32_t HAL_GetUIDw0(void)
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  634              		.global	HAL_GetUIDw2
  635              		.syntax unified
  636              		.thumb
-ARM GAS  /tmp/ccj37QNY.s 			page 20
+ARM GAS  /tmp/cc72PT8r.s 			page 20
 
 
  637              		.thumb_func
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  677 0008 5360     		str	r3, [r2, #4]
  483:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c **** }
  678              		.loc 1 483 0
-ARM GAS  /tmp/ccj37QNY.s 			page 21
+ARM GAS  /tmp/cc72PT8r.s 			page 21
 
 
  679 000a 7047     		bx	lr
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  720              		.thumb
  721              		.thumb_func
  722              		.fpu softvfp
-ARM GAS  /tmp/ccj37QNY.s 			page 22
+ARM GAS  /tmp/cc72PT8r.s 			page 22
 
 
  724              	HAL_DBGMCU_EnableDBGStopMode:
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  749              		.thumb
  750              		.thumb_func
  751              		.fpu softvfp
-ARM GAS  /tmp/ccj37QNY.s 			page 23
+ARM GAS  /tmp/cc72PT8r.s 			page 23
 
 
  753              	HAL_DBGMCU_DisableDBGStopMode:
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  555:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   *       Refer to errata sheet of these devices for more details.
  556:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   * @retval None
  557:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c ****   */
-ARM GAS  /tmp/ccj37QNY.s 			page 24
+ARM GAS  /tmp/cc72PT8r.s 			page 24
 
 
  558:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c **** void HAL_DBGMCU_EnableDBGStandbyMode(void)
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  821 0004 23F00403 		bic	r3, r3, #4
  822 0008 5360     		str	r3, [r2, #4]
  577:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c **** }
-ARM GAS  /tmp/ccj37QNY.s 			page 25
+ARM GAS  /tmp/cc72PT8r.s 			page 25
 
 
  823              		.loc 1 577 0
@@ -1471,91 +1471,91 @@ ARM GAS  /tmp/ccj37QNY.s 			page 1
  855              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
  856              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
  857              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
-ARM GAS  /tmp/ccj37QNY.s 			page 26
+ARM GAS  /tmp/cc72PT8r.s 			page 26
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f1xx_hal.c
-     /tmp/ccj37QNY.s:16     .text.HAL_MspInit:0000000000000000 $t
-     /tmp/ccj37QNY.s:23     .text.HAL_MspInit:0000000000000000 HAL_MspInit
-     /tmp/ccj37QNY.s:37     .text.HAL_MspDeInit:0000000000000000 $t
-     /tmp/ccj37QNY.s:44     .text.HAL_MspDeInit:0000000000000000 HAL_MspDeInit
-     /tmp/ccj37QNY.s:57     .text.HAL_DeInit:0000000000000000 $t
-     /tmp/ccj37QNY.s:64     .text.HAL_DeInit:0000000000000000 HAL_DeInit
-     /tmp/ccj37QNY.s:95     .text.HAL_DeInit:000000000000001c $d
-     /tmp/ccj37QNY.s:100    .text.HAL_InitTick:0000000000000000 $t
-     /tmp/ccj37QNY.s:107    .text.HAL_InitTick:0000000000000000 HAL_InitTick
-     /tmp/ccj37QNY.s:161    .text.HAL_InitTick:0000000000000040 $d
-     /tmp/ccj37QNY.s:168    .text.HAL_Init:0000000000000000 $t
-     /tmp/ccj37QNY.s:175    .text.HAL_Init:0000000000000000 HAL_Init
-     /tmp/ccj37QNY.s:208    .text.HAL_Init:0000000000000020 $d
-     /tmp/ccj37QNY.s:213    .text.HAL_IncTick:0000000000000000 $t
-     /tmp/ccj37QNY.s:220    .text.HAL_IncTick:0000000000000000 HAL_IncTick
-     /tmp/ccj37QNY.s:239    .text.HAL_IncTick:0000000000000010 $d
+     /tmp/cc72PT8r.s:16     .text.HAL_MspInit:0000000000000000 $t
+     /tmp/cc72PT8r.s:23     .text.HAL_MspInit:0000000000000000 HAL_MspInit
+     /tmp/cc72PT8r.s:37     .text.HAL_MspDeInit:0000000000000000 $t
+     /tmp/cc72PT8r.s:44     .text.HAL_MspDeInit:0000000000000000 HAL_MspDeInit
+     /tmp/cc72PT8r.s:57     .text.HAL_DeInit:0000000000000000 $t
+     /tmp/cc72PT8r.s:64     .text.HAL_DeInit:0000000000000000 HAL_DeInit
+     /tmp/cc72PT8r.s:95     .text.HAL_DeInit:000000000000001c $d
+     /tmp/cc72PT8r.s:100    .text.HAL_InitTick:0000000000000000 $t
+     /tmp/cc72PT8r.s:107    .text.HAL_InitTick:0000000000000000 HAL_InitTick
+     /tmp/cc72PT8r.s:161    .text.HAL_InitTick:0000000000000040 $d
+     /tmp/cc72PT8r.s:168    .text.HAL_Init:0000000000000000 $t
+     /tmp/cc72PT8r.s:175    .text.HAL_Init:0000000000000000 HAL_Init
+     /tmp/cc72PT8r.s:208    .text.HAL_Init:0000000000000020 $d
+     /tmp/cc72PT8r.s:213    .text.HAL_IncTick:0000000000000000 $t
+     /tmp/cc72PT8r.s:220    .text.HAL_IncTick:0000000000000000 HAL_IncTick
+     /tmp/cc72PT8r.s:239    .text.HAL_IncTick:0000000000000010 $d
                             *COM*:0000000000000004 uwTick
-     /tmp/ccj37QNY.s:245    .text.HAL_GetTick:0000000000000000 $t
-     /tmp/ccj37QNY.s:252    .text.HAL_GetTick:0000000000000000 HAL_GetTick
-     /tmp/ccj37QNY.s:267    .text.HAL_GetTick:0000000000000008 $d
-     /tmp/ccj37QNY.s:272    .text.HAL_GetTickPrio:0000000000000000 $t
-     /tmp/ccj37QNY.s:279    .text.HAL_GetTickPrio:0000000000000000 HAL_GetTickPrio
-     /tmp/ccj37QNY.s:293    .text.HAL_GetTickPrio:0000000000000008 $d
-     /tmp/ccj37QNY.s:298    .text.HAL_SetTickFreq:0000000000000000 $t
-     /tmp/ccj37QNY.s:305    .text.HAL_SetTickFreq:0000000000000000 HAL_SetTickFreq
-     /tmp/ccj37QNY.s:357    .text.HAL_SetTickFreq:0000000000000028 $d
-     /tmp/ccj37QNY.s:363    .text.HAL_GetTickFreq:0000000000000000 $t
-     /tmp/ccj37QNY.s:370    .text.HAL_GetTickFreq:0000000000000000 HAL_GetTickFreq
-     /tmp/ccj37QNY.s:384    .text.HAL_GetTickFreq:0000000000000008 $d
-     /tmp/ccj37QNY.s:389    .text.HAL_Delay:0000000000000000 $t
-     /tmp/ccj37QNY.s:396    .text.HAL_Delay:0000000000000000 HAL_Delay
-     /tmp/ccj37QNY.s:437    .text.HAL_Delay:0000000000000024 $d
-     /tmp/ccj37QNY.s:442    .text.HAL_SuspendTick:0000000000000000 $t
-     /tmp/ccj37QNY.s:449    .text.HAL_SuspendTick:0000000000000000 HAL_SuspendTick
-     /tmp/ccj37QNY.s:466    .text.HAL_SuspendTick:000000000000000c $d
-     /tmp/ccj37QNY.s:471    .text.HAL_ResumeTick:0000000000000000 $t
-     /tmp/ccj37QNY.s:478    .text.HAL_ResumeTick:0000000000000000 HAL_ResumeTick
-     /tmp/ccj37QNY.s:495    .text.HAL_ResumeTick:000000000000000c $d
-     /tmp/ccj37QNY.s:500    .text.HAL_GetHalVersion:0000000000000000 $t
-     /tmp/ccj37QNY.s:507    .text.HAL_GetHalVersion:0000000000000000 HAL_GetHalVersion
-     /tmp/ccj37QNY.s:520    .text.HAL_GetHalVersion:0000000000000004 $d
-     /tmp/ccj37QNY.s:525    .text.HAL_GetREVID:0000000000000000 $t
-     /tmp/ccj37QNY.s:532    .text.HAL_GetREVID:0000000000000000 HAL_GetREVID
-     /tmp/ccj37QNY.s:548    .text.HAL_GetREVID:0000000000000008 $d
-     /tmp/ccj37QNY.s:553    .text.HAL_GetDEVID:0000000000000000 $t
-     /tmp/ccj37QNY.s:560    .text.HAL_GetDEVID:0000000000000000 HAL_GetDEVID
-     /tmp/ccj37QNY.s:576    .text.HAL_GetDEVID:000000000000000c $d
-     /tmp/ccj37QNY.s:581    .text.HAL_GetUIDw0:0000000000000000 $t
-     /tmp/ccj37QNY.s:588    .text.HAL_GetUIDw0:0000000000000000 HAL_GetUIDw0
-     /tmp/ccj37QNY.s:602    .text.HAL_GetUIDw0:0000000000000008 $d
-     /tmp/ccj37QNY.s:607    .text.HAL_GetUIDw1:0000000000000000 $t
-     /tmp/ccj37QNY.s:614    .text.HAL_GetUIDw1:0000000000000000 HAL_GetUIDw1
-     /tmp/ccj37QNY.s:628    .text.HAL_GetUIDw1:0000000000000008 $d
-     /tmp/ccj37QNY.s:633    .text.HAL_GetUIDw2:0000000000000000 $t
-     /tmp/ccj37QNY.s:640    .text.HAL_GetUIDw2:0000000000000000 HAL_GetUIDw2
-ARM GAS  /tmp/ccj37QNY.s 			page 27
+     /tmp/cc72PT8r.s:245    .text.HAL_GetTick:0000000000000000 $t
+     /tmp/cc72PT8r.s:252    .text.HAL_GetTick:0000000000000000 HAL_GetTick
+     /tmp/cc72PT8r.s:267    .text.HAL_GetTick:0000000000000008 $d
+     /tmp/cc72PT8r.s:272    .text.HAL_GetTickPrio:0000000000000000 $t
+     /tmp/cc72PT8r.s:279    .text.HAL_GetTickPrio:0000000000000000 HAL_GetTickPrio
+     /tmp/cc72PT8r.s:293    .text.HAL_GetTickPrio:0000000000000008 $d
+     /tmp/cc72PT8r.s:298    .text.HAL_SetTickFreq:0000000000000000 $t
+     /tmp/cc72PT8r.s:305    .text.HAL_SetTickFreq:0000000000000000 HAL_SetTickFreq
+     /tmp/cc72PT8r.s:357    .text.HAL_SetTickFreq:0000000000000028 $d
+     /tmp/cc72PT8r.s:363    .text.HAL_GetTickFreq:0000000000000000 $t
+     /tmp/cc72PT8r.s:370    .text.HAL_GetTickFreq:0000000000000000 HAL_GetTickFreq
+     /tmp/cc72PT8r.s:384    .text.HAL_GetTickFreq:0000000000000008 $d
+     /tmp/cc72PT8r.s:389    .text.HAL_Delay:0000000000000000 $t
+     /tmp/cc72PT8r.s:396    .text.HAL_Delay:0000000000000000 HAL_Delay
+     /tmp/cc72PT8r.s:437    .text.HAL_Delay:0000000000000024 $d
+     /tmp/cc72PT8r.s:442    .text.HAL_SuspendTick:0000000000000000 $t
+     /tmp/cc72PT8r.s:449    .text.HAL_SuspendTick:0000000000000000 HAL_SuspendTick
+     /tmp/cc72PT8r.s:466    .text.HAL_SuspendTick:000000000000000c $d
+     /tmp/cc72PT8r.s:471    .text.HAL_ResumeTick:0000000000000000 $t
+     /tmp/cc72PT8r.s:478    .text.HAL_ResumeTick:0000000000000000 HAL_ResumeTick
+     /tmp/cc72PT8r.s:495    .text.HAL_ResumeTick:000000000000000c $d
+     /tmp/cc72PT8r.s:500    .text.HAL_GetHalVersion:0000000000000000 $t
+     /tmp/cc72PT8r.s:507    .text.HAL_GetHalVersion:0000000000000000 HAL_GetHalVersion
+     /tmp/cc72PT8r.s:520    .text.HAL_GetHalVersion:0000000000000004 $d
+     /tmp/cc72PT8r.s:525    .text.HAL_GetREVID:0000000000000000 $t
+     /tmp/cc72PT8r.s:532    .text.HAL_GetREVID:0000000000000000 HAL_GetREVID
+     /tmp/cc72PT8r.s:548    .text.HAL_GetREVID:0000000000000008 $d
+     /tmp/cc72PT8r.s:553    .text.HAL_GetDEVID:0000000000000000 $t
+     /tmp/cc72PT8r.s:560    .text.HAL_GetDEVID:0000000000000000 HAL_GetDEVID
+     /tmp/cc72PT8r.s:576    .text.HAL_GetDEVID:000000000000000c $d
+     /tmp/cc72PT8r.s:581    .text.HAL_GetUIDw0:0000000000000000 $t
+     /tmp/cc72PT8r.s:588    .text.HAL_GetUIDw0:0000000000000000 HAL_GetUIDw0
+     /tmp/cc72PT8r.s:602    .text.HAL_GetUIDw0:0000000000000008 $d
+     /tmp/cc72PT8r.s:607    .text.HAL_GetUIDw1:0000000000000000 $t
+     /tmp/cc72PT8r.s:614    .text.HAL_GetUIDw1:0000000000000000 HAL_GetUIDw1
+     /tmp/cc72PT8r.s:628    .text.HAL_GetUIDw1:0000000000000008 $d
+     /tmp/cc72PT8r.s:633    .text.HAL_GetUIDw2:0000000000000000 $t
+     /tmp/cc72PT8r.s:640    .text.HAL_GetUIDw2:0000000000000000 HAL_GetUIDw2
+ARM GAS  /tmp/cc72PT8r.s 			page 27
 
 
-     /tmp/ccj37QNY.s:654    .text.HAL_GetUIDw2:0000000000000008 $d
-     /tmp/ccj37QNY.s:659    .text.HAL_DBGMCU_EnableDBGSleepMode:0000000000000000 $t
-     /tmp/ccj37QNY.s:666    .text.HAL_DBGMCU_EnableDBGSleepMode:0000000000000000 HAL_DBGMCU_EnableDBGSleepMode
-     /tmp/ccj37QNY.s:683    .text.HAL_DBGMCU_EnableDBGSleepMode:000000000000000c $d
-     /tmp/ccj37QNY.s:688    .text.HAL_DBGMCU_DisableDBGSleepMode:0000000000000000 $t
-     /tmp/ccj37QNY.s:695    .text.HAL_DBGMCU_DisableDBGSleepMode:0000000000000000 HAL_DBGMCU_DisableDBGSleepMode
-     /tmp/ccj37QNY.s:712    .text.HAL_DBGMCU_DisableDBGSleepMode:000000000000000c $d
-     /tmp/ccj37QNY.s:717    .text.HAL_DBGMCU_EnableDBGStopMode:0000000000000000 $t
-     /tmp/ccj37QNY.s:724    .text.HAL_DBGMCU_EnableDBGStopMode:0000000000000000 HAL_DBGMCU_EnableDBGStopMode
-     /tmp/ccj37QNY.s:741    .text.HAL_DBGMCU_EnableDBGStopMode:000000000000000c $d
-     /tmp/ccj37QNY.s:746    .text.HAL_DBGMCU_DisableDBGStopMode:0000000000000000 $t
-     /tmp/ccj37QNY.s:753    .text.HAL_DBGMCU_DisableDBGStopMode:0000000000000000 HAL_DBGMCU_DisableDBGStopMode
-     /tmp/ccj37QNY.s:770    .text.HAL_DBGMCU_DisableDBGStopMode:000000000000000c $d
-     /tmp/ccj37QNY.s:775    .text.HAL_DBGMCU_EnableDBGStandbyMode:0000000000000000 $t
-     /tmp/ccj37QNY.s:782    .text.HAL_DBGMCU_EnableDBGStandbyMode:0000000000000000 HAL_DBGMCU_EnableDBGStandbyMode
-     /tmp/ccj37QNY.s:799    .text.HAL_DBGMCU_EnableDBGStandbyMode:000000000000000c $d
-     /tmp/ccj37QNY.s:804    .text.HAL_DBGMCU_DisableDBGStandbyMode:0000000000000000 $t
-     /tmp/ccj37QNY.s:811    .text.HAL_DBGMCU_DisableDBGStandbyMode:0000000000000000 HAL_DBGMCU_DisableDBGStandbyMode
-     /tmp/ccj37QNY.s:828    .text.HAL_DBGMCU_DisableDBGStandbyMode:000000000000000c $d
-     /tmp/ccj37QNY.s:839    .data.uwTickFreq:0000000000000000 uwTickFreq
-     /tmp/ccj37QNY.s:846    .data.uwTickPrio:0000000000000000 uwTickPrio
-     /tmp/ccj37QNY.s:842    .data.uwTickPrio:0000000000000000 $d
+     /tmp/cc72PT8r.s:654    .text.HAL_GetUIDw2:0000000000000008 $d
+     /tmp/cc72PT8r.s:659    .text.HAL_DBGMCU_EnableDBGSleepMode:0000000000000000 $t
+     /tmp/cc72PT8r.s:666    .text.HAL_DBGMCU_EnableDBGSleepMode:0000000000000000 HAL_DBGMCU_EnableDBGSleepMode
+     /tmp/cc72PT8r.s:683    .text.HAL_DBGMCU_EnableDBGSleepMode:000000000000000c $d
+     /tmp/cc72PT8r.s:688    .text.HAL_DBGMCU_DisableDBGSleepMode:0000000000000000 $t
+     /tmp/cc72PT8r.s:695    .text.HAL_DBGMCU_DisableDBGSleepMode:0000000000000000 HAL_DBGMCU_DisableDBGSleepMode
+     /tmp/cc72PT8r.s:712    .text.HAL_DBGMCU_DisableDBGSleepMode:000000000000000c $d
+     /tmp/cc72PT8r.s:717    .text.HAL_DBGMCU_EnableDBGStopMode:0000000000000000 $t
+     /tmp/cc72PT8r.s:724    .text.HAL_DBGMCU_EnableDBGStopMode:0000000000000000 HAL_DBGMCU_EnableDBGStopMode
+     /tmp/cc72PT8r.s:741    .text.HAL_DBGMCU_EnableDBGStopMode:000000000000000c $d
+     /tmp/cc72PT8r.s:746    .text.HAL_DBGMCU_DisableDBGStopMode:0000000000000000 $t
+     /tmp/cc72PT8r.s:753    .text.HAL_DBGMCU_DisableDBGStopMode:0000000000000000 HAL_DBGMCU_DisableDBGStopMode
+     /tmp/cc72PT8r.s:770    .text.HAL_DBGMCU_DisableDBGStopMode:000000000000000c $d
+     /tmp/cc72PT8r.s:775    .text.HAL_DBGMCU_EnableDBGStandbyMode:0000000000000000 $t
+     /tmp/cc72PT8r.s:782    .text.HAL_DBGMCU_EnableDBGStandbyMode:0000000000000000 HAL_DBGMCU_EnableDBGStandbyMode
+     /tmp/cc72PT8r.s:799    .text.HAL_DBGMCU_EnableDBGStandbyMode:000000000000000c $d
+     /tmp/cc72PT8r.s:804    .text.HAL_DBGMCU_DisableDBGStandbyMode:0000000000000000 $t
+     /tmp/cc72PT8r.s:811    .text.HAL_DBGMCU_DisableDBGStandbyMode:0000000000000000 HAL_DBGMCU_DisableDBGStandbyMode
+     /tmp/cc72PT8r.s:828    .text.HAL_DBGMCU_DisableDBGStandbyMode:000000000000000c $d
+     /tmp/cc72PT8r.s:839    .data.uwTickFreq:0000000000000000 uwTickFreq
+     /tmp/cc72PT8r.s:846    .data.uwTickPrio:0000000000000000 uwTickPrio
+     /tmp/cc72PT8r.s:842    .data.uwTickPrio:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 HAL_SYSTICK_Config
