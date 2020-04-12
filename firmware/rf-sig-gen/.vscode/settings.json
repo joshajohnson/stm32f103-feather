@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "usbd_cdc_if.h": "c",
+        "dwt_stm32_delay.h": "c"
+    }
+}

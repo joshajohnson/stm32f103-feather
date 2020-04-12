@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"main.h": "c"
+		},
+		"cortex-debug.openocdPath": "openocd",
+		"cortex-debug.armToolchainPath": ""
+	}
+}

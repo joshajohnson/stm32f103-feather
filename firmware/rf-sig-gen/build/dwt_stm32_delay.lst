@@ -1,0 +1,148 @@
+ARM GAS  /tmp/ccMu3VwV.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"dwt_stm32_delay.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.DWT_Delay_Init,"ax",%progbits
+  16              		.align	1
+  17              		.global	DWT_Delay_Init
+  18              		.syntax unified
+  19              		.thumb
+  20              		.thumb_func
+  21              		.fpu softvfp
+  23              	DWT_Delay_Init:
+  24              	.LFB66:
+  25              		.file 1 "Src/dwt_stm32_delay.c"
+   1:Src/dwt_stm32_delay.c **** #include "dwt_stm32_delay.h"
+   2:Src/dwt_stm32_delay.c **** 
+   3:Src/dwt_stm32_delay.c **** 
+   4:Src/dwt_stm32_delay.c **** /**
+   5:Src/dwt_stm32_delay.c ****  * @brief  Initializes DWT_Clock_Cycle_Count for DWT_Delay_us function
+   6:Src/dwt_stm32_delay.c ****  * @return Error DWT counter
+   7:Src/dwt_stm32_delay.c ****  *         1: clock cycle counter not started
+   8:Src/dwt_stm32_delay.c ****  *         0: clock cycle counter works
+   9:Src/dwt_stm32_delay.c ****  */
+  10:Src/dwt_stm32_delay.c **** uint32_t DWT_Delay_Init(void) {
+  26              		.loc 1 10 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              		@ link register save eliminated.
+  11:Src/dwt_stm32_delay.c ****   /* Disable TRC */
+  12:Src/dwt_stm32_delay.c ****   CoreDebug->DEMCR &= ~CoreDebug_DEMCR_TRCENA_Msk; // ~0x01000000;
+  31              		.loc 1 12 0
+  32 0000 0E4B     		ldr	r3, .L5
+  33 0002 DA68     		ldr	r2, [r3, #12]
+  34 0004 22F08072 		bic	r2, r2, #16777216
+  35 0008 DA60     		str	r2, [r3, #12]
+  13:Src/dwt_stm32_delay.c ****   /* Enable TRC */
+  14:Src/dwt_stm32_delay.c ****   CoreDebug->DEMCR |=  CoreDebug_DEMCR_TRCENA_Msk; // 0x01000000;
+  36              		.loc 1 14 0
+  37 000a DA68     		ldr	r2, [r3, #12]
+  38 000c 42F08072 		orr	r2, r2, #16777216
+  39 0010 DA60     		str	r2, [r3, #12]
+  15:Src/dwt_stm32_delay.c **** 
+  16:Src/dwt_stm32_delay.c ****   /* Disable clock cycle counter */
+  17:Src/dwt_stm32_delay.c ****   DWT->CTRL &= ~DWT_CTRL_CYCCNTENA_Msk; //~0x00000001;
+  40              		.loc 1 17 0
+  41 0012 0B4B     		ldr	r3, .L5+4
+ARM GAS  /tmp/ccMu3VwV.s 			page 2
+
+
+  42 0014 1A68     		ldr	r2, [r3]
+  43 0016 22F00102 		bic	r2, r2, #1
+  44 001a 1A60     		str	r2, [r3]
+  18:Src/dwt_stm32_delay.c ****   /* Enable  clock cycle counter */
+  19:Src/dwt_stm32_delay.c ****   DWT->CTRL |=  DWT_CTRL_CYCCNTENA_Msk; //0x00000001;
+  45              		.loc 1 19 0
+  46 001c 1A68     		ldr	r2, [r3]
+  47 001e 42F00102 		orr	r2, r2, #1
+  48 0022 1A60     		str	r2, [r3]
+  20:Src/dwt_stm32_delay.c **** 
+  21:Src/dwt_stm32_delay.c ****   /* Reset the clock cycle counter value */
+  22:Src/dwt_stm32_delay.c ****   DWT->CYCCNT = 0;
+  49              		.loc 1 22 0
+  50 0024 0022     		movs	r2, #0
+  51 0026 5A60     		str	r2, [r3, #4]
+  23:Src/dwt_stm32_delay.c **** 
+  24:Src/dwt_stm32_delay.c ****      /* 3 NO OPERATION instructions */
+  25:Src/dwt_stm32_delay.c ****      __ASM volatile ("NOP");
+  52              		.loc 1 25 0
+  53              		.syntax unified
+  54              	@ 25 "Src/dwt_stm32_delay.c" 1
+  55 0028 00BF     		NOP
+  56              	@ 0 "" 2
+  26:Src/dwt_stm32_delay.c ****      __ASM volatile ("NOP");
+  57              		.loc 1 26 0
+  58              	@ 26 "Src/dwt_stm32_delay.c" 1
+  59 002a 00BF     		NOP
+  60              	@ 0 "" 2
+  27:Src/dwt_stm32_delay.c ****   __ASM volatile ("NOP");
+  61              		.loc 1 27 0
+  62              	@ 27 "Src/dwt_stm32_delay.c" 1
+  63 002c 00BF     		NOP
+  64              	@ 0 "" 2
+  28:Src/dwt_stm32_delay.c **** 
+  29:Src/dwt_stm32_delay.c ****   /* Check if clock cycle counter has started */
+  30:Src/dwt_stm32_delay.c ****      if(DWT->CYCCNT)
+  65              		.loc 1 30 0
+  66              		.thumb
+  67              		.syntax unified
+  68 002e 5B68     		ldr	r3, [r3, #4]
+  69 0030 0BB9     		cbnz	r3, .L4
+  31:Src/dwt_stm32_delay.c ****      {
+  32:Src/dwt_stm32_delay.c ****        return 0; /*clock cycle counter started*/
+  33:Src/dwt_stm32_delay.c ****      }
+  34:Src/dwt_stm32_delay.c ****      else
+  35:Src/dwt_stm32_delay.c ****   {
+  36:Src/dwt_stm32_delay.c ****     return 1; /*clock cycle counter not started*/
+  70              		.loc 1 36 0
+  71 0032 0120     		movs	r0, #1
+  37:Src/dwt_stm32_delay.c ****   }
+  38:Src/dwt_stm32_delay.c **** }
+  72              		.loc 1 38 0
+  73 0034 7047     		bx	lr
+  74              	.L4:
+  32:Src/dwt_stm32_delay.c ****      }
+  75              		.loc 1 32 0
+  76 0036 1046     		mov	r0, r2
+ARM GAS  /tmp/ccMu3VwV.s 			page 3
+
+
+  77 0038 7047     		bx	lr
+  78              	.L6:
+  79 003a 00BF     		.align	2
+  80              	.L5:
+  81 003c F0ED00E0 		.word	-536810000
+  82 0040 001000E0 		.word	-536866816
+  83              		.cfi_endproc
+  84              	.LFE66:
+  86              		.text
+  87              	.Letext0:
+  88              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+  89              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+  90              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+  91              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+  92              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ARM GAS  /tmp/ccMu3VwV.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 dwt_stm32_delay.c
+     /tmp/ccMu3VwV.s:16     .text.DWT_Delay_Init:0000000000000000 $t
+     /tmp/ccMu3VwV.s:23     .text.DWT_Delay_Init:0000000000000000 DWT_Delay_Init
+     /tmp/ccMu3VwV.s:81     .text.DWT_Delay_Init:000000000000003c $d
+
+NO UNDEFINED SYMBOLS
