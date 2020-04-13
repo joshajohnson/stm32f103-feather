@@ -52,7 +52,11 @@ extern FIFO RX_FIFO;
 
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
+#define FRAC_N 		0
+#define INT_N		1
 
+#define nVERBOSE 	0
+#define VERBOSE 	1
 /* USER CODE END EC */
 
 /* Exported macro ------------------------------------------------------------*/

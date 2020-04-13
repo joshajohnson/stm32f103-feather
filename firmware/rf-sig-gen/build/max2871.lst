@@ -1,0 +1,2311 @@
+ARM GAS  /tmp/cceaaxGR.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"max2871.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.max2871SpiWrite,"ax",%progbits
+  16              		.align	1
+  17              		.global	max2871SpiWrite
+  18              		.syntax unified
+  19              		.thumb
+  20              		.thumb_func
+  21              		.fpu softvfp
+  23              	max2871SpiWrite:
+  24              	.LFB70:
+  25              		.file 1 "Src/max2871.c"
+   1:Src/max2871.c **** #include "main.h"
+   2:Src/max2871.c **** #include "max2871.h"
+   3:Src/max2871.c **** #include "max2871_registers.h"
+   4:Src/max2871.c **** #include "dwt_stm32_delay.h"
+   5:Src/max2871.c **** #include "usbd_cdc_if.h"
+   6:Src/max2871.c **** #include <string.h>
+   7:Src/max2871.c **** #include <stdlib.h>
+   8:Src/max2871.c **** #include <stdio.h>
+   9:Src/max2871.c **** #include <math.h>
+  10:Src/max2871.c **** 
+  11:Src/max2871.c **** #define MOD 4095
+  12:Src/max2871.c **** #define STR1_SIZE 128
+  13:Src/max2871.c **** uint8_t str1[STR1_SIZE] = "";
+  14:Src/max2871.c **** 
+  15:Src/max2871.c **** struct MAX2871Struct max2871Status;
+  16:Src/max2871.c **** 
+  17:Src/max2871.c **** // Setup of the MAX2871 PLL, 50MHz, output off
+  18:Src/max2871.c **** void max2871Setup(struct MAX2871Struct *max2871Status)
+  19:Src/max2871.c **** {
+  20:Src/max2871.c **** 	// Set to initial known state
+  21:Src/max2871.c **** 	max2871ChipEnable(max2871Status);
+  22:Src/max2871.c **** 	max2871RFDisable(max2871Status);
+  23:Src/max2871.c **** 	HAL_GPIO_WritePin(MAX_CLK_GPIO_Port, MAX_CLK_Pin, 0);
+  24:Src/max2871.c **** 	HAL_GPIO_WritePin(MAX_DAT_GPIO_Port, MAX_DAT_Pin, 0);
+  25:Src/max2871.c **** 	HAL_GPIO_WritePin(MAX_MUX_GPIO_Port, MAX_MUX_Pin, 0);
+  26:Src/max2871.c **** 	HAL_GPIO_WritePin(MAX_LE_GPIO_Port, MAX_LE_Pin, 1);
+  27:Src/max2871.c **** 
+  28:Src/max2871.c **** 	max2871RegsInit();
+  29:Src/max2871.c **** 
+  30:Src/max2871.c **** 	// Initial writing of registers, with wait time
+  31:Src/max2871.c **** 	uint32_t txReg;
+  32:Src/max2871.c **** 	for (int j = 1; j >= 0; j--)
+  33:Src/max2871.c **** 	{
+ARM GAS  /tmp/cceaaxGR.s 			page 2
+
+
+  34:Src/max2871.c **** 		for (int i = 5; i >= 0; i--)
+  35:Src/max2871.c **** 		{
+  36:Src/max2871.c **** 			txReg = max2871GetRegister(i);
+  37:Src/max2871.c **** 			max2871SpiWrite(txReg);
+  38:Src/max2871.c **** 			if (i == 5) HAL_Delay(20);
+  39:Src/max2871.c **** 		}
+  40:Src/max2871.c **** 		HAL_Delay(20);
+  41:Src/max2871.c **** 	}
+  42:Src/max2871.c **** 
+  43:Src/max2871.c **** 	// Set initial register values
+  44:Src/max2871.c **** 	max2871Set_INT(0); 		// Frac N
+  45:Src/max2871.c **** 	max2871Set_N(83);		// Init to 50Mhz
+  46:Src/max2871.c **** 	max2871Set_FRAC(1365);
+  47:Src/max2871.c **** 	max2871Set_CPOC(0);
+  48:Src/max2871.c **** 	max2871Set_CPL(0);
+  49:Src/max2871.c **** 	max2871Set_CPT(0);
+  50:Src/max2871.c **** 	max2871Set_P(1);
+  51:Src/max2871.c **** 	max2871Set_M(4095);
+  52:Src/max2871.c **** 	max2871Set_LDS(1);
+  53:Src/max2871.c **** 	max2871Set_SDN(0);
+  54:Src/max2871.c **** 	max2871Set_MUX(0xC); 	// Reg 6 Readback 0xC
+  55:Src/max2871.c **** 	max2871Set_DBR(1);
+  56:Src/max2871.c **** 	max2871Set_RDIV2(0);
+  57:Src/max2871.c **** 	max2871Set_R(1); 		// 38.4MHz f_PFD
+  58:Src/max2871.c **** 	max2871Set_REG4DB(0);
+  59:Src/max2871.c **** 	max2871Set_CP(15);
+  60:Src/max2871.c **** 	max2871Set_LDF(0);
+  61:Src/max2871.c **** 	max2871Set_LDP(0);
+  62:Src/max2871.c **** 	max2871Set_PDP(1);
+  63:Src/max2871.c **** 	max2871Set_SHDN(0);
+  64:Src/max2871.c **** 	max2871Set_TRI(0);
+  65:Src/max2871.c **** 	max2871Set_RST(0);
+  66:Src/max2871.c **** 	max2871Set_VCO(0);
+  67:Src/max2871.c **** 	max2871Set_VAS_SHDN(0);
+  68:Src/max2871.c **** 	max2871Set_VAS_TEMP(1);
+  69:Src/max2871.c **** 	max2871Set_CSM(0);
+  70:Src/max2871.c **** 	max2871Set_MUTEDEL(1);
+  71:Src/max2871.c **** 	max2871Set_CDM(0);
+  72:Src/max2871.c **** 	max2871Set_CDIV(38);
+  73:Src/max2871.c **** 	max2871Set_SDLDO(0);
+  74:Src/max2871.c **** 	max2871Set_SDDIV(0);
+  75:Src/max2871.c **** 	max2871Set_SDREF(0);
+  76:Src/max2871.c **** 	max2871Set_BS(768);		//BS = fPFD / 50KHz
+  77:Src/max2871.c **** 	max2871Set_FB(1);
+  78:Src/max2871.c **** 	max2871Set_DIVA(6);
+  79:Src/max2871.c **** 	max2871Set_SDVCO(0);
+  80:Src/max2871.c **** 	max2871Set_MTLD(1);
+  81:Src/max2871.c **** 	max2871Set_BDIV(0);
+  82:Src/max2871.c **** 	max2871Set_RFB_EN(0);
+  83:Src/max2871.c **** 	max2871Set_BPWR(0);
+  84:Src/max2871.c **** 	max2871Set_RFA_EN(0);	// Begin with power off
+  85:Src/max2871.c **** 	max2871Set_APWR(3);
+  86:Src/max2871.c **** 	max2871Set_SDPLL(0);
+  87:Src/max2871.c **** 	max2871Set_F01(0);
+  88:Src/max2871.c **** 	max2871Set_LD(1);
+  89:Src/max2871.c **** 	max2871Set_Reserved();
+  90:Src/max2871.c **** 
+ARM GAS  /tmp/cceaaxGR.s 			page 3
+
+
+  91:Src/max2871.c **** 	// Update info in struct
+  92:Src/max2871.c **** 	max2871Status->RFA_EN = 0;
+  93:Src/max2871.c **** 	max2871Status->rfPower = 3;
+  94:Src/max2871.c **** 	max2871Status->frequency = 50;
+  95:Src/max2871.c **** 
+  96:Src/max2871.c **** 	// Send updated registers over SPI
+  97:Src/max2871.c **** 	max2871WriteRegisters();
+  98:Src/max2871.c **** 	HAL_Delay(10);
+  99:Src/max2871.c **** 
+ 100:Src/max2871.c **** 	// Check if the PLL has locked
+ 101:Src/max2871.c **** 	max2871CheckLD(max2871Status);
+ 102:Src/max2871.c **** }
+ 103:Src/max2871.c **** 
+ 104:Src/max2871.c **** // Writes given register to MAX2871
+ 105:Src/max2871.c **** void max2871SpiWrite(uint32_t r)
+ 106:Src/max2871.c **** {
+  26              		.loc 1 106 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              	.LVL0:
+  31 0000 70B5     		push	{r4, r5, r6, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 16
+  34              		.cfi_offset 4, -16
+  35              		.cfi_offset 5, -12
+  36              		.cfi_offset 6, -8
+  37              		.cfi_offset 14, -4
+  38 0002 0646     		mov	r6, r0
+ 107:Src/max2871.c **** 	// Ensure LE high
+ 108:Src/max2871.c **** 	HAL_GPIO_WritePin(MAX_LE_GPIO_Port, MAX_LE_Pin, 1);
+  39              		.loc 1 108 0
+  40 0004 254C     		ldr	r4, .L7
+  41 0006 0122     		movs	r2, #1
+  42 0008 0221     		movs	r1, #2
+  43 000a 2046     		mov	r0, r4
+  44              	.LVL1:
+  45 000c FFF7FEFF 		bl	HAL_GPIO_WritePin
+  46              	.LVL2:
+ 109:Src/max2871.c **** 
+ 110:Src/max2871.c **** 	// Start by bringing LE low
+ 111:Src/max2871.c **** 	HAL_GPIO_WritePin(MAX_LE_GPIO_Port, MAX_LE_Pin, 0);
+  47              		.loc 1 111 0
+  48 0010 0022     		movs	r2, #0
+  49 0012 0221     		movs	r1, #2
+  50 0014 2046     		mov	r0, r4
+  51 0016 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  52              	.LVL3:
+  53              	.LBB7:
+ 112:Src/max2871.c **** 
+ 113:Src/max2871.c **** 	// Transmit all the bits!
+ 114:Src/max2871.c **** 	for (int8_t bit = 32; bit > 0; bit--)
+  54              		.loc 1 114 0
+  55 001a 2025     		movs	r5, #32
+  56 001c 31E0     		b	.L2
+  57              	.LVL4:
+  58              	.L5:
+ARM GAS  /tmp/cceaaxGR.s 			page 4
+
+
+ 115:Src/max2871.c **** 	{
+ 116:Src/max2871.c **** 		HAL_GPIO_WritePin(MAX_DAT_GPIO_Port, MAX_DAT_Pin, ((r) & (1 << bit - 1)) ? 1 : 0);
+  59              		.loc 1 116 0 discriminator 3
+  60 001e 6B1E     		subs	r3, r5, #1
+  61 0020 0124     		movs	r4, #1
+  62 0022 04FA03F3 		lsl	r3, r4, r3
+  63 0026 3342     		tst	r3, r6
+  64 0028 14BF     		ite	ne
+  65 002a 2246     		movne	r2, r4
+  66 002c 0022     		moveq	r2, #0
+  67 002e 1021     		movs	r1, #16
+  68 0030 1B48     		ldr	r0, .L7+4
+  69 0032 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  70              	.LVL5:
+  71              	.LBB8:
+  72              	.LBB9:
+  73              		.file 2 "Inc/dwt_stm32_delay.h"
+   1:Inc/dwt_stm32_delay.h **** #ifndef DWT_STM32_DELAY_H
+   2:Inc/dwt_stm32_delay.h **** #define DWT_STM32_DELAY_H
+   3:Inc/dwt_stm32_delay.h **** 
+   4:Inc/dwt_stm32_delay.h **** #ifdef __cplusplus
+   5:Inc/dwt_stm32_delay.h **** extern "C" {
+   6:Inc/dwt_stm32_delay.h **** #endif
+   7:Inc/dwt_stm32_delay.h **** 
+   8:Inc/dwt_stm32_delay.h **** #include "stm32f1xx_hal.h"
+   9:Inc/dwt_stm32_delay.h **** 
+  10:Inc/dwt_stm32_delay.h **** /**
+  11:Inc/dwt_stm32_delay.h ****  * @brief  Initializes DWT_Cycle_Count for DWT_Delay_us function
+  12:Inc/dwt_stm32_delay.h ****  * @return Error DWT counter
+  13:Inc/dwt_stm32_delay.h ****  *         1: DWT counter Error
+  14:Inc/dwt_stm32_delay.h ****  *         0: DWT counter works
+  15:Inc/dwt_stm32_delay.h ****  */
+  16:Inc/dwt_stm32_delay.h **** uint32_t DWT_Delay_Init(void);
+  17:Inc/dwt_stm32_delay.h **** 
+  18:Inc/dwt_stm32_delay.h **** /**
+  19:Inc/dwt_stm32_delay.h ****  * @brief  This function provides a delay (in microseconds)
+  20:Inc/dwt_stm32_delay.h ****  * @param  microseconds: delay in microseconds
+  21:Inc/dwt_stm32_delay.h ****  */
+  22:Inc/dwt_stm32_delay.h **** __STATIC_INLINE void DWT_Delay_us(volatile uint32_t microseconds)
+  23:Inc/dwt_stm32_delay.h **** {
+  24:Inc/dwt_stm32_delay.h ****   uint32_t clk_cycle_start = DWT->CYCCNT;
+  74              		.loc 2 24 0 discriminator 3
+  75 0036 1B4B     		ldr	r3, .L7+8
+  76 0038 5C68     		ldr	r4, [r3, #4]
+  77              	.LVL6:
+  25:Inc/dwt_stm32_delay.h **** 
+  26:Inc/dwt_stm32_delay.h ****   /* Go to number of cycles for system */
+  27:Inc/dwt_stm32_delay.h ****   microseconds *= (HAL_RCC_GetHCLKFreq() / 1000000);
+  78              		.loc 2 27 0 discriminator 3
+  79 003a FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
+  80              	.LVL7:
+  81 003e 1A4B     		ldr	r3, .L7+12
+  82 0040 A3FB0030 		umull	r3, r0, r3, r0
+  83 0044 800C     		lsrs	r0, r0, #18
+  84              	.L3:
+  28:Inc/dwt_stm32_delay.h **** 
+  29:Inc/dwt_stm32_delay.h ****   /* Delay till end */
+ARM GAS  /tmp/cceaaxGR.s 			page 5
+
+
+  30:Inc/dwt_stm32_delay.h ****   while ((DWT->CYCCNT - clk_cycle_start) < microseconds);
+  85              		.loc 2 30 0
+  86 0046 174B     		ldr	r3, .L7+8
+  87 0048 5B68     		ldr	r3, [r3, #4]
+  88 004a 1B1B     		subs	r3, r3, r4
+  89 004c 8342     		cmp	r3, r0
+  90 004e FAD3     		bcc	.L3
+  91              	.LVL8:
+  92              	.LBE9:
+  93              	.LBE8:
+ 117:Src/max2871.c **** 		DWT_Delay_us(1);
+ 118:Src/max2871.c **** 		HAL_GPIO_WritePin(MAX_CLK_GPIO_Port, MAX_CLK_Pin, 1);
+  94              		.loc 1 118 0 discriminator 3
+  95 0050 0122     		movs	r2, #1
+  96 0052 2021     		movs	r1, #32
+  97 0054 1248     		ldr	r0, .L7+4
+  98 0056 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  99              	.LVL9:
+ 100              	.LBB10:
+ 101              	.LBB11:
+  24:Inc/dwt_stm32_delay.h **** 
+ 102              		.loc 2 24 0 discriminator 3
+ 103 005a 124B     		ldr	r3, .L7+8
+ 104 005c 5C68     		ldr	r4, [r3, #4]
+ 105              	.LVL10:
+  27:Inc/dwt_stm32_delay.h **** 
+ 106              		.loc 2 27 0 discriminator 3
+ 107 005e FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
+ 108              	.LVL11:
+ 109 0062 114B     		ldr	r3, .L7+12
+ 110 0064 A3FB0030 		umull	r3, r0, r3, r0
+ 111 0068 800C     		lsrs	r0, r0, #18
+ 112              	.L4:
+ 113              		.loc 2 30 0
+ 114 006a 0E4B     		ldr	r3, .L7+8
+ 115 006c 5B68     		ldr	r3, [r3, #4]
+ 116 006e 1B1B     		subs	r3, r3, r4
+ 117 0070 8342     		cmp	r3, r0
+ 118 0072 FAD3     		bcc	.L4
+ 119              	.LVL12:
+ 120              	.LBE11:
+ 121              	.LBE10:
+ 119:Src/max2871.c **** 		DWT_Delay_us(1);
+ 120:Src/max2871.c **** 		HAL_GPIO_WritePin(MAX_CLK_GPIO_Port, MAX_CLK_Pin, 0);
+ 122              		.loc 1 120 0 discriminator 3
+ 123 0074 0022     		movs	r2, #0
+ 124 0076 2021     		movs	r1, #32
+ 125 0078 0948     		ldr	r0, .L7+4
+ 126 007a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 127              	.LVL13:
+ 114:Src/max2871.c **** 	{
+ 128              		.loc 1 114 0 discriminator 3
+ 129 007e 013D     		subs	r5, r5, #1
+ 130              	.LVL14:
+ 131 0080 6DB2     		sxtb	r5, r5
+ 132              	.LVL15:
+ 133              	.L2:
+ARM GAS  /tmp/cceaaxGR.s 			page 6
+
+
+ 114:Src/max2871.c **** 	{
+ 134              		.loc 1 114 0 is_stmt 0 discriminator 1
+ 135 0082 002D     		cmp	r5, #0
+ 136 0084 CBDC     		bgt	.L5
+ 137              	.LBE7:
+ 121:Src/max2871.c **** 	}
+ 122:Src/max2871.c **** 
+ 123:Src/max2871.c **** 	HAL_GPIO_WritePin(MAX_DAT_GPIO_Port, MAX_DAT_Pin, 0);
+ 138              		.loc 1 123 0 is_stmt 1
+ 139 0086 0022     		movs	r2, #0
+ 140 0088 1021     		movs	r1, #16
+ 141 008a 0548     		ldr	r0, .L7+4
+ 142 008c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 143              	.LVL16:
+ 124:Src/max2871.c **** 	// Once Transfer complete, pull LE high
+ 125:Src/max2871.c **** 	HAL_GPIO_WritePin(MAX_LE_GPIO_Port, MAX_LE_Pin, 1);
+ 144              		.loc 1 125 0
+ 145 0090 0122     		movs	r2, #1
+ 146 0092 0221     		movs	r1, #2
+ 147 0094 0148     		ldr	r0, .L7
+ 148 0096 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 149              	.LVL17:
+ 126:Src/max2871.c **** }
+ 150              		.loc 1 126 0
+ 151 009a 70BD     		pop	{r4, r5, r6, pc}
+ 152              	.LVL18:
+ 153              	.L8:
+ 154              		.align	2
+ 155              	.L7:
+ 156 009c 00080140 		.word	1073809408
+ 157 00a0 000C0140 		.word	1073810432
+ 158 00a4 001000E0 		.word	-536866816
+ 159 00a8 83DE1B43 		.word	1125899907
+ 160              		.cfi_endproc
+ 161              	.LFE70:
+ 163              		.section	.text.max2871SpiRead,"ax",%progbits
+ 164              		.align	1
+ 165              		.global	max2871SpiRead
+ 166              		.syntax unified
+ 167              		.thumb
+ 168              		.thumb_func
+ 169              		.fpu softvfp
+ 171              	max2871SpiRead:
+ 172              	.LFB71:
+ 127:Src/max2871.c **** 
+ 128:Src/max2871.c **** // Readback register 6 from MAX2871. Requires MUX to be set in readback mode (0xC)
+ 129:Src/max2871.c **** uint32_t max2871SpiRead(void)
+ 130:Src/max2871.c **** {
+ 173              		.loc 1 130 0
+ 174              		.cfi_startproc
+ 175              		@ args = 0, pretend = 0, frame = 8
+ 176              		@ frame_needed = 0, uses_anonymous_args = 0
+ 177 0000 00B5     		push	{lr}
+ 178              	.LCFI1:
+ 179              		.cfi_def_cfa_offset 4
+ 180              		.cfi_offset 14, -4
+ 181 0002 83B0     		sub	sp, sp, #12
+ARM GAS  /tmp/cceaaxGR.s 			page 7
+
+
+ 182              	.LCFI2:
+ 183              		.cfi_def_cfa_offset 16
+ 131:Src/max2871.c **** 	uint8_t data[4];
+ 132:Src/max2871.c **** 	uint32_t dataReturn;
+ 133:Src/max2871.c **** 
+ 134:Src/max2871.c **** 	max2871SpiWrite(0x06);
+ 184              		.loc 1 134 0
+ 185 0004 0620     		movs	r0, #6
+ 186 0006 FFF7FEFF 		bl	max2871SpiWrite
+ 187              	.LVL19:
+ 135:Src/max2871.c **** 
+ 136:Src/max2871.c **** 	// Ensure LE High
+ 137:Src/max2871.c **** 	HAL_GPIO_WritePin(MAX_LE_GPIO_Port, MAX_LE_Pin, 1);
+ 188              		.loc 1 137 0
+ 189 000a 0122     		movs	r2, #1
+ 190 000c 0221     		movs	r1, #2
+ 191 000e 0A48     		ldr	r0, .L11
+ 192 0010 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 193              	.LVL20:
+ 138:Src/max2871.c **** 
+ 139:Src/max2871.c **** 	// IMPLEMENT BIT BANG RECEIVER
+ 140:Src/max2871.c **** 	// HAL_SPI_Receive(&hspi2, (uint8_t *) data, 4, 1000);
+ 141:Src/max2871.c **** 
+ 142:Src/max2871.c **** 	dataReturn = (data[0] << 24) | (data[1] << 16) | (data[2] << 8) | (data[3]);
+ 194              		.loc 1 142 0
+ 195 0014 9DF80400 		ldrb	r0, [sp, #4]	@ zero_extendqisi2
+ 196 0018 9DF80530 		ldrb	r3, [sp, #5]	@ zero_extendqisi2
+ 197 001c 1B04     		lsls	r3, r3, #16
+ 198 001e 43EA0063 		orr	r3, r3, r0, lsl #24
+ 199 0022 9DF80600 		ldrb	r0, [sp, #6]	@ zero_extendqisi2
+ 200 0026 43EA0023 		orr	r3, r3, r0, lsl #8
+ 201 002a 9DF80700 		ldrb	r0, [sp, #7]	@ zero_extendqisi2
+ 202              	.LVL21:
+ 143:Src/max2871.c **** 
+ 144:Src/max2871.c **** 	return dataReturn;
+ 145:Src/max2871.c **** }
+ 203              		.loc 1 145 0
+ 204 002e 1843     		orrs	r0, r0, r3
+ 205              	.LVL22:
+ 206 0030 03B0     		add	sp, sp, #12
+ 207              	.LCFI3:
+ 208              		.cfi_def_cfa_offset 4
+ 209              		@ sp needed
+ 210 0032 5DF804FB 		ldr	pc, [sp], #4
+ 211              	.L12:
+ 212 0036 00BF     		.align	2
+ 213              	.L11:
+ 214 0038 00080140 		.word	1073809408
+ 215              		.cfi_endproc
+ 216              	.LFE71:
+ 218              		.section	.text.max2871WriteRegisters,"ax",%progbits
+ 219              		.align	1
+ 220              		.global	max2871WriteRegisters
+ 221              		.syntax unified
+ 222              		.thumb
+ 223              		.thumb_func
+ 224              		.fpu softvfp
+ARM GAS  /tmp/cceaaxGR.s 			page 8
+
+
+ 226              	max2871WriteRegisters:
+ 227              	.LFB72:
+ 146:Src/max2871.c **** 
+ 147:Src/max2871.c **** // Writes registers 5 - 0 to MAX2871
+ 148:Src/max2871.c **** void max2871WriteRegisters(void)
+ 149:Src/max2871.c **** {
+ 228              		.loc 1 149 0
+ 229              		.cfi_startproc
+ 230              		@ args = 0, pretend = 0, frame = 0
+ 231              		@ frame_needed = 0, uses_anonymous_args = 0
+ 232 0000 10B5     		push	{r4, lr}
+ 233              	.LCFI4:
+ 234              		.cfi_def_cfa_offset 8
+ 235              		.cfi_offset 4, -8
+ 236              		.cfi_offset 14, -4
+ 237              	.LVL23:
+ 238              	.LBB12:
+ 150:Src/max2871.c **** 	for (int i = 5; i >= 0; i--)
+ 239              		.loc 1 150 0
+ 240 0002 0524     		movs	r4, #5
+ 241 0004 05E0     		b	.L14
+ 242              	.LVL24:
+ 243              	.L15:
+ 151:Src/max2871.c **** 	{
+ 152:Src/max2871.c **** 		max2871SpiWrite(max2871GetRegister(i));
+ 244              		.loc 1 152 0 discriminator 3
+ 245 0006 E0B2     		uxtb	r0, r4
+ 246 0008 FFF7FEFF 		bl	max2871GetRegister
+ 247              	.LVL25:
+ 248 000c FFF7FEFF 		bl	max2871SpiWrite
+ 249              	.LVL26:
+ 150:Src/max2871.c **** 	for (int i = 5; i >= 0; i--)
+ 250              		.loc 1 150 0 discriminator 3
+ 251 0010 013C     		subs	r4, r4, #1
+ 252              	.LVL27:
+ 253              	.L14:
+ 150:Src/max2871.c **** 	for (int i = 5; i >= 0; i--)
+ 254              		.loc 1 150 0 is_stmt 0 discriminator 1
+ 255 0012 002C     		cmp	r4, #0
+ 256 0014 F7DA     		bge	.L15
+ 257              	.LBE12:
+ 153:Src/max2871.c **** 	}
+ 154:Src/max2871.c **** }
+ 258              		.loc 1 154 0 is_stmt 1
+ 259 0016 10BD     		pop	{r4, pc}
+ 260              		.cfi_endproc
+ 261              	.LFE72:
+ 263              		.global	__aeabi_fcmpge
+ 264              		.global	__aeabi_fcmplt
+ 265              		.global	__aeabi_i2f
+ 266              		.global	__aeabi_fmul
+ 267              		.global	__aeabi_fdiv
+ 268              		.global	__aeabi_f2uiz
+ 269              		.global	__aeabi_ui2f
+ 270              		.global	__aeabi_fsub
+ 271              		.global	__aeabi_f2d
+ 272              		.global	__aeabi_d2f
+ARM GAS  /tmp/cceaaxGR.s 			page 9
+
+
+ 273              		.global	__aeabi_fadd
+ 274              		.section	.text.max2871SetFrequency,"ax",%progbits
+ 275              		.align	1
+ 276              		.global	max2871SetFrequency
+ 277              		.syntax unified
+ 278              		.thumb
+ 279              		.thumb_func
+ 280              		.fpu softvfp
+ 282              	max2871SetFrequency:
+ 283              	.LFB73:
+ 155:Src/max2871.c **** 
+ 156:Src/max2871.c **** // Calculates values for given frequency and INT_N / FRAC_N mode
+ 157:Src/max2871.c **** void max2871SetFrequency(float mhz, uint8_t intN, struct MAX2871Struct *max2871Status)
+ 158:Src/max2871.c **** {
+ 284              		.loc 1 158 0
+ 285              		.cfi_startproc
+ 286              		@ args = 0, pretend = 0, frame = 0
+ 287              		@ frame_needed = 0, uses_anonymous_args = 0
+ 288              	.LVL28:
+ 289 0000 2DE9F84F 		push	{r3, r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 290              	.LCFI5:
+ 291              		.cfi_def_cfa_offset 40
+ 292              		.cfi_offset 3, -40
+ 293              		.cfi_offset 4, -36
+ 294              		.cfi_offset 5, -32
+ 295              		.cfi_offset 6, -28
+ 296              		.cfi_offset 7, -24
+ 297              		.cfi_offset 8, -20
+ 298              		.cfi_offset 9, -16
+ 299              		.cfi_offset 10, -12
+ 300              		.cfi_offset 11, -8
+ 301              		.cfi_offset 14, -4
+ 302 0004 0546     		mov	r5, r0
+ 303 0006 0C46     		mov	r4, r1
+ 304 0008 1646     		mov	r6, r2
+ 159:Src/max2871.c **** 	// Determine DIVA
+ 160:Src/max2871.c **** 	uint8_t  diva;
+ 161:Src/max2871.c **** 	if ((mhz >= 23.5) &&  (mhz < 46.875))
+ 305              		.loc 1 161 0
+ 306 000a 6749     		ldr	r1, .L39
+ 307              	.LVL29:
+ 308 000c FFF7FEFF 		bl	__aeabi_fcmpge
+ 309              	.LVL30:
+ 310 0010 28B1     		cbz	r0, .L18
+ 311              		.loc 1 161 0 is_stmt 0 discriminator 1
+ 312 0012 6649     		ldr	r1, .L39+4
+ 313 0014 2846     		mov	r0, r5
+ 314 0016 FFF7FEFF 		bl	__aeabi_fcmplt
+ 315              	.LVL31:
+ 316 001a 0028     		cmp	r0, #0
+ 317 001c 2FD1     		bne	.L25
+ 318              	.L18:
+ 162:Src/max2871.c **** 		diva = 7;
+ 163:Src/max2871.c **** 	else if (mhz < 93.75)
+ 319              		.loc 1 163 0 is_stmt 1
+ 320 001e 6449     		ldr	r1, .L39+8
+ 321 0020 2846     		mov	r0, r5
+ARM GAS  /tmp/cceaaxGR.s 			page 10
+
+
+ 322 0022 FFF7FEFF 		bl	__aeabi_fcmplt
+ 323              	.LVL32:
+ 324 0026 0028     		cmp	r0, #0
+ 325 0028 2CD1     		bne	.L26
+ 164:Src/max2871.c **** 		diva = 6;
+ 165:Src/max2871.c **** 	else if (mhz < 187.5)
+ 326              		.loc 1 165 0
+ 327 002a 6249     		ldr	r1, .L39+12
+ 328 002c 2846     		mov	r0, r5
+ 329 002e FFF7FEFF 		bl	__aeabi_fcmplt
+ 330              	.LVL33:
+ 331 0032 0028     		cmp	r0, #0
+ 332 0034 5DD1     		bne	.L27
+ 166:Src/max2871.c **** 		diva = 5;
+ 167:Src/max2871.c **** 	else if (mhz < 375)
+ 333              		.loc 1 167 0
+ 334 0036 6049     		ldr	r1, .L39+16
+ 335 0038 2846     		mov	r0, r5
+ 336 003a FFF7FEFF 		bl	__aeabi_fcmplt
+ 337              	.LVL34:
+ 338 003e 0028     		cmp	r0, #0
+ 339 0040 5AD1     		bne	.L28
+ 168:Src/max2871.c **** 		diva = 4;
+ 169:Src/max2871.c **** 	else if (mhz < 750)
+ 340              		.loc 1 169 0
+ 341 0042 5E49     		ldr	r1, .L39+20
+ 342 0044 2846     		mov	r0, r5
+ 343 0046 FFF7FEFF 		bl	__aeabi_fcmplt
+ 344              	.LVL35:
+ 345 004a 0028     		cmp	r0, #0
+ 346 004c 57D1     		bne	.L29
+ 170:Src/max2871.c **** 		diva = 3;
+ 171:Src/max2871.c **** 	else if (mhz < 1500)
+ 347              		.loc 1 171 0
+ 348 004e 5C49     		ldr	r1, .L39+24
+ 349 0050 2846     		mov	r0, r5
+ 350 0052 FFF7FEFF 		bl	__aeabi_fcmplt
+ 351              	.LVL36:
+ 352 0056 0028     		cmp	r0, #0
+ 353 0058 54D1     		bne	.L30
+ 172:Src/max2871.c **** 		diva = 2;
+ 173:Src/max2871.c **** 	else if (mhz < 3000)
+ 354              		.loc 1 173 0
+ 355 005a 5A49     		ldr	r1, .L39+28
+ 356 005c 2846     		mov	r0, r5
+ 357 005e FFF7FEFF 		bl	__aeabi_fcmplt
+ 358              	.LVL37:
+ 359 0062 0028     		cmp	r0, #0
+ 360 0064 51D1     		bne	.L31
+ 174:Src/max2871.c **** 		diva = 1;
+ 175:Src/max2871.c **** 	else if (mhz < 6000)
+ 361              		.loc 1 175 0
+ 362 0066 5849     		ldr	r1, .L39+32
+ 363 0068 2846     		mov	r0, r5
+ 364 006a FFF7FEFF 		bl	__aeabi_fcmplt
+ 365              	.LVL38:
+ 366 006e 10B1     		cbz	r0, .L35
+ARM GAS  /tmp/cceaaxGR.s 			page 11
+
+
+ 176:Src/max2871.c **** 		diva = 0;
+ 367              		.loc 1 176 0
+ 368 0070 4FF00008 		mov	r8, #0
+ 369 0074 08E0     		b	.L20
+ 370              	.L35:
+ 177:Src/max2871.c **** 	else
+ 178:Src/max2871.c **** 		printUSB((char *) "> Bad input frequency to max2871SetFrequency");
+ 371              		.loc 1 178 0
+ 372 0076 5548     		ldr	r0, .L39+36
+ 373 0078 FFF7FEFF 		bl	printUSB
+ 374              	.LVL39:
+ 375 007c 04E0     		b	.L20
+ 376              	.L25:
+ 162:Src/max2871.c **** 	else if (mhz < 93.75)
+ 377              		.loc 1 162 0
+ 378 007e 4FF00708 		mov	r8, #7
+ 379 0082 01E0     		b	.L20
+ 380              	.L26:
+ 164:Src/max2871.c **** 	else if (mhz < 187.5)
+ 381              		.loc 1 164 0
+ 382 0084 4FF00608 		mov	r8, #6
+ 383              	.L20:
+ 384              	.LVL40:
+ 179:Src/max2871.c **** 
+ 180:Src/max2871.c **** 	// Calculate fOUT
+ 181:Src/max2871.c **** 	float fComp = 38.4;
+ 182:Src/max2871.c **** 	float fVCO = mhz * (2 << (diva - 1));
+ 385              		.loc 1 182 0
+ 386 0088 08F1FF30 		add	r0, r8, #-1
+ 387 008c 0223     		movs	r3, #2
+ 388 008e 03FA00F0 		lsl	r0, r3, r0
+ 389 0092 FFF7FEFF 		bl	__aeabi_i2f
+ 390              	.LVL41:
+ 391 0096 8246     		mov	r10, r0
+ 392 0098 2946     		mov	r1, r5
+ 393 009a FFF7FEFF 		bl	__aeabi_fmul
+ 394              	.LVL42:
+ 395 009e 0546     		mov	r5, r0
+ 396              	.LVL43:
+ 183:Src/max2871.c **** 	float n = fVCO / fComp;
+ 397              		.loc 1 183 0
+ 398 00a0 4B49     		ldr	r1, .L39+40
+ 399 00a2 FFF7FEFF 		bl	__aeabi_fdiv
+ 400              	.LVL44:
+ 401 00a6 8346     		mov	fp, r0
+ 402              	.LVL45:
+ 184:Src/max2871.c **** 	uint32_t N = (uint16_t) n;
+ 403              		.loc 1 184 0
+ 404 00a8 FFF7FEFF 		bl	__aeabi_f2uiz
+ 405              	.LVL46:
+ 406 00ac 1FFA80F9 		uxth	r9, r0
+ 407              	.LVL47:
+ 185:Src/max2871.c **** 
+ 186:Src/max2871.c **** 	float F = round((n - N) * MOD);
+ 408              		.loc 1 186 0
+ 409 00b0 4846     		mov	r0, r9
+ 410 00b2 FFF7FEFF 		bl	__aeabi_ui2f
+ARM GAS  /tmp/cceaaxGR.s 			page 12
+
+
+ 411              	.LVL48:
+ 412 00b6 0746     		mov	r7, r0
+ 413 00b8 0146     		mov	r1, r0
+ 414 00ba 5846     		mov	r0, fp
+ 415 00bc FFF7FEFF 		bl	__aeabi_fsub
+ 416              	.LVL49:
+ 417 00c0 4449     		ldr	r1, .L39+44
+ 418 00c2 FFF7FEFF 		bl	__aeabi_fmul
+ 419              	.LVL50:
+ 420 00c6 FFF7FEFF 		bl	__aeabi_f2d
+ 421              	.LVL51:
+ 422 00ca FFF7FEFF 		bl	round
+ 423              	.LVL52:
+ 424 00ce FFF7FEFF 		bl	__aeabi_d2f
+ 425              	.LVL53:
+ 426 00d2 8346     		mov	fp, r0
+ 427              	.LVL54:
+ 187:Src/max2871.c **** 
+ 188:Src/max2871.c **** 	// Determine fVCO
+ 189:Src/max2871.c **** 	if (intN == 1)
+ 428              		.loc 1 189 0
+ 429 00d4 012C     		cmp	r4, #1
+ 430 00d6 1BD0     		beq	.L36
+ 190:Src/max2871.c **** 		fVCO = N * fComp;
+ 191:Src/max2871.c **** 	else if (!intN)
+ 431              		.loc 1 191 0
+ 432 00d8 FCB9     		cbnz	r4, .L22
+ 192:Src/max2871.c **** 		fVCO = (N + (F/MOD)) * fComp;
+ 433              		.loc 1 192 0
+ 434 00da 3E49     		ldr	r1, .L39+44
+ 435 00dc FFF7FEFF 		bl	__aeabi_fdiv
+ 436              	.LVL55:
+ 437 00e0 0146     		mov	r1, r0
+ 438 00e2 3846     		mov	r0, r7
+ 439 00e4 FFF7FEFF 		bl	__aeabi_fadd
+ 440              	.LVL56:
+ 441 00e8 3949     		ldr	r1, .L39+40
+ 442 00ea FFF7FEFF 		bl	__aeabi_fmul
+ 443              	.LVL57:
+ 444 00ee 0546     		mov	r5, r0
+ 445              	.LVL58:
+ 446 00f0 13E0     		b	.L22
+ 447              	.LVL59:
+ 448              	.L27:
+ 166:Src/max2871.c **** 	else if (mhz < 375)
+ 449              		.loc 1 166 0
+ 450 00f2 4FF00508 		mov	r8, #5
+ 451 00f6 C7E7     		b	.L20
+ 452              	.L28:
+ 168:Src/max2871.c **** 	else if (mhz < 750)
+ 453              		.loc 1 168 0
+ 454 00f8 4FF00408 		mov	r8, #4
+ 455 00fc C4E7     		b	.L20
+ 456              	.L29:
+ 170:Src/max2871.c **** 	else if (mhz < 1500)
+ 457              		.loc 1 170 0
+ 458 00fe 4FF00308 		mov	r8, #3
+ARM GAS  /tmp/cceaaxGR.s 			page 13
+
+
+ 459 0102 C1E7     		b	.L20
+ 460              	.L30:
+ 172:Src/max2871.c **** 	else if (mhz < 3000)
+ 461              		.loc 1 172 0
+ 462 0104 4FF00208 		mov	r8, #2
+ 463 0108 BEE7     		b	.L20
+ 464              	.L31:
+ 174:Src/max2871.c **** 	else if (mhz < 6000)
+ 465              		.loc 1 174 0
+ 466 010a 4FF00108 		mov	r8, #1
+ 467 010e BBE7     		b	.L20
+ 468              	.LVL60:
+ 469              	.L36:
+ 190:Src/max2871.c **** 	else if (!intN)
+ 470              		.loc 1 190 0
+ 471 0110 2F49     		ldr	r1, .L39+40
+ 472 0112 3846     		mov	r0, r7
+ 473              	.LVL61:
+ 474 0114 FFF7FEFF 		bl	__aeabi_fmul
+ 475              	.LVL62:
+ 476 0118 0546     		mov	r5, r0
+ 477              	.LVL63:
+ 478              	.L22:
+ 193:Src/max2871.c **** 
+ 194:Src/max2871.c **** 	float fOUT = fVCO / (2 << (diva - 1));
+ 479              		.loc 1 194 0
+ 480 011a 5146     		mov	r1, r10
+ 481 011c 2846     		mov	r0, r5
+ 482 011e FFF7FEFF 		bl	__aeabi_fdiv
+ 483              	.LVL64:
+ 484 0122 0546     		mov	r5, r0
+ 485              	.LVL65:
+ 195:Src/max2871.c **** 
+ 196:Src/max2871.c **** 	// Set registers for Int-N configuration
+ 197:Src/max2871.c **** 	if (intN == 1)
+ 486              		.loc 1 197 0
+ 487 0124 012C     		cmp	r4, #1
+ 488 0126 06D0     		beq	.L37
+ 198:Src/max2871.c **** 	{
+ 199:Src/max2871.c **** 		max2871Set_INT(1);
+ 200:Src/max2871.c **** 		max2871Set_N(N);
+ 201:Src/max2871.c **** 		max2871Set_FRAC(F);
+ 202:Src/max2871.c **** 		max2871Set_CPL(0);
+ 203:Src/max2871.c **** 		max2871Set_M(MOD);
+ 204:Src/max2871.c **** 		max2871Set_LDF(1);
+ 205:Src/max2871.c **** 		max2871Set_DIVA(diva);
+ 206:Src/max2871.c **** 		max2871Set_F01(0);
+ 207:Src/max2871.c **** 	}
+ 208:Src/max2871.c **** 	// Set registers for Frac-N configuration
+ 209:Src/max2871.c **** 	else if (!intN)
+ 489              		.loc 1 209 0
+ 490 0128 0CB3     		cbz	r4, .L38
+ 491              	.LVL66:
+ 492              	.L24:
+ 210:Src/max2871.c **** 	{
+ 211:Src/max2871.c **** 		max2871Set_INT(0);
+ 212:Src/max2871.c **** 		max2871Set_N(N);
+ARM GAS  /tmp/cceaaxGR.s 			page 14
+
+
+ 213:Src/max2871.c **** 		max2871Set_FRAC(F);
+ 214:Src/max2871.c **** 		max2871Set_CPL(1);
+ 215:Src/max2871.c **** 		max2871Set_M(MOD);
+ 216:Src/max2871.c **** 		max2871Set_LDF(0);
+ 217:Src/max2871.c **** 		max2871Set_DIVA(diva);
+ 218:Src/max2871.c **** 		max2871Set_F01(1);
+ 219:Src/max2871.c **** 	}
+ 220:Src/max2871.c **** 	max2871Status->intN_nFracN = intN;
+ 493              		.loc 1 220 0
+ 494 012a F472     		strb	r4, [r6, #11]
+ 221:Src/max2871.c **** 	max2871Status->frequency = fOUT;
+ 495              		.loc 1 221 0
+ 496 012c 7560     		str	r5, [r6, #4]	@ float
+ 222:Src/max2871.c **** 
+ 223:Src/max2871.c **** 	// Update MAX registers with new frequency info
+ 224:Src/max2871.c **** 	max2871WriteRegisters();
+ 497              		.loc 1 224 0
+ 498 012e FFF7FEFF 		bl	max2871WriteRegisters
+ 499              	.LVL67:
+ 225:Src/max2871.c **** }
+ 500              		.loc 1 225 0
+ 501 0132 BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 502              	.LVL68:
+ 503              	.L37:
+ 199:Src/max2871.c **** 		max2871Set_N(N);
+ 504              		.loc 1 199 0
+ 505 0136 0120     		movs	r0, #1
+ 506              	.LVL69:
+ 507 0138 FFF7FEFF 		bl	max2871Set_INT
+ 508              	.LVL70:
+ 200:Src/max2871.c **** 		max2871Set_FRAC(F);
+ 509              		.loc 1 200 0
+ 510 013c 4846     		mov	r0, r9
+ 511 013e FFF7FEFF 		bl	max2871Set_N
+ 512              	.LVL71:
+ 201:Src/max2871.c **** 		max2871Set_CPL(0);
+ 513              		.loc 1 201 0
+ 514 0142 5846     		mov	r0, fp
+ 515 0144 FFF7FEFF 		bl	__aeabi_f2uiz
+ 516              	.LVL72:
+ 517 0148 FFF7FEFF 		bl	max2871Set_FRAC
+ 518              	.LVL73:
+ 202:Src/max2871.c **** 		max2871Set_M(MOD);
+ 519              		.loc 1 202 0
+ 520 014c 0020     		movs	r0, #0
+ 521 014e FFF7FEFF 		bl	max2871Set_CPL
+ 522              	.LVL74:
+ 203:Src/max2871.c **** 		max2871Set_LDF(1);
+ 523              		.loc 1 203 0
+ 524 0152 40F6FF70 		movw	r0, #4095
+ 525 0156 FFF7FEFF 		bl	max2871Set_M
+ 526              	.LVL75:
+ 204:Src/max2871.c **** 		max2871Set_DIVA(diva);
+ 527              		.loc 1 204 0
+ 528 015a 0120     		movs	r0, #1
+ 529 015c FFF7FEFF 		bl	max2871Set_LDF
+ 530              	.LVL76:
+ARM GAS  /tmp/cceaaxGR.s 			page 15
+
+
+ 205:Src/max2871.c **** 		max2871Set_F01(0);
+ 531              		.loc 1 205 0
+ 532 0160 4046     		mov	r0, r8
+ 533 0162 FFF7FEFF 		bl	max2871Set_DIVA
+ 534              	.LVL77:
+ 206:Src/max2871.c **** 	}
+ 535              		.loc 1 206 0
+ 536 0166 0020     		movs	r0, #0
+ 537 0168 FFF7FEFF 		bl	max2871Set_F01
+ 538              	.LVL78:
+ 539 016c DDE7     		b	.L24
+ 540              	.LVL79:
+ 541              	.L38:
+ 211:Src/max2871.c **** 		max2871Set_N(N);
+ 542              		.loc 1 211 0
+ 543 016e 0020     		movs	r0, #0
+ 544              	.LVL80:
+ 545 0170 FFF7FEFF 		bl	max2871Set_INT
+ 546              	.LVL81:
+ 212:Src/max2871.c **** 		max2871Set_FRAC(F);
+ 547              		.loc 1 212 0
+ 548 0174 4846     		mov	r0, r9
+ 549 0176 FFF7FEFF 		bl	max2871Set_N
+ 550              	.LVL82:
+ 213:Src/max2871.c **** 		max2871Set_CPL(1);
+ 551              		.loc 1 213 0
+ 552 017a 5846     		mov	r0, fp
+ 553 017c FFF7FEFF 		bl	__aeabi_f2uiz
+ 554              	.LVL83:
+ 555 0180 FFF7FEFF 		bl	max2871Set_FRAC
+ 556              	.LVL84:
+ 214:Src/max2871.c **** 		max2871Set_M(MOD);
+ 557              		.loc 1 214 0
+ 558 0184 0120     		movs	r0, #1
+ 559 0186 FFF7FEFF 		bl	max2871Set_CPL
+ 560              	.LVL85:
+ 215:Src/max2871.c **** 		max2871Set_LDF(0);
+ 561              		.loc 1 215 0
+ 562 018a 40F6FF70 		movw	r0, #4095
+ 563 018e FFF7FEFF 		bl	max2871Set_M
+ 564              	.LVL86:
+ 216:Src/max2871.c **** 		max2871Set_DIVA(diva);
+ 565              		.loc 1 216 0
+ 566 0192 0020     		movs	r0, #0
+ 567 0194 FFF7FEFF 		bl	max2871Set_LDF
+ 568              	.LVL87:
+ 217:Src/max2871.c **** 		max2871Set_F01(1);
+ 569              		.loc 1 217 0
+ 570 0198 4046     		mov	r0, r8
+ 571 019a FFF7FEFF 		bl	max2871Set_DIVA
+ 572              	.LVL88:
+ 218:Src/max2871.c **** 	}
+ 573              		.loc 1 218 0
+ 574 019e 0120     		movs	r0, #1
+ 575 01a0 FFF7FEFF 		bl	max2871Set_F01
+ 576              	.LVL89:
+ 577 01a4 C1E7     		b	.L24
+ARM GAS  /tmp/cceaaxGR.s 			page 16
+
+
+ 578              	.L40:
+ 579 01a6 00BF     		.align	2
+ 580              	.L39:
+ 581 01a8 0000BC41 		.word	1102839808
+ 582 01ac 00803B42 		.word	1111195648
+ 583 01b0 0080BB42 		.word	1119584256
+ 584 01b4 00803B43 		.word	1127972864
+ 585 01b8 0080BB43 		.word	1136361472
+ 586 01bc 00803B44 		.word	1144750080
+ 587 01c0 0080BB44 		.word	1153138688
+ 588 01c4 00803B45 		.word	1161527296
+ 589 01c8 0080BB45 		.word	1169915904
+ 590 01cc 00000000 		.word	.LC1
+ 591 01d0 9A991942 		.word	1108973978
+ 592 01d4 00F07F45 		.word	1166012416
+ 593              		.cfi_endproc
+ 594              	.LFE73:
+ 596              		.section	.text.max2871ChipEnable,"ax",%progbits
+ 597              		.align	1
+ 598              		.global	max2871ChipEnable
+ 599              		.syntax unified
+ 600              		.thumb
+ 601              		.thumb_func
+ 602              		.fpu softvfp
+ 604              	max2871ChipEnable:
+ 605              	.LFB74:
+ 226:Src/max2871.c **** 
+ 227:Src/max2871.c **** void max2871ChipEnable(struct MAX2871Struct *max2871Status)
+ 228:Src/max2871.c **** {
+ 606              		.loc 1 228 0
+ 607              		.cfi_startproc
+ 608              		@ args = 0, pretend = 0, frame = 0
+ 609              		@ frame_needed = 0, uses_anonymous_args = 0
+ 610              	.LVL90:
+ 611 0000 10B5     		push	{r4, lr}
+ 612              	.LCFI6:
+ 613              		.cfi_def_cfa_offset 8
+ 614              		.cfi_offset 4, -8
+ 615              		.cfi_offset 14, -4
+ 616 0002 0446     		mov	r4, r0
+ 229:Src/max2871.c **** 	HAL_GPIO_WritePin(MAX_CE_GPIO_Port, MAX_CE_Pin, 1);
+ 617              		.loc 1 229 0
+ 618 0004 0122     		movs	r2, #1
+ 619 0006 0821     		movs	r1, #8
+ 620 0008 0248     		ldr	r0, .L43
+ 621              	.LVL91:
+ 622 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 623              	.LVL92:
+ 230:Src/max2871.c **** 	max2871Status->CHIP_EN = 1;
+ 624              		.loc 1 230 0
+ 625 000e 0123     		movs	r3, #1
+ 626 0010 2370     		strb	r3, [r4]
+ 231:Src/max2871.c **** }
+ 627              		.loc 1 231 0
+ 628 0012 10BD     		pop	{r4, pc}
+ 629              	.LVL93:
+ 630              	.L44:
+ARM GAS  /tmp/cceaaxGR.s 			page 17
+
+
+ 631              		.align	2
+ 632              	.L43:
+ 633 0014 000C0140 		.word	1073810432
+ 634              		.cfi_endproc
+ 635              	.LFE74:
+ 637              		.section	.text.max2871ChipDisable,"ax",%progbits
+ 638              		.align	1
+ 639              		.global	max2871ChipDisable
+ 640              		.syntax unified
+ 641              		.thumb
+ 642              		.thumb_func
+ 643              		.fpu softvfp
+ 645              	max2871ChipDisable:
+ 646              	.LFB75:
+ 232:Src/max2871.c **** 
+ 233:Src/max2871.c **** void max2871ChipDisable(struct MAX2871Struct *max2871Status)
+ 234:Src/max2871.c **** {
+ 647              		.loc 1 234 0
+ 648              		.cfi_startproc
+ 649              		@ args = 0, pretend = 0, frame = 0
+ 650              		@ frame_needed = 0, uses_anonymous_args = 0
+ 651              	.LVL94:
+ 652 0000 10B5     		push	{r4, lr}
+ 653              	.LCFI7:
+ 654              		.cfi_def_cfa_offset 8
+ 655              		.cfi_offset 4, -8
+ 656              		.cfi_offset 14, -4
+ 657 0002 0446     		mov	r4, r0
+ 235:Src/max2871.c **** 	HAL_GPIO_WritePin(MAX_CE_GPIO_Port, MAX_CE_Pin, 0);
+ 658              		.loc 1 235 0
+ 659 0004 0022     		movs	r2, #0
+ 660 0006 0821     		movs	r1, #8
+ 661 0008 0248     		ldr	r0, .L47
+ 662              	.LVL95:
+ 663 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 664              	.LVL96:
+ 236:Src/max2871.c **** 	max2871Status->CHIP_EN = 0;
+ 665              		.loc 1 236 0
+ 666 000e 0023     		movs	r3, #0
+ 667 0010 2370     		strb	r3, [r4]
+ 237:Src/max2871.c **** }
+ 668              		.loc 1 237 0
+ 669 0012 10BD     		pop	{r4, pc}
+ 670              	.LVL97:
+ 671              	.L48:
+ 672              		.align	2
+ 673              	.L47:
+ 674 0014 000C0140 		.word	1073810432
+ 675              		.cfi_endproc
+ 676              	.LFE75:
+ 678              		.section	.text.max2871RFEnable,"ax",%progbits
+ 679              		.align	1
+ 680              		.global	max2871RFEnable
+ 681              		.syntax unified
+ 682              		.thumb
+ 683              		.thumb_func
+ 684              		.fpu softvfp
+ARM GAS  /tmp/cceaaxGR.s 			page 18
+
+
+ 686              	max2871RFEnable:
+ 687              	.LFB76:
+ 238:Src/max2871.c **** 
+ 239:Src/max2871.c **** void max2871RFEnable(struct MAX2871Struct *max2871Status)
+ 240:Src/max2871.c **** {
+ 688              		.loc 1 240 0
+ 689              		.cfi_startproc
+ 690              		@ args = 0, pretend = 0, frame = 0
+ 691              		@ frame_needed = 0, uses_anonymous_args = 0
+ 692              	.LVL98:
+ 693 0000 10B5     		push	{r4, lr}
+ 694              	.LCFI8:
+ 695              		.cfi_def_cfa_offset 8
+ 696              		.cfi_offset 4, -8
+ 697              		.cfi_offset 14, -4
+ 698 0002 0446     		mov	r4, r0
+ 241:Src/max2871.c **** 	max2871Set_RFA_EN(1);
+ 699              		.loc 1 241 0
+ 700 0004 0120     		movs	r0, #1
+ 701              	.LVL99:
+ 702 0006 FFF7FEFF 		bl	max2871Set_RFA_EN
+ 703              	.LVL100:
+ 242:Src/max2871.c **** 	HAL_GPIO_WritePin(MAX_RFOUT_EN_GPIO_Port, MAX_RFOUT_EN_Pin, 1);
+ 704              		.loc 1 242 0
+ 705 000a 0122     		movs	r2, #1
+ 706 000c 0421     		movs	r1, #4
+ 707 000e 0648     		ldr	r0, .L51
+ 708 0010 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 709              	.LVL101:
+ 243:Src/max2871.c **** 	max2871ChipEnable(max2871Status);
+ 710              		.loc 1 243 0
+ 711 0014 2046     		mov	r0, r4
+ 712 0016 FFF7FEFF 		bl	max2871ChipEnable
+ 713              	.LVL102:
+ 244:Src/max2871.c **** 	max2871Status->RFA_EN = 1;
+ 714              		.loc 1 244 0
+ 715 001a 0123     		movs	r3, #1
+ 716 001c 2372     		strb	r3, [r4, #8]
+ 245:Src/max2871.c **** 	max2871Status->RF_CHIP_EN = 1;
+ 717              		.loc 1 245 0
+ 718 001e 6372     		strb	r3, [r4, #9]
+ 246:Src/max2871.c **** 	max2871WriteRegisters();
+ 719              		.loc 1 246 0
+ 720 0020 FFF7FEFF 		bl	max2871WriteRegisters
+ 721              	.LVL103:
+ 247:Src/max2871.c **** }
+ 722              		.loc 1 247 0
+ 723 0024 10BD     		pop	{r4, pc}
+ 724              	.LVL104:
+ 725              	.L52:
+ 726 0026 00BF     		.align	2
+ 727              	.L51:
+ 728 0028 00080140 		.word	1073809408
+ 729              		.cfi_endproc
+ 730              	.LFE76:
+ 732              		.section	.text.max2871RFDisable,"ax",%progbits
+ 733              		.align	1
+ARM GAS  /tmp/cceaaxGR.s 			page 19
+
+
+ 734              		.global	max2871RFDisable
+ 735              		.syntax unified
+ 736              		.thumb
+ 737              		.thumb_func
+ 738              		.fpu softvfp
+ 740              	max2871RFDisable:
+ 741              	.LFB77:
+ 248:Src/max2871.c **** 
+ 249:Src/max2871.c **** void max2871RFDisable(struct MAX2871Struct *max2871Status)
+ 250:Src/max2871.c **** {
+ 742              		.loc 1 250 0
+ 743              		.cfi_startproc
+ 744              		@ args = 0, pretend = 0, frame = 0
+ 745              		@ frame_needed = 0, uses_anonymous_args = 0
+ 746              	.LVL105:
+ 747 0000 10B5     		push	{r4, lr}
+ 748              	.LCFI9:
+ 749              		.cfi_def_cfa_offset 8
+ 750              		.cfi_offset 4, -8
+ 751              		.cfi_offset 14, -4
+ 752 0002 0446     		mov	r4, r0
+ 251:Src/max2871.c **** 	max2871Set_RFA_EN(0);
+ 753              		.loc 1 251 0
+ 754 0004 0020     		movs	r0, #0
+ 755              	.LVL106:
+ 756 0006 FFF7FEFF 		bl	max2871Set_RFA_EN
+ 757              	.LVL107:
+ 252:Src/max2871.c **** 	HAL_GPIO_WritePin(MAX_RFOUT_EN_GPIO_Port, MAX_RFOUT_EN_Pin, 0);
+ 758              		.loc 1 252 0
+ 759 000a 0022     		movs	r2, #0
+ 760 000c 0421     		movs	r1, #4
+ 761 000e 0448     		ldr	r0, .L55
+ 762 0010 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 763              	.LVL108:
+ 253:Src/max2871.c **** 	max2871Status->RFA_EN = 0;
+ 764              		.loc 1 253 0
+ 765 0014 0023     		movs	r3, #0
+ 766 0016 2372     		strb	r3, [r4, #8]
+ 254:Src/max2871.c **** 	max2871Status->RF_CHIP_EN = 0;
+ 767              		.loc 1 254 0
+ 768 0018 6372     		strb	r3, [r4, #9]
+ 255:Src/max2871.c **** 	max2871WriteRegisters();
+ 769              		.loc 1 255 0
+ 770 001a FFF7FEFF 		bl	max2871WriteRegisters
+ 771              	.LVL109:
+ 256:Src/max2871.c **** }
+ 772              		.loc 1 256 0
+ 773 001e 10BD     		pop	{r4, pc}
+ 774              	.LVL110:
+ 775              	.L56:
+ 776              		.align	2
+ 777              	.L55:
+ 778 0020 00080140 		.word	1073809408
+ 779              		.cfi_endproc
+ 780              	.LFE77:
+ 782              		.section	.text.max2871SetPower,"ax",%progbits
+ 783              		.align	1
+ARM GAS  /tmp/cceaaxGR.s 			page 20
+
+
+ 784              		.global	max2871SetPower
+ 785              		.syntax unified
+ 786              		.thumb
+ 787              		.thumb_func
+ 788              		.fpu softvfp
+ 790              	max2871SetPower:
+ 791              	.LFB78:
+ 257:Src/max2871.c **** 
+ 258:Src/max2871.c **** void max2871SetPower(int8_t dbm, struct MAX2871Struct *max2871Status)
+ 259:Src/max2871.c **** {
+ 792              		.loc 1 259 0
+ 793              		.cfi_startproc
+ 794              		@ args = 0, pretend = 0, frame = 0
+ 795              		@ frame_needed = 0, uses_anonymous_args = 0
+ 796              	.LVL111:
+ 797 0000 10B5     		push	{r4, lr}
+ 798              	.LCFI10:
+ 799              		.cfi_def_cfa_offset 8
+ 800              		.cfi_offset 4, -8
+ 801              		.cfi_offset 14, -4
+ 802 0002 0C46     		mov	r4, r1
+ 260:Src/max2871.c **** 	switch (dbm)
+ 803              		.loc 1 260 0
+ 804 0004 0430     		adds	r0, r0, #4
+ 805              	.LVL112:
+ 806 0006 0928     		cmp	r0, #9
+ 807 0008 17D8     		bhi	.L58
+ 808 000a DFE800F0 		tbb	[pc, r0]
+ 809              	.L60:
+ 810 000e 05       		.byte	(.L59-.L60)/2
+ 811 000f 16       		.byte	(.L58-.L60)/2
+ 812 0010 16       		.byte	(.L58-.L60)/2
+ 813 0011 0D       		.byte	(.L61-.L60)/2
+ 814 0012 16       		.byte	(.L58-.L60)/2
+ 815 0013 16       		.byte	(.L58-.L60)/2
+ 816 0014 10       		.byte	(.L62-.L60)/2
+ 817 0015 16       		.byte	(.L58-.L60)/2
+ 818 0016 16       		.byte	(.L58-.L60)/2
+ 819 0017 13       		.byte	(.L63-.L60)/2
+ 820              		.p2align 1
+ 821              	.L59:
+ 261:Src/max2871.c **** 	{
+ 262:Src/max2871.c **** 		case -4:
+ 263:Src/max2871.c **** 			max2871Status->rfPower = 0;
+ 822              		.loc 1 263 0
+ 823 0018 0023     		movs	r3, #0
+ 824 001a 8B72     		strb	r3, [r1, #10]
+ 825              	.LVL113:
+ 826              	.L64:
+ 264:Src/max2871.c **** 			break;
+ 265:Src/max2871.c **** 
+ 266:Src/max2871.c **** 		case -1:
+ 267:Src/max2871.c **** 			max2871Status->rfPower = 1;
+ 268:Src/max2871.c **** 			break;
+ 269:Src/max2871.c **** 
+ 270:Src/max2871.c **** 		case 2:
+ 271:Src/max2871.c **** 			max2871Status->rfPower = 2;
+ARM GAS  /tmp/cceaaxGR.s 			page 21
+
+
+ 272:Src/max2871.c **** 			break;
+ 273:Src/max2871.c **** 
+ 274:Src/max2871.c **** 		case 5:
+ 275:Src/max2871.c **** 			max2871Status->rfPower = 3;
+ 276:Src/max2871.c **** 			break;
+ 277:Src/max2871.c **** 		default:
+ 278:Src/max2871.c **** 			printUSB((uint8_t *) "> Bad input power to max2871SetPower");
+ 279:Src/max2871.c **** 	}
+ 280:Src/max2871.c **** 
+ 281:Src/max2871.c **** 	max2871Set_APWR(max2871Status->rfPower);
+ 827              		.loc 1 281 0
+ 828 001c A07A     		ldrb	r0, [r4, #10]	@ zero_extendqisi2
+ 829 001e FFF7FEFF 		bl	max2871Set_APWR
+ 830              	.LVL114:
+ 282:Src/max2871.c **** 	max2871WriteRegisters();
+ 831              		.loc 1 282 0
+ 832 0022 FFF7FEFF 		bl	max2871WriteRegisters
+ 833              	.LVL115:
+ 283:Src/max2871.c **** }
+ 834              		.loc 1 283 0
+ 835 0026 10BD     		pop	{r4, pc}
+ 836              	.LVL116:
+ 837              	.L61:
+ 267:Src/max2871.c **** 			break;
+ 838              		.loc 1 267 0
+ 839 0028 0123     		movs	r3, #1
+ 840 002a 8B72     		strb	r3, [r1, #10]
+ 268:Src/max2871.c **** 
+ 841              		.loc 1 268 0
+ 842 002c F6E7     		b	.L64
+ 843              	.L62:
+ 271:Src/max2871.c **** 			break;
+ 844              		.loc 1 271 0
+ 845 002e 0223     		movs	r3, #2
+ 846 0030 8B72     		strb	r3, [r1, #10]
+ 272:Src/max2871.c **** 
+ 847              		.loc 1 272 0
+ 848 0032 F3E7     		b	.L64
+ 849              	.L63:
+ 275:Src/max2871.c **** 			break;
+ 850              		.loc 1 275 0
+ 851 0034 0323     		movs	r3, #3
+ 852 0036 8B72     		strb	r3, [r1, #10]
+ 276:Src/max2871.c **** 		default:
+ 853              		.loc 1 276 0
+ 854 0038 F0E7     		b	.L64
+ 855              	.L58:
+ 278:Src/max2871.c **** 	}
+ 856              		.loc 1 278 0
+ 857 003a 0248     		ldr	r0, .L66
+ 858 003c FFF7FEFF 		bl	printUSB
+ 859              	.LVL117:
+ 860 0040 ECE7     		b	.L64
+ 861              	.L67:
+ 862 0042 00BF     		.align	2
+ 863              	.L66:
+ 864 0044 00000000 		.word	.LC2
+ARM GAS  /tmp/cceaaxGR.s 			page 22
+
+
+ 865              		.cfi_endproc
+ 866              	.LFE78:
+ 868              		.section	.text.max2871CheckLD,"ax",%progbits
+ 869              		.align	1
+ 870              		.global	max2871CheckLD
+ 871              		.syntax unified
+ 872              		.thumb
+ 873              		.thumb_func
+ 874              		.fpu softvfp
+ 876              	max2871CheckLD:
+ 877              	.LFB79:
+ 284:Src/max2871.c **** 
+ 285:Src/max2871.c **** int8_t max2871CheckLD(struct MAX2871Struct *max2871Status)
+ 286:Src/max2871.c **** {
+ 878              		.loc 1 286 0
+ 879              		.cfi_startproc
+ 880              		@ args = 0, pretend = 0, frame = 0
+ 881              		@ frame_needed = 0, uses_anonymous_args = 0
+ 882              	.LVL118:
+ 883 0000 10B5     		push	{r4, lr}
+ 884              	.LCFI11:
+ 885              		.cfi_def_cfa_offset 8
+ 886              		.cfi_offset 4, -8
+ 887              		.cfi_offset 14, -4
+ 888 0002 0446     		mov	r4, r0
+ 287:Src/max2871.c **** 	max2871Status->ldState = HAL_GPIO_ReadPin(MAX_LD_GPIO_Port, MAX_LD_Pin);
+ 889              		.loc 1 287 0
+ 890 0004 0821     		movs	r1, #8
+ 891 0006 0548     		ldr	r0, .L72
+ 892              	.LVL119:
+ 893 0008 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 894              	.LVL120:
+ 895 000c 6070     		strb	r0, [r4, #1]
+ 288:Src/max2871.c **** 
+ 289:Src/max2871.c **** 	if (max2871Status->ldState)
+ 896              		.loc 1 289 0
+ 897 000e 08B1     		cbz	r0, .L70
+ 290:Src/max2871.c **** 		return 1;
+ 898              		.loc 1 290 0
+ 899 0010 0120     		movs	r0, #1
+ 900              	.L69:
+ 291:Src/max2871.c **** 	else
+ 292:Src/max2871.c **** 		return -1;
+ 293:Src/max2871.c **** }
+ 901              		.loc 1 293 0
+ 902 0012 10BD     		pop	{r4, pc}
+ 903              	.LVL121:
+ 904              	.L70:
+ 292:Src/max2871.c **** }
+ 905              		.loc 1 292 0
+ 906 0014 4FF0FF30 		mov	r0, #-1
+ 907 0018 FBE7     		b	.L69
+ 908              	.L73:
+ 909 001a 00BF     		.align	2
+ 910              	.L72:
+ 911 001c 00080140 		.word	1073809408
+ 912              		.cfi_endproc
+ARM GAS  /tmp/cceaaxGR.s 			page 23
+
+
+ 913              	.LFE79:
+ 915              		.section	.text.max2871Setup,"ax",%progbits
+ 916              		.align	1
+ 917              		.global	max2871Setup
+ 918              		.syntax unified
+ 919              		.thumb
+ 920              		.thumb_func
+ 921              		.fpu softvfp
+ 923              	max2871Setup:
+ 924              	.LFB69:
+  19:Src/max2871.c **** 	// Set to initial known state
+ 925              		.loc 1 19 0
+ 926              		.cfi_startproc
+ 927              		@ args = 0, pretend = 0, frame = 0
+ 928              		@ frame_needed = 0, uses_anonymous_args = 0
+ 929              	.LVL122:
+ 930 0000 70B5     		push	{r4, r5, r6, lr}
+ 931              	.LCFI12:
+ 932              		.cfi_def_cfa_offset 16
+ 933              		.cfi_offset 4, -16
+ 934              		.cfi_offset 5, -12
+ 935              		.cfi_offset 6, -8
+ 936              		.cfi_offset 14, -4
+ 937 0002 0646     		mov	r6, r0
+  21:Src/max2871.c **** 	max2871RFDisable(max2871Status);
+ 938              		.loc 1 21 0
+ 939 0004 FFF7FEFF 		bl	max2871ChipEnable
+ 940              	.LVL123:
+  22:Src/max2871.c **** 	HAL_GPIO_WritePin(MAX_CLK_GPIO_Port, MAX_CLK_Pin, 0);
+ 941              		.loc 1 22 0
+ 942 0008 3046     		mov	r0, r6
+ 943 000a FFF7FEFF 		bl	max2871RFDisable
+ 944              	.LVL124:
+  23:Src/max2871.c **** 	HAL_GPIO_WritePin(MAX_DAT_GPIO_Port, MAX_DAT_Pin, 0);
+ 945              		.loc 1 23 0
+ 946 000e 654C     		ldr	r4, .L83
+ 947 0010 0022     		movs	r2, #0
+ 948 0012 2021     		movs	r1, #32
+ 949 0014 2046     		mov	r0, r4
+ 950 0016 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 951              	.LVL125:
+  24:Src/max2871.c **** 	HAL_GPIO_WritePin(MAX_MUX_GPIO_Port, MAX_MUX_Pin, 0);
+ 952              		.loc 1 24 0
+ 953 001a 0022     		movs	r2, #0
+ 954 001c 1021     		movs	r1, #16
+ 955 001e 2046     		mov	r0, r4
+ 956 0020 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 957              	.LVL126:
+  25:Src/max2871.c **** 	HAL_GPIO_WritePin(MAX_LE_GPIO_Port, MAX_LE_Pin, 1);
+ 958              		.loc 1 25 0
+ 959 0024 0022     		movs	r2, #0
+ 960 0026 8021     		movs	r1, #128
+ 961 0028 2046     		mov	r0, r4
+ 962 002a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 963              	.LVL127:
+  26:Src/max2871.c **** 
+ 964              		.loc 1 26 0
+ARM GAS  /tmp/cceaaxGR.s 			page 24
+
+
+ 965 002e 0122     		movs	r2, #1
+ 966 0030 0221     		movs	r1, #2
+ 967 0032 5D48     		ldr	r0, .L83+4
+ 968 0034 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 969              	.LVL128:
+  28:Src/max2871.c **** 
+ 970              		.loc 1 28 0
+ 971 0038 FFF7FEFF 		bl	max2871RegsInit
+ 972              	.LVL129:
+ 973              	.LBB13:
+  32:Src/max2871.c **** 	{
+ 974              		.loc 1 32 0
+ 975 003c 0125     		movs	r5, #1
+ 976 003e 11E0     		b	.L75
+ 977              	.LVL130:
+ 978              	.L76:
+ 979              	.LBB14:
+  34:Src/max2871.c **** 		{
+ 980              		.loc 1 34 0 discriminator 2
+ 981 0040 013C     		subs	r4, r4, #1
+ 982              	.LVL131:
+ 983              	.L78:
+  34:Src/max2871.c **** 		{
+ 984              		.loc 1 34 0 is_stmt 0 discriminator 1
+ 985 0042 002C     		cmp	r4, #0
+ 986 0044 0ADB     		blt	.L81
+  36:Src/max2871.c **** 			max2871SpiWrite(txReg);
+ 987              		.loc 1 36 0 is_stmt 1
+ 988 0046 E0B2     		uxtb	r0, r4
+ 989 0048 FFF7FEFF 		bl	max2871GetRegister
+ 990              	.LVL132:
+  37:Src/max2871.c **** 			if (i == 5) HAL_Delay(20);
+ 991              		.loc 1 37 0
+ 992 004c FFF7FEFF 		bl	max2871SpiWrite
+ 993              	.LVL133:
+  38:Src/max2871.c **** 		}
+ 994              		.loc 1 38 0
+ 995 0050 052C     		cmp	r4, #5
+ 996 0052 F5D1     		bne	.L76
+  38:Src/max2871.c **** 		}
+ 997              		.loc 1 38 0 is_stmt 0 discriminator 1
+ 998 0054 1420     		movs	r0, #20
+ 999 0056 FFF7FEFF 		bl	HAL_Delay
+ 1000              	.LVL134:
+ 1001 005a F1E7     		b	.L76
+ 1002              	.L81:
+ 1003              	.LBE14:
+  40:Src/max2871.c **** 	}
+ 1004              		.loc 1 40 0 is_stmt 1 discriminator 2
+ 1005 005c 1420     		movs	r0, #20
+ 1006 005e FFF7FEFF 		bl	HAL_Delay
+ 1007              	.LVL135:
+  32:Src/max2871.c **** 	{
+ 1008              		.loc 1 32 0 discriminator 2
+ 1009 0062 013D     		subs	r5, r5, #1
+ 1010              	.LVL136:
+ 1011              	.L75:
+ARM GAS  /tmp/cceaaxGR.s 			page 25
+
+
+  32:Src/max2871.c **** 	{
+ 1012              		.loc 1 32 0 is_stmt 0 discriminator 1
+ 1013 0064 002D     		cmp	r5, #0
+ 1014 0066 01DB     		blt	.L82
+ 1015              	.LBB15:
+  34:Src/max2871.c **** 		{
+ 1016              		.loc 1 34 0 is_stmt 1
+ 1017 0068 0524     		movs	r4, #5
+ 1018 006a EAE7     		b	.L78
+ 1019              	.L82:
+ 1020              	.LBE15:
+ 1021              	.LBE13:
+  44:Src/max2871.c **** 	max2871Set_N(83);		// Init to 50Mhz
+ 1022              		.loc 1 44 0
+ 1023 006c 0020     		movs	r0, #0
+ 1024 006e FFF7FEFF 		bl	max2871Set_INT
+ 1025              	.LVL137:
+  45:Src/max2871.c **** 	max2871Set_FRAC(1365);
+ 1026              		.loc 1 45 0
+ 1027 0072 5320     		movs	r0, #83
+ 1028 0074 FFF7FEFF 		bl	max2871Set_N
+ 1029              	.LVL138:
+  46:Src/max2871.c **** 	max2871Set_CPOC(0);
+ 1030              		.loc 1 46 0
+ 1031 0078 40F25550 		movw	r0, #1365
+ 1032 007c FFF7FEFF 		bl	max2871Set_FRAC
+ 1033              	.LVL139:
+  47:Src/max2871.c **** 	max2871Set_CPL(0);
+ 1034              		.loc 1 47 0
+ 1035 0080 0020     		movs	r0, #0
+ 1036 0082 FFF7FEFF 		bl	max2871Set_CPOC
+ 1037              	.LVL140:
+  48:Src/max2871.c **** 	max2871Set_CPT(0);
+ 1038              		.loc 1 48 0
+ 1039 0086 0020     		movs	r0, #0
+ 1040 0088 FFF7FEFF 		bl	max2871Set_CPL
+ 1041              	.LVL141:
+  49:Src/max2871.c **** 	max2871Set_P(1);
+ 1042              		.loc 1 49 0
+ 1043 008c 0020     		movs	r0, #0
+ 1044 008e FFF7FEFF 		bl	max2871Set_CPT
+ 1045              	.LVL142:
+  50:Src/max2871.c **** 	max2871Set_M(4095);
+ 1046              		.loc 1 50 0
+ 1047 0092 0120     		movs	r0, #1
+ 1048 0094 FFF7FEFF 		bl	max2871Set_P
+ 1049              	.LVL143:
+  51:Src/max2871.c **** 	max2871Set_LDS(1);
+ 1050              		.loc 1 51 0
+ 1051 0098 40F6FF70 		movw	r0, #4095
+ 1052 009c FFF7FEFF 		bl	max2871Set_M
+ 1053              	.LVL144:
+  52:Src/max2871.c **** 	max2871Set_SDN(0);
+ 1054              		.loc 1 52 0
+ 1055 00a0 0120     		movs	r0, #1
+ 1056 00a2 FFF7FEFF 		bl	max2871Set_LDS
+ 1057              	.LVL145:
+ARM GAS  /tmp/cceaaxGR.s 			page 26
+
+
+  53:Src/max2871.c **** 	max2871Set_MUX(0xC); 	// Reg 6 Readback 0xC
+ 1058              		.loc 1 53 0
+ 1059 00a6 0020     		movs	r0, #0
+ 1060 00a8 FFF7FEFF 		bl	max2871Set_SDN
+ 1061              	.LVL146:
+  54:Src/max2871.c **** 	max2871Set_DBR(1);
+ 1062              		.loc 1 54 0
+ 1063 00ac 0C20     		movs	r0, #12
+ 1064 00ae FFF7FEFF 		bl	max2871Set_MUX
+ 1065              	.LVL147:
+  55:Src/max2871.c **** 	max2871Set_RDIV2(0);
+ 1066              		.loc 1 55 0
+ 1067 00b2 0120     		movs	r0, #1
+ 1068 00b4 FFF7FEFF 		bl	max2871Set_DBR
+ 1069              	.LVL148:
+  56:Src/max2871.c **** 	max2871Set_R(1); 		// 38.4MHz f_PFD
+ 1070              		.loc 1 56 0
+ 1071 00b8 0020     		movs	r0, #0
+ 1072 00ba FFF7FEFF 		bl	max2871Set_RDIV2
+ 1073              	.LVL149:
+  57:Src/max2871.c **** 	max2871Set_REG4DB(0);
+ 1074              		.loc 1 57 0
+ 1075 00be 0120     		movs	r0, #1
+ 1076 00c0 FFF7FEFF 		bl	max2871Set_R
+ 1077              	.LVL150:
+  58:Src/max2871.c **** 	max2871Set_CP(15);
+ 1078              		.loc 1 58 0
+ 1079 00c4 0020     		movs	r0, #0
+ 1080 00c6 FFF7FEFF 		bl	max2871Set_REG4DB
+ 1081              	.LVL151:
+  59:Src/max2871.c **** 	max2871Set_LDF(0);
+ 1082              		.loc 1 59 0
+ 1083 00ca 0F20     		movs	r0, #15
+ 1084 00cc FFF7FEFF 		bl	max2871Set_CP
+ 1085              	.LVL152:
+  60:Src/max2871.c **** 	max2871Set_LDP(0);
+ 1086              		.loc 1 60 0
+ 1087 00d0 0020     		movs	r0, #0
+ 1088 00d2 FFF7FEFF 		bl	max2871Set_LDF
+ 1089              	.LVL153:
+  61:Src/max2871.c **** 	max2871Set_PDP(1);
+ 1090              		.loc 1 61 0
+ 1091 00d6 0020     		movs	r0, #0
+ 1092 00d8 FFF7FEFF 		bl	max2871Set_LDP
+ 1093              	.LVL154:
+  62:Src/max2871.c **** 	max2871Set_SHDN(0);
+ 1094              		.loc 1 62 0
+ 1095 00dc 0120     		movs	r0, #1
+ 1096 00de FFF7FEFF 		bl	max2871Set_PDP
+ 1097              	.LVL155:
+  63:Src/max2871.c **** 	max2871Set_TRI(0);
+ 1098              		.loc 1 63 0
+ 1099 00e2 0020     		movs	r0, #0
+ 1100 00e4 FFF7FEFF 		bl	max2871Set_SHDN
+ 1101              	.LVL156:
+  64:Src/max2871.c **** 	max2871Set_RST(0);
+ 1102              		.loc 1 64 0
+ARM GAS  /tmp/cceaaxGR.s 			page 27
+
+
+ 1103 00e8 0020     		movs	r0, #0
+ 1104 00ea FFF7FEFF 		bl	max2871Set_TRI
+ 1105              	.LVL157:
+  65:Src/max2871.c **** 	max2871Set_VCO(0);
+ 1106              		.loc 1 65 0
+ 1107 00ee 0020     		movs	r0, #0
+ 1108 00f0 FFF7FEFF 		bl	max2871Set_RST
+ 1109              	.LVL158:
+  66:Src/max2871.c **** 	max2871Set_VAS_SHDN(0);
+ 1110              		.loc 1 66 0
+ 1111 00f4 0020     		movs	r0, #0
+ 1112 00f6 FFF7FEFF 		bl	max2871Set_VCO
+ 1113              	.LVL159:
+  67:Src/max2871.c **** 	max2871Set_VAS_TEMP(1);
+ 1114              		.loc 1 67 0
+ 1115 00fa 0020     		movs	r0, #0
+ 1116 00fc FFF7FEFF 		bl	max2871Set_VAS_SHDN
+ 1117              	.LVL160:
+  68:Src/max2871.c **** 	max2871Set_CSM(0);
+ 1118              		.loc 1 68 0
+ 1119 0100 0120     		movs	r0, #1
+ 1120 0102 FFF7FEFF 		bl	max2871Set_VAS_TEMP
+ 1121              	.LVL161:
+  69:Src/max2871.c **** 	max2871Set_MUTEDEL(1);
+ 1122              		.loc 1 69 0
+ 1123 0106 0020     		movs	r0, #0
+ 1124 0108 FFF7FEFF 		bl	max2871Set_CSM
+ 1125              	.LVL162:
+  70:Src/max2871.c **** 	max2871Set_CDM(0);
+ 1126              		.loc 1 70 0
+ 1127 010c 0120     		movs	r0, #1
+ 1128 010e FFF7FEFF 		bl	max2871Set_MUTEDEL
+ 1129              	.LVL163:
+  71:Src/max2871.c **** 	max2871Set_CDIV(38);
+ 1130              		.loc 1 71 0
+ 1131 0112 0020     		movs	r0, #0
+ 1132 0114 FFF7FEFF 		bl	max2871Set_CDM
+ 1133              	.LVL164:
+  72:Src/max2871.c **** 	max2871Set_SDLDO(0);
+ 1134              		.loc 1 72 0
+ 1135 0118 2620     		movs	r0, #38
+ 1136 011a FFF7FEFF 		bl	max2871Set_CDIV
+ 1137              	.LVL165:
+  73:Src/max2871.c **** 	max2871Set_SDDIV(0);
+ 1138              		.loc 1 73 0
+ 1139 011e 0020     		movs	r0, #0
+ 1140 0120 FFF7FEFF 		bl	max2871Set_SDLDO
+ 1141              	.LVL166:
+  74:Src/max2871.c **** 	max2871Set_SDREF(0);
+ 1142              		.loc 1 74 0
+ 1143 0124 0020     		movs	r0, #0
+ 1144 0126 FFF7FEFF 		bl	max2871Set_SDDIV
+ 1145              	.LVL167:
+  75:Src/max2871.c **** 	max2871Set_BS(768);		//BS = fPFD / 50KHz
+ 1146              		.loc 1 75 0
+ 1147 012a 0020     		movs	r0, #0
+ 1148 012c FFF7FEFF 		bl	max2871Set_SDREF
+ARM GAS  /tmp/cceaaxGR.s 			page 28
+
+
+ 1149              	.LVL168:
+  76:Src/max2871.c **** 	max2871Set_FB(1);
+ 1150              		.loc 1 76 0
+ 1151 0130 4FF44070 		mov	r0, #768
+ 1152 0134 FFF7FEFF 		bl	max2871Set_BS
+ 1153              	.LVL169:
+  77:Src/max2871.c **** 	max2871Set_DIVA(6);
+ 1154              		.loc 1 77 0
+ 1155 0138 0120     		movs	r0, #1
+ 1156 013a FFF7FEFF 		bl	max2871Set_FB
+ 1157              	.LVL170:
+  78:Src/max2871.c **** 	max2871Set_SDVCO(0);
+ 1158              		.loc 1 78 0
+ 1159 013e 0620     		movs	r0, #6
+ 1160 0140 FFF7FEFF 		bl	max2871Set_DIVA
+ 1161              	.LVL171:
+  79:Src/max2871.c **** 	max2871Set_MTLD(1);
+ 1162              		.loc 1 79 0
+ 1163 0144 0020     		movs	r0, #0
+ 1164 0146 FFF7FEFF 		bl	max2871Set_SDVCO
+ 1165              	.LVL172:
+  80:Src/max2871.c **** 	max2871Set_BDIV(0);
+ 1166              		.loc 1 80 0
+ 1167 014a 0120     		movs	r0, #1
+ 1168 014c FFF7FEFF 		bl	max2871Set_MTLD
+ 1169              	.LVL173:
+  81:Src/max2871.c **** 	max2871Set_RFB_EN(0);
+ 1170              		.loc 1 81 0
+ 1171 0150 0020     		movs	r0, #0
+ 1172 0152 FFF7FEFF 		bl	max2871Set_BDIV
+ 1173              	.LVL174:
+  82:Src/max2871.c **** 	max2871Set_BPWR(0);
+ 1174              		.loc 1 82 0
+ 1175 0156 0020     		movs	r0, #0
+ 1176 0158 FFF7FEFF 		bl	max2871Set_RFB_EN
+ 1177              	.LVL175:
+  83:Src/max2871.c **** 	max2871Set_RFA_EN(0);	// Begin with power off
+ 1178              		.loc 1 83 0
+ 1179 015c 0020     		movs	r0, #0
+ 1180 015e FFF7FEFF 		bl	max2871Set_BPWR
+ 1181              	.LVL176:
+  84:Src/max2871.c **** 	max2871Set_APWR(3);
+ 1182              		.loc 1 84 0
+ 1183 0162 0020     		movs	r0, #0
+ 1184 0164 FFF7FEFF 		bl	max2871Set_RFA_EN
+ 1185              	.LVL177:
+  85:Src/max2871.c **** 	max2871Set_SDPLL(0);
+ 1186              		.loc 1 85 0
+ 1187 0168 0320     		movs	r0, #3
+ 1188 016a FFF7FEFF 		bl	max2871Set_APWR
+ 1189              	.LVL178:
+  86:Src/max2871.c **** 	max2871Set_F01(0);
+ 1190              		.loc 1 86 0
+ 1191 016e 0020     		movs	r0, #0
+ 1192 0170 FFF7FEFF 		bl	max2871Set_SDPLL
+ 1193              	.LVL179:
+  87:Src/max2871.c **** 	max2871Set_LD(1);
+ARM GAS  /tmp/cceaaxGR.s 			page 29
+
+
+ 1194              		.loc 1 87 0
+ 1195 0174 0020     		movs	r0, #0
+ 1196 0176 FFF7FEFF 		bl	max2871Set_F01
+ 1197              	.LVL180:
+  88:Src/max2871.c **** 	max2871Set_Reserved();
+ 1198              		.loc 1 88 0
+ 1199 017a 0120     		movs	r0, #1
+ 1200 017c FFF7FEFF 		bl	max2871Set_LD
+ 1201              	.LVL181:
+  89:Src/max2871.c **** 
+ 1202              		.loc 1 89 0
+ 1203 0180 FFF7FEFF 		bl	max2871Set_Reserved
+ 1204              	.LVL182:
+  92:Src/max2871.c **** 	max2871Status->rfPower = 3;
+ 1205              		.loc 1 92 0
+ 1206 0184 0023     		movs	r3, #0
+ 1207 0186 3372     		strb	r3, [r6, #8]
+  93:Src/max2871.c **** 	max2871Status->frequency = 50;
+ 1208              		.loc 1 93 0
+ 1209 0188 0323     		movs	r3, #3
+ 1210 018a B372     		strb	r3, [r6, #10]
+  94:Src/max2871.c **** 
+ 1211              		.loc 1 94 0
+ 1212 018c 074B     		ldr	r3, .L83+8
+ 1213 018e 7360     		str	r3, [r6, #4]	@ float
+  97:Src/max2871.c **** 	HAL_Delay(10);
+ 1214              		.loc 1 97 0
+ 1215 0190 FFF7FEFF 		bl	max2871WriteRegisters
+ 1216              	.LVL183:
+  98:Src/max2871.c **** 
+ 1217              		.loc 1 98 0
+ 1218 0194 0A20     		movs	r0, #10
+ 1219 0196 FFF7FEFF 		bl	HAL_Delay
+ 1220              	.LVL184:
+ 101:Src/max2871.c **** }
+ 1221              		.loc 1 101 0
+ 1222 019a 3046     		mov	r0, r6
+ 1223 019c FFF7FEFF 		bl	max2871CheckLD
+ 1224              	.LVL185:
+ 102:Src/max2871.c **** 
+ 1225              		.loc 1 102 0
+ 1226 01a0 70BD     		pop	{r4, r5, r6, pc}
+ 1227              	.LVL186:
+ 1228              	.L84:
+ 1229 01a2 00BF     		.align	2
+ 1230              	.L83:
+ 1231 01a4 000C0140 		.word	1073810432
+ 1232 01a8 00080140 		.word	1073809408
+ 1233 01ac 00004842 		.word	1112014848
+ 1234              		.cfi_endproc
+ 1235              	.LFE69:
+ 1237              		.section	.text.max2871PrintRegisters,"ax",%progbits
+ 1238              		.align	1
+ 1239              		.global	max2871PrintRegisters
+ 1240              		.syntax unified
+ 1241              		.thumb
+ 1242              		.thumb_func
+ARM GAS  /tmp/cceaaxGR.s 			page 30
+
+
+ 1243              		.fpu softvfp
+ 1245              	max2871PrintRegisters:
+ 1246              	.LFB80:
+ 294:Src/max2871.c **** 
+ 295:Src/max2871.c **** void max2871PrintRegisters(void)
+ 296:Src/max2871.c **** {
+ 1247              		.loc 1 296 0
+ 1248              		.cfi_startproc
+ 1249              		@ args = 0, pretend = 0, frame = 0
+ 1250              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1251 0000 70B5     		push	{r4, r5, r6, lr}
+ 1252              	.LCFI13:
+ 1253              		.cfi_def_cfa_offset 16
+ 1254              		.cfi_offset 4, -16
+ 1255              		.cfi_offset 5, -12
+ 1256              		.cfi_offset 6, -8
+ 1257              		.cfi_offset 14, -4
+ 1258              	.LVL187:
+ 1259              	.LBB16:
+ 297:Src/max2871.c **** 	uint32_t txReg;
+ 298:Src/max2871.c **** 
+ 299:Src/max2871.c **** 	for (int8_t i = 0; i <= 5; i++)
+ 1260              		.loc 1 299 0
+ 1261 0002 0025     		movs	r5, #0
+ 1262 0004 12E0     		b	.L86
+ 1263              	.LVL188:
+ 1264              	.L87:
+ 300:Src/max2871.c **** 	{
+ 301:Src/max2871.c **** 		txReg = max2871GetRegister(i);
+ 1265              		.loc 1 301 0 discriminator 3
+ 1266 0006 ECB2     		uxtb	r4, r5
+ 1267 0008 2046     		mov	r0, r4
+ 1268 000a FFF7FEFF 		bl	max2871GetRegister
+ 1269              	.LVL189:
+ 302:Src/max2871.c **** 		sprintf((char *)str1, "> Register %d = 0x%x\n", i, (unsigned int) txReg);
+ 1270              		.loc 1 302 0 discriminator 3
+ 1271 000e 0E4E     		ldr	r6, .L89
+ 1272 0010 0346     		mov	r3, r0
+ 1273 0012 2A46     		mov	r2, r5
+ 1274 0014 0D49     		ldr	r1, .L89+4
+ 1275 0016 3046     		mov	r0, r6
+ 1276              	.LVL190:
+ 1277 0018 FFF7FEFF 		bl	sprintf
+ 1278              	.LVL191:
+ 303:Src/max2871.c **** 		printUSB(str1);
+ 1279              		.loc 1 303 0 discriminator 3
+ 1280 001c 3046     		mov	r0, r6
+ 1281 001e FFF7FEFF 		bl	printUSB
+ 1282              	.LVL192:
+ 304:Src/max2871.c **** 		HAL_Delay(10);
+ 1283              		.loc 1 304 0 discriminator 3
+ 1284 0022 0A20     		movs	r0, #10
+ 1285 0024 FFF7FEFF 		bl	HAL_Delay
+ 1286              	.LVL193:
+ 299:Src/max2871.c **** 	{
+ 1287              		.loc 1 299 0 discriminator 3
+ 1288 0028 0134     		adds	r4, r4, #1
+ARM GAS  /tmp/cceaaxGR.s 			page 31
+
+
+ 1289 002a 65B2     		sxtb	r5, r4
+ 1290              	.LVL194:
+ 1291              	.L86:
+ 299:Src/max2871.c **** 	{
+ 1292              		.loc 1 299 0 is_stmt 0 discriminator 1
+ 1293 002c 052D     		cmp	r5, #5
+ 1294 002e EADD     		ble	.L87
+ 1295              	.LBE16:
+ 305:Src/max2871.c **** 
+ 306:Src/max2871.c **** 	}
+ 307:Src/max2871.c **** 
+ 308:Src/max2871.c **** 	txReg = max2871SpiRead();
+ 1296              		.loc 1 308 0 is_stmt 1
+ 1297 0030 FFF7FEFF 		bl	max2871SpiRead
+ 1298              	.LVL195:
+ 309:Src/max2871.c **** 	sprintf((char *)str1, "> Register 6 = 0x%x\n", (unsigned int) txReg);
+ 1299              		.loc 1 309 0
+ 1300 0034 044C     		ldr	r4, .L89
+ 1301 0036 0246     		mov	r2, r0
+ 1302 0038 0549     		ldr	r1, .L89+8
+ 1303 003a 2046     		mov	r0, r4
+ 1304              	.LVL196:
+ 1305 003c FFF7FEFF 		bl	sprintf
+ 1306              	.LVL197:
+ 310:Src/max2871.c **** 	printUSB(str1);
+ 1307              		.loc 1 310 0
+ 1308 0040 2046     		mov	r0, r4
+ 1309 0042 FFF7FEFF 		bl	printUSB
+ 1310              	.LVL198:
+ 311:Src/max2871.c **** }
+ 1311              		.loc 1 311 0
+ 1312 0046 70BD     		pop	{r4, r5, r6, pc}
+ 1313              	.LVL199:
+ 1314              	.L90:
+ 1315              		.align	2
+ 1316              	.L89:
+ 1317 0048 00000000 		.word	.LANCHOR0
+ 1318 004c 00000000 		.word	.LC3
+ 1319 0050 18000000 		.word	.LC4
+ 1320              		.cfi_endproc
+ 1321              	.LFE80:
+ 1323              		.section	.text.max2871PrintStatus,"ax",%progbits
+ 1324              		.align	1
+ 1325              		.global	max2871PrintStatus
+ 1326              		.syntax unified
+ 1327              		.thumb
+ 1328              		.thumb_func
+ 1329              		.fpu softvfp
+ 1331              	max2871PrintStatus:
+ 1332              	.LFB81:
+ 312:Src/max2871.c **** 
+ 313:Src/max2871.c **** void max2871PrintStatus(uint8_t verbose, struct MAX2871Struct *max2871Status)
+ 314:Src/max2871.c **** {
+ 1333              		.loc 1 314 0
+ 1334              		.cfi_startproc
+ 1335              		@ args = 0, pretend = 0, frame = 136
+ 1336              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/cceaaxGR.s 			page 32
+
+
+ 1337              	.LVL200:
+ 1338 0000 30B5     		push	{r4, r5, lr}
+ 1339              	.LCFI14:
+ 1340              		.cfi_def_cfa_offset 12
+ 1341              		.cfi_offset 4, -12
+ 1342              		.cfi_offset 5, -8
+ 1343              		.cfi_offset 14, -4
+ 1344 0002 A3B0     		sub	sp, sp, #140
+ 1345              	.LCFI15:
+ 1346              		.cfi_def_cfa_offset 152
+ 1347 0004 0546     		mov	r5, r0
+ 1348 0006 0C46     		mov	r4, r1
+ 315:Src/max2871.c **** 	uint8_t str1[128] = "";
+ 1349              		.loc 1 315 0
+ 1350 0008 0021     		movs	r1, #0
+ 1351              	.LVL201:
+ 1352 000a 0291     		str	r1, [sp, #8]
+ 1353 000c 7C22     		movs	r2, #124
+ 1354 000e 03A8     		add	r0, sp, #12
+ 1355              	.LVL202:
+ 1356 0010 FFF7FEFF 		bl	memset
+ 1357              	.LVL203:
+ 316:Src/max2871.c **** 	int8_t powerArray[4] = {-4, -1, 2, 5};
+ 1358              		.loc 1 316 0
+ 1359 0014 274B     		ldr	r3, .L95
+ 1360 0016 1B68     		ldr	r3, [r3]
+ 1361 0018 0193     		str	r3, [sp, #4]
+ 317:Src/max2871.c **** 
+ 318:Src/max2871.c **** 	printUSB("> ----  MAX2871  ----\n");
+ 1362              		.loc 1 318 0
+ 1363 001a 2748     		ldr	r0, .L95+4
+ 1364 001c FFF7FEFF 		bl	printUSB
+ 1365              	.LVL204:
+ 319:Src/max2871.c **** 
+ 320:Src/max2871.c **** 	sprintf(str1, "> Chip Enable = %d\n", max2871Status->CHIP_EN);
+ 1366              		.loc 1 320 0
+ 1367 0020 2278     		ldrb	r2, [r4]	@ zero_extendqisi2
+ 1368 0022 2649     		ldr	r1, .L95+8
+ 1369 0024 02A8     		add	r0, sp, #8
+ 1370 0026 FFF7FEFF 		bl	sprintf
+ 1371              	.LVL205:
+ 321:Src/max2871.c **** 	printUSB(str1);
+ 1372              		.loc 1 321 0
+ 1373 002a 02A8     		add	r0, sp, #8
+ 1374 002c FFF7FEFF 		bl	printUSB
+ 1375              	.LVL206:
+ 322:Src/max2871.c **** 
+ 323:Src/max2871.c **** 	max2871CheckLD(max2871Status);
+ 1376              		.loc 1 323 0
+ 1377 0030 2046     		mov	r0, r4
+ 1378 0032 FFF7FEFF 		bl	max2871CheckLD
+ 1379              	.LVL207:
+ 324:Src/max2871.c **** 	sprintf(str1, "> LD Status = %d\n", max2871Status->ldState);
+ 1380              		.loc 1 324 0
+ 1381 0036 6278     		ldrb	r2, [r4, #1]	@ zero_extendqisi2
+ 1382 0038 2149     		ldr	r1, .L95+12
+ 1383 003a 02A8     		add	r0, sp, #8
+ARM GAS  /tmp/cceaaxGR.s 			page 33
+
+
+ 1384 003c FFF7FEFF 		bl	sprintf
+ 1385              	.LVL208:
+ 325:Src/max2871.c **** 	printUSB(str1);
+ 1386              		.loc 1 325 0
+ 1387 0040 02A8     		add	r0, sp, #8
+ 1388 0042 FFF7FEFF 		bl	printUSB
+ 1389              	.LVL209:
+ 326:Src/max2871.c **** 
+ 327:Src/max2871.c **** 	sprintf(str1, "> Set Frequency = %0.2f MHz\n", max2871Status->frequency);
+ 1390              		.loc 1 327 0
+ 1391 0046 6068     		ldr	r0, [r4, #4]	@ float
+ 1392 0048 FFF7FEFF 		bl	__aeabi_f2d
+ 1393              	.LVL210:
+ 1394 004c 0246     		mov	r2, r0
+ 1395 004e 0B46     		mov	r3, r1
+ 1396 0050 1C49     		ldr	r1, .L95+16
+ 1397 0052 02A8     		add	r0, sp, #8
+ 1398 0054 FFF7FEFF 		bl	sprintf
+ 1399              	.LVL211:
+ 328:Src/max2871.c **** 	printUSB(str1);
+ 1400              		.loc 1 328 0
+ 1401 0058 02A8     		add	r0, sp, #8
+ 1402 005a FFF7FEFF 		bl	printUSB
+ 1403              	.LVL212:
+ 329:Src/max2871.c **** 
+ 330:Src/max2871.c **** 	sprintf(str1, "> Int-N / nFrac-N = %d\n", max2871Status->intN_nFracN);
+ 1404              		.loc 1 330 0
+ 1405 005e E27A     		ldrb	r2, [r4, #11]	@ zero_extendqisi2
+ 1406 0060 1949     		ldr	r1, .L95+20
+ 1407 0062 02A8     		add	r0, sp, #8
+ 1408 0064 FFF7FEFF 		bl	sprintf
+ 1409              	.LVL213:
+ 331:Src/max2871.c **** 	printUSB(str1);
+ 1410              		.loc 1 331 0
+ 1411 0068 02A8     		add	r0, sp, #8
+ 1412 006a FFF7FEFF 		bl	printUSB
+ 1413              	.LVL214:
+ 332:Src/max2871.c **** 
+ 333:Src/max2871.c **** 	sprintf(str1, "> RFA Enable = %d\n", max2871Status->RFA_EN);
+ 1414              		.loc 1 333 0
+ 1415 006e 227A     		ldrb	r2, [r4, #8]	@ zero_extendqisi2
+ 1416 0070 1649     		ldr	r1, .L95+24
+ 1417 0072 02A8     		add	r0, sp, #8
+ 1418 0074 FFF7FEFF 		bl	sprintf
+ 1419              	.LVL215:
+ 334:Src/max2871.c **** 	printUSB(str1);
+ 1420              		.loc 1 334 0
+ 1421 0078 02A8     		add	r0, sp, #8
+ 1422 007a FFF7FEFF 		bl	printUSB
+ 1423              	.LVL216:
+ 335:Src/max2871.c **** 
+ 336:Src/max2871.c **** 	sprintf(str1, "> RF Out Enable = %d\n", max2871Status->RF_CHIP_EN);
+ 1424              		.loc 1 336 0
+ 1425 007e 627A     		ldrb	r2, [r4, #9]	@ zero_extendqisi2
+ 1426 0080 1349     		ldr	r1, .L95+28
+ 1427 0082 02A8     		add	r0, sp, #8
+ 1428 0084 FFF7FEFF 		bl	sprintf
+ARM GAS  /tmp/cceaaxGR.s 			page 34
+
+
+ 1429              	.LVL217:
+ 337:Src/max2871.c **** 	printUSB(str1);
+ 1430              		.loc 1 337 0
+ 1431 0088 02A8     		add	r0, sp, #8
+ 1432 008a FFF7FEFF 		bl	printUSB
+ 1433              	.LVL218:
+ 338:Src/max2871.c **** 
+ 339:Src/max2871.c **** 	sprintf(str1, "> RF Power = %d dBm\n", powerArray[max2871Status->rfPower]);
+ 1434              		.loc 1 339 0
+ 1435 008e A37A     		ldrb	r3, [r4, #10]	@ zero_extendqisi2
+ 1436 0090 22AA     		add	r2, sp, #136
+ 1437 0092 1344     		add	r3, r3, r2
+ 1438 0094 13F9842C 		ldrsb	r2, [r3, #-132]
+ 1439 0098 0E49     		ldr	r1, .L95+32
+ 1440 009a 02A8     		add	r0, sp, #8
+ 1441 009c FFF7FEFF 		bl	sprintf
+ 1442              	.LVL219:
+ 340:Src/max2871.c **** 	printUSB(str1);
+ 1443              		.loc 1 340 0
+ 1444 00a0 02A8     		add	r0, sp, #8
+ 1445 00a2 FFF7FEFF 		bl	printUSB
+ 1446              	.LVL220:
+ 341:Src/max2871.c **** 
+ 342:Src/max2871.c **** 	if (verbose)
+ 1447              		.loc 1 342 0
+ 1448 00a6 0DB9     		cbnz	r5, .L94
+ 1449              	.L91:
+ 343:Src/max2871.c **** 	{
+ 344:Src/max2871.c **** 		max2871PrintRegisters();
+ 345:Src/max2871.c **** 	}
+ 346:Src/max2871.c **** }
+ 1450              		.loc 1 346 0
+ 1451 00a8 23B0     		add	sp, sp, #140
+ 1452              	.LCFI16:
+ 1453              		.cfi_remember_state
+ 1454              		.cfi_def_cfa_offset 12
+ 1455              		@ sp needed
+ 1456 00aa 30BD     		pop	{r4, r5, pc}
+ 1457              	.LVL221:
+ 1458              	.L94:
+ 1459              	.LCFI17:
+ 1460              		.cfi_restore_state
+ 344:Src/max2871.c **** 	}
+ 1461              		.loc 1 344 0
+ 1462 00ac FFF7FEFF 		bl	max2871PrintRegisters
+ 1463              	.LVL222:
+ 1464              		.loc 1 346 0
+ 1465 00b0 FAE7     		b	.L91
+ 1466              	.L96:
+ 1467 00b2 00BF     		.align	2
+ 1468              	.L95:
+ 1469 00b4 00000000 		.word	.LANCHOR1
+ 1470 00b8 00000000 		.word	.LC5
+ 1471 00bc 18000000 		.word	.LC6
+ 1472 00c0 2C000000 		.word	.LC7
+ 1473 00c4 40000000 		.word	.LC8
+ 1474 00c8 60000000 		.word	.LC9
+ARM GAS  /tmp/cceaaxGR.s 			page 35
+
+
+ 1475 00cc 78000000 		.word	.LC10
+ 1476 00d0 8C000000 		.word	.LC11
+ 1477 00d4 A4000000 		.word	.LC12
+ 1478              		.cfi_endproc
+ 1479              	.LFE81:
+ 1481              		.comm	max2871Status,12,4
+ 1482              		.global	str1
+ 1483              		.section	.rodata
+ 1484              		.align	2
+ 1485              		.set	.LANCHOR1,. + 0
+ 1486              	.LC0:
+ 1487 0000 FC       		.byte	-4
+ 1488 0001 FF       		.byte	-1
+ 1489 0002 02       		.byte	2
+ 1490 0003 05       		.byte	5
+ 1491              		.section	.bss.str1,"aw",%nobits
+ 1492              		.align	2
+ 1493              		.set	.LANCHOR0,. + 0
+ 1496              	str1:
+ 1497 0000 00000000 		.space	128
+ 1497      00000000 
+ 1497      00000000 
+ 1497      00000000 
+ 1497      00000000 
+ 1498              		.section	.rodata.max2871PrintRegisters.str1.4,"aMS",%progbits,1
+ 1499              		.align	2
+ 1500              	.LC3:
+ 1501 0000 3E205265 		.ascii	"> Register %d = 0x%x\012\000"
+ 1501      67697374 
+ 1501      65722025 
+ 1501      64203D20 
+ 1501      30782578 
+ 1502 0016 0000     		.space	2
+ 1503              	.LC4:
+ 1504 0018 3E205265 		.ascii	"> Register 6 = 0x%x\012\000"
+ 1504      67697374 
+ 1504      65722036 
+ 1504      203D2030 
+ 1504      7825780A 
+ 1505              		.section	.rodata.max2871PrintStatus.str1.4,"aMS",%progbits,1
+ 1506              		.align	2
+ 1507              	.LC5:
+ 1508 0000 3E202D2D 		.ascii	"> ----  MAX2871  ----\012\000"
+ 1508      2D2D2020 
+ 1508      4D415832 
+ 1508      38373120 
+ 1508      202D2D2D 
+ 1509 0017 00       		.space	1
+ 1510              	.LC6:
+ 1511 0018 3E204368 		.ascii	"> Chip Enable = %d\012\000"
+ 1511      69702045 
+ 1511      6E61626C 
+ 1511      65203D20 
+ 1511      25640A00 
+ 1512              	.LC7:
+ 1513 002c 3E204C44 		.ascii	"> LD Status = %d\012\000"
+ 1513      20537461 
+ARM GAS  /tmp/cceaaxGR.s 			page 36
+
+
+ 1513      74757320 
+ 1513      3D202564 
+ 1513      0A00
+ 1514 003e 0000     		.space	2
+ 1515              	.LC8:
+ 1516 0040 3E205365 		.ascii	"> Set Frequency = %0.2f MHz\012\000"
+ 1516      74204672 
+ 1516      65717565 
+ 1516      6E637920 
+ 1516      3D202530 
+ 1517 005d 000000   		.space	3
+ 1518              	.LC9:
+ 1519 0060 3E20496E 		.ascii	"> Int-N / nFrac-N = %d\012\000"
+ 1519      742D4E20 
+ 1519      2F206E46 
+ 1519      7261632D 
+ 1519      4E203D20 
+ 1520              	.LC10:
+ 1521 0078 3E205246 		.ascii	"> RFA Enable = %d\012\000"
+ 1521      4120456E 
+ 1521      61626C65 
+ 1521      203D2025 
+ 1521      640A00
+ 1522 008b 00       		.space	1
+ 1523              	.LC11:
+ 1524 008c 3E205246 		.ascii	"> RF Out Enable = %d\012\000"
+ 1524      204F7574 
+ 1524      20456E61 
+ 1524      626C6520 
+ 1524      3D202564 
+ 1525 00a2 0000     		.space	2
+ 1526              	.LC12:
+ 1527 00a4 3E205246 		.ascii	"> RF Power = %d dBm\012\000"
+ 1527      20506F77 
+ 1527      6572203D 
+ 1527      20256420 
+ 1527      64426D0A 
+ 1528              		.section	.rodata.max2871SetFrequency.str1.4,"aMS",%progbits,1
+ 1529              		.align	2
+ 1530              	.LC1:
+ 1531 0000 3E204261 		.ascii	"> Bad input frequency to max2871SetFrequency\000"
+ 1531      6420696E 
+ 1531      70757420 
+ 1531      66726571 
+ 1531      75656E63 
+ 1532              		.section	.rodata.max2871SetPower.str1.4,"aMS",%progbits,1
+ 1533              		.align	2
+ 1534              	.LC2:
+ 1535 0000 3E204261 		.ascii	"> Bad input power to max2871SetPower\000"
+ 1535      6420696E 
+ 1535      70757420 
+ 1535      706F7765 
+ 1535      7220746F 
+ 1536              		.text
+ 1537              	.Letext0:
+ 1538              		.file 3 "/usr/include/newlib/machine/_default_types.h"
+ 1539              		.file 4 "/usr/include/newlib/sys/_stdint.h"
+ARM GAS  /tmp/cceaaxGR.s 			page 37
+
+
+ 1540              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
+ 1541              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 1542              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 1543              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 1544              		.file 9 "Inc/main.h"
+ 1545              		.file 10 "Inc/max2871.h"
+ 1546              		.file 11 "/usr/include/newlib/sys/lock.h"
+ 1547              		.file 12 "/usr/include/newlib/sys/_types.h"
+ 1548              		.file 13 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
+ 1549              		.file 14 "/usr/include/newlib/sys/reent.h"
+ 1550              		.file 15 "/usr/include/newlib/stdlib.h"
+ 1551              		.file 16 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
+ 1552              		.file 17 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
+ 1553              		.file 18 "Inc/usbd_cdc_if.h"
+ 1554              		.file 19 "/usr/include/newlib/math.h"
+ 1555              		.file 20 "/usr/include/newlib/stdio.h"
+ 1556              		.file 21 "Inc/max2871_registers.h"
+ 1557              		.file 22 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 1558              		.file 23 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
+ 1559              		.file 24 "<built-in>"
+ARM GAS  /tmp/cceaaxGR.s 			page 38
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 max2871.c
+     /tmp/cceaaxGR.s:16     .text.max2871SpiWrite:0000000000000000 $t
+     /tmp/cceaaxGR.s:23     .text.max2871SpiWrite:0000000000000000 max2871SpiWrite
+     /tmp/cceaaxGR.s:156    .text.max2871SpiWrite:000000000000009c $d
+     /tmp/cceaaxGR.s:164    .text.max2871SpiRead:0000000000000000 $t
+     /tmp/cceaaxGR.s:171    .text.max2871SpiRead:0000000000000000 max2871SpiRead
+     /tmp/cceaaxGR.s:214    .text.max2871SpiRead:0000000000000038 $d
+     /tmp/cceaaxGR.s:219    .text.max2871WriteRegisters:0000000000000000 $t
+     /tmp/cceaaxGR.s:226    .text.max2871WriteRegisters:0000000000000000 max2871WriteRegisters
+     /tmp/cceaaxGR.s:275    .text.max2871SetFrequency:0000000000000000 $t
+     /tmp/cceaaxGR.s:282    .text.max2871SetFrequency:0000000000000000 max2871SetFrequency
+     /tmp/cceaaxGR.s:581    .text.max2871SetFrequency:00000000000001a8 $d
+     /tmp/cceaaxGR.s:597    .text.max2871ChipEnable:0000000000000000 $t
+     /tmp/cceaaxGR.s:604    .text.max2871ChipEnable:0000000000000000 max2871ChipEnable
+     /tmp/cceaaxGR.s:633    .text.max2871ChipEnable:0000000000000014 $d
+     /tmp/cceaaxGR.s:638    .text.max2871ChipDisable:0000000000000000 $t
+     /tmp/cceaaxGR.s:645    .text.max2871ChipDisable:0000000000000000 max2871ChipDisable
+     /tmp/cceaaxGR.s:674    .text.max2871ChipDisable:0000000000000014 $d
+     /tmp/cceaaxGR.s:679    .text.max2871RFEnable:0000000000000000 $t
+     /tmp/cceaaxGR.s:686    .text.max2871RFEnable:0000000000000000 max2871RFEnable
+     /tmp/cceaaxGR.s:728    .text.max2871RFEnable:0000000000000028 $d
+     /tmp/cceaaxGR.s:733    .text.max2871RFDisable:0000000000000000 $t
+     /tmp/cceaaxGR.s:740    .text.max2871RFDisable:0000000000000000 max2871RFDisable
+     /tmp/cceaaxGR.s:778    .text.max2871RFDisable:0000000000000020 $d
+     /tmp/cceaaxGR.s:783    .text.max2871SetPower:0000000000000000 $t
+     /tmp/cceaaxGR.s:790    .text.max2871SetPower:0000000000000000 max2871SetPower
+     /tmp/cceaaxGR.s:810    .text.max2871SetPower:000000000000000e $d
+     /tmp/cceaaxGR.s:820    .text.max2871SetPower:0000000000000018 $t
+     /tmp/cceaaxGR.s:864    .text.max2871SetPower:0000000000000044 $d
+     /tmp/cceaaxGR.s:869    .text.max2871CheckLD:0000000000000000 $t
+     /tmp/cceaaxGR.s:876    .text.max2871CheckLD:0000000000000000 max2871CheckLD
+     /tmp/cceaaxGR.s:911    .text.max2871CheckLD:000000000000001c $d
+     /tmp/cceaaxGR.s:916    .text.max2871Setup:0000000000000000 $t
+     /tmp/cceaaxGR.s:923    .text.max2871Setup:0000000000000000 max2871Setup
+     /tmp/cceaaxGR.s:1231   .text.max2871Setup:00000000000001a4 $d
+     /tmp/cceaaxGR.s:1238   .text.max2871PrintRegisters:0000000000000000 $t
+     /tmp/cceaaxGR.s:1245   .text.max2871PrintRegisters:0000000000000000 max2871PrintRegisters
+     /tmp/cceaaxGR.s:1317   .text.max2871PrintRegisters:0000000000000048 $d
+     /tmp/cceaaxGR.s:1324   .text.max2871PrintStatus:0000000000000000 $t
+     /tmp/cceaaxGR.s:1331   .text.max2871PrintStatus:0000000000000000 max2871PrintStatus
+     /tmp/cceaaxGR.s:1469   .text.max2871PrintStatus:00000000000000b4 $d
+                            *COM*:000000000000000c max2871Status
+     /tmp/cceaaxGR.s:1496   .bss.str1:0000000000000000 str1
+     /tmp/cceaaxGR.s:1484   .rodata:0000000000000000 $d
+     /tmp/cceaaxGR.s:1492   .bss.str1:0000000000000000 $d
+     /tmp/cceaaxGR.s:1499   .rodata.max2871PrintRegisters.str1.4:0000000000000000 $d
+     /tmp/cceaaxGR.s:1506   .rodata.max2871PrintStatus.str1.4:0000000000000000 $d
+     /tmp/cceaaxGR.s:1529   .rodata.max2871SetFrequency.str1.4:0000000000000000 $d
+     /tmp/cceaaxGR.s:1533   .rodata.max2871SetPower.str1.4:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_WritePin
+HAL_RCC_GetHCLKFreq
+max2871GetRegister
+__aeabi_fcmpge
+__aeabi_fcmplt
+ARM GAS  /tmp/cceaaxGR.s 			page 39
+
+
+__aeabi_i2f
+__aeabi_fmul
+__aeabi_fdiv
+__aeabi_f2uiz
+__aeabi_ui2f
+__aeabi_fsub
+__aeabi_f2d
+__aeabi_d2f
+__aeabi_fadd
+printUSB
+round
+max2871Set_INT
+max2871Set_N
+max2871Set_FRAC
+max2871Set_CPL
+max2871Set_M
+max2871Set_LDF
+max2871Set_DIVA
+max2871Set_F01
+max2871Set_RFA_EN
+max2871Set_APWR
+HAL_GPIO_ReadPin
+max2871RegsInit
+HAL_Delay
+max2871Set_CPOC
+max2871Set_CPT
+max2871Set_P
+max2871Set_LDS
+max2871Set_SDN
+max2871Set_MUX
+max2871Set_DBR
+max2871Set_RDIV2
+max2871Set_R
+max2871Set_REG4DB
+max2871Set_CP
+max2871Set_LDP
+max2871Set_PDP
+max2871Set_SHDN
+max2871Set_TRI
+max2871Set_RST
+max2871Set_VCO
+max2871Set_VAS_SHDN
+max2871Set_VAS_TEMP
+max2871Set_CSM
+max2871Set_MUTEDEL
+max2871Set_CDM
+max2871Set_CDIV
+max2871Set_SDLDO
+max2871Set_SDDIV
+max2871Set_SDREF
+max2871Set_BS
+max2871Set_FB
+max2871Set_SDVCO
+max2871Set_MTLD
+max2871Set_BDIV
+max2871Set_RFB_EN
+max2871Set_BPWR
+ARM GAS  /tmp/cceaaxGR.s 			page 40
+
+
+max2871Set_SDPLL
+max2871Set_LD
+max2871Set_Reserved
+sprintf
+memset

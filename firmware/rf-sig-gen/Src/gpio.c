@@ -51,7 +51,8 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, MAX_RFOUT_EN_Pin|nLED_OE_Pin|ATTEN_SDI_Pin|nLED_USR_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, MAX_LE_Pin|MAX_RFOUT_EN_Pin|nLED_OE_Pin|ATTEN_SDI_Pin 
+                          |nLED_USR_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, ATTEN_CLK_Pin|LED_SDI_Pin|LED_CLK_Pin|LED_LE_Pin 
@@ -63,17 +64,19 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PAPin PAPin PAPin PAPin */
-  GPIO_InitStruct.Pin = MAX_LE_Pin|MAX_LD_Pin|ATTEN_LE_Pin|USB_PU_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : PAPin PAPin PAPin PAPin */
-  GPIO_InitStruct.Pin = MAX_RFOUT_EN_Pin|nLED_OE_Pin|ATTEN_SDI_Pin|nLED_USR_Pin;
+  /*Configure GPIO pins : PAPin PAPin PAPin PAPin 
+                           PAPin */
+  GPIO_InitStruct.Pin = MAX_LE_Pin|MAX_RFOUT_EN_Pin|nLED_OE_Pin|ATTEN_SDI_Pin 
+                          |nLED_USR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PAPin PAPin PAPin */
+  GPIO_InitStruct.Pin = MAX_LD_Pin|ATTEN_LE_Pin|USB_PU_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PA4 PA9 PA10 */

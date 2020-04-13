@@ -21,6 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
+#include "tim.h"
 #include "usb_device.h"
 #include "gpio.h"
 
@@ -30,6 +31,9 @@
 #include <string.h>
 #include "usbd_cdc_if.h"
 #include "dwt_stm32_delay.h"
+#include "commandParser.h"
+#include "max2871.h"
+#include "max2871_registers.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,6 +54,8 @@ FIFO RX_FIFO = {.head = 0, .tail = 0};
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+
+extern struct MAX2871Struct max2871Status;
 
 /* USER CODE END PV */
 
@@ -95,23 +101,22 @@ int main(void)
   MX_GPIO_Init();
   MX_ADC1_Init();
   MX_USB_DEVICE_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
   DWT_Delay_Init();
   enumerateUSB(); // Force USB enumeration
 
-  uint8_t usrStr [128];
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    if (RX_FIFO.dataReady == 1)
-    {
-      HAL_GPIO_TogglePin(nLED_USR_GPIO_Port, nLED_USR_Pin);
-      scanUSB(&usrStr, strlen(usrStr));
-      printUSB(usrStr);
-    }
+    	  // Command Parser
+	  if (RX_FIFO.dataReady == 1)
+	  {
+		  commandParser(&max2871Status);
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

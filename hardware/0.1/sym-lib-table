@@ -9,5 +9,4 @@
   (lib (name josh-power)(type Legacy)(uri ${KIPRJMOD}/../../josh-kicad-lib/josh-power.lib)(options "")(descr ""))
   (lib (name josh-rf)(type Legacy)(uri ${KIPRJMOD}/../../josh-kicad-lib/josh-rf.lib)(options "")(descr ""))
   (lib (name josh-connector)(type Legacy)(uri "$(KIPRJMOD)/../../josh-kicad-lib/josh-connector.lib")(options "")(descr ""))
-  (lib (name stm32f103-feather-rescue)(type Legacy)(uri ${KIPRJMOD}/stm32f103-feather-rescue.lib)(options "")(descr ""))
 )

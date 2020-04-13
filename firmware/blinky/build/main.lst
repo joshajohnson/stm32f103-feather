@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccXbRKQu.s 			page 1
+ARM GAS  /tmp/cc1TPd5v.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccXbRKQu.s 			page 1
   31:Src/main.c    **** /* USER CODE BEGIN PTD */
   32:Src/main.c    **** 
   33:Src/main.c    **** /* USER CODE END PTD */
-ARM GAS  /tmp/ccXbRKQu.s 			page 2
+ARM GAS  /tmp/cc1TPd5v.s 			page 2
 
 
   34:Src/main.c    **** 
@@ -118,42 +118,33 @@ ARM GAS  /tmp/ccXbRKQu.s 			page 1
   88:Src/main.c    ****   /* Initialize all configured peripherals */
   89:Src/main.c    ****   MX_GPIO_Init();
   90:Src/main.c    ****   /* USER CODE BEGIN 2 */
-ARM GAS  /tmp/ccXbRKQu.s 			page 3
+ARM GAS  /tmp/cc1TPd5v.s 			page 3
 
 
-  91:Src/main.c    ****   HAL_GPIO_WritePin(LED_nRED_GPIO_Port, LED_nRED_Pin,1);
-  92:Src/main.c    ****   HAL_GPIO_WritePin(LED_nGRN_GPIO_Port, LED_nGRN_Pin,1);
-  93:Src/main.c    ****   HAL_GPIO_WritePin(LED_nBLU_GPIO_Port, LED_nBLU_Pin,1);
-  94:Src/main.c    ****   HAL_GPIO_WritePin(LED_nUSR_GPIO_Port, LED_nUSR_Pin,1);
-  95:Src/main.c    **** 
-  96:Src/main.c    ****   /* USER CODE END 2 */
-  97:Src/main.c    **** 
-  98:Src/main.c    ****   /* Infinite loop */
-  99:Src/main.c    ****   /* USER CODE BEGIN WHILE */
- 100:Src/main.c    ****   while (1)
- 101:Src/main.c    ****   {
- 102:Src/main.c    ****     HAL_GPIO_TogglePin(LED_nRED_GPIO_Port, LED_nRED_Pin);
- 103:Src/main.c    ****     HAL_Delay(500);
- 104:Src/main.c    ****     HAL_GPIO_TogglePin(LED_nGRN_GPIO_Port, LED_nGRN_Pin);
- 105:Src/main.c    ****     HAL_Delay(500);
- 106:Src/main.c    ****     HAL_GPIO_TogglePin(LED_nBLU_GPIO_Port, LED_nBLU_Pin);
- 107:Src/main.c    ****     HAL_Delay(500);
- 108:Src/main.c    ****     HAL_GPIO_TogglePin(LED_nUSR_GPIO_Port, LED_nUSR_Pin);
- 109:Src/main.c    ****     HAL_Delay(500);
- 110:Src/main.c    ****     /* USER CODE END WHILE */
- 111:Src/main.c    **** 
- 112:Src/main.c    ****     /* USER CODE BEGIN 3 */
- 113:Src/main.c    ****   }
- 114:Src/main.c    ****   /* USER CODE END 3 */
- 115:Src/main.c    **** }
- 116:Src/main.c    **** 
- 117:Src/main.c    **** /**
- 118:Src/main.c    ****   * @brief System Clock Configuration
- 119:Src/main.c    ****   * @retval None
- 120:Src/main.c    ****   */
- 121:Src/main.c    **** void SystemClock_Config(void)
- 122:Src/main.c    **** {
-  26              		.loc 1 122 0
+  91:Src/main.c    ****   HAL_GPIO_WritePin(LED_nBLU_GPIO_Port, LED_nBLU_Pin,1);
+  92:Src/main.c    ****   HAL_GPIO_WritePin(LED_nRED_GPIO_Port, LED_nRED_Pin,1);
+  93:Src/main.c    ****   /* USER CODE END 2 */
+  94:Src/main.c    **** 
+  95:Src/main.c    ****   /* Infinite loop */
+  96:Src/main.c    ****   /* USER CODE BEGIN WHILE */
+  97:Src/main.c    ****   while (1)
+  98:Src/main.c    ****   {
+  99:Src/main.c    ****     HAL_GPIO_TogglePin(LED_nGRN_GPIO_Port, LED_nGRN_Pin);
+ 100:Src/main.c    ****     HAL_Delay(100);
+ 101:Src/main.c    ****     /* USER CODE END WHILE */
+ 102:Src/main.c    **** 
+ 103:Src/main.c    ****     /* USER CODE BEGIN 3 */
+ 104:Src/main.c    ****   }
+ 105:Src/main.c    ****   /* USER CODE END 3 */
+ 106:Src/main.c    **** }
+ 107:Src/main.c    **** 
+ 108:Src/main.c    **** /**
+ 109:Src/main.c    ****   * @brief System Clock Configuration
+ 110:Src/main.c    ****   * @retval None
+ 111:Src/main.c    ****   */
+ 112:Src/main.c    **** void SystemClock_Config(void)
+ 113:Src/main.c    **** {
+  26              		.loc 1 113 0
   27              		.cfi_startproc
   28              		@ args = 0, pretend = 0, frame = 64
   29              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -167,92 +158,92 @@ ARM GAS  /tmp/ccXbRKQu.s 			page 1
   37 0002 90B0     		sub	sp, sp, #64
   38              	.LCFI1:
   39              		.cfi_def_cfa_offset 80
- 123:Src/main.c    ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-  40              		.loc 1 123 0
+ 114:Src/main.c    ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  40              		.loc 1 114 0
   41 0004 0024     		movs	r4, #0
   42 0006 0894     		str	r4, [sp, #32]
   43 0008 0994     		str	r4, [sp, #36]
   44 000a 0B94     		str	r4, [sp, #44]
   45 000c 0C94     		str	r4, [sp, #48]
- 124:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-  46              		.loc 1 124 0
+ 115:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  46              		.loc 1 115 0
   47 000e 0194     		str	r4, [sp, #4]
   48 0010 0294     		str	r4, [sp, #8]
-ARM GAS  /tmp/ccXbRKQu.s 			page 4
-
-
   49 0012 0394     		str	r4, [sp, #12]
   50 0014 0494     		str	r4, [sp, #16]
   51 0016 0594     		str	r4, [sp, #20]
- 125:Src/main.c    **** 
- 126:Src/main.c    ****   /** Initializes the CPU, AHB and APB busses clocks 
- 127:Src/main.c    ****   */
- 128:Src/main.c    ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  52              		.loc 1 128 0
+ 116:Src/main.c    **** 
+ 117:Src/main.c    ****   /** Initializes the CPU, AHB and APB busses clocks 
+ 118:Src/main.c    ****   */
+ 119:Src/main.c    ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  52              		.loc 1 119 0
   53 0018 0125     		movs	r5, #1
+ARM GAS  /tmp/cc1TPd5v.s 			page 4
+
+
   54 001a 0695     		str	r5, [sp, #24]
- 129:Src/main.c    ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-  55              		.loc 1 129 0
+ 120:Src/main.c    ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  55              		.loc 1 120 0
   56 001c 4FF48033 		mov	r3, #65536
   57 0020 0793     		str	r3, [sp, #28]
- 130:Src/main.c    ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
- 131:Src/main.c    ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  58              		.loc 1 131 0
+ 121:Src/main.c    ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+ 122:Src/main.c    ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  58              		.loc 1 122 0
   59 0022 0A95     		str	r5, [sp, #40]
- 132:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  60              		.loc 1 132 0
+ 123:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  60              		.loc 1 123 0
   61 0024 0226     		movs	r6, #2
   62 0026 0D96     		str	r6, [sp, #52]
- 133:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  63              		.loc 1 133 0
+ 124:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  63              		.loc 1 124 0
   64 0028 0E93     		str	r3, [sp, #56]
- 134:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL6;
-  65              		.loc 1 134 0
+ 125:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL6;
+  65              		.loc 1 125 0
   66 002a 4FF48013 		mov	r3, #1048576
   67 002e 0F93     		str	r3, [sp, #60]
- 135:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  68              		.loc 1 135 0
+ 126:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  68              		.loc 1 126 0
   69 0030 06A8     		add	r0, sp, #24
   70 0032 FFF7FEFF 		bl	HAL_RCC_OscConfig
   71              	.LVL0:
- 136:Src/main.c    ****   {
- 137:Src/main.c    ****     Error_Handler();
- 138:Src/main.c    ****   }
- 139:Src/main.c    ****   /** Initializes the CPU, AHB and APB busses clocks 
- 140:Src/main.c    ****   */
- 141:Src/main.c    ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-  72              		.loc 1 141 0
+ 127:Src/main.c    ****   {
+ 128:Src/main.c    ****     Error_Handler();
+ 129:Src/main.c    ****   }
+ 130:Src/main.c    ****   /** Initializes the CPU, AHB and APB busses clocks 
+ 131:Src/main.c    ****   */
+ 132:Src/main.c    ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+  72              		.loc 1 132 0
   73 0036 0F23     		movs	r3, #15
   74 0038 0193     		str	r3, [sp, #4]
- 142:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
- 143:Src/main.c    ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  75              		.loc 1 143 0
+ 133:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+ 134:Src/main.c    ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+  75              		.loc 1 134 0
   76 003a 0296     		str	r6, [sp, #8]
- 144:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  77              		.loc 1 144 0
+ 135:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  77              		.loc 1 135 0
   78 003c 0394     		str	r4, [sp, #12]
- 145:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  79              		.loc 1 145 0
+ 136:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+  79              		.loc 1 136 0
   80 003e 4FF48063 		mov	r3, #1024
   81 0042 0493     		str	r3, [sp, #16]
- 146:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
-  82              		.loc 1 146 0
+ 137:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  82              		.loc 1 137 0
   83 0044 0594     		str	r4, [sp, #20]
-ARM GAS  /tmp/ccXbRKQu.s 			page 5
-
-
- 147:Src/main.c    **** 
- 148:Src/main.c    ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
-  84              		.loc 1 148 0
+ 138:Src/main.c    **** 
+ 139:Src/main.c    ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
+  84              		.loc 1 139 0
   85 0046 2946     		mov	r1, r5
   86 0048 01A8     		add	r0, sp, #4
   87 004a FFF7FEFF 		bl	HAL_RCC_ClockConfig
   88              	.LVL1:
- 149:Src/main.c    ****   {
- 150:Src/main.c    ****     Error_Handler();
- 151:Src/main.c    ****   }
- 152:Src/main.c    **** }
-  89              		.loc 1 152 0
+ 140:Src/main.c    ****   {
+ 141:Src/main.c    ****     Error_Handler();
+ARM GAS  /tmp/cc1TPd5v.s 			page 5
+
+
+ 142:Src/main.c    ****   }
+ 143:Src/main.c    **** }
+  89              		.loc 1 143 0
   90 004e 10B0     		add	sp, sp, #64
   91              	.LCFI2:
   92              		.cfi_def_cfa_offset 16
@@ -292,157 +283,105 @@ ARM GAS  /tmp/ccXbRKQu.s 			page 1
  124              		.loc 1 89 0
  125 000a FFF7FEFF 		bl	MX_GPIO_Init
  126              	.LVL4:
-  91:Src/main.c    ****   HAL_GPIO_WritePin(LED_nGRN_GPIO_Port, LED_nGRN_Pin,1);
+  91:Src/main.c    ****   HAL_GPIO_WritePin(LED_nRED_GPIO_Port, LED_nRED_Pin,1);
  127              		.loc 1 91 0
- 128 000e 1F4C     		ldr	r4, .L6
+ 128 000e 0B4C     		ldr	r4, .L6
  129 0010 0122     		movs	r2, #1
- 130 0012 4FF40051 		mov	r1, #8192
+ 130 0012 4FF40041 		mov	r1, #32768
  131 0016 2046     		mov	r0, r4
-ARM GAS  /tmp/ccXbRKQu.s 			page 6
-
-
  132 0018 FFF7FEFF 		bl	HAL_GPIO_WritePin
  133              	.LVL5:
-  92:Src/main.c    ****   HAL_GPIO_WritePin(LED_nBLU_GPIO_Port, LED_nBLU_Pin,1);
+  92:Src/main.c    ****   /* USER CODE END 2 */
  134              		.loc 1 92 0
  135 001c 0122     		movs	r2, #1
- 136 001e 4FF48041 		mov	r1, #16384
+ 136 001e 4FF40051 		mov	r1, #8192
  137 0022 2046     		mov	r0, r4
  138 0024 FFF7FEFF 		bl	HAL_GPIO_WritePin
  139              	.LVL6:
-  93:Src/main.c    ****   HAL_GPIO_WritePin(LED_nUSR_GPIO_Port, LED_nUSR_Pin,1);
- 140              		.loc 1 93 0
- 141 0028 0122     		movs	r2, #1
- 142 002a 4FF40041 		mov	r1, #32768
- 143 002e 2046     		mov	r0, r4
- 144 0030 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ARM GAS  /tmp/cc1TPd5v.s 			page 6
+
+
+ 140              	.L4:
+  99:Src/main.c    ****     HAL_Delay(100);
+ 141              		.loc 1 99 0 discriminator 1
+ 142 0028 4FF48041 		mov	r1, #16384
+ 143 002c 0348     		ldr	r0, .L6
+ 144 002e FFF7FEFF 		bl	HAL_GPIO_TogglePin
  145              	.LVL7:
-  94:Src/main.c    **** 
- 146              		.loc 1 94 0
- 147 0034 0122     		movs	r2, #1
- 148 0036 4FF48071 		mov	r1, #256
- 149 003a 1548     		ldr	r0, .L6+4
- 150 003c FFF7FEFF 		bl	HAL_GPIO_WritePin
- 151              	.LVL8:
- 152              	.L4:
- 102:Src/main.c    ****     HAL_Delay(500);
- 153              		.loc 1 102 0 discriminator 1
- 154 0040 124C     		ldr	r4, .L6
- 155 0042 4FF40051 		mov	r1, #8192
- 156 0046 2046     		mov	r0, r4
- 157 0048 FFF7FEFF 		bl	HAL_GPIO_TogglePin
- 158              	.LVL9:
- 103:Src/main.c    ****     HAL_GPIO_TogglePin(LED_nGRN_GPIO_Port, LED_nGRN_Pin);
- 159              		.loc 1 103 0 discriminator 1
- 160 004c 4FF4FA70 		mov	r0, #500
- 161 0050 FFF7FEFF 		bl	HAL_Delay
- 162              	.LVL10:
- 104:Src/main.c    ****     HAL_Delay(500);
- 163              		.loc 1 104 0 discriminator 1
- 164 0054 4FF48041 		mov	r1, #16384
- 165 0058 2046     		mov	r0, r4
- 166 005a FFF7FEFF 		bl	HAL_GPIO_TogglePin
- 167              	.LVL11:
- 105:Src/main.c    ****     HAL_GPIO_TogglePin(LED_nBLU_GPIO_Port, LED_nBLU_Pin);
- 168              		.loc 1 105 0 discriminator 1
- 169 005e 4FF4FA70 		mov	r0, #500
- 170 0062 FFF7FEFF 		bl	HAL_Delay
- 171              	.LVL12:
- 106:Src/main.c    ****     HAL_Delay(500);
- 172              		.loc 1 106 0 discriminator 1
- 173 0066 4FF40041 		mov	r1, #32768
- 174 006a 2046     		mov	r0, r4
- 175 006c FFF7FEFF 		bl	HAL_GPIO_TogglePin
- 176              	.LVL13:
- 107:Src/main.c    ****     HAL_GPIO_TogglePin(LED_nUSR_GPIO_Port, LED_nUSR_Pin);
- 177              		.loc 1 107 0 discriminator 1
- 178 0070 4FF4FA70 		mov	r0, #500
- 179 0074 FFF7FEFF 		bl	HAL_Delay
-ARM GAS  /tmp/ccXbRKQu.s 			page 7
-
-
- 180              	.LVL14:
- 108:Src/main.c    ****     HAL_Delay(500);
- 181              		.loc 1 108 0 discriminator 1
- 182 0078 4FF48071 		mov	r1, #256
- 183 007c 0448     		ldr	r0, .L6+4
- 184 007e FFF7FEFF 		bl	HAL_GPIO_TogglePin
- 185              	.LVL15:
- 109:Src/main.c    ****     /* USER CODE END WHILE */
- 186              		.loc 1 109 0 discriminator 1
- 187 0082 4FF4FA70 		mov	r0, #500
- 188 0086 FFF7FEFF 		bl	HAL_Delay
- 189              	.LVL16:
- 190 008a D9E7     		b	.L4
- 191              	.L7:
- 192              		.align	2
- 193              	.L6:
- 194 008c 000C0140 		.word	1073810432
- 195 0090 00080140 		.word	1073809408
- 196              		.cfi_endproc
- 197              	.LFE65:
- 199              		.section	.text.Error_Handler,"ax",%progbits
- 200              		.align	1
- 201              		.global	Error_Handler
- 202              		.syntax unified
- 203              		.thumb
- 204              		.thumb_func
- 205              		.fpu softvfp
- 207              	Error_Handler:
- 208              	.LFB67:
- 153:Src/main.c    **** 
- 154:Src/main.c    **** /* USER CODE BEGIN 4 */
- 155:Src/main.c    **** 
- 156:Src/main.c    **** /* USER CODE END 4 */
+ 100:Src/main.c    ****     /* USER CODE END WHILE */
+ 146              		.loc 1 100 0 discriminator 1
+ 147 0032 6420     		movs	r0, #100
+ 148 0034 FFF7FEFF 		bl	HAL_Delay
+ 149              	.LVL8:
+ 150 0038 F6E7     		b	.L4
+ 151              	.L7:
+ 152 003a 00BF     		.align	2
+ 153              	.L6:
+ 154 003c 000C0140 		.word	1073810432
+ 155              		.cfi_endproc
+ 156              	.LFE65:
+ 158              		.section	.text.Error_Handler,"ax",%progbits
+ 159              		.align	1
+ 160              		.global	Error_Handler
+ 161              		.syntax unified
+ 162              		.thumb
+ 163              		.thumb_func
+ 164              		.fpu softvfp
+ 166              	Error_Handler:
+ 167              	.LFB67:
+ 144:Src/main.c    **** 
+ 145:Src/main.c    **** /* USER CODE BEGIN 4 */
+ 146:Src/main.c    **** 
+ 147:Src/main.c    **** /* USER CODE END 4 */
+ 148:Src/main.c    **** 
+ 149:Src/main.c    **** /**
+ 150:Src/main.c    ****   * @brief  This function is executed in case of error occurrence.
+ 151:Src/main.c    ****   * @retval None
+ 152:Src/main.c    ****   */
+ 153:Src/main.c    **** void Error_Handler(void)
+ 154:Src/main.c    **** {
+ 168              		.loc 1 154 0
+ 169              		.cfi_startproc
+ 170              		@ args = 0, pretend = 0, frame = 0
+ 171              		@ frame_needed = 0, uses_anonymous_args = 0
+ 172              		@ link register save eliminated.
+ 155:Src/main.c    ****   /* USER CODE BEGIN Error_Handler_Debug */
+ 156:Src/main.c    ****   /* User can add his own implementation to report the HAL error return state */
  157:Src/main.c    **** 
- 158:Src/main.c    **** /**
- 159:Src/main.c    ****   * @brief  This function is executed in case of error occurrence.
- 160:Src/main.c    ****   * @retval None
- 161:Src/main.c    ****   */
- 162:Src/main.c    **** void Error_Handler(void)
- 163:Src/main.c    **** {
- 209              		.loc 1 163 0
- 210              		.cfi_startproc
- 211              		@ args = 0, pretend = 0, frame = 0
- 212              		@ frame_needed = 0, uses_anonymous_args = 0
- 213              		@ link register save eliminated.
- 164:Src/main.c    ****   /* USER CODE BEGIN Error_Handler_Debug */
- 165:Src/main.c    ****   /* User can add his own implementation to report the HAL error return state */
- 166:Src/main.c    **** 
- 167:Src/main.c    ****   /* USER CODE END Error_Handler_Debug */
- 168:Src/main.c    **** }
- 214              		.loc 1 168 0
- 215 0000 7047     		bx	lr
- 216              		.cfi_endproc
- 217              	.LFE67:
- 219              		.text
- 220              	.Letext0:
- 221              		.file 2 "/usr/include/newlib/machine/_default_types.h"
-ARM GAS  /tmp/ccXbRKQu.s 			page 8
+ 158:Src/main.c    ****   /* USER CODE END Error_Handler_Debug */
+ 159:Src/main.c    **** }
+ 173              		.loc 1 159 0
+ 174 0000 7047     		bx	lr
+ 175              		.cfi_endproc
+ 176              	.LFE67:
+ 178              		.text
+ 179              	.Letext0:
+ 180              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 181              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ARM GAS  /tmp/cc1TPd5v.s 			page 7
 
 
- 222              		.file 3 "/usr/include/newlib/sys/_stdint.h"
- 223              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
- 224              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 225              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
- 226              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
- 227              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h"
- 228              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
- 229              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 230              		.file 11 "Inc/gpio.h"
- 231              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
-ARM GAS  /tmp/ccXbRKQu.s 			page 9
+ 182              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 183              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 184              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 185              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
+ 186              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h"
+ 187              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 188              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 189              		.file 11 "Inc/gpio.h"
+ 190              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ARM GAS  /tmp/cc1TPd5v.s 			page 8
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/ccXbRKQu.s:16     .text.SystemClock_Config:0000000000000000 $t
-     /tmp/ccXbRKQu.s:23     .text.SystemClock_Config:0000000000000000 SystemClock_Config
-     /tmp/ccXbRKQu.s:99     .text.main:0000000000000000 $t
-     /tmp/ccXbRKQu.s:106    .text.main:0000000000000000 main
-     /tmp/ccXbRKQu.s:194    .text.main:000000000000008c $d
-     /tmp/ccXbRKQu.s:200    .text.Error_Handler:0000000000000000 $t
-     /tmp/ccXbRKQu.s:207    .text.Error_Handler:0000000000000000 Error_Handler
+     /tmp/cc1TPd5v.s:16     .text.SystemClock_Config:0000000000000000 $t
+     /tmp/cc1TPd5v.s:23     .text.SystemClock_Config:0000000000000000 SystemClock_Config
+     /tmp/cc1TPd5v.s:99     .text.main:0000000000000000 $t
+     /tmp/cc1TPd5v.s:106    .text.main:0000000000000000 main
+     /tmp/cc1TPd5v.s:154    .text.main:000000000000003c $d
+     /tmp/cc1TPd5v.s:159    .text.Error_Handler:0000000000000000 $t
+     /tmp/cc1TPd5v.s:166    .text.Error_Handler:0000000000000000 Error_Handler
 
 UNDEFINED SYMBOLS
 HAL_RCC_OscConfig

@@ -1,4 +1,5 @@
 EESchema Schematic File Version 4
+LIBS:stm32f103-feather-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -1456,7 +1457,7 @@ Wire Wire Line
 Text Label 9400 6150 0    50   ~ 0
 nLED_B
 $Comp
-L stm32f103-feather-rescue:RN-josh-passive RN1
+L josh-passive:RN RN1
 U 2 1 5E470D79
 P 9900 5950
 F 0 "RN1" H 9900 6050 50  0000 C CNN
@@ -1467,7 +1468,7 @@ F 3 "~" V 9900 5950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L stm32f103-feather-rescue:RN-josh-passive RN1
+L josh-passive:RN RN1
 U 3 1 5E47191D
 P 9900 6150
 F 0 "RN1" H 9900 6250 50  0000 C CNN
@@ -1478,7 +1479,7 @@ F 3 "~" V 9900 6150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L stm32f103-feather-rescue:RN-josh-passive RN1
+L josh-passive:RN RN1
 U 4 1 5E47241A
 P 8600 5950
 F 0 "RN1" H 8600 6050 50  0000 C CNN
@@ -1489,7 +1490,7 @@ F 3 "~" V 8600 5950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L stm32f103-feather-rescue:RN-josh-passive RN1
+L josh-passive:RN RN1
 U 1 1 5E4736FB
 P 9900 5750
 F 0 "RN1" H 9900 5850 50  0000 C CNN
@@ -1541,9 +1542,4 @@ Text Label 2150 5900 0    50   ~ 0
 IO8
 Wire Wire Line
 	2150 5900 2450 5900
-NoConn ~ 3750 5600
-NoConn ~ 3750 5700
-NoConn ~ 2450 4300
-NoConn ~ 2450 4400
-NoConn ~ 2450 4500
 $EndSCHEMATC
