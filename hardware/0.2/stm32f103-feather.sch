@@ -573,7 +573,7 @@ U 1 1 5DDFF1B2
 P 3350 1600
 F 0 "D1" H 3350 1384 50  0000 C CNN
 F 1 "MBR120" H 3350 1475 50  0000 C CNN
-F 2 "Diode_SMD:D_SOD-123F" H 3350 1600 50  0001 C CNN
+F 2 "josh-passives-smt:D_SOD-123FL" H 3350 1600 50  0001 C CNN
 F 3 "~" H 3350 1600 50  0001 C CNN
 	1    3350 1600
 	-1   0    0    1   
@@ -1401,7 +1401,7 @@ U 1 1 5E333AB6
 P 10400 5950
 F 0 "D4" H 10400 6447 50  0000 C CNN
 F 1 "LED_RGBA" H 10400 6356 50  0000 C CNN
-F 2 "josh-led:LED_0606" H 10400 5900 50  0001 C CNN
+F 2 "josh-led:LED_0606_E6C0606RGBC3UDA" H 10400 5900 50  0001 C CNN
 F 3 "~" H 10400 5900 50  0001 C CNN
 	1    10400 5950
 	1    0    0    -1  
@@ -1456,7 +1456,7 @@ Wire Wire Line
 Text Label 9400 6150 0    50   ~ 0
 nLED_B
 $Comp
-L stm32f103-feather-rescue:RN-josh-passive RN1
+L josh-passive:RN RN1
 U 2 1 5E470D79
 P 9900 5950
 F 0 "RN1" H 9900 6050 50  0000 C CNN
@@ -1467,7 +1467,7 @@ F 3 "~" V 9900 5950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L stm32f103-feather-rescue:RN-josh-passive RN1
+L josh-passive:RN RN1
 U 3 1 5E47191D
 P 9900 6150
 F 0 "RN1" H 9900 6250 50  0000 C CNN
@@ -1478,7 +1478,7 @@ F 3 "~" V 9900 6150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L stm32f103-feather-rescue:RN-josh-passive RN1
+L josh-passive:RN RN1
 U 4 1 5E47241A
 P 8600 5950
 F 0 "RN1" H 8600 6050 50  0000 C CNN
@@ -1489,7 +1489,7 @@ F 3 "~" V 8600 5950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L stm32f103-feather-rescue:RN-josh-passive RN1
+L josh-passive:RN RN1
 U 1 1 5E4736FB
 P 9900 5750
 F 0 "RN1" H 9900 5850 50  0000 C CNN
