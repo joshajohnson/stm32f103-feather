@@ -88,16 +88,25 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-  HAL_GPIO_WritePin(LED_nBLU_GPIO_Port, LED_nBLU_Pin,1);
   HAL_GPIO_WritePin(LED_nRED_GPIO_Port, LED_nRED_Pin,1);
+  HAL_GPIO_WritePin(LED_nGRN_GPIO_Port, LED_nGRN_Pin,1);
+  HAL_GPIO_WritePin(LED_nBLU_GPIO_Port, LED_nBLU_Pin,1);
+  HAL_GPIO_WritePin(LED_nUSR_GPIO_Port, LED_nUSR_Pin,1);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    HAL_GPIO_TogglePin(LED_nRED_GPIO_Port, LED_nRED_Pin);
+    HAL_Delay(500);
     HAL_GPIO_TogglePin(LED_nGRN_GPIO_Port, LED_nGRN_Pin);
-    HAL_Delay(100);
+    HAL_Delay(500);
+    HAL_GPIO_TogglePin(LED_nBLU_GPIO_Port, LED_nBLU_Pin);
+    HAL_Delay(500);
+    HAL_GPIO_TogglePin(LED_nUSR_GPIO_Port, LED_nUSR_Pin);
+    HAL_Delay(500);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
