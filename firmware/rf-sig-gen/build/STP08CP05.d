@@ -1,4 +1,4 @@
-build/commandParser.o: Src/commandParser.c Inc/main.h \
+build/STP08CP05.o: Src/STP08CP05.c Inc/STP08CP05.h Inc/main.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  Inc/stm32f1xx_hal_conf.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
@@ -25,15 +25,9 @@ build/commandParser.o: Src/commandParser.c Inc/main.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_usb.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd_ex.h \
- Inc/commandParser.h Inc/usbd_cdc_if.h \
- Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h \
- Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
- Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
- Inc/usbd_conf.h Inc/main.h \
- Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
- Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
- Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h \
- Inc/dwt_stm32_delay.h Inc/max2871.h Inc/txChain.h
+ Inc/dwt_stm32_delay.h
+
+Inc/STP08CP05.h:
 
 Inc/main.h:
 
@@ -93,28 +87,4 @@ Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_usb.h:
 
 Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd_ex.h:
 
-Inc/commandParser.h:
-
-Inc/usbd_cdc_if.h:
-
-Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h:
-
-Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
-
-Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
-
-Inc/usbd_conf.h:
-
-Inc/main.h:
-
-Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
-
-Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
-
-Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:
-
 Inc/dwt_stm32_delay.h:
-
-Inc/max2871.h:
-
-Inc/txChain.h:

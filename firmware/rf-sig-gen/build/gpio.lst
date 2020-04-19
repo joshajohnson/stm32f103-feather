@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccqsg8ac.s 			page 1
+ARM GAS  /tmp/ccpN8THE.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccqsg8ac.s 			page 1
   31:Src/gpio.c    **** /* USER CODE END 1 */
   32:Src/gpio.c    **** 
   33:Src/gpio.c    **** /** Configure pins as 
-ARM GAS  /tmp/ccqsg8ac.s 			page 2
+ARM GAS  /tmp/ccpN8THE.s 			page 2
 
 
   34:Src/gpio.c    ****         * Analog 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccqsg8ac.s 			page 1
   64 002a 9A61     		str	r2, [r3, #24]
   65 002c 9A69     		ldr	r2, [r3, #24]
   66 002e 02F02002 		and	r2, r2, #32
-ARM GAS  /tmp/ccqsg8ac.s 			page 3
+ARM GAS  /tmp/ccpN8THE.s 			page 3
 
 
   67 0032 0192     		str	r2, [sp, #4]
@@ -148,15 +148,15 @@ ARM GAS  /tmp/ccqsg8ac.s 			page 1
   89              	.LBE5:
   52:Src/gpio.c    **** 
   53:Src/gpio.c    ****   /*Configure GPIO pin Output Level */
-  54:Src/gpio.c    ****   HAL_GPIO_WritePin(GPIOA, MAX_LE_Pin|MAX_RFOUT_EN_Pin|nLED_OE_Pin|ATTEN_SDI_Pin 
+  54:Src/gpio.c    ****   HAL_GPIO_WritePin(GPIOA, MAX_LE_Pin|MAX_RFOUT_EN_Pin|nLED_OE_Pin|ATTEN_LE_Pin 
   90              		.loc 1 54 0
   91 005a 2C4E     		ldr	r6, .L3+4
   92 005c 2246     		mov	r2, r4
-  93 005e 4FF4D371 		mov	r1, #422
+  93 005e 4FF4F371 		mov	r1, #486
   94 0062 3046     		mov	r0, r6
   95 0064 FFF7FEFF 		bl	HAL_GPIO_WritePin
   96              	.LVL0:
-  55:Src/gpio.c    ****                           |nLED_USR_Pin, GPIO_PIN_RESET);
+  55:Src/gpio.c    ****                           |ATTEN_SDO_Pin|nLED_USR_Pin, GPIO_PIN_RESET);
   56:Src/gpio.c    **** 
   57:Src/gpio.c    ****   /*Configure GPIO pin Output Level */
   58:Src/gpio.c    ****   HAL_GPIO_WritePin(GPIOB, ATTEN_CLK_Pin|LED_SDI_Pin|LED_CLK_Pin|LED_LE_Pin 
@@ -168,7 +168,7 @@ ARM GAS  /tmp/ccqsg8ac.s 			page 1
  102 0072 FFF7FEFF 		bl	HAL_GPIO_WritePin
  103              	.LVL1:
   59:Src/gpio.c    ****                           |MAX_CE_Pin|MAX_DAT_Pin|MAX_CLK_Pin|LED_Pin 
-  60:Src/gpio.c    ****                           |ATTEN_SDO_Pin|PA_PWDN_Pin, GPIO_PIN_RESET);
+  60:Src/gpio.c    ****                           |ATTEN_SDI_Pin|PA_PWDN_Pin, GPIO_PIN_RESET);
   61:Src/gpio.c    **** 
   62:Src/gpio.c    ****   /*Configure GPIO pins : PC13 PC14 PC15 */
   63:Src/gpio.c    ****   GPIO_InitStruct.Pin = GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15;
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccqsg8ac.s 			page 1
   64:Src/gpio.c    ****   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
  107              		.loc 1 64 0
  108 007c 0327     		movs	r7, #3
-ARM GAS  /tmp/ccqsg8ac.s 			page 4
+ARM GAS  /tmp/ccpN8THE.s 			page 4
 
 
  109 007e 0597     		str	r7, [sp, #20]
@@ -190,12 +190,12 @@ ARM GAS  /tmp/ccqsg8ac.s 			page 1
  114              	.LVL2:
   66:Src/gpio.c    **** 
   67:Src/gpio.c    ****   /*Configure GPIO pins : PAPin PAPin PAPin PAPin 
-  68:Src/gpio.c    ****                            PAPin */
-  69:Src/gpio.c    ****   GPIO_InitStruct.Pin = MAX_LE_Pin|MAX_RFOUT_EN_Pin|nLED_OE_Pin|ATTEN_SDI_Pin 
+  68:Src/gpio.c    ****                            PAPin PAPin */
+  69:Src/gpio.c    ****   GPIO_InitStruct.Pin = MAX_LE_Pin|MAX_RFOUT_EN_Pin|nLED_OE_Pin|ATTEN_LE_Pin 
  115              		.loc 1 69 0
- 116 0088 4FF4D373 		mov	r3, #422
+ 116 0088 4FF4F373 		mov	r3, #486
  117 008c 0493     		str	r3, [sp, #16]
-  70:Src/gpio.c    ****                           |nLED_USR_Pin;
+  70:Src/gpio.c    ****                           |ATTEN_SDO_Pin|nLED_USR_Pin;
   71:Src/gpio.c    ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
  118              		.loc 1 71 0
  119 008e 4FF00109 		mov	r9, #1
@@ -214,10 +214,10 @@ ARM GAS  /tmp/ccqsg8ac.s 			page 1
  129 00a4 FFF7FEFF 		bl	HAL_GPIO_Init
  130              	.LVL3:
   75:Src/gpio.c    **** 
-  76:Src/gpio.c    ****   /*Configure GPIO pins : PAPin PAPin PAPin */
-  77:Src/gpio.c    ****   GPIO_InitStruct.Pin = MAX_LD_Pin|ATTEN_LE_Pin|USB_PU_Pin;
+  76:Src/gpio.c    ****   /*Configure GPIO pins : PAPin PAPin */
+  77:Src/gpio.c    ****   GPIO_InitStruct.Pin = MAX_LD_Pin|USB_PU_Pin;
  131              		.loc 1 77 0
- 132 00a8 48F24803 		movw	r3, #32840
+ 132 00a8 48F20803 		movw	r3, #32776
  133 00ac 0493     		str	r3, [sp, #16]
   78:Src/gpio.c    ****   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
  134              		.loc 1 78 0
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccqsg8ac.s 			page 1
  144 00ba 4FF4C263 		mov	r3, #1552
  145 00be 0493     		str	r3, [sp, #16]
   84:Src/gpio.c    ****   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-ARM GAS  /tmp/ccqsg8ac.s 			page 5
+ARM GAS  /tmp/ccpN8THE.s 			page 5
 
 
  146              		.loc 1 84 0
@@ -258,7 +258,7 @@ ARM GAS  /tmp/ccqsg8ac.s 			page 1
  154 00ca 41F67973 		movw	r3, #8057
  155 00ce 0493     		str	r3, [sp, #16]
   91:Src/gpio.c    ****                           |MAX_CE_Pin|MAX_DAT_Pin|MAX_CLK_Pin|LED_Pin 
-  92:Src/gpio.c    ****                           |ATTEN_SDO_Pin|PA_PWDN_Pin;
+  92:Src/gpio.c    ****                           |ATTEN_SDI_Pin|PA_PWDN_Pin;
   93:Src/gpio.c    ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
  156              		.loc 1 93 0
  157 00d0 CDF81490 		str	r9, [sp, #20]
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccqsg8ac.s 			page 1
  105:Src/gpio.c    ****   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
  180              		.loc 1 105 0
  181 00f4 0594     		str	r4, [sp, #20]
-ARM GAS  /tmp/ccqsg8ac.s 			page 6
+ARM GAS  /tmp/ccpN8THE.s 			page 6
 
 
  106:Src/gpio.c    ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -337,14 +337,14 @@ ARM GAS  /tmp/ccqsg8ac.s 			page 1
  212              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
  213              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
  214              		.file 9 "Inc/main.h"
-ARM GAS  /tmp/ccqsg8ac.s 			page 7
+ARM GAS  /tmp/ccpN8THE.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 gpio.c
-     /tmp/ccqsg8ac.s:16     .text.MX_GPIO_Init:0000000000000000 $t
-     /tmp/ccqsg8ac.s:23     .text.MX_GPIO_Init:0000000000000000 MX_GPIO_Init
-     /tmp/ccqsg8ac.s:198    .text.MX_GPIO_Init:0000000000000108 $d
+     /tmp/ccpN8THE.s:16     .text.MX_GPIO_Init:0000000000000000 $t
+     /tmp/ccpN8THE.s:23     .text.MX_GPIO_Init:0000000000000000 MX_GPIO_Init
+     /tmp/ccpN8THE.s:198    .text.MX_GPIO_Init:0000000000000108 $d
 
 UNDEFINED SYMBOLS
 HAL_GPIO_WritePin

@@ -2,7 +2,7 @@
 #define TXCHAIN_H_
 
 // ADC values
-#define VREF 				3.3 // Attenuating the signal by 2, so double VREF
+#define VREF 				3.3
 #define NUM_STATES_12_BIT	4096
 
 // Attenuator

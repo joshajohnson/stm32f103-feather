@@ -51,13 +51,13 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, MAX_LE_Pin|MAX_RFOUT_EN_Pin|nLED_OE_Pin|ATTEN_SDI_Pin 
-                          |nLED_USR_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, MAX_LE_Pin|MAX_RFOUT_EN_Pin|nLED_OE_Pin|ATTEN_LE_Pin 
+                          |ATTEN_SDO_Pin|nLED_USR_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, ATTEN_CLK_Pin|LED_SDI_Pin|LED_CLK_Pin|LED_LE_Pin 
                           |MAX_CE_Pin|MAX_DAT_Pin|MAX_CLK_Pin|LED_Pin 
-                          |ATTEN_SDO_Pin|PA_PWDN_Pin, GPIO_PIN_RESET);
+                          |ATTEN_SDI_Pin|PA_PWDN_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PC13 PC14 PC15 */
   GPIO_InitStruct.Pin = GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15;
@@ -65,16 +65,16 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PAPin PAPin PAPin PAPin 
-                           PAPin */
-  GPIO_InitStruct.Pin = MAX_LE_Pin|MAX_RFOUT_EN_Pin|nLED_OE_Pin|ATTEN_SDI_Pin 
-                          |nLED_USR_Pin;
+                           PAPin PAPin */
+  GPIO_InitStruct.Pin = MAX_LE_Pin|MAX_RFOUT_EN_Pin|nLED_OE_Pin|ATTEN_LE_Pin 
+                          |ATTEN_SDO_Pin|nLED_USR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PAPin PAPin PAPin */
-  GPIO_InitStruct.Pin = MAX_LD_Pin|ATTEN_LE_Pin|USB_PU_Pin;
+  /*Configure GPIO pins : PAPin PAPin */
+  GPIO_InitStruct.Pin = MAX_LD_Pin|USB_PU_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
@@ -89,7 +89,7 @@ void MX_GPIO_Init(void)
                            PBPin PBPin */
   GPIO_InitStruct.Pin = ATTEN_CLK_Pin|LED_SDI_Pin|LED_CLK_Pin|LED_LE_Pin 
                           |MAX_CE_Pin|MAX_DAT_Pin|MAX_CLK_Pin|LED_Pin 
-                          |ATTEN_SDO_Pin|PA_PWDN_Pin;
+                          |ATTEN_SDI_Pin|PA_PWDN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

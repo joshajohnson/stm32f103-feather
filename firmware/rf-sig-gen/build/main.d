@@ -35,7 +35,8 @@ build/main.o: Src/main.c Inc/main.h \
  Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
  Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h \
  Inc/dwt_stm32_delay.h Inc/commandParser.h Inc/max2871.h \
- Inc/max2871_registers.h
+ Inc/max2871_registers.h Inc/txChain.h Inc/STP08CP05.h \
+ Inc/dwt_stm32_delay.h
 
 Inc/main.h:
 
@@ -130,3 +131,9 @@ Inc/commandParser.h:
 Inc/max2871.h:
 
 Inc/max2871_registers.h:
+
+Inc/txChain.h:
+
+Inc/STP08CP05.h:
+
+Inc/dwt_stm32_delay.h:

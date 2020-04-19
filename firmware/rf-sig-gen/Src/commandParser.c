@@ -5,12 +5,11 @@
 #include <stdio.h>
 #include <string.h>
 #include "max2871.h"
+#include "txChain.h"
 
 char txStr[128] = "";
 
-// extern struct MAX2871Struct max2871Status;
-
-void commandParser(struct MAX2871Struct *max2871Status)
+void commandParser(struct MAX2871Struct *max2871Status, struct txStruct *txStatus)
 {
 	#define BUF_SIZE 128
 	#define CMD_SIZE 32
@@ -62,19 +61,70 @@ void commandParser(struct MAX2871Struct *max2871Status)
 
 	// Find command based on command word, and call function
 
-	if (strncmp("on", command, 2) == 0)
+	if (strncmp("sigGen", command, 6) == 0)
 	{
-		HAL_GPIO_WritePin(nLED_USR_GPIO_Port, nLED_USR_Pin, 1);
+		sigGen(atof(args[0]), atof(args[1]), max2871Status, txStatus);
+
+		sprintf((char *)txStr, "> Signal Generator: Frequency = %0.2f MHz, Power = %0.2f dBm\n", max2871Status->frequency, txStatus->measOutputPower);
+		printUSB(txStr);
 	}
 
-	else if (strncmp("off", command, 3) == 0)
+	else if (strncmp("sweep", command, 5) == 0)
 	{
-		HAL_GPIO_WritePin(nLED_USR_GPIO_Port, nLED_USR_Pin, 0);
+		sprintf((char *)txStr, "> Sweep: Start = %0.2f MHz, fFinish = %0.2f dBm Power = %0.2f dBm\n", atof(args[0]), atof(args[1]), atof(args[2]));
+		printUSB(txStr);
+
+		sweep(atof(args[0]), atof(args[1]), atof(args[2]), atof(args[3]), atof(args[4]), max2871Status, txStatus);
 	}
 
-	else if (strncmp("init", command, 4) == 0)
+	else if (strncmp("setMaxPower", command, 11) == 0)
 	{
-		max2871Setup(max2871Status);
+		max2871SetPower(atoi(args[0]), max2871Status);
+		int8_t powerArray[4] = {-4, -1, 2, 5};
+		sprintf((char *)txStr, "> Power set to: %d dBm\n", powerArray[max2871Status->rfPower]);
+		printUSB(txStr);
+	}
+
+	else if (strncmp("setAttenuation", command, 14) == 0)
+	{
+		setAttenuation(atof(args[0]), txStatus);
+		sprintf((char *)txStr, "> Attenuation set to: %0.2f dB\n", txStatus->attenuation);
+		printUSB(txStr);
+	}
+
+	else if (strncmp("enableRF", command, 8) == 0)
+	{
+		max2871RFEnable(max2871Status);
+		printUSB("> RF Enabled \r\n");
+	}
+
+	else if (strncmp("disableRF", command, 8) == 0)
+	{
+		max2871RFDisable(max2871Status);
+		printUSB("> RF Disabled \r\n");
+	}
+
+	else if (strncmp("enablePA", command, 8) == 0)
+	{
+		enablePA(txStatus);
+		printUSB("> PA Enabled \r\n");
+	}
+
+	else if (strncmp("disablePA", command, 8) == 0)
+	{
+		disablePA(txStatus);
+		printUSB("> PA Disabled \r\n");
+	}
+
+	else if (strncmp("adc", command, 3) == 0)
+	{
+		readAD8319(txStatus);
+
+		sprintf((char *)txStr, "> Measured Voltage= %0.2f V\n", readAD8319(txStatus));
+		printUSB(txStr);
+
+		sprintf((char *)txStr, "> Output Power at SMA = %0.2f dBm\n", txStatus->measOutputPower);
+		printUSB(txStr);
 	}
 
 	else if (strncmp("status", command, 6) == 0)
@@ -87,12 +137,7 @@ void commandParser(struct MAX2871Struct *max2871Status)
 		else
 			max2871PrintStatus(nVERBOSE,max2871Status);
 
-		// txChainPrintStatus(txStatus);
-
-		// readAD8302vRef(receiverStatus);
-		// sprintf((char *)txStr, "> AD8302 VREF = %0.3f, VDELTA = %0.3f\n", receiverStatus->refVoltage, receiverStatus->refDelta);
-		// printUSB(txStr);
-
+		txChainPrintStatus(txStatus);
 	}
 
 	else if (strncmp("WHOAMI", command, 5) == 0)

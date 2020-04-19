@@ -35,7 +35,7 @@ void MX_ADC1_Init(void)
   */
   hadc1.Instance = ADC1;
   hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
-  hadc1.Init.ContinuousConvMode = DISABLE;
+  hadc1.Init.ContinuousConvMode = ENABLE;
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
@@ -72,9 +72,9 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* adcHandle)
     /**ADC1 GPIO Configuration    
     PA0-WKUP     ------> ADC1_IN0 
     */
-    GPIO_InitStruct.Pin = RF_PWR_Pin;
+    GPIO_InitStruct.Pin = GPIO_PIN_0;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-    HAL_GPIO_Init(RF_PWR_GPIO_Port, &GPIO_InitStruct);
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /* USER CODE BEGIN ADC1_MspInit 1 */
 
@@ -96,7 +96,7 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* adcHandle)
     /**ADC1 GPIO Configuration    
     PA0-WKUP     ------> ADC1_IN0 
     */
-    HAL_GPIO_DeInit(RF_PWR_GPIO_Port, RF_PWR_Pin);
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_0);
 
   /* USER CODE BEGIN ADC1_MspDeInit 1 */
 

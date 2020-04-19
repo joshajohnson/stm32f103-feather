@@ -34,6 +34,8 @@
 #include "commandParser.h"
 #include "max2871.h"
 #include "max2871_registers.h"
+#include "txChain.h"
+#include "STP08CP05.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -56,6 +58,7 @@ FIFO RX_FIFO = {.head = 0, .tail = 0};
 /* USER CODE BEGIN PV */
 
 extern struct MAX2871Struct max2871Status;
+extern struct txStruct txStatus;
 
 /* USER CODE END PV */
 
@@ -105,6 +108,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   DWT_Delay_Init();
   enumerateUSB(); // Force USB enumeration
+  txChainInit(&max2871Status, &txStatus);
+  HAL_ADC_Start(&hadc1);
 
   /* USER CODE END 2 */
 
@@ -115,7 +120,7 @@ int main(void)
     	  // Command Parser
 	  if (RX_FIFO.dataReady == 1)
 	  {
-		  commandParser(&max2871Status);
+		  commandParser(&max2871Status, &txStatus);
 	  }
     /* USER CODE END WHILE */
 

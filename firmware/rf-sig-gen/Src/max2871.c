@@ -130,7 +130,6 @@ void max2871SpiWrite(uint32_t r)
 // Readback register 6 from MAX2871. Requires MUX to be set in readback mode (0xC)
 uint32_t max2871SpiRead(void)
 {
-	uint8_t data[4];
 	uint32_t dataReturn;
 
 	max2871SpiWrite(0x06);
@@ -138,10 +137,16 @@ uint32_t max2871SpiRead(void)
 	// Ensure LE High
 	HAL_GPIO_WritePin(MAX_LE_GPIO_Port, MAX_LE_Pin, 1);
 
-	// IMPLEMENT BIT BANG RECEIVER
-	// HAL_SPI_Receive(&hspi2, (uint8_t *) data, 4, 1000);
-
-	dataReturn = (data[0] << 24) | (data[1] << 16) | (data[2] << 8) | (data[3]);
+	// Receive all the bits!
+	for (int8_t bit = 32; bit > 0; bit--)
+	{
+		HAL_GPIO_WritePin(MAX_CLK_GPIO_Port, MAX_CLK_Pin, 1);
+		DWT_Delay_us(1);
+		dataReturn |= HAL_GPIO_ReadPin(MAX_MUX_GPIO_Port, MAX_MUX_Pin) << bit;
+		DWT_Delay_us(1);
+		HAL_GPIO_WritePin(MAX_CLK_GPIO_Port, MAX_CLK_Pin, 0);
+		DWT_Delay_us(2);
+	}
 
 	return dataReturn;
 }

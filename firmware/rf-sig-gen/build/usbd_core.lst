@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccGiioXn.s 			page 1
+ARM GAS  /tmp/ccoMzPOl.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
   31:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** */
   32:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** 
   33:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** /** @defgroup USBD_CORE_Private_TypesDefinitions
-ARM GAS  /tmp/ccGiioXn.s 			page 2
+ARM GAS  /tmp/ccoMzPOl.s 			page 2
 
 
   34:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** * @{
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
   88:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** */
   89:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** USBD_StatusTypeDef USBD_Init(USBD_HandleTypeDef *pdev,
   90:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****                              USBD_DescriptorsTypeDef *pdesc, uint8_t id)
-ARM GAS  /tmp/ccGiioXn.s 			page 3
+ARM GAS  /tmp/ccoMzPOl.s 			page 3
 
 
   91:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** {
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
   55 001a 0123     		movs	r3, #1
   56              	.LVL2:
   57 001c 80F89C32 		strb	r3, [r0, #668]
-ARM GAS  /tmp/ccGiioXn.s 			page 4
+ARM GAS  /tmp/ccoMzPOl.s 			page 4
 
 
  115:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****   pdev->id = id;
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
   98              		.cfi_def_cfa_offset 8
   99              		.cfi_offset 4, -8
  100              		.cfi_offset 14, -4
-ARM GAS  /tmp/ccGiioXn.s 			page 5
+ARM GAS  /tmp/ccoMzPOl.s 			page 5
 
 
  101 0002 0446     		mov	r4, r0
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  152:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** USBD_StatusTypeDef  USBD_RegisterClass(USBD_HandleTypeDef *pdev, USBD_ClassTypeDef *pclass)
  153:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** {
  135              		.loc 1 153 0
-ARM GAS  /tmp/ccGiioXn.s 			page 6
+ARM GAS  /tmp/ccoMzPOl.s 			page 6
 
 
  136              		.cfi_startproc
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  177:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****   */
  178:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** USBD_StatusTypeDef  USBD_Start(USBD_HandleTypeDef *pdev)
  179:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** {
-ARM GAS  /tmp/ccGiioXn.s 			page 7
+ARM GAS  /tmp/ccoMzPOl.s 			page 7
 
 
  169              		.loc 1 179 0
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  209              		.loc 1 195 0
  210 0004 D0F8B432 		ldr	r3, [r0, #692]
  211 0008 5B68     		ldr	r3, [r3, #4]
-ARM GAS  /tmp/ccGiioXn.s 			page 8
+ARM GAS  /tmp/ccoMzPOl.s 			page 8
 
 
  212 000a 0179     		ldrb	r1, [r0, #4]	@ zero_extendqisi2
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  249              		.align	1
  250              		.global	USBD_SetClassConfig
  251              		.syntax unified
-ARM GAS  /tmp/ccGiioXn.s 			page 9
+ARM GAS  /tmp/ccoMzPOl.s 			page 9
 
 
  252              		.thumb
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  283              	.LVL25:
  284              	.L25:
  227:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** 
-ARM GAS  /tmp/ccGiioXn.s 			page 10
+ARM GAS  /tmp/ccoMzPOl.s 			page 10
 
 
  285              		.loc 1 227 0
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  327              		.section	.text.USBD_LL_SetupStage,"ax",%progbits
  328              		.align	1
  329              		.global	USBD_LL_SetupStage
-ARM GAS  /tmp/ccGiioXn.s 			page 11
+ARM GAS  /tmp/ccoMzPOl.s 			page 11
 
 
  330              		.syntax unified
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  368 002a 022B     		cmp	r3, #2
  369 002c 10D0     		beq	.L32
  272:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****   {
-ARM GAS  /tmp/ccGiioXn.s 			page 12
+ARM GAS  /tmp/ccoMzPOl.s 			page 12
 
 
  273:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****     case USB_REQ_RECIPIENT_DEVICE:
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  401              	.LVL37:
  283:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** 
  402              		.loc 1 283 0
-ARM GAS  /tmp/ccGiioXn.s 			page 13
+ARM GAS  /tmp/ccoMzPOl.s 			page 13
 
 
  403 0058 F3E7     		b	.L33
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  313:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****         pep->rem_length -= pep->maxpacket;
  314:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** 
  315:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****         USBD_CtlContinueRx(pdev, pdata,
-ARM GAS  /tmp/ccGiioXn.s 			page 14
+ARM GAS  /tmp/ccoMzPOl.s 			page 14
 
 
  316:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****                            (uint16_t)MIN(pep->rem_length, pep->maxpacket));
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  315:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****                            (uint16_t)MIN(pep->rem_length, pep->maxpacket));
  454              		.loc 1 315 0
  455 002a 9A42     		cmp	r2, r3
-ARM GAS  /tmp/ccGiioXn.s 			page 15
+ARM GAS  /tmp/ccoMzPOl.s 			page 15
 
 
  456 002c 06D9     		bls	.L40
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  501 005e 0025     		movs	r5, #0
  502 0060 C4F89452 		str	r5, [r4, #660]
  336:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****       }
-ARM GAS  /tmp/ccGiioXn.s 			page 16
+ARM GAS  /tmp/ccoMzPOl.s 			page 16
 
 
  503              		.loc 1 336 0
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  552              		.global	USBD_LL_DataInStage
  553              		.syntax unified
  554              		.thumb
-ARM GAS  /tmp/ccGiioXn.s 			page 17
+ARM GAS  /tmp/ccoMzPOl.s 			page 17
 
 
  555              		.thumb_func
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  383:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****         /* last packet is MPS multiple, so send ZLP packet */
  384:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****         if ((pep->total_length % pep->maxpacket == 0U) &&
  385:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****             (pep->total_length >= pep->maxpacket) &&
-ARM GAS  /tmp/ccGiioXn.s 			page 18
+ARM GAS  /tmp/ccoMzPOl.s 			page 18
 
 
  386:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****             (pep->total_length < pdev->ep0_data_len))
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  423:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****   {
  424:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****     pdev->pClass->DataIn(pdev, epnum);
  425:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****   }
-ARM GAS  /tmp/ccGiioXn.s 			page 19
+ARM GAS  /tmp/ccoMzPOl.s 			page 19
 
 
  426:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****   else
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  635              	.LVL67:
  636              	.L56:
  401:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****           USBD_CtlReceiveStatus(pdev);
-ARM GAS  /tmp/ccGiioXn.s 			page 20
+ARM GAS  /tmp/ccoMzPOl.s 			page 20
 
 
  637              		.loc 1 401 0
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  684 00a2 FFF7FEFF 		bl	USBD_LL_PrepareReceive
  685              	.LVL78:
  686 00a6 BBE7     		b	.L54
-ARM GAS  /tmp/ccGiioXn.s 			page 21
+ARM GAS  /tmp/ccoMzPOl.s 			page 21
 
 
  687              	.L64:
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  735              		.fpu softvfp
  737              	USBD_LL_Reset:
  738              	.LFB79:
-ARM GAS  /tmp/ccGiioXn.s 			page 22
+ARM GAS  /tmp/ccoMzPOl.s 			page 22
 
 
  434:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** 
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  454:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****   pdev->ep_in[0].maxpacket = USB_MAX_EP0_SIZE;
  773              		.loc 1 454 0
  774 0028 6662     		str	r6, [r4, #36]
-ARM GAS  /tmp/ccGiioXn.s 			page 23
+ARM GAS  /tmp/ccoMzPOl.s 			page 23
 
 
  455:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** 
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  475:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** */
  476:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** USBD_StatusTypeDef USBD_LL_SetSpeed(USBD_HandleTypeDef *pdev,
  477:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****                                     USBD_SpeedTypeDef speed)
-ARM GAS  /tmp/ccGiioXn.s 			page 24
+ARM GAS  /tmp/ccoMzPOl.s 			page 24
 
 
  478:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** {
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  497:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** }
  848              		.loc 1 497 0
  849 000e 0020     		movs	r0, #0
-ARM GAS  /tmp/ccGiioXn.s 			page 25
+ARM GAS  /tmp/ccoMzPOl.s 			page 25
 
 
  850              	.LVL94:
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  889              		.section	.text.USBD_LL_SOF,"ax",%progbits
  890              		.align	1
  891              		.global	USBD_LL_SOF
-ARM GAS  /tmp/ccGiioXn.s 			page 26
+ARM GAS  /tmp/ccoMzPOl.s 			page 26
 
 
  892              		.syntax unified
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  925              		.loc 1 529 0
  926 0018 9847     		blx	r3
  927              	.LVL101:
-ARM GAS  /tmp/ccGiioXn.s 			page 27
+ARM GAS  /tmp/ccoMzPOl.s 			page 27
 
 
  928 001a F6E7     		b	.L76
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  556:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** * @retval status
  557:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** */
  558:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c **** USBD_StatusTypeDef USBD_LL_IsoOUTIncomplete(USBD_HandleTypeDef *pdev,
-ARM GAS  /tmp/ccGiioXn.s 			page 28
+ARM GAS  /tmp/ccoMzPOl.s 			page 28
 
 
  559:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c ****                                             uint8_t epnum)
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  999              	.LFE86:
  1001              		.section	.text.USBD_LL_DevDisconnected,"ax",%progbits
  1002              		.align	1
-ARM GAS  /tmp/ccGiioXn.s 			page 29
+ARM GAS  /tmp/ccoMzPOl.s 			page 29
 
 
  1003              		.global	USBD_LL_DevDisconnected
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  1044              		.file 8 "/usr/include/newlib/stdlib.h"
  1045              		.file 9 "Drivers/CMSIS/Include/core_cm3.h"
  1046              		.file 10 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
-ARM GAS  /tmp/ccGiioXn.s 			page 30
+ARM GAS  /tmp/ccoMzPOl.s 			page 30
 
 
  1047              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
@@ -1747,51 +1747,51 @@ ARM GAS  /tmp/ccGiioXn.s 			page 1
  1050              		.file 14 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h"
  1051              		.file 15 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h"
  1052              		.file 16 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h"
-ARM GAS  /tmp/ccGiioXn.s 			page 31
+ARM GAS  /tmp/ccoMzPOl.s 			page 31
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 usbd_core.c
-     /tmp/ccGiioXn.s:16     .text.USBD_Init:0000000000000000 $t
-     /tmp/ccGiioXn.s:23     .text.USBD_Init:0000000000000000 USBD_Init
-     /tmp/ccGiioXn.s:82     .text.USBD_DeInit:0000000000000000 $t
-     /tmp/ccGiioXn.s:89     .text.USBD_DeInit:0000000000000000 USBD_DeInit
-     /tmp/ccGiioXn.s:126    .text.USBD_RegisterClass:0000000000000000 $t
-     /tmp/ccGiioXn.s:133    .text.USBD_RegisterClass:0000000000000000 USBD_RegisterClass
-     /tmp/ccGiioXn.s:160    .text.USBD_Start:0000000000000000 $t
-     /tmp/ccGiioXn.s:167    .text.USBD_Start:0000000000000000 USBD_Start
-     /tmp/ccGiioXn.s:189    .text.USBD_Stop:0000000000000000 $t
-     /tmp/ccGiioXn.s:196    .text.USBD_Stop:0000000000000000 USBD_Stop
-     /tmp/ccGiioXn.s:226    .text.USBD_RunTestMode:0000000000000000 $t
-     /tmp/ccGiioXn.s:233    .text.USBD_RunTestMode:0000000000000000 USBD_RunTestMode
-     /tmp/ccGiioXn.s:249    .text.USBD_SetClassConfig:0000000000000000 $t
-     /tmp/ccGiioXn.s:256    .text.USBD_SetClassConfig:0000000000000000 USBD_SetClassConfig
-     /tmp/ccGiioXn.s:297    .text.USBD_ClrClassConfig:0000000000000000 $t
-     /tmp/ccGiioXn.s:304    .text.USBD_ClrClassConfig:0000000000000000 USBD_ClrClassConfig
-     /tmp/ccGiioXn.s:328    .text.USBD_LL_SetupStage:0000000000000000 $t
-     /tmp/ccGiioXn.s:335    .text.USBD_LL_SetupStage:0000000000000000 USBD_LL_SetupStage
-     /tmp/ccGiioXn.s:408    .text.USBD_LL_DataOutStage:0000000000000000 $t
-     /tmp/ccGiioXn.s:415    .text.USBD_LL_DataOutStage:0000000000000000 USBD_LL_DataOutStage
-     /tmp/ccGiioXn.s:551    .text.USBD_LL_DataInStage:0000000000000000 $t
-     /tmp/ccGiioXn.s:558    .text.USBD_LL_DataInStage:0000000000000000 USBD_LL_DataInStage
-     /tmp/ccGiioXn.s:730    .text.USBD_LL_Reset:0000000000000000 $t
-     /tmp/ccGiioXn.s:737    .text.USBD_LL_Reset:0000000000000000 USBD_LL_Reset
-     /tmp/ccGiioXn.s:802    .text.USBD_LL_SetSpeed:0000000000000000 $t
-     /tmp/ccGiioXn.s:809    .text.USBD_LL_SetSpeed:0000000000000000 USBD_LL_SetSpeed
-     /tmp/ccGiioXn.s:827    .text.USBD_LL_Suspend:0000000000000000 $t
-     /tmp/ccGiioXn.s:834    .text.USBD_LL_Suspend:0000000000000000 USBD_LL_Suspend
-     /tmp/ccGiioXn.s:856    .text.USBD_LL_Resume:0000000000000000 $t
-     /tmp/ccGiioXn.s:863    .text.USBD_LL_Resume:0000000000000000 USBD_LL_Resume
-     /tmp/ccGiioXn.s:890    .text.USBD_LL_SOF:0000000000000000 $t
-     /tmp/ccGiioXn.s:897    .text.USBD_LL_SOF:0000000000000000 USBD_LL_SOF
-     /tmp/ccGiioXn.s:933    .text.USBD_LL_IsoINIncomplete:0000000000000000 $t
-     /tmp/ccGiioXn.s:940    .text.USBD_LL_IsoINIncomplete:0000000000000000 USBD_LL_IsoINIncomplete
-     /tmp/ccGiioXn.s:956    .text.USBD_LL_IsoOUTIncomplete:0000000000000000 $t
-     /tmp/ccGiioXn.s:963    .text.USBD_LL_IsoOUTIncomplete:0000000000000000 USBD_LL_IsoOUTIncomplete
-     /tmp/ccGiioXn.s:979    .text.USBD_LL_DevConnected:0000000000000000 $t
-     /tmp/ccGiioXn.s:986    .text.USBD_LL_DevConnected:0000000000000000 USBD_LL_DevConnected
-     /tmp/ccGiioXn.s:1002   .text.USBD_LL_DevDisconnected:0000000000000000 $t
-     /tmp/ccGiioXn.s:1009   .text.USBD_LL_DevDisconnected:0000000000000000 USBD_LL_DevDisconnected
+     /tmp/ccoMzPOl.s:16     .text.USBD_Init:0000000000000000 $t
+     /tmp/ccoMzPOl.s:23     .text.USBD_Init:0000000000000000 USBD_Init
+     /tmp/ccoMzPOl.s:82     .text.USBD_DeInit:0000000000000000 $t
+     /tmp/ccoMzPOl.s:89     .text.USBD_DeInit:0000000000000000 USBD_DeInit
+     /tmp/ccoMzPOl.s:126    .text.USBD_RegisterClass:0000000000000000 $t
+     /tmp/ccoMzPOl.s:133    .text.USBD_RegisterClass:0000000000000000 USBD_RegisterClass
+     /tmp/ccoMzPOl.s:160    .text.USBD_Start:0000000000000000 $t
+     /tmp/ccoMzPOl.s:167    .text.USBD_Start:0000000000000000 USBD_Start
+     /tmp/ccoMzPOl.s:189    .text.USBD_Stop:0000000000000000 $t
+     /tmp/ccoMzPOl.s:196    .text.USBD_Stop:0000000000000000 USBD_Stop
+     /tmp/ccoMzPOl.s:226    .text.USBD_RunTestMode:0000000000000000 $t
+     /tmp/ccoMzPOl.s:233    .text.USBD_RunTestMode:0000000000000000 USBD_RunTestMode
+     /tmp/ccoMzPOl.s:249    .text.USBD_SetClassConfig:0000000000000000 $t
+     /tmp/ccoMzPOl.s:256    .text.USBD_SetClassConfig:0000000000000000 USBD_SetClassConfig
+     /tmp/ccoMzPOl.s:297    .text.USBD_ClrClassConfig:0000000000000000 $t
+     /tmp/ccoMzPOl.s:304    .text.USBD_ClrClassConfig:0000000000000000 USBD_ClrClassConfig
+     /tmp/ccoMzPOl.s:328    .text.USBD_LL_SetupStage:0000000000000000 $t
+     /tmp/ccoMzPOl.s:335    .text.USBD_LL_SetupStage:0000000000000000 USBD_LL_SetupStage
+     /tmp/ccoMzPOl.s:408    .text.USBD_LL_DataOutStage:0000000000000000 $t
+     /tmp/ccoMzPOl.s:415    .text.USBD_LL_DataOutStage:0000000000000000 USBD_LL_DataOutStage
+     /tmp/ccoMzPOl.s:551    .text.USBD_LL_DataInStage:0000000000000000 $t
+     /tmp/ccoMzPOl.s:558    .text.USBD_LL_DataInStage:0000000000000000 USBD_LL_DataInStage
+     /tmp/ccoMzPOl.s:730    .text.USBD_LL_Reset:0000000000000000 $t
+     /tmp/ccoMzPOl.s:737    .text.USBD_LL_Reset:0000000000000000 USBD_LL_Reset
+     /tmp/ccoMzPOl.s:802    .text.USBD_LL_SetSpeed:0000000000000000 $t
+     /tmp/ccoMzPOl.s:809    .text.USBD_LL_SetSpeed:0000000000000000 USBD_LL_SetSpeed
+     /tmp/ccoMzPOl.s:827    .text.USBD_LL_Suspend:0000000000000000 $t
+     /tmp/ccoMzPOl.s:834    .text.USBD_LL_Suspend:0000000000000000 USBD_LL_Suspend
+     /tmp/ccoMzPOl.s:856    .text.USBD_LL_Resume:0000000000000000 $t
+     /tmp/ccoMzPOl.s:863    .text.USBD_LL_Resume:0000000000000000 USBD_LL_Resume
+     /tmp/ccoMzPOl.s:890    .text.USBD_LL_SOF:0000000000000000 $t
+     /tmp/ccoMzPOl.s:897    .text.USBD_LL_SOF:0000000000000000 USBD_LL_SOF
+     /tmp/ccoMzPOl.s:933    .text.USBD_LL_IsoINIncomplete:0000000000000000 $t
+     /tmp/ccoMzPOl.s:940    .text.USBD_LL_IsoINIncomplete:0000000000000000 USBD_LL_IsoINIncomplete
+     /tmp/ccoMzPOl.s:956    .text.USBD_LL_IsoOUTIncomplete:0000000000000000 $t
+     /tmp/ccoMzPOl.s:963    .text.USBD_LL_IsoOUTIncomplete:0000000000000000 USBD_LL_IsoOUTIncomplete
+     /tmp/ccoMzPOl.s:979    .text.USBD_LL_DevConnected:0000000000000000 $t
+     /tmp/ccoMzPOl.s:986    .text.USBD_LL_DevConnected:0000000000000000 USBD_LL_DevConnected
+     /tmp/ccoMzPOl.s:1002   .text.USBD_LL_DevDisconnected:0000000000000000 $t
+     /tmp/ccoMzPOl.s:1009   .text.USBD_LL_DevDisconnected:0000000000000000 USBD_LL_DevDisconnected
 
 UNDEFINED SYMBOLS
 USBD_LL_Init
@@ -1807,7 +1807,7 @@ USBD_CtlContinueRx
 USBD_CtlSendStatus
 USBD_CtlReceiveStatus
 USBD_CtlContinueSendData
-ARM GAS  /tmp/ccGiioXn.s 			page 32
+ARM GAS  /tmp/ccoMzPOl.s 			page 32
 
 
 USBD_LL_PrepareReceive

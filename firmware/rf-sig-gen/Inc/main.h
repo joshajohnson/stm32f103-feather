@@ -72,8 +72,6 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define RF_PWR_Pin GPIO_PIN_0
-#define RF_PWR_GPIO_Port GPIOA
 #define MAX_LE_Pin GPIO_PIN_1
 #define MAX_LE_GPIO_Port GPIOA
 #define MAX_RFOUT_EN_Pin GPIO_PIN_2
@@ -84,8 +82,8 @@ void Error_Handler(void);
 #define nLED_OE_GPIO_Port GPIOA
 #define ATTEN_LE_Pin GPIO_PIN_6
 #define ATTEN_LE_GPIO_Port GPIOA
-#define ATTEN_SDI_Pin GPIO_PIN_7
-#define ATTEN_SDI_GPIO_Port GPIOA
+#define ATTEN_SDO_Pin GPIO_PIN_7
+#define ATTEN_SDO_GPIO_Port GPIOA
 #define ATTEN_CLK_Pin GPIO_PIN_0
 #define ATTEN_CLK_GPIO_Port GPIOB
 #define LED_SDI_Pin GPIO_PIN_10
@@ -118,8 +116,8 @@ void Error_Handler(void);
 #define LED_GPIO_Port GPIOB
 #define MAX_MUX_Pin GPIO_PIN_7
 #define MAX_MUX_GPIO_Port GPIOB
-#define ATTEN_SDO_Pin GPIO_PIN_8
-#define ATTEN_SDO_GPIO_Port GPIOB
+#define ATTEN_SDI_Pin GPIO_PIN_8
+#define ATTEN_SDI_GPIO_Port GPIOB
 #define PA_PWDN_Pin GPIO_PIN_9
 #define PA_PWDN_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */

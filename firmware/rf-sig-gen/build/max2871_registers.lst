@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccMlWFLQ.s 			page 1
+ARM GAS  /tmp/cc28GOPq.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
   44              		.loc 1 12 0
   45 0012 8C22     		movs	r2, #140
   46 0014 1A61     		str	r2, [r3, #16]
-ARM GAS  /tmp/ccMlWFLQ.s 			page 2
+ARM GAS  /tmp/cc28GOPq.s 			page 2
 
 
   13:Src/max2871_registers.c **** 	registers[5] = 0x5;
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
   21:Src/max2871_registers.c **** 
   22:Src/max2871_registers.c **** // 0 = Frac-N, 1 = Int-N
   23:Src/max2871_registers.c **** void max2871Set_INT(uint32_t j)
-ARM GAS  /tmp/ccMlWFLQ.s 			page 3
+ARM GAS  /tmp/cc28GOPq.s 			page 3
 
 
   24:Src/max2871_registers.c **** {
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  143 0010 1060     		str	r0, [r2]
   34:Src/max2871_registers.c **** }
  144              		.loc 1 34 0
-ARM GAS  /tmp/ccMlWFLQ.s 			page 4
+ARM GAS  /tmp/cc28GOPq.s 			page 4
 
 
  145 0012 7047     		bx	lr
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  196              	.LFB5:
   42:Src/max2871_registers.c **** 
   43:Src/max2871_registers.c **** void max2871Set_CPOC(uint32_t j)
-ARM GAS  /tmp/ccMlWFLQ.s 			page 5
+ARM GAS  /tmp/cc28GOPq.s 			page 5
 
 
   44:Src/max2871_registers.c **** {
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  242              		.loc 1 54 0
  243 000e 7047     		bx	lr
  244              	.L21:
-ARM GAS  /tmp/ccMlWFLQ.s 			page 6
+ARM GAS  /tmp/cc28GOPq.s 			page 6
 
 
  245              		.align	2
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
   65:Src/max2871_registers.c **** {
  293              		.loc 1 65 0
  294              		.cfi_startproc
-ARM GAS  /tmp/ccMlWFLQ.s 			page 7
+ARM GAS  /tmp/cc28GOPq.s 			page 7
 
 
  295              		@ args = 0, pretend = 0, frame = 0
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
   75:Src/max2871_registers.c **** }
  342              		.loc 1 75 0
  343 0012 7047     		bx	lr
-ARM GAS  /tmp/ccMlWFLQ.s 			page 8
+ARM GAS  /tmp/cc28GOPq.s 			page 8
 
 
  344              	.L30:
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
   85:Src/max2871_registers.c **** void max2871Set_SDN(uint32_t j)
   86:Src/max2871_registers.c **** {
  393              		.loc 1 86 0
-ARM GAS  /tmp/ccMlWFLQ.s 			page 9
+ARM GAS  /tmp/cc28GOPq.s 			page 9
 
 
  394              		.cfi_startproc
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  441 000c 23F48023 		bic	r3, r3, #262144
   96:Src/max2871_registers.c ****     registers[2] |= (j & 0x7) << 26;
  442              		.loc 1 96 0
-ARM GAS  /tmp/ccMlWFLQ.s 			page 10
+ARM GAS  /tmp/cc28GOPq.s 			page 10
 
 
  443 0010 8406     		lsls	r4, r0, #26
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  490              		.loc 1 105 0
  491 000e 7047     		bx	lr
  492              	.L43:
-ARM GAS  /tmp/ccMlWFLQ.s 			page 11
+ARM GAS  /tmp/cc28GOPq.s 			page 11
 
 
  493              		.align	2
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  116:Src/max2871_registers.c **** {
  541              		.loc 1 116 0
  542              		.cfi_startproc
-ARM GAS  /tmp/ccMlWFLQ.s 			page 12
+ARM GAS  /tmp/cc28GOPq.s 			page 12
 
 
  543              		@ args = 0, pretend = 0, frame = 0
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  589 000e 7047     		bx	lr
  590              	.L52:
  591              		.align	2
-ARM GAS  /tmp/ccMlWFLQ.s 			page 13
+ARM GAS  /tmp/cc28GOPq.s 			page 13
 
 
  592              	.L51:
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  639              		.loc 1 137 0
  640              		.cfi_startproc
  641              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/ccMlWFLQ.s 			page 14
+ARM GAS  /tmp/cc28GOPq.s 			page 14
 
 
  642              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  689 0010 00000000 		.word	.LANCHOR0
  690              		.cfi_endproc
  691              	.LFE19:
-ARM GAS  /tmp/ccMlWFLQ.s 			page 15
+ARM GAS  /tmp/cc28GOPq.s 			page 15
 
 
  693              		.section	.text.max2871Set_PDP,"ax",%progbits
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  739              		@ link register save eliminated.
  740              	.LVL27:
  158:Src/max2871_registers.c ****     registers[2] &= ~(0x1 << 5);
-ARM GAS  /tmp/ccMlWFLQ.s 			page 16
+ARM GAS  /tmp/cc28GOPq.s 			page 16
 
 
  741              		.loc 1 158 0
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  789              		.section	.text.max2871Set_RST,"ax",%progbits
  790              		.align	1
  791              		.global	max2871Set_RST
-ARM GAS  /tmp/ccMlWFLQ.s 			page 17
+ARM GAS  /tmp/cc28GOPq.s 			page 17
 
 
  792              		.syntax unified
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  837              		.loc 1 179 0
  838 0000 034A     		ldr	r2, .L75
  839 0002 D368     		ldr	r3, [r2, #12]
-ARM GAS  /tmp/ccMlWFLQ.s 			page 18
+ARM GAS  /tmp/cc28GOPq.s 			page 18
 
 
  840 0004 23F07C43 		bic	r3, r3, #-67108864
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  888              		.syntax unified
  889              		.thumb
  890              		.thumb_func
-ARM GAS  /tmp/ccMlWFLQ.s 			page 19
+ARM GAS  /tmp/cc28GOPq.s 			page 19
 
 
  891              		.fpu softvfp
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  934              		.loc 1 202 0
  935              		.cfi_startproc
  936              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/ccMlWFLQ.s 			page 20
+ARM GAS  /tmp/cc28GOPq.s 			page 20
 
 
  937              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  983              	.L87:
  984 0010 00000000 		.word	.LANCHOR0
  985              		.cfi_endproc
-ARM GAS  /tmp/ccMlWFLQ.s 			page 21
+ARM GAS  /tmp/cc28GOPq.s 			page 21
 
 
  986              	.LFE28:
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  1033              		@ frame_needed = 0, uses_anonymous_args = 0
  1034              		@ link register save eliminated.
  1035              	.LVL37:
-ARM GAS  /tmp/ccMlWFLQ.s 			page 22
+ARM GAS  /tmp/cc28GOPq.s 			page 22
 
 
  224:Src/max2871_registers.c ****     registers[3] &= ~(0xFFF << 3);
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  1082 0010 00000000 		.word	.LANCHOR0
  1083              		.cfi_endproc
  1084              	.LFE31:
-ARM GAS  /tmp/ccMlWFLQ.s 			page 23
+ARM GAS  /tmp/cc28GOPq.s 			page 23
 
 
  1086              		.section	.text.max2871Set_SDDIV,"ax",%progbits
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  1132              		@ link register save eliminated.
  1133              	.LVL41:
  245:Src/max2871_registers.c ****     registers[4] &= ~(0x1 << 26);
-ARM GAS  /tmp/ccMlWFLQ.s 			page 24
+ARM GAS  /tmp/cc28GOPq.s 			page 24
 
 
  1134              		.loc 1 245 0
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  1180 0018 00F47F20 		and	r0, r0, #1044480
  1181 001c 0343     		orrs	r3, r3, r0
  1182 001e 0B61     		str	r3, [r1, #16]
-ARM GAS  /tmp/ccMlWFLQ.s 			page 25
+ARM GAS  /tmp/cc28GOPq.s 			page 25
 
 
  256:Src/max2871_registers.c **** }
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  1233              	.LFB36:
  264:Src/max2871_registers.c **** 
  265:Src/max2871_registers.c **** // RFOUT_ Output Divider Mode
-ARM GAS  /tmp/ccMlWFLQ.s 			page 26
+ARM GAS  /tmp/cc28GOPq.s 			page 26
 
 
  266:Src/max2871_registers.c **** void max2871Set_DIVA(uint32_t j)
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  277:Src/max2871_registers.c **** }
  1279              		.loc 1 277 0
  1280 000e 7047     		bx	lr
-ARM GAS  /tmp/ccMlWFLQ.s 			page 27
+ARM GAS  /tmp/cc28GOPq.s 			page 27
 
 
  1281              	.L115:
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  287:Src/max2871_registers.c **** void max2871Set_BDIV(uint32_t j)
  288:Src/max2871_registers.c **** {
  1330              		.loc 1 288 0
-ARM GAS  /tmp/ccMlWFLQ.s 			page 28
+ARM GAS  /tmp/cc28GOPq.s 			page 28
 
 
  1331              		.cfi_startproc
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  1377              	.L124:
  1378              		.align	2
  1379              	.L123:
-ARM GAS  /tmp/ccMlWFLQ.s 			page 29
+ARM GAS  /tmp/cc28GOPq.s 			page 29
 
 
  1380 0010 00000000 		.word	.LANCHOR0
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  1428              		@ args = 0, pretend = 0, frame = 0
  1429              		@ frame_needed = 0, uses_anonymous_args = 0
  1430              		@ link register save eliminated.
-ARM GAS  /tmp/ccMlWFLQ.s 			page 30
+ARM GAS  /tmp/cc28GOPq.s 			page 30
 
 
  1431              	.LVL51:
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  1478              	.LFE43:
  1480              		.section	.text.max2871Set_SDPLL,"ax",%progbits
  1481              		.align	1
-ARM GAS  /tmp/ccMlWFLQ.s 			page 31
+ARM GAS  /tmp/cc28GOPq.s 			page 31
 
 
  1482              		.global	max2871Set_SDPLL
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  329:Src/max2871_registers.c ****     registers[5] &= ~(0x1 << 24);
  1528              		.loc 1 329 0
  1529 0000 034A     		ldr	r2, .L138
-ARM GAS  /tmp/ccMlWFLQ.s 			page 32
+ARM GAS  /tmp/cc28GOPq.s 			page 32
 
 
  1530 0002 5369     		ldr	r3, [r2, #20]
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  1578              		.global	max2871Set_Reserved
  1579              		.syntax unified
  1580              		.thumb
-ARM GAS  /tmp/ccMlWFLQ.s 			page 33
+ARM GAS  /tmp/cc28GOPq.s 			page 33
 
 
  1581              		.thumb_func
@@ -1972,162 +1972,162 @@ ARM GAS  /tmp/ccMlWFLQ.s 			page 1
  1621              	.Letext0:
  1622              		.file 2 "/usr/include/newlib/machine/_default_types.h"
  1623              		.file 3 "/usr/include/newlib/sys/_stdint.h"
-ARM GAS  /tmp/ccMlWFLQ.s 			page 34
+ARM GAS  /tmp/cc28GOPq.s 			page 34
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 max2871_registers.c
-     /tmp/ccMlWFLQ.s:16     .text.max2871RegsInit:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:23     .text.max2871RegsInit:0000000000000000 max2871RegsInit
-     /tmp/ccMlWFLQ.s:55     .text.max2871RegsInit:000000000000001c $d
-     /tmp/ccMlWFLQ.s:60     .text.max2871GetRegister:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:67     .text.max2871GetRegister:0000000000000000 max2871GetRegister
-     /tmp/ccMlWFLQ.s:83     .text.max2871GetRegister:0000000000000008 $d
-     /tmp/ccMlWFLQ.s:88     .text.max2871Set_INT:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:95     .text.max2871Set_INT:0000000000000000 max2871Set_INT
-     /tmp/ccMlWFLQ.s:115    .text.max2871Set_INT:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:120    .text.max2871Set_N:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:127    .text.max2871Set_N:0000000000000000 max2871Set_N
-     /tmp/ccMlWFLQ.s:149    .text.max2871Set_N:0000000000000014 $d
-     /tmp/ccMlWFLQ.s:154    .text.max2871Set_FRAC:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:161    .text.max2871Set_FRAC:0000000000000000 max2871Set_FRAC
-     /tmp/ccMlWFLQ.s:183    .text.max2871Set_FRAC:0000000000000014 $d
-     /tmp/ccMlWFLQ.s:188    .text.max2871Set_CPOC:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:195    .text.max2871Set_CPOC:0000000000000000 max2871Set_CPOC
-     /tmp/ccMlWFLQ.s:215    .text.max2871Set_CPOC:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:220    .text.max2871Set_CPL:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:227    .text.max2871Set_CPL:0000000000000000 max2871Set_CPL
-     /tmp/ccMlWFLQ.s:247    .text.max2871Set_CPL:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:252    .text.max2871Set_CPT:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:259    .text.max2871Set_CPT:0000000000000000 max2871Set_CPT
-     /tmp/ccMlWFLQ.s:279    .text.max2871Set_CPT:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:284    .text.max2871Set_P:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:291    .text.max2871Set_P:0000000000000000 max2871Set_P
-     /tmp/ccMlWFLQ.s:313    .text.max2871Set_P:0000000000000014 $d
-     /tmp/ccMlWFLQ.s:318    .text.max2871Set_M:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:325    .text.max2871Set_M:0000000000000000 max2871Set_M
-     /tmp/ccMlWFLQ.s:347    .text.max2871Set_M:0000000000000014 $d
-     /tmp/ccMlWFLQ.s:352    .text.max2871Set_LDS:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:359    .text.max2871Set_LDS:0000000000000000 max2871Set_LDS
-     /tmp/ccMlWFLQ.s:379    .text.max2871Set_LDS:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:384    .text.max2871Set_SDN:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:391    .text.max2871Set_SDN:0000000000000000 max2871Set_SDN
-     /tmp/ccMlWFLQ.s:411    .text.max2871Set_SDN:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:416    .text.max2871Set_MUX:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:423    .text.max2871Set_MUX:0000000000000000 max2871Set_MUX
-     /tmp/ccMlWFLQ.s:463    .text.max2871Set_MUX:000000000000002c $d
-     /tmp/ccMlWFLQ.s:468    .text.max2871Set_DBR:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:475    .text.max2871Set_DBR:0000000000000000 max2871Set_DBR
-     /tmp/ccMlWFLQ.s:495    .text.max2871Set_DBR:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:500    .text.max2871Set_RDIV2:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:507    .text.max2871Set_RDIV2:0000000000000000 max2871Set_RDIV2
-     /tmp/ccMlWFLQ.s:527    .text.max2871Set_RDIV2:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:532    .text.max2871Set_R:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:539    .text.max2871Set_R:0000000000000000 max2871Set_R
-     /tmp/ccMlWFLQ.s:561    .text.max2871Set_R:0000000000000014 $d
-     /tmp/ccMlWFLQ.s:566    .text.max2871Set_REG4DB:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:573    .text.max2871Set_REG4DB:0000000000000000 max2871Set_REG4DB
-     /tmp/ccMlWFLQ.s:593    .text.max2871Set_REG4DB:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:598    .text.max2871Set_TRI:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:605    .text.max2871Set_TRI:0000000000000000 max2871Set_TRI
-     /tmp/ccMlWFLQ.s:625    .text.max2871Set_TRI:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:630    .text.max2871Set_LDF:0000000000000000 $t
-ARM GAS  /tmp/ccMlWFLQ.s 			page 35
+     /tmp/cc28GOPq.s:16     .text.max2871RegsInit:0000000000000000 $t
+     /tmp/cc28GOPq.s:23     .text.max2871RegsInit:0000000000000000 max2871RegsInit
+     /tmp/cc28GOPq.s:55     .text.max2871RegsInit:000000000000001c $d
+     /tmp/cc28GOPq.s:60     .text.max2871GetRegister:0000000000000000 $t
+     /tmp/cc28GOPq.s:67     .text.max2871GetRegister:0000000000000000 max2871GetRegister
+     /tmp/cc28GOPq.s:83     .text.max2871GetRegister:0000000000000008 $d
+     /tmp/cc28GOPq.s:88     .text.max2871Set_INT:0000000000000000 $t
+     /tmp/cc28GOPq.s:95     .text.max2871Set_INT:0000000000000000 max2871Set_INT
+     /tmp/cc28GOPq.s:115    .text.max2871Set_INT:0000000000000010 $d
+     /tmp/cc28GOPq.s:120    .text.max2871Set_N:0000000000000000 $t
+     /tmp/cc28GOPq.s:127    .text.max2871Set_N:0000000000000000 max2871Set_N
+     /tmp/cc28GOPq.s:149    .text.max2871Set_N:0000000000000014 $d
+     /tmp/cc28GOPq.s:154    .text.max2871Set_FRAC:0000000000000000 $t
+     /tmp/cc28GOPq.s:161    .text.max2871Set_FRAC:0000000000000000 max2871Set_FRAC
+     /tmp/cc28GOPq.s:183    .text.max2871Set_FRAC:0000000000000014 $d
+     /tmp/cc28GOPq.s:188    .text.max2871Set_CPOC:0000000000000000 $t
+     /tmp/cc28GOPq.s:195    .text.max2871Set_CPOC:0000000000000000 max2871Set_CPOC
+     /tmp/cc28GOPq.s:215    .text.max2871Set_CPOC:0000000000000010 $d
+     /tmp/cc28GOPq.s:220    .text.max2871Set_CPL:0000000000000000 $t
+     /tmp/cc28GOPq.s:227    .text.max2871Set_CPL:0000000000000000 max2871Set_CPL
+     /tmp/cc28GOPq.s:247    .text.max2871Set_CPL:0000000000000010 $d
+     /tmp/cc28GOPq.s:252    .text.max2871Set_CPT:0000000000000000 $t
+     /tmp/cc28GOPq.s:259    .text.max2871Set_CPT:0000000000000000 max2871Set_CPT
+     /tmp/cc28GOPq.s:279    .text.max2871Set_CPT:0000000000000010 $d
+     /tmp/cc28GOPq.s:284    .text.max2871Set_P:0000000000000000 $t
+     /tmp/cc28GOPq.s:291    .text.max2871Set_P:0000000000000000 max2871Set_P
+     /tmp/cc28GOPq.s:313    .text.max2871Set_P:0000000000000014 $d
+     /tmp/cc28GOPq.s:318    .text.max2871Set_M:0000000000000000 $t
+     /tmp/cc28GOPq.s:325    .text.max2871Set_M:0000000000000000 max2871Set_M
+     /tmp/cc28GOPq.s:347    .text.max2871Set_M:0000000000000014 $d
+     /tmp/cc28GOPq.s:352    .text.max2871Set_LDS:0000000000000000 $t
+     /tmp/cc28GOPq.s:359    .text.max2871Set_LDS:0000000000000000 max2871Set_LDS
+     /tmp/cc28GOPq.s:379    .text.max2871Set_LDS:0000000000000010 $d
+     /tmp/cc28GOPq.s:384    .text.max2871Set_SDN:0000000000000000 $t
+     /tmp/cc28GOPq.s:391    .text.max2871Set_SDN:0000000000000000 max2871Set_SDN
+     /tmp/cc28GOPq.s:411    .text.max2871Set_SDN:0000000000000010 $d
+     /tmp/cc28GOPq.s:416    .text.max2871Set_MUX:0000000000000000 $t
+     /tmp/cc28GOPq.s:423    .text.max2871Set_MUX:0000000000000000 max2871Set_MUX
+     /tmp/cc28GOPq.s:463    .text.max2871Set_MUX:000000000000002c $d
+     /tmp/cc28GOPq.s:468    .text.max2871Set_DBR:0000000000000000 $t
+     /tmp/cc28GOPq.s:475    .text.max2871Set_DBR:0000000000000000 max2871Set_DBR
+     /tmp/cc28GOPq.s:495    .text.max2871Set_DBR:0000000000000010 $d
+     /tmp/cc28GOPq.s:500    .text.max2871Set_RDIV2:0000000000000000 $t
+     /tmp/cc28GOPq.s:507    .text.max2871Set_RDIV2:0000000000000000 max2871Set_RDIV2
+     /tmp/cc28GOPq.s:527    .text.max2871Set_RDIV2:0000000000000010 $d
+     /tmp/cc28GOPq.s:532    .text.max2871Set_R:0000000000000000 $t
+     /tmp/cc28GOPq.s:539    .text.max2871Set_R:0000000000000000 max2871Set_R
+     /tmp/cc28GOPq.s:561    .text.max2871Set_R:0000000000000014 $d
+     /tmp/cc28GOPq.s:566    .text.max2871Set_REG4DB:0000000000000000 $t
+     /tmp/cc28GOPq.s:573    .text.max2871Set_REG4DB:0000000000000000 max2871Set_REG4DB
+     /tmp/cc28GOPq.s:593    .text.max2871Set_REG4DB:0000000000000010 $d
+     /tmp/cc28GOPq.s:598    .text.max2871Set_TRI:0000000000000000 $t
+     /tmp/cc28GOPq.s:605    .text.max2871Set_TRI:0000000000000000 max2871Set_TRI
+     /tmp/cc28GOPq.s:625    .text.max2871Set_TRI:0000000000000010 $d
+     /tmp/cc28GOPq.s:630    .text.max2871Set_LDF:0000000000000000 $t
+ARM GAS  /tmp/cc28GOPq.s 			page 35
 
 
-     /tmp/ccMlWFLQ.s:637    .text.max2871Set_LDF:0000000000000000 max2871Set_LDF
-     /tmp/ccMlWFLQ.s:657    .text.max2871Set_LDF:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:662    .text.max2871Set_LDP:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:669    .text.max2871Set_LDP:0000000000000000 max2871Set_LDP
-     /tmp/ccMlWFLQ.s:689    .text.max2871Set_LDP:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:694    .text.max2871Set_PDP:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:701    .text.max2871Set_PDP:0000000000000000 max2871Set_PDP
-     /tmp/ccMlWFLQ.s:721    .text.max2871Set_PDP:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:726    .text.max2871Set_SHDN:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:733    .text.max2871Set_SHDN:0000000000000000 max2871Set_SHDN
-     /tmp/ccMlWFLQ.s:753    .text.max2871Set_SHDN:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:758    .text.max2871Set_CP:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:765    .text.max2871Set_CP:0000000000000000 max2871Set_CP
-     /tmp/ccMlWFLQ.s:785    .text.max2871Set_CP:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:790    .text.max2871Set_RST:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:797    .text.max2871Set_RST:0000000000000000 max2871Set_RST
-     /tmp/ccMlWFLQ.s:817    .text.max2871Set_RST:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:822    .text.max2871Set_VCO:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:829    .text.max2871Set_VCO:0000000000000000 max2871Set_VCO
-     /tmp/ccMlWFLQ.s:849    .text.max2871Set_VCO:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:854    .text.max2871Set_VAS_SHDN:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:861    .text.max2871Set_VAS_SHDN:0000000000000000 max2871Set_VAS_SHDN
-     /tmp/ccMlWFLQ.s:881    .text.max2871Set_VAS_SHDN:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:886    .text.max2871Set_VAS_TEMP:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:893    .text.max2871Set_VAS_TEMP:0000000000000000 max2871Set_VAS_TEMP
-     /tmp/ccMlWFLQ.s:920    .text.max2871Set_VAS_TEMP:000000000000001c $d
-     /tmp/ccMlWFLQ.s:925    .text.max2871Set_CSM:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:932    .text.max2871Set_CSM:0000000000000000 max2871Set_CSM
-     /tmp/ccMlWFLQ.s:952    .text.max2871Set_CSM:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:957    .text.max2871Set_MUTEDEL:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:964    .text.max2871Set_MUTEDEL:0000000000000000 max2871Set_MUTEDEL
-     /tmp/ccMlWFLQ.s:984    .text.max2871Set_MUTEDEL:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:989    .text.max2871Set_CDM:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:996    .text.max2871Set_CDM:0000000000000000 max2871Set_CDM
-     /tmp/ccMlWFLQ.s:1016   .text.max2871Set_CDM:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:1021   .text.max2871Set_CDIV:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:1028   .text.max2871Set_CDIV:0000000000000000 max2871Set_CDIV
-     /tmp/ccMlWFLQ.s:1050   .text.max2871Set_CDIV:0000000000000014 $d
-     /tmp/ccMlWFLQ.s:1055   .text.max2871Set_SDLDO:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:1062   .text.max2871Set_SDLDO:0000000000000000 max2871Set_SDLDO
-     /tmp/ccMlWFLQ.s:1082   .text.max2871Set_SDLDO:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:1087   .text.max2871Set_SDDIV:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:1094   .text.max2871Set_SDDIV:0000000000000000 max2871Set_SDDIV
-     /tmp/ccMlWFLQ.s:1114   .text.max2871Set_SDDIV:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:1119   .text.max2871Set_SDREF:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:1126   .text.max2871Set_SDREF:0000000000000000 max2871Set_SDREF
-     /tmp/ccMlWFLQ.s:1146   .text.max2871Set_SDREF:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:1151   .text.max2871Set_BS:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:1158   .text.max2871Set_BS:0000000000000000 max2871Set_BS
-     /tmp/ccMlWFLQ.s:1188   .text.max2871Set_BS:0000000000000024 $d
-     /tmp/ccMlWFLQ.s:1193   .text.max2871Set_FB:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:1200   .text.max2871Set_FB:0000000000000000 max2871Set_FB
-     /tmp/ccMlWFLQ.s:1220   .text.max2871Set_FB:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:1225   .text.max2871Set_DIVA:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:1232   .text.max2871Set_DIVA:0000000000000000 max2871Set_DIVA
-     /tmp/ccMlWFLQ.s:1252   .text.max2871Set_DIVA:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:1257   .text.max2871Set_SDVCO:0000000000000000 $t
-ARM GAS  /tmp/ccMlWFLQ.s 			page 36
+     /tmp/cc28GOPq.s:637    .text.max2871Set_LDF:0000000000000000 max2871Set_LDF
+     /tmp/cc28GOPq.s:657    .text.max2871Set_LDF:0000000000000010 $d
+     /tmp/cc28GOPq.s:662    .text.max2871Set_LDP:0000000000000000 $t
+     /tmp/cc28GOPq.s:669    .text.max2871Set_LDP:0000000000000000 max2871Set_LDP
+     /tmp/cc28GOPq.s:689    .text.max2871Set_LDP:0000000000000010 $d
+     /tmp/cc28GOPq.s:694    .text.max2871Set_PDP:0000000000000000 $t
+     /tmp/cc28GOPq.s:701    .text.max2871Set_PDP:0000000000000000 max2871Set_PDP
+     /tmp/cc28GOPq.s:721    .text.max2871Set_PDP:0000000000000010 $d
+     /tmp/cc28GOPq.s:726    .text.max2871Set_SHDN:0000000000000000 $t
+     /tmp/cc28GOPq.s:733    .text.max2871Set_SHDN:0000000000000000 max2871Set_SHDN
+     /tmp/cc28GOPq.s:753    .text.max2871Set_SHDN:0000000000000010 $d
+     /tmp/cc28GOPq.s:758    .text.max2871Set_CP:0000000000000000 $t
+     /tmp/cc28GOPq.s:765    .text.max2871Set_CP:0000000000000000 max2871Set_CP
+     /tmp/cc28GOPq.s:785    .text.max2871Set_CP:0000000000000010 $d
+     /tmp/cc28GOPq.s:790    .text.max2871Set_RST:0000000000000000 $t
+     /tmp/cc28GOPq.s:797    .text.max2871Set_RST:0000000000000000 max2871Set_RST
+     /tmp/cc28GOPq.s:817    .text.max2871Set_RST:0000000000000010 $d
+     /tmp/cc28GOPq.s:822    .text.max2871Set_VCO:0000000000000000 $t
+     /tmp/cc28GOPq.s:829    .text.max2871Set_VCO:0000000000000000 max2871Set_VCO
+     /tmp/cc28GOPq.s:849    .text.max2871Set_VCO:0000000000000010 $d
+     /tmp/cc28GOPq.s:854    .text.max2871Set_VAS_SHDN:0000000000000000 $t
+     /tmp/cc28GOPq.s:861    .text.max2871Set_VAS_SHDN:0000000000000000 max2871Set_VAS_SHDN
+     /tmp/cc28GOPq.s:881    .text.max2871Set_VAS_SHDN:0000000000000010 $d
+     /tmp/cc28GOPq.s:886    .text.max2871Set_VAS_TEMP:0000000000000000 $t
+     /tmp/cc28GOPq.s:893    .text.max2871Set_VAS_TEMP:0000000000000000 max2871Set_VAS_TEMP
+     /tmp/cc28GOPq.s:920    .text.max2871Set_VAS_TEMP:000000000000001c $d
+     /tmp/cc28GOPq.s:925    .text.max2871Set_CSM:0000000000000000 $t
+     /tmp/cc28GOPq.s:932    .text.max2871Set_CSM:0000000000000000 max2871Set_CSM
+     /tmp/cc28GOPq.s:952    .text.max2871Set_CSM:0000000000000010 $d
+     /tmp/cc28GOPq.s:957    .text.max2871Set_MUTEDEL:0000000000000000 $t
+     /tmp/cc28GOPq.s:964    .text.max2871Set_MUTEDEL:0000000000000000 max2871Set_MUTEDEL
+     /tmp/cc28GOPq.s:984    .text.max2871Set_MUTEDEL:0000000000000010 $d
+     /tmp/cc28GOPq.s:989    .text.max2871Set_CDM:0000000000000000 $t
+     /tmp/cc28GOPq.s:996    .text.max2871Set_CDM:0000000000000000 max2871Set_CDM
+     /tmp/cc28GOPq.s:1016   .text.max2871Set_CDM:0000000000000010 $d
+     /tmp/cc28GOPq.s:1021   .text.max2871Set_CDIV:0000000000000000 $t
+     /tmp/cc28GOPq.s:1028   .text.max2871Set_CDIV:0000000000000000 max2871Set_CDIV
+     /tmp/cc28GOPq.s:1050   .text.max2871Set_CDIV:0000000000000014 $d
+     /tmp/cc28GOPq.s:1055   .text.max2871Set_SDLDO:0000000000000000 $t
+     /tmp/cc28GOPq.s:1062   .text.max2871Set_SDLDO:0000000000000000 max2871Set_SDLDO
+     /tmp/cc28GOPq.s:1082   .text.max2871Set_SDLDO:0000000000000010 $d
+     /tmp/cc28GOPq.s:1087   .text.max2871Set_SDDIV:0000000000000000 $t
+     /tmp/cc28GOPq.s:1094   .text.max2871Set_SDDIV:0000000000000000 max2871Set_SDDIV
+     /tmp/cc28GOPq.s:1114   .text.max2871Set_SDDIV:0000000000000010 $d
+     /tmp/cc28GOPq.s:1119   .text.max2871Set_SDREF:0000000000000000 $t
+     /tmp/cc28GOPq.s:1126   .text.max2871Set_SDREF:0000000000000000 max2871Set_SDREF
+     /tmp/cc28GOPq.s:1146   .text.max2871Set_SDREF:0000000000000010 $d
+     /tmp/cc28GOPq.s:1151   .text.max2871Set_BS:0000000000000000 $t
+     /tmp/cc28GOPq.s:1158   .text.max2871Set_BS:0000000000000000 max2871Set_BS
+     /tmp/cc28GOPq.s:1188   .text.max2871Set_BS:0000000000000024 $d
+     /tmp/cc28GOPq.s:1193   .text.max2871Set_FB:0000000000000000 $t
+     /tmp/cc28GOPq.s:1200   .text.max2871Set_FB:0000000000000000 max2871Set_FB
+     /tmp/cc28GOPq.s:1220   .text.max2871Set_FB:0000000000000010 $d
+     /tmp/cc28GOPq.s:1225   .text.max2871Set_DIVA:0000000000000000 $t
+     /tmp/cc28GOPq.s:1232   .text.max2871Set_DIVA:0000000000000000 max2871Set_DIVA
+     /tmp/cc28GOPq.s:1252   .text.max2871Set_DIVA:0000000000000010 $d
+     /tmp/cc28GOPq.s:1257   .text.max2871Set_SDVCO:0000000000000000 $t
+ARM GAS  /tmp/cc28GOPq.s 			page 36
 
 
-     /tmp/ccMlWFLQ.s:1264   .text.max2871Set_SDVCO:0000000000000000 max2871Set_SDVCO
-     /tmp/ccMlWFLQ.s:1284   .text.max2871Set_SDVCO:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:1289   .text.max2871Set_MTLD:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:1296   .text.max2871Set_MTLD:0000000000000000 max2871Set_MTLD
-     /tmp/ccMlWFLQ.s:1316   .text.max2871Set_MTLD:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:1321   .text.max2871Set_BDIV:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:1328   .text.max2871Set_BDIV:0000000000000000 max2871Set_BDIV
-     /tmp/ccMlWFLQ.s:1348   .text.max2871Set_BDIV:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:1353   .text.max2871Set_RFB_EN:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:1360   .text.max2871Set_RFB_EN:0000000000000000 max2871Set_RFB_EN
-     /tmp/ccMlWFLQ.s:1380   .text.max2871Set_RFB_EN:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:1385   .text.max2871Set_BPWR:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:1392   .text.max2871Set_BPWR:0000000000000000 max2871Set_BPWR
-     /tmp/ccMlWFLQ.s:1412   .text.max2871Set_BPWR:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:1417   .text.max2871Set_RFA_EN:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:1424   .text.max2871Set_RFA_EN:0000000000000000 max2871Set_RFA_EN
-     /tmp/ccMlWFLQ.s:1444   .text.max2871Set_RFA_EN:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:1449   .text.max2871Set_APWR:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:1456   .text.max2871Set_APWR:0000000000000000 max2871Set_APWR
-     /tmp/ccMlWFLQ.s:1476   .text.max2871Set_APWR:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:1481   .text.max2871Set_SDPLL:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:1488   .text.max2871Set_SDPLL:0000000000000000 max2871Set_SDPLL
-     /tmp/ccMlWFLQ.s:1508   .text.max2871Set_SDPLL:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:1513   .text.max2871Set_F01:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:1520   .text.max2871Set_F01:0000000000000000 max2871Set_F01
-     /tmp/ccMlWFLQ.s:1540   .text.max2871Set_F01:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:1545   .text.max2871Set_LD:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:1552   .text.max2871Set_LD:0000000000000000 max2871Set_LD
-     /tmp/ccMlWFLQ.s:1572   .text.max2871Set_LD:0000000000000010 $d
-     /tmp/ccMlWFLQ.s:1577   .text.max2871Set_Reserved:0000000000000000 $t
-     /tmp/ccMlWFLQ.s:1584   .text.max2871Set_Reserved:0000000000000000 max2871Set_Reserved
-     /tmp/ccMlWFLQ.s:1609   .text.max2871Set_Reserved:000000000000001c $d
-     /tmp/ccMlWFLQ.s:1614   .bss.registers:0000000000000000 $d
-     /tmp/ccMlWFLQ.s:1618   .bss.registers:0000000000000000 registers
+     /tmp/cc28GOPq.s:1264   .text.max2871Set_SDVCO:0000000000000000 max2871Set_SDVCO
+     /tmp/cc28GOPq.s:1284   .text.max2871Set_SDVCO:0000000000000010 $d
+     /tmp/cc28GOPq.s:1289   .text.max2871Set_MTLD:0000000000000000 $t
+     /tmp/cc28GOPq.s:1296   .text.max2871Set_MTLD:0000000000000000 max2871Set_MTLD
+     /tmp/cc28GOPq.s:1316   .text.max2871Set_MTLD:0000000000000010 $d
+     /tmp/cc28GOPq.s:1321   .text.max2871Set_BDIV:0000000000000000 $t
+     /tmp/cc28GOPq.s:1328   .text.max2871Set_BDIV:0000000000000000 max2871Set_BDIV
+     /tmp/cc28GOPq.s:1348   .text.max2871Set_BDIV:0000000000000010 $d
+     /tmp/cc28GOPq.s:1353   .text.max2871Set_RFB_EN:0000000000000000 $t
+     /tmp/cc28GOPq.s:1360   .text.max2871Set_RFB_EN:0000000000000000 max2871Set_RFB_EN
+     /tmp/cc28GOPq.s:1380   .text.max2871Set_RFB_EN:0000000000000010 $d
+     /tmp/cc28GOPq.s:1385   .text.max2871Set_BPWR:0000000000000000 $t
+     /tmp/cc28GOPq.s:1392   .text.max2871Set_BPWR:0000000000000000 max2871Set_BPWR
+     /tmp/cc28GOPq.s:1412   .text.max2871Set_BPWR:0000000000000010 $d
+     /tmp/cc28GOPq.s:1417   .text.max2871Set_RFA_EN:0000000000000000 $t
+     /tmp/cc28GOPq.s:1424   .text.max2871Set_RFA_EN:0000000000000000 max2871Set_RFA_EN
+     /tmp/cc28GOPq.s:1444   .text.max2871Set_RFA_EN:0000000000000010 $d
+     /tmp/cc28GOPq.s:1449   .text.max2871Set_APWR:0000000000000000 $t
+     /tmp/cc28GOPq.s:1456   .text.max2871Set_APWR:0000000000000000 max2871Set_APWR
+     /tmp/cc28GOPq.s:1476   .text.max2871Set_APWR:0000000000000010 $d
+     /tmp/cc28GOPq.s:1481   .text.max2871Set_SDPLL:0000000000000000 $t
+     /tmp/cc28GOPq.s:1488   .text.max2871Set_SDPLL:0000000000000000 max2871Set_SDPLL
+     /tmp/cc28GOPq.s:1508   .text.max2871Set_SDPLL:0000000000000010 $d
+     /tmp/cc28GOPq.s:1513   .text.max2871Set_F01:0000000000000000 $t
+     /tmp/cc28GOPq.s:1520   .text.max2871Set_F01:0000000000000000 max2871Set_F01
+     /tmp/cc28GOPq.s:1540   .text.max2871Set_F01:0000000000000010 $d
+     /tmp/cc28GOPq.s:1545   .text.max2871Set_LD:0000000000000000 $t
+     /tmp/cc28GOPq.s:1552   .text.max2871Set_LD:0000000000000000 max2871Set_LD
+     /tmp/cc28GOPq.s:1572   .text.max2871Set_LD:0000000000000010 $d
+     /tmp/cc28GOPq.s:1577   .text.max2871Set_Reserved:0000000000000000 $t
+     /tmp/cc28GOPq.s:1584   .text.max2871Set_Reserved:0000000000000000 max2871Set_Reserved
+     /tmp/cc28GOPq.s:1609   .text.max2871Set_Reserved:000000000000001c $d
+     /tmp/cc28GOPq.s:1614   .bss.registers:0000000000000000 $d
+     /tmp/cc28GOPq.s:1618   .bss.registers:0000000000000000 registers
 
 NO UNDEFINED SYMBOLS
