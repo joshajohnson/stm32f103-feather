@@ -124,7 +124,7 @@ void max2871SpiWrite(uint32_t r)
 	HAL_GPIO_WritePin(MAX_DAT_GPIO_Port, MAX_DAT_Pin, 0);
 	// Once Transfer complete, pull LE high
 	HAL_GPIO_WritePin(MAX_LE_GPIO_Port, MAX_LE_Pin, 1);
-	DWT_Delay_us(100);
+	DWT_Delay_us(1);
 }
 
 // Readback register 6 from MAX2871. Requires MUX to be set in readback mode (0xC)
@@ -145,7 +145,6 @@ uint32_t max2871SpiRead(void)
 		dataReturn |= HAL_GPIO_ReadPin(MAX_MUX_GPIO_Port, MAX_MUX_Pin) << bit;
 		DWT_Delay_us(1);
 		HAL_GPIO_WritePin(MAX_CLK_GPIO_Port, MAX_CLK_Pin, 0);
-		DWT_Delay_us(2);
 	}
 
 	return dataReturn;
@@ -182,11 +181,12 @@ void max2871SetFrequency(float mhz, uint8_t intN, struct MAX2871Struct *max2871S
 	else if (mhz < 6000)
 		diva = 0;
 	else
-		printUSB((char *) "> Bad input frequency to max2871SetFrequency");
+		printUSB((char *) "> Bad input frequency to max2871SetFrequency\r\n");
 
 	// Calculate fOUT
 	float fComp = 38.4;
 	float fVCO = mhz * (2 << (diva - 1));
+	if (diva == 0) fVCO = mhz; // Gets around 2^0 error
 	float n = fVCO / fComp;
 	uint32_t N = (uint16_t) n;
 
@@ -198,7 +198,8 @@ void max2871SetFrequency(float mhz, uint8_t intN, struct MAX2871Struct *max2871S
 	else if (!intN)
 		fVCO = (N + (F/MOD)) * fComp;
 
-	float fOUT = fVCO / (2 << (diva - 1));
+	float fOUT = fVCO / pow(2,diva);
+	if (diva == 0) fOUT = fVCO;
 
 	// Set registers for Int-N configuration
 	if (intN == 1)

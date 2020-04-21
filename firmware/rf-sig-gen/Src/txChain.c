@@ -12,8 +12,23 @@ extern ADC_HandleTypeDef hadc1;
 
 struct txStruct txStatus;
 
-// Sweeps through frequency as if measuring S-Params
-// Optional param sweepTime to add delays in for human viewing pleasure. Set to 0 for no injected delays
+// Sets up output for given frequency and power level
+void sigGen(float frequency, float power, struct MAX2871Struct *max2871Status, struct txStruct *txStatus)
+{
+	// Ensure RF Enabled
+	max2871RFEnable(max2871Status);
+	enablePA(txStatus);
+
+	max2871SetFrequency(frequency,FRAC_N,max2871Status);
+	stpSpiTx(freqToLed(frequency));
+
+	while (!max2871CheckLD(max2871Status));
+	// Don't go any further until PLL has lock
+
+	setOutputPower(power, max2871Status, txStatus);
+}
+
+// Sweeps through frequencies
 void sweep(float lowerFreq, float higherFreq, float numSteps, float power, float sweepTime, struct MAX2871Struct *max2871Status, struct txStruct *txStatus)
 {
 	float stepSize = ((higherFreq - lowerFreq) / numSteps);
@@ -30,25 +45,12 @@ void sweep(float lowerFreq, float higherFreq, float numSteps, float power, float
 	}
 }
 
-// Sets up output for given frequency and power level
-void sigGen(float frequency, float power, struct MAX2871Struct *max2871Status, struct txStruct *txStatus)
-{
-	max2871SetFrequency(frequency,FRAC_N,max2871Status);
-	stpSpiTx(freqToLed(frequency));
-
-	while (!max2871CheckLD(max2871Status));
-	// Don't go any further until PLL has lock
-
-	setOutputPower(power, max2871Status, txStatus);
-}
-
 void txChainInit(struct MAX2871Struct *max2871Status, struct txStruct *txStatus)
 {
+	max2871RFDisable(max2871Status);
 	disablePA(txStatus);
 	setAttenuation(MAX_ATTENUATION,txStatus);
 	max2871Setup(max2871Status);
-	enablePA(txStatus);
-	max2871RFEnable(max2871Status);
 }
 
 // Sets attenuation for a SKY12347 attenuator
@@ -94,15 +96,15 @@ void setOutputPower(float setPower, struct MAX2871Struct *max2871Status, struct 
 	readAD8319(txStatus);
 
 	// If power too high
-	if (txStatus->measOutputPower > txStatus->setOutputPower)
+	if (txStatus->measOutputPower > (txStatus->setOutputPower + STEP_ATTENUATION / 2))
 	{
 		// While power too high
-		while (txStatus->measOutputPower > (txStatus->setOutputPower + STEP_ATTENUATION))
+		while (txStatus->measOutputPower > (txStatus->setOutputPower + STEP_ATTENUATION / 2))
 		{
 			if (txStatus->attenuation < MAX_ATTENUATION)
 			{
 				setAttenuation(txStatus->attenuation += STEP_ATTENUATION, txStatus);
-				HAL_Delay(10);	// Delay to allow for propagation of new signal
+				DWT_Delay_us(1);
 				readAD8319(txStatus);
 			}
 			else
@@ -113,15 +115,15 @@ void setOutputPower(float setPower, struct MAX2871Struct *max2871Status, struct 
 		}
 	}
 	// If power too low
-	else if (txStatus->measOutputPower < txStatus->setOutputPower)
+	else if (txStatus->measOutputPower < (txStatus->setOutputPower - STEP_ATTENUATION / 2))
 	{
 		// While power too low
-		while (txStatus->measOutputPower < (txStatus->setOutputPower - STEP_ATTENUATION))
+		while (txStatus->measOutputPower < (txStatus->setOutputPower - STEP_ATTENUATION / 2))
 		{
 			if (txStatus->attenuation > MIN_ATTENUATION)
 			{
 				setAttenuation(txStatus->attenuation -= STEP_ATTENUATION, txStatus);
-				HAL_Delay(10);	// Delay to allow for propagation of new signal
+				DWT_Delay_us(1);
 				readAD8319(txStatus);
 			}
 			else
@@ -164,7 +166,7 @@ float readAD8319(struct txStruct *txStatus)
 
 	voltage = (VREF * adcValue) / NUM_STATES_12_BIT;	// Convert to voltage
 
-	power = -44.4 * voltage + 65; 				// Voltage to power at SMA
+	power = -44.4 * voltage + 33; 				// Voltage to power at SMA
 
 	txStatus->measOutputPower = power;
 
@@ -184,7 +186,7 @@ void disablePA(struct txStruct *txStatus)
 }
 
 
-void txChainPrintStatus(struct txStruct *txStatus)
+void txChainPrintStatus(uint8_t verbose, struct txStruct *txStatus)
 {
 
 	char str1[128] = "";
@@ -194,7 +196,7 @@ void txChainPrintStatus(struct txStruct *txStatus)
 	sprintf((char *)str1, "> Attenuation = %0.1f dB\n", txStatus->attenuation);
 	printUSB(str1);
 
-	sprintf((char *)str1, "> PA Powerdown = %d\n", txStatus->paPwdn);
+	sprintf((char *)str1, "> PA Enabled = %d\n", !txStatus->paPwdn);
 	printUSB(str1);
 
 	sprintf((char *)str1, "> Set Output Power= %0.2f dBm\n", txStatus->setOutputPower);
@@ -202,9 +204,13 @@ void txChainPrintStatus(struct txStruct *txStatus)
 
 	readAD8319(txStatus);
 
-	sprintf((char *)str1, "> Output Power = %0.2f dBm\n", txStatus->measOutputPower);
+	sprintf((char *)str1, "> Measured Output Power = %0.2f dBm\n", txStatus->measOutputPower);
 	printUSB(str1);
 
-	sprintf((char *)str1, "> Measured Voltage= %0.2f V\n", readAD8319(txStatus));
-	printUSB(str1);
+	if (verbose)
+	{
+		readAD8319(txStatus);
+		sprintf((char *)str1, "> Measured Voltage= %0.2f V\n", readAD8319(txStatus));
+		printUSB(str1);
+	}
 }

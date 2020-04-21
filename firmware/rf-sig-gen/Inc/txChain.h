@@ -28,6 +28,6 @@ void setAttenuation(float atten, struct txStruct *txStatus);
 float readAD8319(struct txStruct *txStatus);
 void enablePA(struct txStruct *txStatus);
 void disablePA(struct txStruct *txStatus);
-void txChainPrintStatus(struct txStruct *txStatus);
+void txChainPrintStatus(uint8_t verbose, struct txStruct *txStatus);
 
 #endif

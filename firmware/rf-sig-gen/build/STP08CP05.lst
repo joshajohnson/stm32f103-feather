@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cccdRLd4.s 			page 1
+ARM GAS  /tmp/ccccngp0.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,11 +58,11 @@ ARM GAS  /tmp/cccdRLd4.s 			page 1
   47 000e 2046     		mov	r0, r4
   48 0010 FFF7FEFF 		bl	__aeabi_fcmplt
   49              	.LVL2:
-ARM GAS  /tmp/cccdRLd4.s 			page 2
+ARM GAS  /tmp/ccccngp0.s 			page 2
 
 
   50 0014 38BB     		cbnz	r0, .L4
-  10:Src/STP08CP05.c ****         leds = 0x1;
+  10:Src/STP08CP05.c ****         leds = 0b00000001;
   11:Src/STP08CP05.c ****     else if (frequency < 73.75)
   51              		.loc 1 11 0
   52 0016 1D49     		ldr	r1, .L13+8
@@ -70,7 +70,7 @@ ARM GAS  /tmp/cccdRLd4.s 			page 1
   54 001a FFF7FEFF 		bl	__aeabi_fcmplt
   55              	.LVL3:
   56 001e 20BB     		cbnz	r0, .L5
-  12:Src/STP08CP05.c ****         leds = 0x3;
+  12:Src/STP08CP05.c ****         leds = 0b00000011;
   13:Src/STP08CP05.c ****     else if (frequency < 187.5)
   57              		.loc 1 13 0
   58 0020 1B49     		ldr	r1, .L13+12
@@ -78,7 +78,7 @@ ARM GAS  /tmp/cccdRLd4.s 			page 1
   60 0024 FFF7FEFF 		bl	__aeabi_fcmplt
   61              	.LVL4:
   62 0028 08BB     		cbnz	r0, .L6
-  14:Src/STP08CP05.c ****         leds = 0x7;
+  14:Src/STP08CP05.c ****         leds = 0b00000111;
   15:Src/STP08CP05.c ****     else if (frequency < 375)
   63              		.loc 1 15 0
   64 002a 1A49     		ldr	r1, .L13+16
@@ -86,7 +86,7 @@ ARM GAS  /tmp/cccdRLd4.s 			page 1
   66 002e FFF7FEFF 		bl	__aeabi_fcmplt
   67              	.LVL5:
   68 0032 F0B9     		cbnz	r0, .L7
-  16:Src/STP08CP05.c ****         leds = 0xF;
+  16:Src/STP08CP05.c ****         leds = 0b00001111;
   17:Src/STP08CP05.c ****     else if (frequency < 750)
   69              		.loc 1 17 0
   70 0034 1849     		ldr	r1, .L13+20
@@ -94,7 +94,7 @@ ARM GAS  /tmp/cccdRLd4.s 			page 1
   72 0038 FFF7FEFF 		bl	__aeabi_fcmplt
   73              	.LVL6:
   74 003c D8B9     		cbnz	r0, .L8
-  18:Src/STP08CP05.c ****         leds = 0x1F;
+  18:Src/STP08CP05.c ****         leds = 0b00011111;
   19:Src/STP08CP05.c ****     else if (frequency < 1500)
   75              		.loc 1 19 0
   76 003e 1749     		ldr	r1, .L13+24
@@ -102,7 +102,7 @@ ARM GAS  /tmp/cccdRLd4.s 			page 1
   78 0042 FFF7FEFF 		bl	__aeabi_fcmplt
   79              	.LVL7:
   80 0046 C0B9     		cbnz	r0, .L9
-  20:Src/STP08CP05.c ****         leds = 0x3F;
+  20:Src/STP08CP05.c ****         leds = 0b00111111;
   21:Src/STP08CP05.c ****     else if (frequency < 3000)
   81              		.loc 1 21 0
   82 0048 1549     		ldr	r1, .L13+28
@@ -110,7 +110,7 @@ ARM GAS  /tmp/cccdRLd4.s 			page 1
   84 004c FFF7FEFF 		bl	__aeabi_fcmplt
   85              	.LVL8:
   86 0050 A8B9     		cbnz	r0, .L10
-  22:Src/STP08CP05.c ****         leds = 0x7F;
+  22:Src/STP08CP05.c ****         leds = 0b01111111;
   23:Src/STP08CP05.c ****     else if (frequency < 6000)
   87              		.loc 1 23 0
   88 0052 1449     		ldr	r1, .L13+32
@@ -118,10 +118,10 @@ ARM GAS  /tmp/cccdRLd4.s 			page 1
   90 0056 FFF7FEFF 		bl	__aeabi_fcmplt
   91              	.LVL9:
   92 005a 10B1     		cbz	r0, .L2
-ARM GAS  /tmp/cccdRLd4.s 			page 3
+ARM GAS  /tmp/ccccngp0.s 			page 3
 
 
-  24:Src/STP08CP05.c ****         leds = 0xFF;
+  24:Src/STP08CP05.c ****         leds = 0b11111111;
   93              		.loc 1 24 0
   94 005c FF25     		movs	r5, #255
   95 005e 00E0     		b	.L2
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cccdRLd4.s 			page 1
  135              	.L13:
  136 0084 0000BC41 		.word	1102839808
  137 0088 00801342 		.word	1108574208
-ARM GAS  /tmp/cccdRLd4.s 			page 4
+ARM GAS  /tmp/ccccngp0.s 			page 4
 
 
  138 008c 00809342 		.word	1116962816
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cccdRLd4.s 			page 1
   10:Inc/dwt_stm32_delay.h **** /**
   11:Inc/dwt_stm32_delay.h ****  * @brief  Initializes DWT_Cycle_Count for DWT_Delay_us function
   12:Inc/dwt_stm32_delay.h ****  * @return Error DWT counter
-ARM GAS  /tmp/cccdRLd4.s 			page 5
+ARM GAS  /tmp/ccccngp0.s 			page 5
 
 
   13:Inc/dwt_stm32_delay.h ****  *         1: DWT counter Error
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cccdRLd4.s 			page 1
  212 003c 3D48     		ldr	r0, .L25
  213 003e FFF7FEFF 		bl	HAL_GPIO_WritePin
  214              	.LVL18:
-ARM GAS  /tmp/cccdRLd4.s 			page 6
+ARM GAS  /tmp/ccccngp0.s 			page 6
 
 
  215              	.LBB18:
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cccdRLd4.s 			page 1
  263              	.LBE21:
  264              	.LBE20:
   39:Src/STP08CP05.c **** 		DWT_Delay_us(1);
-ARM GAS  /tmp/cccdRLd4.s 			page 7
+ARM GAS  /tmp/ccccngp0.s 			page 7
 
 
   40:Src/STP08CP05.c **** 		HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 0);
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cccdRLd4.s 			page 1
   46:Src/STP08CP05.c ****     HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 1);
  309              		.loc 1 46 0
  310 00bc 1D4C     		ldr	r4, .L25
-ARM GAS  /tmp/cccdRLd4.s 			page 8
+ARM GAS  /tmp/ccccngp0.s 			page 8
 
 
  311 00be 0122     		movs	r2, #1
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cccdRLd4.s 			page 1
   24:Inc/dwt_stm32_delay.h **** 
  359              		.loc 2 24 0
  360 010a 0B4B     		ldr	r3, .L25+4
-ARM GAS  /tmp/cccdRLd4.s 			page 9
+ARM GAS  /tmp/ccccngp0.s 			page 9
 
 
  361 010c 5C68     		ldr	r4, [r3, #4]
@@ -534,17 +534,17 @@ ARM GAS  /tmp/cccdRLd4.s 			page 1
  405              		.file 9 "Inc/main.h"
  406              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
  407              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
-ARM GAS  /tmp/cccdRLd4.s 			page 10
+ARM GAS  /tmp/ccccngp0.s 			page 10
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 STP08CP05.c
-     /tmp/cccdRLd4.s:17     .text.freqToLed:0000000000000000 $t
-     /tmp/cccdRLd4.s:24     .text.freqToLed:0000000000000000 freqToLed
-     /tmp/cccdRLd4.s:136    .text.freqToLed:0000000000000084 $d
-     /tmp/cccdRLd4.s:149    .text.stpSpiTx:0000000000000000 $t
-     /tmp/cccdRLd4.s:156    .text.stpSpiTx:0000000000000000 stpSpiTx
-     /tmp/cccdRLd4.s:391    .text.stpSpiTx:0000000000000134 $d
+     /tmp/ccccngp0.s:17     .text.freqToLed:0000000000000000 $t
+     /tmp/ccccngp0.s:24     .text.freqToLed:0000000000000000 freqToLed
+     /tmp/ccccngp0.s:136    .text.freqToLed:0000000000000084 $d
+     /tmp/ccccngp0.s:149    .text.stpSpiTx:0000000000000000 $t
+     /tmp/ccccngp0.s:156    .text.stpSpiTx:0000000000000000 stpSpiTx
+     /tmp/ccccngp0.s:391    .text.stpSpiTx:0000000000000134 $d
 
 UNDEFINED SYMBOLS
 __aeabi_fcmplt

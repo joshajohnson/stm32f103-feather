@@ -65,18 +65,53 @@ void commandParser(struct MAX2871Struct *max2871Status, struct txStruct *txStatu
 	{
 		sigGen(atof(args[0]), atof(args[1]), max2871Status, txStatus);
 
-		sprintf((char *)txStr, "> Signal Generator: Frequency = %0.2f MHz, Power = %0.2f dBm\n", max2871Status->frequency, txStatus->measOutputPower);
+		sprintf((char *)txStr, "> Signal Generator: Frequency = %0.3f MHz, Power = %0.2f dBm\n", max2871Status->frequency, txStatus->measOutputPower);
 		printUSB(txStr);
 	}
 
-	else if (strncmp("sweep", command, 5) == 0)
+	// else if (strncmp("sweep", command, 5) == 0)
+	// {
+	// 	sprintf((char *)txStr, "> Sweep: Start = %0.2f MHz, fFinish = %0.2f dBm Power = %0.2f dBm\n", atof(args[0]), atof(args[1]), atof(args[2]));
+	// 	printUSB(txStr);
+
+	// 	sweep(atof(args[0]), atof(args[1]), atof(args[2]), atof(args[3]), atof(args[4]), max2871Status, txStatus);
+	// }
+
+	else if (strncmp("enableRF", command, 8) == 0)
 	{
-		sprintf((char *)txStr, "> Sweep: Start = %0.2f MHz, fFinish = %0.2f dBm Power = %0.2f dBm\n", atof(args[0]), atof(args[1]), atof(args[2]));
-		printUSB(txStr);
-
-		sweep(atof(args[0]), atof(args[1]), atof(args[2]), atof(args[3]), atof(args[4]), max2871Status, txStatus);
+		max2871RFEnable(max2871Status);
+		enablePA(txStatus);
+		printUSB("> RF Enabled \r\n");
 	}
 
+	else if (strncmp("disableRF", command, 9) == 0)
+	{
+		max2871RFDisable(max2871Status);
+		disablePA(txStatus);
+		printUSB("> RF Disabled \r\n");
+	}
+
+	else if (strncmp("status", command, 6) == 0)
+	{
+		if (strncmp("v", args[0], 1) == 0)
+		{
+			args[0][0] = (int32_t) "";
+			max2871PrintStatus(VERBOSE,max2871Status);
+			txChainPrintStatus(VERBOSE,txStatus);
+		}
+		else
+		{
+			max2871PrintStatus(nVERBOSE,max2871Status);
+			txChainPrintStatus(nVERBOSE,txStatus);
+		}
+	}
+	
+	else if (strncmp("WHOAMI", command, 5) == 0)
+	{
+		printUSB("> Josh's Signal Generator!\r\n");
+	}
+	
+	// USE BELOW AT YOUR OWN RISK
 	else if (strncmp("setMaxPower", command, 11) == 0)
 	{
 		max2871SetPower(atoi(args[0]), max2871Status);
@@ -92,16 +127,16 @@ void commandParser(struct MAX2871Struct *max2871Status, struct txStruct *txStatu
 		printUSB(txStr);
 	}
 
-	else if (strncmp("enableRF", command, 8) == 0)
+	else if (strncmp("enableLO", command, 8) == 0)
 	{
 		max2871RFEnable(max2871Status);
-		printUSB("> RF Enabled \r\n");
+		printUSB("> LO Enabled \r\n");
 	}
 
-	else if (strncmp("disableRF", command, 8) == 0)
+	else if (strncmp("disableLO", command, 8) == 0)
 	{
 		max2871RFDisable(max2871Status);
-		printUSB("> RF Disabled \r\n");
+		printUSB("> LO Disabled \r\n");
 	}
 
 	else if (strncmp("enablePA", command, 8) == 0)
@@ -127,36 +162,20 @@ void commandParser(struct MAX2871Struct *max2871Status, struct txStruct *txStatu
 		printUSB(txStr);
 	}
 
-	else if (strncmp("status", command, 6) == 0)
-	{
-		if (strncmp("verbose", args[0], 7) == 0)
-		{
-			args[0][0] = (int32_t) "";
-			max2871PrintStatus(VERBOSE,max2871Status);
-		}
-		else
-			max2871PrintStatus(nVERBOSE,max2871Status);
-
-		txChainPrintStatus(txStatus);
-	}
-
-	else if (strncmp("WHOAMI", command, 5) == 0)
-	{
-		printUSB("> Josh's Signal Generator!\r\n");
-	}
-
 	else if ((strncmp("ls", command,2) == 0) || (strncmp("help", command, 4) == 0))
 	{
 		printUSB((char *)"> --  Available Commands  --\r\n");
 		printUSB((char *)"> sigGen(frequency, power)\r\n");
 		printUSB((char *)"> sweep(startFreq, stopFreq, numSteps, power, time)\r\n");
-		printUSB((char *)"> status(verbose)\r\n");
-		printUSB((char *)"> WHOAMI\r\n");
-		printUSB((char *)"> Use the below at your own risk:\r\n");
-		printUSB((char *)"> setMaxPower(power(dBm))\r\n");
-		printUSB((char *)"> setAttenuation(atten(dB))\r\n");
 		printUSB((char *)"> enableRF\r\n");
 		printUSB((char *)"> disableRF\r\n");
+		printUSB((char *)"> status(verbose)\r\n");
+		printUSB((char *)"> WHOAMI\r\n");
+		printUSB((char *)"> --- Use the below at your own risk ---\r\n");
+		printUSB((char *)"> setMaxPower(power(dBm))\r\n");
+		printUSB((char *)"> setAttenuation(atten(dB))\r\n");
+		printUSB((char *)"> enableLO\r\n");
+		printUSB((char *)"> disableLO\r\n");
 		printUSB((char *)"> enablePA\r\n");
 		printUSB((char *)"> disablePA\r\n");
 	}

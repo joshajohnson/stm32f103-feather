@@ -7,21 +7,21 @@ uint8_t freqToLed (float frequency)
     if (frequency < 23.50)
         leds = 0;
     else if (frequency < 36.875)
-        leds = 0x1;
+        leds = 0b00000001;
     else if (frequency < 73.75)
-        leds = 0x3;
+        leds = 0b00000011;
     else if (frequency < 187.5)
-        leds = 0x7;
+        leds = 0b00000111;
     else if (frequency < 375)
-        leds = 0xF;
+        leds = 0b00001111;
     else if (frequency < 750)
-        leds = 0x1F;
+        leds = 0b00011111;
     else if (frequency < 1500)
-        leds = 0x3F;
+        leds = 0b00111111;
     else if (frequency < 3000)
-        leds = 0x7F;
+        leds = 0b01111111;
     else if (frequency < 6000)
-        leds = 0xFF;
+        leds = 0b11111111;
 
     return leds;
 }
