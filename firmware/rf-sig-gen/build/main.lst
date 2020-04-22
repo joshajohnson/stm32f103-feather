@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cchhLoyG.s 			page 1
+ARM GAS  /tmp/ccz0rby9.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cchhLoyG.s 			page 1
   31:Src/main.c    **** #include <string.h>
   32:Src/main.c    **** #include "usbd_cdc_if.h"
   33:Src/main.c    **** #include "dwt_stm32_delay.h"
-ARM GAS  /tmp/cchhLoyG.s 			page 2
+ARM GAS  /tmp/ccz0rby9.s 			page 2
 
 
   34:Src/main.c    **** #include "commandParser.h"
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cchhLoyG.s 			page 1
   88:Src/main.c    **** 
   89:Src/main.c    ****   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   90:Src/main.c    ****   HAL_Init();
-ARM GAS  /tmp/cchhLoyG.s 			page 3
+ARM GAS  /tmp/ccz0rby9.s 			page 3
 
 
   91:Src/main.c    **** 
@@ -143,32 +143,33 @@ ARM GAS  /tmp/cchhLoyG.s 			page 1
  110:Src/main.c    ****   enumerateUSB(); // Force USB enumeration
  111:Src/main.c    ****   txChainInit(&max2871Status, &txStatus);
  112:Src/main.c    ****   HAL_ADC_Start(&hadc1);
- 113:Src/main.c    **** 
- 114:Src/main.c    ****   /* USER CODE END 2 */
- 115:Src/main.c    **** 
- 116:Src/main.c    ****   /* Infinite loop */
- 117:Src/main.c    ****   /* USER CODE BEGIN WHILE */
- 118:Src/main.c    ****   while (1)
- 119:Src/main.c    ****   {
- 120:Src/main.c    ****     	  // Command Parser
- 121:Src/main.c    **** 	  if (RX_FIFO.dataReady == 1)
- 122:Src/main.c    **** 	  {
- 123:Src/main.c    **** 		  commandParser(&max2871Status, &txStatus);
- 124:Src/main.c    **** 	  }
- 125:Src/main.c    ****     /* USER CODE END WHILE */
- 126:Src/main.c    **** 
- 127:Src/main.c    ****     /* USER CODE BEGIN 3 */
- 128:Src/main.c    ****   }
- 129:Src/main.c    ****   /* USER CODE END 3 */
- 130:Src/main.c    **** }
- 131:Src/main.c    **** 
- 132:Src/main.c    **** /**
- 133:Src/main.c    ****   * @brief System Clock Configuration
- 134:Src/main.c    ****   * @retval None
- 135:Src/main.c    ****   */
- 136:Src/main.c    **** void SystemClock_Config(void)
- 137:Src/main.c    **** {
-  26              		.loc 1 137 0
+ 113:Src/main.c    ****   HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 0); //  LED Control
+ 114:Src/main.c    **** 
+ 115:Src/main.c    ****   /* USER CODE END 2 */
+ 116:Src/main.c    **** 
+ 117:Src/main.c    ****   /* Infinite loop */
+ 118:Src/main.c    ****   /* USER CODE BEGIN WHILE */
+ 119:Src/main.c    ****   while (1)
+ 120:Src/main.c    ****   {
+ 121:Src/main.c    ****     	  // Command Parser
+ 122:Src/main.c    **** 	  if (RX_FIFO.dataReady == 1)
+ 123:Src/main.c    **** 	  {
+ 124:Src/main.c    **** 		  commandParser(&max2871Status, &txStatus);
+ 125:Src/main.c    **** 	  }
+ 126:Src/main.c    ****     /* USER CODE END WHILE */
+ 127:Src/main.c    **** 
+ 128:Src/main.c    ****     /* USER CODE BEGIN 3 */
+ 129:Src/main.c    ****   }
+ 130:Src/main.c    ****   /* USER CODE END 3 */
+ 131:Src/main.c    **** }
+ 132:Src/main.c    **** 
+ 133:Src/main.c    **** /**
+ 134:Src/main.c    ****   * @brief System Clock Configuration
+ 135:Src/main.c    ****   * @retval None
+ 136:Src/main.c    ****   */
+ 137:Src/main.c    **** void SystemClock_Config(void)
+ 138:Src/main.c    **** {
+  26              		.loc 1 138 0
   27              		.cfi_startproc
   28              		@ args = 0, pretend = 0, frame = 80
   29              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -177,130 +178,130 @@ ARM GAS  /tmp/cchhLoyG.s 			page 1
   32              		.cfi_def_cfa_offset 16
   33              		.cfi_offset 4, -16
   34              		.cfi_offset 5, -12
+ARM GAS  /tmp/ccz0rby9.s 			page 4
+
+
   35              		.cfi_offset 6, -8
-ARM GAS  /tmp/cchhLoyG.s 			page 4
-
-
   36              		.cfi_offset 14, -4
   37 0002 94B0     		sub	sp, sp, #80
   38              	.LCFI1:
   39              		.cfi_def_cfa_offset 96
- 138:Src/main.c    ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-  40              		.loc 1 138 0
+ 139:Src/main.c    ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  40              		.loc 1 139 0
   41 0004 0024     		movs	r4, #0
   42 0006 0C94     		str	r4, [sp, #48]
   43 0008 0D94     		str	r4, [sp, #52]
   44 000a 0F94     		str	r4, [sp, #60]
   45 000c 1094     		str	r4, [sp, #64]
- 139:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-  46              		.loc 1 139 0
+ 140:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  46              		.loc 1 140 0
   47 000e 0594     		str	r4, [sp, #20]
   48 0010 0694     		str	r4, [sp, #24]
   49 0012 0794     		str	r4, [sp, #28]
   50 0014 0894     		str	r4, [sp, #32]
   51 0016 0994     		str	r4, [sp, #36]
- 140:Src/main.c    ****   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
-  52              		.loc 1 140 0
+ 141:Src/main.c    ****   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+  52              		.loc 1 141 0
   53 0018 0194     		str	r4, [sp, #4]
   54 001a 0294     		str	r4, [sp, #8]
   55 001c 0394     		str	r4, [sp, #12]
   56 001e 0494     		str	r4, [sp, #16]
- 141:Src/main.c    **** 
- 142:Src/main.c    ****   /** Initializes the CPU, AHB and APB busses clocks 
- 143:Src/main.c    ****   */
- 144:Src/main.c    ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  57              		.loc 1 144 0
+ 142:Src/main.c    **** 
+ 143:Src/main.c    ****   /** Initializes the CPU, AHB and APB busses clocks 
+ 144:Src/main.c    ****   */
+ 145:Src/main.c    ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  57              		.loc 1 145 0
   58 0020 0125     		movs	r5, #1
   59 0022 0A95     		str	r5, [sp, #40]
- 145:Src/main.c    ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-  60              		.loc 1 145 0
+ 146:Src/main.c    ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  60              		.loc 1 146 0
   61 0024 4FF48033 		mov	r3, #65536
   62 0028 0B93     		str	r3, [sp, #44]
- 146:Src/main.c    ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
- 147:Src/main.c    ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  63              		.loc 1 147 0
+ 147:Src/main.c    ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+ 148:Src/main.c    ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  63              		.loc 1 148 0
   64 002a 0E95     		str	r5, [sp, #56]
- 148:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  65              		.loc 1 148 0
+ 149:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  65              		.loc 1 149 0
   66 002c 0226     		movs	r6, #2
   67 002e 1196     		str	r6, [sp, #68]
- 149:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  68              		.loc 1 149 0
+ 150:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  68              		.loc 1 150 0
   69 0030 1293     		str	r3, [sp, #72]
- 150:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL6;
-  70              		.loc 1 150 0
+ 151:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL6;
+  70              		.loc 1 151 0
   71 0032 4FF48013 		mov	r3, #1048576
   72 0036 1393     		str	r3, [sp, #76]
- 151:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  73              		.loc 1 151 0
+ 152:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  73              		.loc 1 152 0
   74 0038 0AA8     		add	r0, sp, #40
   75 003a FFF7FEFF 		bl	HAL_RCC_OscConfig
   76              	.LVL0:
- 152:Src/main.c    ****   {
- 153:Src/main.c    ****     Error_Handler();
-ARM GAS  /tmp/cchhLoyG.s 			page 5
+ 153:Src/main.c    ****   {
+ARM GAS  /tmp/ccz0rby9.s 			page 5
 
 
- 154:Src/main.c    ****   }
- 155:Src/main.c    ****   /** Initializes the CPU, AHB and APB busses clocks 
- 156:Src/main.c    ****   */
- 157:Src/main.c    ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-  77              		.loc 1 157 0
+ 154:Src/main.c    ****     Error_Handler();
+ 155:Src/main.c    ****   }
+ 156:Src/main.c    ****   /** Initializes the CPU, AHB and APB busses clocks 
+ 157:Src/main.c    ****   */
+ 158:Src/main.c    ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+  77              		.loc 1 158 0
   78 003e 0F23     		movs	r3, #15
   79 0040 0593     		str	r3, [sp, #20]
- 158:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
- 159:Src/main.c    ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  80              		.loc 1 159 0
+ 159:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+ 160:Src/main.c    ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+  80              		.loc 1 160 0
   81 0042 0696     		str	r6, [sp, #24]
- 160:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  82              		.loc 1 160 0
+ 161:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  82              		.loc 1 161 0
   83 0044 0794     		str	r4, [sp, #28]
- 161:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  84              		.loc 1 161 0
+ 162:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+  84              		.loc 1 162 0
   85 0046 4FF48063 		mov	r3, #1024
   86 004a 0893     		str	r3, [sp, #32]
- 162:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
-  87              		.loc 1 162 0
+ 163:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  87              		.loc 1 163 0
   88 004c 0994     		str	r4, [sp, #36]
- 163:Src/main.c    **** 
- 164:Src/main.c    ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
-  89              		.loc 1 164 0
+ 164:Src/main.c    **** 
+ 165:Src/main.c    ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
+  89              		.loc 1 165 0
   90 004e 2946     		mov	r1, r5
   91 0050 05A8     		add	r0, sp, #20
   92 0052 FFF7FEFF 		bl	HAL_RCC_ClockConfig
   93              	.LVL1:
- 165:Src/main.c    ****   {
- 166:Src/main.c    ****     Error_Handler();
- 167:Src/main.c    ****   }
- 168:Src/main.c    ****   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC|RCC_PERIPHCLK_USB;
-  94              		.loc 1 168 0
+ 166:Src/main.c    ****   {
+ 167:Src/main.c    ****     Error_Handler();
+ 168:Src/main.c    ****   }
+ 169:Src/main.c    ****   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC|RCC_PERIPHCLK_USB;
+  94              		.loc 1 169 0
   95 0056 1223     		movs	r3, #18
   96 0058 0193     		str	r3, [sp, #4]
- 169:Src/main.c    ****   PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV4;
-  97              		.loc 1 169 0
+ 170:Src/main.c    ****   PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV4;
+  97              		.loc 1 170 0
   98 005a 4FF48043 		mov	r3, #16384
   99 005e 0393     		str	r3, [sp, #12]
- 170:Src/main.c    ****   PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL;
- 100              		.loc 1 170 0
+ 171:Src/main.c    ****   PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL;
+ 100              		.loc 1 171 0
  101 0060 4FF48003 		mov	r3, #4194304
  102 0064 0493     		str	r3, [sp, #16]
- 171:Src/main.c    ****   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
- 103              		.loc 1 171 0
+ 172:Src/main.c    ****   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+ 103              		.loc 1 172 0
  104 0066 01A8     		add	r0, sp, #4
  105 0068 FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
  106              	.LVL2:
- 172:Src/main.c    ****   {
- 173:Src/main.c    ****     Error_Handler();
- 174:Src/main.c    ****   }
- 175:Src/main.c    **** }
- 107              		.loc 1 175 0
+ 173:Src/main.c    ****   {
+ 174:Src/main.c    ****     Error_Handler();
+ 175:Src/main.c    ****   }
+ 176:Src/main.c    **** }
+ 107              		.loc 1 176 0
  108 006c 14B0     		add	sp, sp, #80
  109              	.LCFI2:
  110              		.cfi_def_cfa_offset 16
+ARM GAS  /tmp/ccz0rby9.s 			page 6
+
+
  111              		@ sp needed
-ARM GAS  /tmp/cchhLoyG.s 			page 6
-
-
  112 006e 70BD     		pop	{r4, r5, r6, pc}
  113              		.cfi_endproc
  114              	.LFE70:
@@ -313,10 +314,10 @@ ARM GAS  /tmp/cchhLoyG.s 			page 1
  122              		.fpu softvfp
  124              	enumerateUSB:
  125              	.LFB71:
- 176:Src/main.c    **** 
- 177:Src/main.c    **** /* USER CODE BEGIN 4 */
- 178:Src/main.c    **** void enumerateUSB(void){
- 126              		.loc 1 178 0
+ 177:Src/main.c    **** 
+ 178:Src/main.c    **** /* USER CODE BEGIN 4 */
+ 179:Src/main.c    **** void enumerateUSB(void){
+ 126              		.loc 1 179 0
  127              		.cfi_startproc
  128              		@ args = 0, pretend = 0, frame = 16
  129              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -330,65 +331,65 @@ ARM GAS  /tmp/cchhLoyG.s 			page 1
  137 0002 84B0     		sub	sp, sp, #16
  138              	.LCFI4:
  139              		.cfi_def_cfa_offset 32
- 179:Src/main.c    ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
- 140              		.loc 1 179 0
+ 180:Src/main.c    ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
+ 140              		.loc 1 180 0
  141 0004 0024     		movs	r4, #0
  142 0006 0294     		str	r4, [sp, #8]
- 180:Src/main.c    **** 
- 181:Src/main.c    ****   GPIO_InitStruct.Pin = USB_PU_Pin;
- 143              		.loc 1 181 0
+ 181:Src/main.c    **** 
+ 182:Src/main.c    ****   GPIO_InitStruct.Pin = USB_PU_Pin;
+ 143              		.loc 1 182 0
  144 0008 4FF40046 		mov	r6, #32768
  145 000c 0096     		str	r6, [sp]
- 182:Src/main.c    ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
- 146              		.loc 1 182 0
+ 183:Src/main.c    ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ 146              		.loc 1 183 0
  147 000e 0123     		movs	r3, #1
  148 0010 0193     		str	r3, [sp, #4]
- 183:Src/main.c    ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
- 184:Src/main.c    ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
- 149              		.loc 1 184 0
+ 184:Src/main.c    ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 185:Src/main.c    ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+ 149              		.loc 1 185 0
  150 0012 0223     		movs	r3, #2
  151 0014 0393     		str	r3, [sp, #12]
- 185:Src/main.c    ****   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
- 152              		.loc 1 185 0
+ 186:Src/main.c    ****   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+ 152              		.loc 1 186 0
  153 0016 0B4D     		ldr	r5, .L5
  154 0018 6946     		mov	r1, sp
  155 001a 2846     		mov	r0, r5
  156 001c FFF7FEFF 		bl	HAL_GPIO_Init
  157              	.LVL3:
- 186:Src/main.c    ****   HAL_GPIO_WritePin(USB_PU_GPIO_Port, USB_PU_Pin, 0);
- 158              		.loc 1 186 0
+ 187:Src/main.c    ****   HAL_GPIO_WritePin(USB_PU_GPIO_Port, USB_PU_Pin, 0);
+ 158              		.loc 1 187 0
+ARM GAS  /tmp/ccz0rby9.s 			page 7
+
+
  159 0020 2246     		mov	r2, r4
-ARM GAS  /tmp/cchhLoyG.s 			page 7
-
-
  160 0022 3146     		mov	r1, r6
  161 0024 2846     		mov	r0, r5
  162 0026 FFF7FEFF 		bl	HAL_GPIO_WritePin
  163              	.LVL4:
- 187:Src/main.c    **** 
- 188:Src/main.c    ****   HAL_Delay(500);
- 164              		.loc 1 188 0
+ 188:Src/main.c    **** 
+ 189:Src/main.c    ****   HAL_Delay(500);
+ 164              		.loc 1 189 0
  165 002a 4FF4FA70 		mov	r0, #500
  166 002e FFF7FEFF 		bl	HAL_Delay
  167              	.LVL5:
- 189:Src/main.c    **** 
- 190:Src/main.c    ****   GPIO_InitStruct.Pin = USB_PU_Pin;
- 168              		.loc 1 190 0
+ 190:Src/main.c    **** 
+ 191:Src/main.c    ****   GPIO_InitStruct.Pin = USB_PU_Pin;
+ 168              		.loc 1 191 0
  169 0032 0096     		str	r6, [sp]
- 191:Src/main.c    ****   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
- 170              		.loc 1 191 0
+ 192:Src/main.c    ****   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+ 170              		.loc 1 192 0
  171 0034 0194     		str	r4, [sp, #4]
- 192:Src/main.c    ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
- 172              		.loc 1 192 0
+ 193:Src/main.c    ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 172              		.loc 1 193 0
  173 0036 0294     		str	r4, [sp, #8]
- 193:Src/main.c    ****   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
- 174              		.loc 1 193 0
+ 194:Src/main.c    ****   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+ 174              		.loc 1 194 0
  175 0038 6946     		mov	r1, sp
  176 003a 2846     		mov	r0, r5
  177 003c FFF7FEFF 		bl	HAL_GPIO_Init
  178              	.LVL6:
- 194:Src/main.c    **** }
- 179              		.loc 1 194 0
+ 195:Src/main.c    **** }
+ 179              		.loc 1 195 0
  180 0040 04B0     		add	sp, sp, #16
  181              	.LCFI5:
  182              		.cfi_def_cfa_offset 16
@@ -417,10 +418,10 @@ ARM GAS  /tmp/cchhLoyG.s 			page 1
  206              		@ frame_needed = 0, uses_anonymous_args = 0
  207 0000 08B5     		push	{r3, lr}
  208              	.LCFI6:
+ARM GAS  /tmp/ccz0rby9.s 			page 8
+
+
  209              		.cfi_def_cfa_offset 8
-ARM GAS  /tmp/cchhLoyG.s 			page 8
-
-
  210              		.cfi_offset 3, -8
  211              		.cfi_offset 14, -4
   90:Src/main.c    **** 
@@ -457,135 +458,143 @@ ARM GAS  /tmp/cchhLoyG.s 			page 1
  235              	.LVL14:
  111:Src/main.c    ****   HAL_ADC_Start(&hadc1);
  236              		.loc 1 111 0
- 237 0022 0849     		ldr	r1, .L11
- 238 0024 0848     		ldr	r0, .L11+4
+ 237 0022 0B49     		ldr	r1, .L11
+ 238 0024 0B48     		ldr	r0, .L11+4
  239 0026 FFF7FEFF 		bl	txChainInit
  240              	.LVL15:
- 112:Src/main.c    **** 
+ 112:Src/main.c    ****   HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 0); //  LED Control
  241              		.loc 1 112 0
- 242 002a 0848     		ldr	r0, .L11+8
+ 242 002a 0B48     		ldr	r0, .L11+8
  243 002c FFF7FEFF 		bl	HAL_ADC_Start
  244              	.LVL16:
- 245              	.L8:
- 121:Src/main.c    **** 	  {
- 246              		.loc 1 121 0
- 247 0030 074B     		ldr	r3, .L11+12
- 248 0032 93F88830 		ldrb	r3, [r3, #136]	@ zero_extendqisi2
- 249 0036 012B     		cmp	r3, #1
- 250 0038 FAD1     		bne	.L8
- 123:Src/main.c    **** 	  }
- 251              		.loc 1 123 0
- 252 003a 0249     		ldr	r1, .L11
- 253 003c 0248     		ldr	r0, .L11+4
- 254 003e FFF7FEFF 		bl	commandParser
-ARM GAS  /tmp/cchhLoyG.s 			page 9
+ 113:Src/main.c    **** 
+ 245              		.loc 1 113 0
+ 246 0030 0022     		movs	r2, #0
+ 247 0032 4FF40061 		mov	r1, #2048
+ 248 0036 0948     		ldr	r0, .L11+12
+ 249 0038 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 250              	.LVL17:
+ 251              	.L8:
+ 122:Src/main.c    **** 	  {
+ 252              		.loc 1 122 0
+ 253 003c 084B     		ldr	r3, .L11+16
+ARM GAS  /tmp/ccz0rby9.s 			page 9
 
 
- 255              	.LVL17:
- 256 0042 F5E7     		b	.L8
- 257              	.L12:
- 258              		.align	2
- 259              	.L11:
- 260 0044 00000000 		.word	txStatus
- 261 0048 00000000 		.word	max2871Status
- 262 004c 00000000 		.word	hadc1
- 263 0050 00000000 		.word	.LANCHOR0
- 264              		.cfi_endproc
- 265              	.LFE69:
- 267              		.section	.text.Error_Handler,"ax",%progbits
- 268              		.align	1
- 269              		.global	Error_Handler
- 270              		.syntax unified
- 271              		.thumb
- 272              		.thumb_func
- 273              		.fpu softvfp
- 275              	Error_Handler:
- 276              	.LFB72:
- 195:Src/main.c    **** /* USER CODE END 4 */
- 196:Src/main.c    **** 
- 197:Src/main.c    **** /**
- 198:Src/main.c    ****   * @brief  This function is executed in case of error occurrence.
- 199:Src/main.c    ****   * @retval None
- 200:Src/main.c    ****   */
- 201:Src/main.c    **** void Error_Handler(void)
- 202:Src/main.c    **** {
- 277              		.loc 1 202 0
- 278              		.cfi_startproc
- 279              		@ args = 0, pretend = 0, frame = 0
- 280              		@ frame_needed = 0, uses_anonymous_args = 0
- 281              		@ link register save eliminated.
- 203:Src/main.c    ****   /* USER CODE BEGIN Error_Handler_Debug */
- 204:Src/main.c    ****   /* User can add his own implementation to report the HAL error return state */
- 205:Src/main.c    **** 
- 206:Src/main.c    ****   /* USER CODE END Error_Handler_Debug */
- 207:Src/main.c    **** }
- 282              		.loc 1 207 0
- 283 0000 7047     		bx	lr
- 284              		.cfi_endproc
- 285              	.LFE72:
- 287              		.global	RX_FIFO
- 288              		.section	.bss.RX_FIFO,"aw",%nobits
- 289              		.align	2
- 290              		.set	.LANCHOR0,. + 0
- 293              	RX_FIFO:
- 294 0000 00000000 		.space	268
- 294      00000000 
- 294      00000000 
- 294      00000000 
- 294      00000000 
- 295              		.text
- 296              	.Letext0:
- 297              		.file 2 "/usr/include/newlib/machine/_default_types.h"
- 298              		.file 3 "/usr/include/newlib/sys/_stdint.h"
- 299              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
-ARM GAS  /tmp/cchhLoyG.s 			page 10
+ 254 003e 93F88830 		ldrb	r3, [r3, #136]	@ zero_extendqisi2
+ 255 0042 012B     		cmp	r3, #1
+ 256 0044 FAD1     		bne	.L8
+ 124:Src/main.c    **** 	  }
+ 257              		.loc 1 124 0
+ 258 0046 0249     		ldr	r1, .L11
+ 259 0048 0248     		ldr	r0, .L11+4
+ 260 004a FFF7FEFF 		bl	commandParser
+ 261              	.LVL18:
+ 262 004e F5E7     		b	.L8
+ 263              	.L12:
+ 264              		.align	2
+ 265              	.L11:
+ 266 0050 00000000 		.word	txStatus
+ 267 0054 00000000 		.word	max2871Status
+ 268 0058 00000000 		.word	hadc1
+ 269 005c 000C0140 		.word	1073810432
+ 270 0060 00000000 		.word	.LANCHOR0
+ 271              		.cfi_endproc
+ 272              	.LFE69:
+ 274              		.section	.text.Error_Handler,"ax",%progbits
+ 275              		.align	1
+ 276              		.global	Error_Handler
+ 277              		.syntax unified
+ 278              		.thumb
+ 279              		.thumb_func
+ 280              		.fpu softvfp
+ 282              	Error_Handler:
+ 283              	.LFB72:
+ 196:Src/main.c    **** /* USER CODE END 4 */
+ 197:Src/main.c    **** 
+ 198:Src/main.c    **** /**
+ 199:Src/main.c    ****   * @brief  This function is executed in case of error occurrence.
+ 200:Src/main.c    ****   * @retval None
+ 201:Src/main.c    ****   */
+ 202:Src/main.c    **** void Error_Handler(void)
+ 203:Src/main.c    **** {
+ 284              		.loc 1 203 0
+ 285              		.cfi_startproc
+ 286              		@ args = 0, pretend = 0, frame = 0
+ 287              		@ frame_needed = 0, uses_anonymous_args = 0
+ 288              		@ link register save eliminated.
+ 204:Src/main.c    ****   /* USER CODE BEGIN Error_Handler_Debug */
+ 205:Src/main.c    ****   /* User can add his own implementation to report the HAL error return state */
+ 206:Src/main.c    **** 
+ 207:Src/main.c    ****   /* USER CODE END Error_Handler_Debug */
+ 208:Src/main.c    **** }
+ 289              		.loc 1 208 0
+ 290 0000 7047     		bx	lr
+ 291              		.cfi_endproc
+ 292              	.LFE72:
+ 294              		.global	RX_FIFO
+ 295              		.section	.bss.RX_FIFO,"aw",%nobits
+ 296              		.align	2
+ 297              		.set	.LANCHOR0,. + 0
+ 300              	RX_FIFO:
+ 301 0000 00000000 		.space	268
+ARM GAS  /tmp/ccz0rby9.s 			page 10
 
 
- 300              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 301              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
- 302              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
- 303              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
- 304              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
- 305              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h"
- 306              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
- 307              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
- 308              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h"
- 309              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
- 310              		.file 15 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 311              		.file 16 "Inc/main.h"
- 312              		.file 17 "Inc/adc.h"
- 313              		.file 18 "Inc/tim.h"
- 314              		.file 19 "/usr/include/newlib/sys/lock.h"
- 315              		.file 20 "/usr/include/newlib/sys/_types.h"
- 316              		.file 21 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
- 317              		.file 22 "/usr/include/newlib/sys/reent.h"
- 318              		.file 23 "/usr/include/newlib/stdlib.h"
- 319              		.file 24 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
- 320              		.file 25 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
- 321              		.file 26 "Inc/usbd_cdc_if.h"
- 322              		.file 27 "Inc/max2871.h"
- 323              		.file 28 "Inc/commandParser.h"
- 324              		.file 29 "Inc/txChain.h"
- 325              		.file 30 "Inc/gpio.h"
- 326              		.file 31 "Inc/usb_device.h"
- 327              		.file 32 "Inc/dwt_stm32_delay.h"
-ARM GAS  /tmp/cchhLoyG.s 			page 11
+ 301      00000000 
+ 301      00000000 
+ 301      00000000 
+ 301      00000000 
+ 302              		.text
+ 303              	.Letext0:
+ 304              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 305              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 306              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 307              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 308              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 309              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
+ 310              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 311              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
+ 312              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h"
+ 313              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 314              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 315              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h"
+ 316              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 317              		.file 15 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 318              		.file 16 "Inc/main.h"
+ 319              		.file 17 "Inc/adc.h"
+ 320              		.file 18 "Inc/tim.h"
+ 321              		.file 19 "/usr/include/newlib/sys/lock.h"
+ 322              		.file 20 "/usr/include/newlib/sys/_types.h"
+ 323              		.file 21 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
+ 324              		.file 22 "/usr/include/newlib/sys/reent.h"
+ 325              		.file 23 "/usr/include/newlib/stdlib.h"
+ 326              		.file 24 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
+ 327              		.file 25 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
+ 328              		.file 26 "Inc/usbd_cdc_if.h"
+ 329              		.file 27 "Inc/max2871.h"
+ 330              		.file 28 "Inc/commandParser.h"
+ 331              		.file 29 "Inc/txChain.h"
+ 332              		.file 30 "Inc/gpio.h"
+ 333              		.file 31 "Inc/usb_device.h"
+ 334              		.file 32 "Inc/dwt_stm32_delay.h"
+ARM GAS  /tmp/ccz0rby9.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/cchhLoyG.s:16     .text.SystemClock_Config:0000000000000000 $t
-     /tmp/cchhLoyG.s:23     .text.SystemClock_Config:0000000000000000 SystemClock_Config
-     /tmp/cchhLoyG.s:117    .text.enumerateUSB:0000000000000000 $t
-     /tmp/cchhLoyG.s:124    .text.enumerateUSB:0000000000000000 enumerateUSB
-     /tmp/cchhLoyG.s:188    .text.enumerateUSB:0000000000000044 $d
-     /tmp/cchhLoyG.s:193    .text.main:0000000000000000 $t
-     /tmp/cchhLoyG.s:200    .text.main:0000000000000000 main
-     /tmp/cchhLoyG.s:260    .text.main:0000000000000044 $d
-     /tmp/cchhLoyG.s:268    .text.Error_Handler:0000000000000000 $t
-     /tmp/cchhLoyG.s:275    .text.Error_Handler:0000000000000000 Error_Handler
-     /tmp/cchhLoyG.s:293    .bss.RX_FIFO:0000000000000000 RX_FIFO
-     /tmp/cchhLoyG.s:289    .bss.RX_FIFO:0000000000000000 $d
+     /tmp/ccz0rby9.s:16     .text.SystemClock_Config:0000000000000000 $t
+     /tmp/ccz0rby9.s:23     .text.SystemClock_Config:0000000000000000 SystemClock_Config
+     /tmp/ccz0rby9.s:117    .text.enumerateUSB:0000000000000000 $t
+     /tmp/ccz0rby9.s:124    .text.enumerateUSB:0000000000000000 enumerateUSB
+     /tmp/ccz0rby9.s:188    .text.enumerateUSB:0000000000000044 $d
+     /tmp/ccz0rby9.s:193    .text.main:0000000000000000 $t
+     /tmp/ccz0rby9.s:200    .text.main:0000000000000000 main
+     /tmp/ccz0rby9.s:266    .text.main:0000000000000050 $d
+     /tmp/ccz0rby9.s:275    .text.Error_Handler:0000000000000000 $t
+     /tmp/ccz0rby9.s:282    .text.Error_Handler:0000000000000000 Error_Handler
+     /tmp/ccz0rby9.s:300    .bss.RX_FIFO:0000000000000000 RX_FIFO
+     /tmp/ccz0rby9.s:296    .bss.RX_FIFO:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 HAL_RCC_OscConfig

@@ -6,6 +6,7 @@
 #include <string.h>
 #include "max2871.h"
 #include "txChain.h"
+#include "STP08CP05.h"
 
 char txStr[128] = "";
 
@@ -69,13 +70,17 @@ void commandParser(struct MAX2871Struct *max2871Status, struct txStruct *txStatu
 		printUSB(txStr);
 	}
 
-	// else if (strncmp("sweep", command, 5) == 0)
-	// {
-	// 	sprintf((char *)txStr, "> Sweep: Start = %0.2f MHz, fFinish = %0.2f dBm Power = %0.2f dBm\n", atof(args[0]), atof(args[1]), atof(args[2]));
-	// 	printUSB(txStr);
+	else if (strncmp("sweep", command, 5) == 0)
+	{
+		sprintf((char *)txStr, "> Sweep: Start = %0.2f MHz, fFinish = %0.2f dBm Power = %0.2f dBm\n", atof(args[0]), atof(args[1]), atof(args[2]));
+		printUSB(txStr);
 
-	// 	sweep(atof(args[0]), atof(args[1]), atof(args[2]), atof(args[3]), atof(args[4]), max2871Status, txStatus);
-	// }
+		while (RX_FIFO.dataReady == 0)
+		{
+			sweep(atof(args[0]), atof(args[1]), atof(args[2]), atof(args[3]), atof(args[4]), max2871Status, txStatus);
+		}
+	}
+
 
 	else if (strncmp("enableRF", command, 8) == 0)
 	{
@@ -109,6 +114,26 @@ void commandParser(struct MAX2871Struct *max2871Status, struct txStruct *txStatu
 	else if (strncmp("WHOAMI", command, 5) == 0)
 	{
 		printUSB("> Josh's Signal Generator!\r\n");
+	}
+
+	else if (strncmp("led", command, 3) == 0)
+	{
+		stpSpiTx((uint8_t) atoi(args[0]));
+	}
+
+	else if (strncmp("rainbow", command, 7) == 0)
+	{
+		rainbow();
+	}
+
+	else if (strncmp("kitt", command, 4) == 0)
+	{
+		kitt();
+	}
+
+	else if (strncmp("binary", command, 6) == 0)
+	{
+		binary();
 	}
 	
 	// USE BELOW AT YOUR OWN RISK
@@ -162,7 +187,7 @@ void commandParser(struct MAX2871Struct *max2871Status, struct txStruct *txStatu
 		printUSB(txStr);
 	}
 
-	else if ((strncmp("ls", command,2) == 0) || (strncmp("help", command, 4) == 0))
+	else if (strncmp("help", command, 4) == 0)
 	{
 		printUSB((char *)"> --  Available Commands  --\r\n");
 		printUSB((char *)"> sigGen(frequency, power)\r\n");

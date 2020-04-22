@@ -41,6 +41,7 @@ void sweep(float lowerFreq, float higherFreq, float numSteps, float power, float
 		sigGen(currentFrequency, power, max2871Status, txStatus);
 		DWT_Delay_us(delay);
 		currentFrequency += stepSize;
+		if (RX_FIFO.dataReady == 1) break;
 
 	}
 }

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccccngp0.s 			page 1
+ARM GAS  /tmp/cciePhOU.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccccngp0.s 			page 1
   47 000e 2046     		mov	r0, r4
   48 0010 FFF7FEFF 		bl	__aeabi_fcmplt
   49              	.LVL2:
-ARM GAS  /tmp/ccccngp0.s 			page 2
+ARM GAS  /tmp/cciePhOU.s 			page 2
 
 
   50 0014 38BB     		cbnz	r0, .L4
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccccngp0.s 			page 1
   90 0056 FFF7FEFF 		bl	__aeabi_fcmplt
   91              	.LVL9:
   92 005a 10B1     		cbz	r0, .L2
-ARM GAS  /tmp/ccccngp0.s 			page 3
+ARM GAS  /tmp/cciePhOU.s 			page 3
 
 
   24:Src/STP08CP05.c ****         leds = 0b11111111;
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccccngp0.s 			page 1
  135              	.L13:
  136 0084 0000BC41 		.word	1102839808
  137 0088 00801342 		.word	1108574208
-ARM GAS  /tmp/ccccngp0.s 			page 4
+ARM GAS  /tmp/cciePhOU.s 			page 4
 
 
  138 008c 00809342 		.word	1116962816
@@ -198,355 +198,518 @@ ARM GAS  /tmp/ccccngp0.s 			page 1
  153              		.thumb_func
  154              		.fpu softvfp
  156              	stpSpiTx:
- 157              	.LFB67:
+ 157              	.LFB70:
   28:Src/STP08CP05.c **** 
-  29:Src/STP08CP05.c **** void stpSpiTx(uint8_t leds)
+  29:Src/STP08CP05.c **** void rainbow()
   30:Src/STP08CP05.c **** {
- 158              		.loc 1 30 0
+  31:Src/STP08CP05.c ****     uint8_t display = 0;
+  32:Src/STP08CP05.c ****     while ((RX_FIFO.dataReady == 0))
+  33:Src/STP08CP05.c ****     {
+  34:Src/STP08CP05.c ****         for (uint8_t i = 0; i < 8; i++)
+  35:Src/STP08CP05.c ****         {
+  36:Src/STP08CP05.c ****             stpSpiTx(display |= (1 << i));
+  37:Src/STP08CP05.c ****             HAL_Delay(250);
+  38:Src/STP08CP05.c ****         }
+  39:Src/STP08CP05.c **** 
+  40:Src/STP08CP05.c ****         for (uint8_t i = 0; i < 8; i++)
+  41:Src/STP08CP05.c ****         {
+  42:Src/STP08CP05.c ****             stpSpiTx(display &= ~(1 << i));
+  43:Src/STP08CP05.c ****             HAL_Delay(250);
+  44:Src/STP08CP05.c ****         }
+  45:Src/STP08CP05.c ****     }
+  46:Src/STP08CP05.c **** }
+  47:Src/STP08CP05.c **** 
+  48:Src/STP08CP05.c **** void kitt()
+  49:Src/STP08CP05.c **** {
+  50:Src/STP08CP05.c ****     uint8_t display = 0;
+  51:Src/STP08CP05.c ****     while ((RX_FIFO.dataReady == 0))
+  52:Src/STP08CP05.c ****     {
+  53:Src/STP08CP05.c ****         for (uint8_t i = 0; i < 8; i++)
+  54:Src/STP08CP05.c ****         {
+  55:Src/STP08CP05.c ****             stpSpiTx(display = (1 << i));
+  56:Src/STP08CP05.c ****             HAL_Delay(100);
+  57:Src/STP08CP05.c ****             if (RX_FIFO.dataReady == 1) break;
+  58:Src/STP08CP05.c ****         }
+  59:Src/STP08CP05.c ****         for (uint8_t i = 6; i > 0; i--)
+  60:Src/STP08CP05.c ****         {
+  61:Src/STP08CP05.c ****             stpSpiTx(display = (1 << i));
+  62:Src/STP08CP05.c ****             HAL_Delay(100);
+  63:Src/STP08CP05.c ****             if (RX_FIFO.dataReady == 1) break;
+  64:Src/STP08CP05.c ****         }
+  65:Src/STP08CP05.c ****     }
+  66:Src/STP08CP05.c **** }
+ARM GAS  /tmp/cciePhOU.s 			page 5
+
+
+  67:Src/STP08CP05.c **** 
+  68:Src/STP08CP05.c **** void binary()
+  69:Src/STP08CP05.c **** {
+  70:Src/STP08CP05.c ****     while ((RX_FIFO.dataReady == 0))
+  71:Src/STP08CP05.c ****     {
+  72:Src/STP08CP05.c ****         for (uint8_t i = 0; i <= 255; i++)
+  73:Src/STP08CP05.c ****         {
+  74:Src/STP08CP05.c ****             stpSpiTx(i);
+  75:Src/STP08CP05.c ****             HAL_Delay(50);
+  76:Src/STP08CP05.c ****             if (RX_FIFO.dataReady == 1) break;
+  77:Src/STP08CP05.c ****         }
+  78:Src/STP08CP05.c ****     }
+  79:Src/STP08CP05.c **** }
+  80:Src/STP08CP05.c **** 
+  81:Src/STP08CP05.c **** void stpSpiTx(uint8_t leds)
+  82:Src/STP08CP05.c **** {
+ 158              		.loc 1 82 0
  159              		.cfi_startproc
  160              		@ args = 0, pretend = 0, frame = 0
  161              		@ frame_needed = 0, uses_anonymous_args = 0
  162              	.LVL12:
- 163 0000 70B5     		push	{r4, r5, r6, lr}
+ 163 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
  164              	.LCFI1:
- 165              		.cfi_def_cfa_offset 16
- 166              		.cfi_offset 4, -16
- 167              		.cfi_offset 5, -12
- 168              		.cfi_offset 6, -8
- 169              		.cfi_offset 14, -4
- 170 0002 0646     		mov	r6, r0
-  31:Src/STP08CP05.c ****     HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 0);
- 171              		.loc 1 31 0
- 172 0004 0022     		movs	r2, #0
- 173 0006 4FF40061 		mov	r1, #2048
- 174 000a 4A48     		ldr	r0, .L25
- 175              	.LVL13:
- 176 000c FFF7FEFF 		bl	HAL_GPIO_WritePin
- 177              	.LVL14:
- 178              	.LBB15:
- 179              	.LBB16:
- 180              		.file 2 "Inc/dwt_stm32_delay.h"
-   1:Inc/dwt_stm32_delay.h **** #ifndef DWT_STM32_DELAY_H
-   2:Inc/dwt_stm32_delay.h **** #define DWT_STM32_DELAY_H
-   3:Inc/dwt_stm32_delay.h **** 
-   4:Inc/dwt_stm32_delay.h **** #ifdef __cplusplus
-   5:Inc/dwt_stm32_delay.h **** extern "C" {
-   6:Inc/dwt_stm32_delay.h **** #endif
-   7:Inc/dwt_stm32_delay.h **** 
-   8:Inc/dwt_stm32_delay.h **** #include "stm32f1xx_hal.h"
-   9:Inc/dwt_stm32_delay.h **** 
-  10:Inc/dwt_stm32_delay.h **** /**
-  11:Inc/dwt_stm32_delay.h ****  * @brief  Initializes DWT_Cycle_Count for DWT_Delay_us function
-  12:Inc/dwt_stm32_delay.h ****  * @return Error DWT counter
-ARM GAS  /tmp/ccccngp0.s 			page 5
+ 165              		.cfi_def_cfa_offset 24
+ 166              		.cfi_offset 3, -24
+ 167              		.cfi_offset 4, -20
+ 168              		.cfi_offset 5, -16
+ 169              		.cfi_offset 6, -12
+ 170              		.cfi_offset 7, -8
+ 171              		.cfi_offset 14, -4
+ 172 0002 0746     		mov	r7, r0
+ 173              	.LVL13:
+ 174              	.LBB2:
+  83:Src/STP08CP05.c **** 	// Transfer the bits
+  84:Src/STP08CP05.c **** 	for (uint8_t i = 0; i < 8; i++)
+ 175              		.loc 1 84 0
+ 176 0004 0024     		movs	r4, #0
+ 177 0006 17E0     		b	.L16
+ 178              	.LVL14:
+ 179              	.L17:
+  85:Src/STP08CP05.c **** 	{
+  86:Src/STP08CP05.c **** 		HAL_GPIO_WritePin(LED_SDI_GPIO_Port, LED_SDI_Pin, leds & (1 << i));
+ 180              		.loc 1 86 0 discriminator 3
+ 181 0008 0126     		movs	r6, #1
+ 182 000a 06FA04F2 		lsl	r2, r6, r4
+ 183 000e 184D     		ldr	r5, .L19
+ 184 0010 3A40     		ands	r2, r2, r7
+ 185 0012 4FF48061 		mov	r1, #1024
+ 186 0016 2846     		mov	r0, r5
+ 187 0018 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 188              	.LVL15:
+  87:Src/STP08CP05.c **** 		HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 1);
+ 189              		.loc 1 87 0 discriminator 3
+ 190 001c 3246     		mov	r2, r6
+ 191 001e 4FF40061 		mov	r1, #2048
+ 192 0022 2846     		mov	r0, r5
+ 193 0024 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ARM GAS  /tmp/cciePhOU.s 			page 6
 
 
-  13:Inc/dwt_stm32_delay.h ****  *         1: DWT counter Error
-  14:Inc/dwt_stm32_delay.h ****  *         0: DWT counter works
-  15:Inc/dwt_stm32_delay.h ****  */
-  16:Inc/dwt_stm32_delay.h **** uint32_t DWT_Delay_Init(void);
-  17:Inc/dwt_stm32_delay.h **** 
-  18:Inc/dwt_stm32_delay.h **** /**
-  19:Inc/dwt_stm32_delay.h ****  * @brief  This function provides a delay (in microseconds)
-  20:Inc/dwt_stm32_delay.h ****  * @param  microseconds: delay in microseconds
-  21:Inc/dwt_stm32_delay.h ****  */
-  22:Inc/dwt_stm32_delay.h **** __STATIC_INLINE void DWT_Delay_us(volatile uint32_t microseconds)
-  23:Inc/dwt_stm32_delay.h **** {
-  24:Inc/dwt_stm32_delay.h ****   uint32_t clk_cycle_start = DWT->CYCCNT;
- 181              		.loc 2 24 0
- 182 0010 494B     		ldr	r3, .L25+4
- 183 0012 5C68     		ldr	r4, [r3, #4]
- 184              	.LVL15:
-  25:Inc/dwt_stm32_delay.h **** 
-  26:Inc/dwt_stm32_delay.h ****   /* Go to number of cycles for system */
-  27:Inc/dwt_stm32_delay.h ****   microseconds *= (HAL_RCC_GetHCLKFreq() / 1000000);
- 185              		.loc 2 27 0
- 186 0014 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
- 187              	.LVL16:
- 188 0018 484A     		ldr	r2, .L25+8
- 189 001a A2FB0032 		umull	r3, r2, r2, r0
- 190 001e 920C     		lsrs	r2, r2, #18
- 191              	.L16:
-  28:Inc/dwt_stm32_delay.h **** 
-  29:Inc/dwt_stm32_delay.h ****   /* Delay till end */
-  30:Inc/dwt_stm32_delay.h ****   while ((DWT->CYCCNT - clk_cycle_start) < microseconds);
- 192              		.loc 2 30 0
- 193 0020 454B     		ldr	r3, .L25+4
- 194 0022 5B68     		ldr	r3, [r3, #4]
- 195 0024 1B1B     		subs	r3, r3, r4
- 196 0026 9342     		cmp	r3, r2
- 197 0028 FAD3     		bcc	.L16
- 198              	.LBE16:
- 199              	.LBE15:
- 200              	.LBB17:
-  32:Src/STP08CP05.c ****     DWT_Delay_us(1);
-  33:Src/STP08CP05.c **** 	// Transfer the bits
-  34:Src/STP08CP05.c **** 	for (uint8_t i = 8; i > 0 ; i--)
- 201              		.loc 1 34 0
- 202 002a 0825     		movs	r5, #8
- 203 002c 31E0     		b	.L17
- 204              	.LVL17:
- 205              	.L20:
-  35:Src/STP08CP05.c **** 	{
-  36:Src/STP08CP05.c **** 		HAL_GPIO_WritePin(LED_SDI_GPIO_Port, LED_SDI_Pin, leds & (1 << i - 1));
- 206              		.loc 1 36 0 discriminator 3
- 207 002e 6A1E     		subs	r2, r5, #1
- 208 0030 0124     		movs	r4, #1
- 209 0032 04FA02F2 		lsl	r2, r4, r2
- 210 0036 3240     		ands	r2, r2, r6
- 211 0038 4FF48061 		mov	r1, #1024
- 212 003c 3D48     		ldr	r0, .L25
- 213 003e FFF7FEFF 		bl	HAL_GPIO_WritePin
- 214              	.LVL18:
-ARM GAS  /tmp/ccccngp0.s 			page 6
+ 194              	.LVL16:
+  88:Src/STP08CP05.c **** 		HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 0);
+ 195              		.loc 1 88 0 discriminator 3
+ 196 0028 0022     		movs	r2, #0
+ 197 002a 4FF40061 		mov	r1, #2048
+ 198 002e 2846     		mov	r0, r5
+ 199 0030 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 200              	.LVL17:
+  84:Src/STP08CP05.c **** 	{
+ 201              		.loc 1 84 0 discriminator 3
+ 202 0034 3444     		add	r4, r4, r6
+ 203              	.LVL18:
+ 204 0036 E4B2     		uxtb	r4, r4
+ 205              	.LVL19:
+ 206              	.L16:
+  84:Src/STP08CP05.c **** 	{
+ 207              		.loc 1 84 0 is_stmt 0 discriminator 1
+ 208 0038 072C     		cmp	r4, #7
+ 209 003a E5D9     		bls	.L17
+ 210              	.LBE2:
+  89:Src/STP08CP05.c **** 	}
+  90:Src/STP08CP05.c **** 
+  91:Src/STP08CP05.c ****     // Latch Enable
+  92:Src/STP08CP05.c ****     HAL_GPIO_WritePin(LED_LE_GPIO_Port, LED_LE_Pin, 1);
+ 211              		.loc 1 92 0 is_stmt 1
+ 212 003c 0C4C     		ldr	r4, .L19
+ 213              	.LVL20:
+ 214 003e 0122     		movs	r2, #1
+ 215 0040 4FF48051 		mov	r1, #4096
+ 216 0044 2046     		mov	r0, r4
+ 217 0046 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 218              	.LVL21:
+  93:Src/STP08CP05.c ****     HAL_GPIO_WritePin(LED_LE_GPIO_Port, LED_LE_Pin, 0);
+ 219              		.loc 1 93 0
+ 220 004a 0022     		movs	r2, #0
+ 221 004c 4FF48051 		mov	r1, #4096
+ 222 0050 2046     		mov	r0, r4
+ 223 0052 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 224              	.LVL22:
+  94:Src/STP08CP05.c **** 
+  95:Src/STP08CP05.c ****     // Clock Again
+  96:Src/STP08CP05.c ****     HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 1);
+ 225              		.loc 1 96 0
+ 226 0056 0122     		movs	r2, #1
+ 227 0058 4FF40061 		mov	r1, #2048
+ 228 005c 2046     		mov	r0, r4
+ 229 005e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 230              	.LVL23:
+  97:Src/STP08CP05.c ****     HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 0);
+ 231              		.loc 1 97 0
+ 232 0062 0022     		movs	r2, #0
+ 233 0064 4FF40061 		mov	r1, #2048
+ 234 0068 2046     		mov	r0, r4
+ 235 006a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 236              	.LVL24:
+  98:Src/STP08CP05.c **** 	
+  99:Src/STP08CP05.c **** }...
+ARM GAS  /tmp/cciePhOU.s 			page 7
 
 
- 215              	.LBB18:
- 216              	.LBB19:
-  24:Inc/dwt_stm32_delay.h **** 
- 217              		.loc 2 24 0 discriminator 3
- 218 0042 3D4B     		ldr	r3, .L25+4
- 219 0044 5C68     		ldr	r4, [r3, #4]
- 220              	.LVL19:
-  27:Inc/dwt_stm32_delay.h **** 
- 221              		.loc 2 27 0 discriminator 3
- 222 0046 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
- 223              	.LVL20:
- 224 004a 3C4B     		ldr	r3, .L25+8
- 225 004c A3FB0030 		umull	r3, r0, r3, r0
- 226 0050 800C     		lsrs	r0, r0, #18
- 227              	.L18:
- 228              		.loc 2 30 0
- 229 0052 394B     		ldr	r3, .L25+4
- 230 0054 5B68     		ldr	r3, [r3, #4]
- 231 0056 1B1B     		subs	r3, r3, r4
- 232 0058 8342     		cmp	r3, r0
- 233 005a FAD3     		bcc	.L18
- 234              	.LVL21:
- 235              	.LBE19:
- 236              	.LBE18:
-  37:Src/STP08CP05.c **** 		DWT_Delay_us(1);
-  38:Src/STP08CP05.c **** 		HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 1);
- 237              		.loc 1 38 0 discriminator 3
- 238 005c 0122     		movs	r2, #1
- 239 005e 4FF40061 		mov	r1, #2048
- 240 0062 3448     		ldr	r0, .L25
- 241 0064 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 242              	.LVL22:
- 243              	.LBB20:
- 244              	.LBB21:
-  24:Inc/dwt_stm32_delay.h **** 
- 245              		.loc 2 24 0 discriminator 3
- 246 0068 334B     		ldr	r3, .L25+4
- 247 006a 5C68     		ldr	r4, [r3, #4]
- 248              	.LVL23:
-  27:Inc/dwt_stm32_delay.h **** 
- 249              		.loc 2 27 0 discriminator 3
- 250 006c FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
- 251              	.LVL24:
- 252 0070 324B     		ldr	r3, .L25+8
- 253 0072 A3FB0030 		umull	r3, r0, r3, r0
- 254 0076 800C     		lsrs	r0, r0, #18
- 255              	.L19:
- 256              		.loc 2 30 0
- 257 0078 2F4B     		ldr	r3, .L25+4
- 258 007a 5B68     		ldr	r3, [r3, #4]
- 259 007c 1B1B     		subs	r3, r3, r4
- 260 007e 8342     		cmp	r3, r0
- 261 0080 FAD3     		bcc	.L19
- 262              	.LVL25:
- 263              	.LBE21:
- 264              	.LBE20:
-  39:Src/STP08CP05.c **** 		DWT_Delay_us(1);
-ARM GAS  /tmp/ccccngp0.s 			page 7
+ 237              		.loc 1 99 0
+ 238 006e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 239              	.L20:
+ 240              		.align	2
+ 241              	.L19:
+ 242 0070 000C0140 		.word	1073810432
+ 243              		.cfi_endproc
+ 244              	.LFE70:
+ 246              		.section	.text.rainbow,"ax",%progbits
+ 247              		.align	1
+ 248              		.global	rainbow
+ 249              		.syntax unified
+ 250              		.thumb
+ 251              		.thumb_func
+ 252              		.fpu softvfp
+ 254              	rainbow:
+ 255              	.LFB67:
+  30:Src/STP08CP05.c **** {
+ 256              		.loc 1 30 0
+ 257              		.cfi_startproc
+ 258              		@ args = 0, pretend = 0, frame = 0
+ 259              		@ frame_needed = 0, uses_anonymous_args = 0
+ 260 0000 70B5     		push	{r4, r5, r6, lr}
+ 261              	.LCFI2:
+ 262              		.cfi_def_cfa_offset 16
+ 263              		.cfi_offset 4, -16
+ 264              		.cfi_offset 5, -12
+ 265              		.cfi_offset 6, -8
+ 266              		.cfi_offset 14, -4
+ 267              	.LVL25:
+  31:Src/STP08CP05.c ****     uint8_t display = 0;
+ 268              		.loc 1 31 0
+ 269 0002 0026     		movs	r6, #0
+  32:Src/STP08CP05.c ****     while ((RX_FIFO.dataReady == 0))
+ 270              		.loc 1 32 0
+ 271 0004 1CE0     		b	.L22
+ 272              	.LVL26:
+ 273              	.L23:
+ 274              	.LBB3:
+  36:Src/STP08CP05.c ****             stpSpiTx(display |= (1 << i));
+ 275              		.loc 1 36 0 discriminator 3
+ 276 0006 0123     		movs	r3, #1
+ 277 0008 AB40     		lsls	r3, r3, r5
+ 278 000a 1E43     		orrs	r6, r6, r3
+ 279              	.LVL27:
+ 280 000c F6B2     		uxtb	r6, r6
+ 281              	.LVL28:
+ 282 000e 3046     		mov	r0, r6
+ 283 0010 FFF7FEFF 		bl	stpSpiTx
+ 284              	.LVL29:
+  37:Src/STP08CP05.c ****             HAL_Delay(250);
+ 285              		.loc 1 37 0 discriminator 3
+ 286 0014 FA20     		movs	r0, #250
+ 287 0016 FFF7FEFF 		bl	HAL_Delay
+ 288              	.LVL30:
+  34:Src/STP08CP05.c ****         for (uint8_t i = 0; i < 8; i++)
+ 289              		.loc 1 34 0 discriminator 3
+ARM GAS  /tmp/cciePhOU.s 			page 8
 
 
-  40:Src/STP08CP05.c **** 		HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 0);
- 265              		.loc 1 40 0 discriminator 3
- 266 0082 0022     		movs	r2, #0
- 267 0084 4FF40061 		mov	r1, #2048
- 268 0088 2A48     		ldr	r0, .L25
- 269 008a FFF7FEFF 		bl	HAL_GPIO_WritePin
- 270              	.LVL26:
-  34:Src/STP08CP05.c **** 	{
- 271              		.loc 1 34 0 discriminator 3
- 272 008e 013D     		subs	r5, r5, #1
- 273              	.LVL27:
- 274 0090 EDB2     		uxtb	r5, r5
- 275              	.LVL28:
- 276              	.L17:
-  34:Src/STP08CP05.c **** 	{
- 277              		.loc 1 34 0 is_stmt 0 discriminator 1
- 278 0092 002D     		cmp	r5, #0
- 279 0094 CBD1     		bne	.L20
- 280              	.LBE17:
-  41:Src/STP08CP05.c **** 	}
-  42:Src/STP08CP05.c **** 	HAL_GPIO_WritePin(LED_SDI_GPIO_Port, LED_SDI_Pin, 0);
- 281              		.loc 1 42 0 is_stmt 1
- 282 0096 0022     		movs	r2, #0
- 283 0098 4FF48061 		mov	r1, #1024
- 284 009c 2548     		ldr	r0, .L25
- 285 009e FFF7FEFF 		bl	HAL_GPIO_WritePin
- 286              	.LVL29:
- 287              	.LBB22:
- 288              	.LBB23:
-  24:Inc/dwt_stm32_delay.h **** 
- 289              		.loc 2 24 0
- 290 00a2 254B     		ldr	r3, .L25+4
- 291 00a4 5C68     		ldr	r4, [r3, #4]
- 292              	.LVL30:
-  27:Inc/dwt_stm32_delay.h **** 
- 293              		.loc 2 27 0
- 294 00a6 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
- 295              	.LVL31:
- 296 00aa 244A     		ldr	r2, .L25+8
- 297 00ac A2FB0032 		umull	r3, r2, r2, r0
- 298 00b0 920C     		lsrs	r2, r2, #18
- 299              	.L21:
- 300              		.loc 2 30 0
- 301 00b2 214B     		ldr	r3, .L25+4
- 302 00b4 5B68     		ldr	r3, [r3, #4]
- 303 00b6 1B1B     		subs	r3, r3, r4
- 304 00b8 9342     		cmp	r3, r2
- 305 00ba FAD3     		bcc	.L21
- 306              	.LVL32:
- 307              	.LBE23:
- 308              	.LBE22:
-  43:Src/STP08CP05.c ****     DWT_Delay_us(1);
-  44:Src/STP08CP05.c **** 
-  45:Src/STP08CP05.c ****     // Latch Enable
-  46:Src/STP08CP05.c ****     HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 1);
- 309              		.loc 1 46 0
- 310 00bc 1D4C     		ldr	r4, .L25
-ARM GAS  /tmp/ccccngp0.s 			page 8
+ 290 001a 0135     		adds	r5, r5, #1
+ 291              	.LVL31:
+ 292 001c EDB2     		uxtb	r5, r5
+ 293              	.LVL32:
+ 294              	.L26:
+  34:Src/STP08CP05.c ****         for (uint8_t i = 0; i < 8; i++)
+ 295              		.loc 1 34 0 is_stmt 0 discriminator 1
+ 296 001e 072D     		cmp	r5, #7
+ 297 0020 F1D9     		bls	.L23
+ 298 0022 0BE0     		b	.L24
+ 299              	.LVL33:
+ 300              	.L25:
+ 301              	.LBE3:
+ 302              	.LBB4:
+  42:Src/STP08CP05.c ****             stpSpiTx(display &= ~(1 << i));
+ 303              		.loc 1 42 0 is_stmt 1 discriminator 3
+ 304 0024 0123     		movs	r3, #1
+ 305 0026 A340     		lsls	r3, r3, r4
+ 306 0028 26EA0306 		bic	r6, r6, r3
+ 307              	.LVL34:
+ 308 002c 3046     		mov	r0, r6
+ 309 002e FFF7FEFF 		bl	stpSpiTx
+ 310              	.LVL35:
+  43:Src/STP08CP05.c ****             HAL_Delay(250);
+ 311              		.loc 1 43 0 discriminator 3
+ 312 0032 FA20     		movs	r0, #250
+ 313 0034 FFF7FEFF 		bl	HAL_Delay
+ 314              	.LVL36:
+  40:Src/STP08CP05.c ****         for (uint8_t i = 0; i < 8; i++)
+ 315              		.loc 1 40 0 discriminator 3
+ 316 0038 0134     		adds	r4, r4, #1
+ 317              	.LVL37:
+ 318 003a E4B2     		uxtb	r4, r4
+ 319              	.LVL38:
+ 320              	.L24:
+  40:Src/STP08CP05.c ****         for (uint8_t i = 0; i < 8; i++)
+ 321              		.loc 1 40 0 is_stmt 0 discriminator 1
+ 322 003c 072C     		cmp	r4, #7
+ 323 003e F1D9     		bls	.L25
+ 324              	.LVL39:
+ 325              	.L22:
+ 326              	.LBE4:
+  32:Src/STP08CP05.c ****     while ((RX_FIFO.dataReady == 0))
+ 327              		.loc 1 32 0 is_stmt 1
+ 328 0040 034B     		ldr	r3, .L30
+ 329 0042 93F88840 		ldrb	r4, [r3, #136]	@ zero_extendqisi2
+ 330 0046 0CB9     		cbnz	r4, .L29
+ 331              	.LBB5:
+  34:Src/STP08CP05.c ****         for (uint8_t i = 0; i < 8; i++)
+ 332              		.loc 1 34 0
+ 333 0048 2546     		mov	r5, r4
+ 334 004a E8E7     		b	.L26
+ 335              	.L29:
+ 336              	.LBE5:
+  46:Src/STP08CP05.c **** }
+ 337              		.loc 1 46 0
+ 338 004c 70BD     		pop	{r4, r5, r6, pc}
+ARM GAS  /tmp/cciePhOU.s 			page 9
 
 
- 311 00be 0122     		movs	r2, #1
- 312 00c0 4FF40061 		mov	r1, #2048
- 313 00c4 2046     		mov	r0, r4
- 314 00c6 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 315              	.LVL33:
-  47:Src/STP08CP05.c ****     HAL_GPIO_WritePin(LED_LE_GPIO_Port, LED_LE_Pin, 1);
- 316              		.loc 1 47 0
- 317 00ca 0122     		movs	r2, #1
- 318 00cc 4FF48051 		mov	r1, #4096
- 319 00d0 2046     		mov	r0, r4
- 320 00d2 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 321              	.LVL34:
- 322              	.LBB24:
- 323              	.LBB25:
-  24:Inc/dwt_stm32_delay.h **** 
- 324              		.loc 2 24 0
- 325 00d6 184B     		ldr	r3, .L25+4
- 326 00d8 5C68     		ldr	r4, [r3, #4]
- 327              	.LVL35:
-  27:Inc/dwt_stm32_delay.h **** 
- 328              		.loc 2 27 0
- 329 00da FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
- 330              	.LVL36:
- 331 00de 174A     		ldr	r2, .L25+8
- 332 00e0 A2FB0032 		umull	r3, r2, r2, r0
- 333 00e4 920C     		lsrs	r2, r2, #18
- 334              	.L22:
- 335              		.loc 2 30 0
- 336 00e6 144B     		ldr	r3, .L25+4
- 337 00e8 5B68     		ldr	r3, [r3, #4]
- 338 00ea 1B1B     		subs	r3, r3, r4
- 339 00ec 9342     		cmp	r3, r2
- 340 00ee FAD3     		bcc	.L22
- 341              	.LVL37:
- 342              	.LBE25:
- 343              	.LBE24:
-  48:Src/STP08CP05.c ****     DWT_Delay_us(1);
-  49:Src/STP08CP05.c ****     HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 0);
- 344              		.loc 1 49 0
- 345 00f0 104C     		ldr	r4, .L25
- 346 00f2 0022     		movs	r2, #0
- 347 00f4 4FF40061 		mov	r1, #2048
- 348 00f8 2046     		mov	r0, r4
- 349 00fa FFF7FEFF 		bl	HAL_GPIO_WritePin
- 350              	.LVL38:
-  50:Src/STP08CP05.c ****     HAL_GPIO_WritePin(LED_LE_GPIO_Port, LED_LE_Pin, 0);
- 351              		.loc 1 50 0
- 352 00fe 0022     		movs	r2, #0
- 353 0100 4FF48051 		mov	r1, #4096
- 354 0104 2046     		mov	r0, r4
- 355 0106 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 356              	.LVL39:
- 357              	.LBB26:
- 358              	.LBB27:
-  24:Inc/dwt_stm32_delay.h **** 
- 359              		.loc 2 24 0
- 360 010a 0B4B     		ldr	r3, .L25+4
-ARM GAS  /tmp/ccccngp0.s 			page 9
+ 339              	.LVL40:
+ 340              	.L31:
+ 341 004e 00BF     		.align	2
+ 342              	.L30:
+ 343 0050 00000000 		.word	RX_FIFO
+ 344              		.cfi_endproc
+ 345              	.LFE67:
+ 347              		.section	.text.kitt,"ax",%progbits
+ 348              		.align	1
+ 349              		.global	kitt
+ 350              		.syntax unified
+ 351              		.thumb
+ 352              		.thumb_func
+ 353              		.fpu softvfp
+ 355              	kitt:
+ 356              	.LFB68:
+  49:Src/STP08CP05.c **** {
+ 357              		.loc 1 49 0
+ 358              		.cfi_startproc
+ 359              		@ args = 0, pretend = 0, frame = 0
+ 360              		@ frame_needed = 0, uses_anonymous_args = 0
+ 361 0000 10B5     		push	{r4, lr}
+ 362              	.LCFI3:
+ 363              		.cfi_def_cfa_offset 8
+ 364              		.cfi_offset 4, -8
+ 365              		.cfi_offset 14, -4
+ 366              	.LVL41:
+  51:Src/STP08CP05.c ****     while ((RX_FIFO.dataReady == 0))
+ 367              		.loc 1 51 0
+ 368 0002 11E0     		b	.L38
+ 369              	.LVL42:
+ 370              	.L34:
+  49:Src/STP08CP05.c **** {
+ 371              		.loc 1 49 0 discriminator 1
+ 372 0004 0624     		movs	r4, #6
+ 373              	.LVL43:
+ 374 0006 01E0     		b	.L36
+ 375              	.LVL44:
+ 376              	.L41:
+ 377              	.LBB6:
+  59:Src/STP08CP05.c ****         for (uint8_t i = 6; i > 0; i--)
+ 378              		.loc 1 59 0 discriminator 2
+ 379 0008 013C     		subs	r4, r4, #1
+ 380              	.LVL45:
+ 381 000a E4B2     		uxtb	r4, r4
+ 382              	.LVL46:
+ 383              	.L36:
+  59:Src/STP08CP05.c ****         for (uint8_t i = 6; i > 0; i--)
+ 384              		.loc 1 59 0 is_stmt 0 discriminator 1
+ 385 000c 64B1     		cbz	r4, .L38
+  61:Src/STP08CP05.c ****             stpSpiTx(display = (1 << i));
+ 386              		.loc 1 61 0 is_stmt 1
+ 387 000e 0120     		movs	r0, #1
+ 388 0010 A040     		lsls	r0, r0, r4
+ 389              	.LVL47:
+ 390 0012 C0B2     		uxtb	r0, r0
+ 391 0014 FFF7FEFF 		bl	stpSpiTx
+ARM GAS  /tmp/cciePhOU.s 			page 10
 
 
- 361 010c 5C68     		ldr	r4, [r3, #4]
- 362              	.LVL40:
-  27:Inc/dwt_stm32_delay.h **** 
- 363              		.loc 2 27 0
- 364 010e FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
- 365              	.LVL41:
- 366 0112 0A4A     		ldr	r2, .L25+8
- 367 0114 A2FB0032 		umull	r3, r2, r2, r0
- 368 0118 920C     		lsrs	r2, r2, #18
- 369              	.L23:
- 370              		.loc 2 30 0
- 371 011a 074B     		ldr	r3, .L25+4
- 372 011c 5B68     		ldr	r3, [r3, #4]
- 373 011e 1B1B     		subs	r3, r3, r4
- 374 0120 9342     		cmp	r3, r2
- 375 0122 FAD3     		bcc	.L23
- 376              	.LVL42:
- 377              	.LBE27:
- 378              	.LBE26:
-  51:Src/STP08CP05.c ****     DWT_Delay_us(1);
-  52:Src/STP08CP05.c **** 
-  53:Src/STP08CP05.c ****     // Clock Again
-  54:Src/STP08CP05.c ****     HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 1);
- 379              		.loc 1 54 0
- 380 0124 0122     		movs	r2, #1
- 381 0126 4FF40061 		mov	r1, #2048
- 382 012a 0248     		ldr	r0, .L25
- 383 012c FFF7FEFF 		bl	HAL_GPIO_WritePin
- 384              	.LVL43:
-  55:Src/STP08CP05.c **** 	
-  56:Src/STP08CP05.c **** }...
- 385              		.loc 1 56 0
- 386 0130 70BD     		pop	{r4, r5, r6, pc}
- 387              	.LVL44:
- 388              	.L26:
- 389 0132 00BF     		.align	2
- 390              	.L25:
- 391 0134 000C0140 		.word	1073810432
- 392 0138 001000E0 		.word	-536866816
- 393 013c 83DE1B43 		.word	1125899907
- 394              		.cfi_endproc
- 395              	.LFE67:
- 397              		.text
- 398              	.Letext0:
- 399              		.file 3 "/usr/include/newlib/machine/_default_types.h"
- 400              		.file 4 "/usr/include/newlib/sys/_stdint.h"
- 401              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
- 402              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 403              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
- 404              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 405              		.file 9 "Inc/main.h"
- 406              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
- 407              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
-ARM GAS  /tmp/ccccngp0.s 			page 10
+ 392              	.LVL48:
+  62:Src/STP08CP05.c ****             HAL_Delay(100);
+ 393              		.loc 1 62 0
+ 394 0018 6420     		movs	r0, #100
+ 395 001a FFF7FEFF 		bl	HAL_Delay
+ 396              	.LVL49:
+  63:Src/STP08CP05.c ****             if (RX_FIFO.dataReady == 1) break;
+ 397              		.loc 1 63 0
+ 398 001e 0E4B     		ldr	r3, .L43
+ 399 0020 93F88830 		ldrb	r3, [r3, #136]	@ zero_extendqisi2
+ 400 0024 012B     		cmp	r3, #1
+ 401 0026 EFD1     		bne	.L41
+ 402              	.LVL50:
+ 403              	.L38:
+ 404              	.LBE6:
+  51:Src/STP08CP05.c ****     while ((RX_FIFO.dataReady == 0))
+ 405              		.loc 1 51 0
+ 406 0028 0B4B     		ldr	r3, .L43
+ 407 002a 93F88840 		ldrb	r4, [r3, #136]	@ zero_extendqisi2
+ 408 002e 8CB9     		cbnz	r4, .L42
+ 409              	.L39:
+ 410              	.LVL51:
+ 411              	.LBB7:
+  53:Src/STP08CP05.c ****         for (uint8_t i = 0; i < 8; i++)
+ 412              		.loc 1 53 0 discriminator 1
+ 413 0030 072C     		cmp	r4, #7
+ 414 0032 E7D8     		bhi	.L34
+  55:Src/STP08CP05.c ****             stpSpiTx(display = (1 << i));
+ 415              		.loc 1 55 0
+ 416 0034 0120     		movs	r0, #1
+ 417 0036 A040     		lsls	r0, r0, r4
+ 418              	.LVL52:
+ 419 0038 C0B2     		uxtb	r0, r0
+ 420 003a FFF7FEFF 		bl	stpSpiTx
+ 421              	.LVL53:
+  56:Src/STP08CP05.c ****             HAL_Delay(100);
+ 422              		.loc 1 56 0
+ 423 003e 6420     		movs	r0, #100
+ 424 0040 FFF7FEFF 		bl	HAL_Delay
+ 425              	.LVL54:
+  57:Src/STP08CP05.c ****             if (RX_FIFO.dataReady == 1) break;
+ 426              		.loc 1 57 0
+ 427 0044 044B     		ldr	r3, .L43
+ 428 0046 93F88830 		ldrb	r3, [r3, #136]	@ zero_extendqisi2
+ 429 004a 012B     		cmp	r3, #1
+ 430 004c DAD0     		beq	.L34
+  53:Src/STP08CP05.c ****         for (uint8_t i = 0; i < 8; i++)
+ 431              		.loc 1 53 0 discriminator 2
+ 432 004e 0134     		adds	r4, r4, #1
+ 433              	.LVL55:
+ 434 0050 E4B2     		uxtb	r4, r4
+ 435              	.LVL56:
+ 436 0052 EDE7     		b	.L39
+ 437              	.LVL57:
+ 438              	.L42:
+ 439              	.LBE7:
+  66:Src/STP08CP05.c **** }
+ARM GAS  /tmp/cciePhOU.s 			page 11
+
+
+ 440              		.loc 1 66 0
+ 441 0054 10BD     		pop	{r4, pc}
+ 442              	.L44:
+ 443 0056 00BF     		.align	2
+ 444              	.L43:
+ 445 0058 00000000 		.word	RX_FIFO
+ 446              		.cfi_endproc
+ 447              	.LFE68:
+ 449              		.section	.text.binary,"ax",%progbits
+ 450              		.align	1
+ 451              		.global	binary
+ 452              		.syntax unified
+ 453              		.thumb
+ 454              		.thumb_func
+ 455              		.fpu softvfp
+ 457              	binary:
+ 458              	.LFB69:
+  69:Src/STP08CP05.c **** {
+ 459              		.loc 1 69 0
+ 460              		.cfi_startproc
+ 461              		@ args = 0, pretend = 0, frame = 0
+ 462              		@ frame_needed = 0, uses_anonymous_args = 0
+ 463 0000 10B5     		push	{r4, lr}
+ 464              	.LCFI4:
+ 465              		.cfi_def_cfa_offset 8
+ 466              		.cfi_offset 4, -8
+ 467              		.cfi_offset 14, -4
+ 468              	.L46:
+  70:Src/STP08CP05.c ****     while ((RX_FIFO.dataReady == 0))
+ 469              		.loc 1 70 0
+ 470 0002 094B     		ldr	r3, .L50
+ 471 0004 93F88840 		ldrb	r4, [r3, #136]	@ zero_extendqisi2
+ 472 0008 6CB9     		cbnz	r4, .L49
+ 473              	.L47:
+ 474              	.LVL58:
+ 475              	.LBB8:
+  74:Src/STP08CP05.c ****             stpSpiTx(i);
+ 476              		.loc 1 74 0
+ 477 000a 2046     		mov	r0, r4
+ 478 000c FFF7FEFF 		bl	stpSpiTx
+ 479              	.LVL59:
+  75:Src/STP08CP05.c ****             HAL_Delay(50);
+ 480              		.loc 1 75 0
+ 481 0010 3220     		movs	r0, #50
+ 482 0012 FFF7FEFF 		bl	HAL_Delay
+ 483              	.LVL60:
+  76:Src/STP08CP05.c ****             if (RX_FIFO.dataReady == 1) break;
+ 484              		.loc 1 76 0
+ 485 0016 044B     		ldr	r3, .L50
+ 486 0018 93F88830 		ldrb	r3, [r3, #136]	@ zero_extendqisi2
+ 487 001c 012B     		cmp	r3, #1
+ 488 001e F0D0     		beq	.L46
+  72:Src/STP08CP05.c ****         for (uint8_t i = 0; i <= 255; i++)
+ 489              		.loc 1 72 0
+ 490 0020 0134     		adds	r4, r4, #1
+ 491              	.LVL61:
+ 492 0022 E4B2     		uxtb	r4, r4
+ARM GAS  /tmp/cciePhOU.s 			page 12
+
+
+ 493              	.LVL62:
+  74:Src/STP08CP05.c ****             stpSpiTx(i);
+ 494              		.loc 1 74 0
+ 495 0024 F1E7     		b	.L47
+ 496              	.LVL63:
+ 497              	.L49:
+ 498              	.LBE8:
+  79:Src/STP08CP05.c **** }
+ 499              		.loc 1 79 0
+ 500 0026 10BD     		pop	{r4, pc}
+ 501              	.L51:
+ 502              		.align	2
+ 503              	.L50:
+ 504 0028 00000000 		.word	RX_FIFO
+ 505              		.cfi_endproc
+ 506              	.LFE69:
+ 508              		.text
+ 509              	.Letext0:
+ 510              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 511              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 512              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 513              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 514              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 515              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 516              		.file 8 "Inc/main.h"
+ 517              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ARM GAS  /tmp/cciePhOU.s 			page 13
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 STP08CP05.c
-     /tmp/ccccngp0.s:17     .text.freqToLed:0000000000000000 $t
-     /tmp/ccccngp0.s:24     .text.freqToLed:0000000000000000 freqToLed
-     /tmp/ccccngp0.s:136    .text.freqToLed:0000000000000084 $d
-     /tmp/ccccngp0.s:149    .text.stpSpiTx:0000000000000000 $t
-     /tmp/ccccngp0.s:156    .text.stpSpiTx:0000000000000000 stpSpiTx
-     /tmp/ccccngp0.s:391    .text.stpSpiTx:0000000000000134 $d
+     /tmp/cciePhOU.s:17     .text.freqToLed:0000000000000000 $t
+     /tmp/cciePhOU.s:24     .text.freqToLed:0000000000000000 freqToLed
+     /tmp/cciePhOU.s:136    .text.freqToLed:0000000000000084 $d
+     /tmp/cciePhOU.s:149    .text.stpSpiTx:0000000000000000 $t
+     /tmp/cciePhOU.s:156    .text.stpSpiTx:0000000000000000 stpSpiTx
+     /tmp/cciePhOU.s:242    .text.stpSpiTx:0000000000000070 $d
+     /tmp/cciePhOU.s:247    .text.rainbow:0000000000000000 $t
+     /tmp/cciePhOU.s:254    .text.rainbow:0000000000000000 rainbow
+     /tmp/cciePhOU.s:343    .text.rainbow:0000000000000050 $d
+     /tmp/cciePhOU.s:348    .text.kitt:0000000000000000 $t
+     /tmp/cciePhOU.s:355    .text.kitt:0000000000000000 kitt
+     /tmp/cciePhOU.s:445    .text.kitt:0000000000000058 $d
+     /tmp/cciePhOU.s:450    .text.binary:0000000000000000 $t
+     /tmp/cciePhOU.s:457    .text.binary:0000000000000000 binary
+     /tmp/cciePhOU.s:504    .text.binary:0000000000000028 $d
 
 UNDEFINED SYMBOLS
 __aeabi_fcmplt
 HAL_GPIO_WritePin
-HAL_RCC_GetHCLKFreq
+HAL_Delay
+RX_FIFO

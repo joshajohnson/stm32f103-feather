@@ -6,6 +6,9 @@
 #include "dwt_stm32_delay.h"
 
 uint8_t freqToLed (float frequency);
+void rainbow(void);
+void kitt(void);
+void binary(void);
 void stpSpiTx (uint8_t leds);
 
 #endif

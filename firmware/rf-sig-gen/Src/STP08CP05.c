@@ -26,31 +26,74 @@ uint8_t freqToLed (float frequency)
     return leds;
 }
 
+void rainbow()
+{
+    uint8_t display = 0;
+    while ((RX_FIFO.dataReady == 0))
+    {
+        for (uint8_t i = 0; i < 8; i++)
+        {
+            stpSpiTx(display |= (1 << i));
+            HAL_Delay(250);
+        }
+
+        for (uint8_t i = 0; i < 8; i++)
+        {
+            stpSpiTx(display &= ~(1 << i));
+            HAL_Delay(250);
+        }
+    }
+}
+
+void kitt()
+{
+    uint8_t display = 0;
+    while ((RX_FIFO.dataReady == 0))
+    {
+        for (uint8_t i = 0; i < 8; i++)
+        {
+            stpSpiTx(display = (1 << i));
+            HAL_Delay(100);
+            if (RX_FIFO.dataReady == 1) break;
+        }
+        for (uint8_t i = 6; i > 0; i--)
+        {
+            stpSpiTx(display = (1 << i));
+            HAL_Delay(100);
+            if (RX_FIFO.dataReady == 1) break;
+        }
+    }
+}
+
+void binary()
+{
+    while ((RX_FIFO.dataReady == 0))
+    {
+        for (uint8_t i = 0; i <= 255; i++)
+        {
+            stpSpiTx(i);
+            HAL_Delay(50);
+            if (RX_FIFO.dataReady == 1) break;
+        }
+    }
+}
+
 void stpSpiTx(uint8_t leds)
 {
-    HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 0);
-    DWT_Delay_us(1);
 	// Transfer the bits
-	for (uint8_t i = 8; i > 0 ; i--)
+	for (uint8_t i = 0; i < 8; i++)
 	{
-		HAL_GPIO_WritePin(LED_SDI_GPIO_Port, LED_SDI_Pin, leds & (1 << i - 1));
-		DWT_Delay_us(1);
+		HAL_GPIO_WritePin(LED_SDI_GPIO_Port, LED_SDI_Pin, leds & (1 << i));
 		HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 1);
-		DWT_Delay_us(1);
 		HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 0);
 	}
-	HAL_GPIO_WritePin(LED_SDI_GPIO_Port, LED_SDI_Pin, 0);
-    DWT_Delay_us(1);
 
     // Latch Enable
-    HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 1);
     HAL_GPIO_WritePin(LED_LE_GPIO_Port, LED_LE_Pin, 1);
-    DWT_Delay_us(1);
-    HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 0);
     HAL_GPIO_WritePin(LED_LE_GPIO_Port, LED_LE_Pin, 0);
-    DWT_Delay_us(1);
 
     // Clock Again
     HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 1);
+    HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 0);
 	
 }

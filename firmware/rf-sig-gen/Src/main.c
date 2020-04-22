@@ -110,6 +110,7 @@ int main(void)
   enumerateUSB(); // Force USB enumeration
   txChainInit(&max2871Status, &txStatus);
   HAL_ADC_Start(&hadc1);
+  HAL_GPIO_WritePin(LED_CLK_GPIO_Port, LED_CLK_Pin, 0); //  LED Control
 
   /* USER CODE END 2 */
 

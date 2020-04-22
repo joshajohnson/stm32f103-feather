@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccHEr0ck.s 			page 1
+ARM GAS  /tmp/cc3pqADL.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
   31:Src/max2871.c **** 	uint32_t txReg;
   32:Src/max2871.c **** 	for (int j = 1; j >= 0; j--)
   33:Src/max2871.c **** 	{
-ARM GAS  /tmp/ccHEr0ck.s 			page 2
+ARM GAS  /tmp/cc3pqADL.s 			page 2
 
 
   34:Src/max2871.c **** 		for (int i = 5; i >= 0; i--)
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
   88:Src/max2871.c **** 	max2871Set_LD(1);
   89:Src/max2871.c **** 	max2871Set_Reserved();
   90:Src/max2871.c **** 
-ARM GAS  /tmp/ccHEr0ck.s 			page 3
+ARM GAS  /tmp/cc3pqADL.s 			page 3
 
 
   91:Src/max2871.c **** 	// Update info in struct
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
   56 001c 31E0     		b	.L2
   57              	.LVL4:
   58              	.L5:
-ARM GAS  /tmp/ccHEr0ck.s 			page 4
+ARM GAS  /tmp/cc3pqADL.s 			page 4
 
 
  115:Src/max2871.c **** 	{
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
   84              	.L3:
   28:Inc/dwt_stm32_delay.h **** 
   29:Inc/dwt_stm32_delay.h ****   /* Delay till end */
-ARM GAS  /tmp/ccHEr0ck.s 			page 5
+ARM GAS  /tmp/cc3pqADL.s 			page 5
 
 
   30:Inc/dwt_stm32_delay.h ****   while ((DWT->CYCCNT - clk_cycle_start) < microseconds);
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  131 0080 6DB2     		sxtb	r5, r5
  132              	.LVL15:
  133              	.L2:
-ARM GAS  /tmp/ccHEr0ck.s 			page 6
+ARM GAS  /tmp/cc3pqADL.s 			page 6
 
 
  114:Src/max2871.c **** 	{
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  177 00b8 00080140 		.word	1073809408
  178 00bc 000C0140 		.word	1073810432
  179 00c0 001000E0 		.word	-536866816
-ARM GAS  /tmp/ccHEr0ck.s 			page 7
+ARM GAS  /tmp/cc3pqADL.s 			page 7
 
 
  180 00c4 83DE1B43 		.word	1125899907
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  221              		.loc 1 143 0 discriminator 3
  222 0016 0122     		movs	r2, #1
  223 0018 2021     		movs	r1, #32
-ARM GAS  /tmp/ccHEr0ck.s 			page 8
+ARM GAS  /tmp/cc3pqADL.s 			page 8
 
 
  224 001a 1848     		ldr	r0, .L16+4
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  272 0058 5B68     		ldr	r3, [r3, #4]
  273 005a 9B1B     		subs	r3, r3, r6
  274 005c 8342     		cmp	r3, r0
-ARM GAS  /tmp/ccHEr0ck.s 			page 9
+ARM GAS  /tmp/cc3pqADL.s 			page 9
 
 
  275 005e FAD3     		bcc	.L13
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  319              		.loc 1 155 0
  320              		.cfi_startproc
  321              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/ccHEr0ck.s 			page 10
+ARM GAS  /tmp/cc3pqADL.s 			page 10
 
 
  322              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  370              		.syntax unified
  371              		.thumb
  372              		.thumb_func
-ARM GAS  /tmp/ccHEr0ck.s 			page 11
+ARM GAS  /tmp/cc3pqADL.s 			page 11
 
 
  373              		.fpu softvfp
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  170:Src/max2871.c **** 		diva = 6;
  171:Src/max2871.c **** 	else if (mhz < 187.5)
  419              		.loc 1 171 0
-ARM GAS  /tmp/ccHEr0ck.s 			page 12
+ARM GAS  /tmp/cc3pqADL.s 			page 12
 
 
  420 002a 6749     		ldr	r1, .L46+12
@@ -717,8 +717,8 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  462 0072 06E0     		b	.L25
  463              	.L42:
  183:Src/max2871.c **** 	else
- 184:Src/max2871.c **** 		printUSB((char *) "> Bad input frequency to max2871SetFrequency");
-ARM GAS  /tmp/ccHEr0ck.s 			page 13
+ 184:Src/max2871.c **** 		printUSB((char *) "> Bad input frequency to max2871SetFrequency\r\n");
+ARM GAS  /tmp/cc3pqADL.s 			page 13
 
 
  464              		.loc 1 184 0
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  506 00aa 5046     		mov	r0, r10
  507 00ac FFF7FEFF 		bl	__aeabi_ui2f
  508              	.LVL62:
-ARM GAS  /tmp/ccHEr0ck.s 			page 14
+ARM GAS  /tmp/cc3pqADL.s 			page 14
 
 
  509 00b0 8046     		mov	r8, r0
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  554              		.loc 1 176 0
  555 00f4 0326     		movs	r6, #3
  556 00f6 C4E7     		b	.L25
-ARM GAS  /tmp/ccHEr0ck.s 			page 15
+ARM GAS  /tmp/cc3pqADL.s 			page 15
 
 
  557              	.L37:
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  203:Src/max2871.c **** 
  204:Src/max2871.c **** 	// Set registers for Int-N configuration
  205:Src/max2871.c **** 	if (intN == 1)
-ARM GAS  /tmp/ccHEr0ck.s 			page 16
+ARM GAS  /tmp/cc3pqADL.s 			page 16
 
 
  604              		.loc 1 205 0
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  628              	.LVL88:
  209:Src/max2871.c **** 		max2871Set_CPL(0);
  629              		.loc 1 209 0
-ARM GAS  /tmp/ccHEr0ck.s 			page 17
+ARM GAS  /tmp/cc3pqADL.s 			page 17
 
 
  630 0156 5846     		mov	r0, fp
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  223:Src/max2871.c **** 		max2871Set_LDF(0);
  675              		.loc 1 223 0
  676 019e 40F6FF70 		movw	r0, #4095
-ARM GAS  /tmp/ccHEr0ck.s 			page 18
+ARM GAS  /tmp/cc3pqADL.s 			page 18
 
 
  677 01a2 FFF7FEFF 		bl	max2871Set_M
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  727              		.cfi_def_cfa_offset 8
  728              		.cfi_offset 4, -8
  729              		.cfi_offset 14, -4
-ARM GAS  /tmp/ccHEr0ck.s 			page 19
+ARM GAS  /tmp/cc3pqADL.s 			page 19
 
 
  730 0002 0446     		mov	r4, r0
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  244:Src/max2871.c **** 	max2871Status->CHIP_EN = 0;
  779              		.loc 1 244 0
  780 000e 0023     		movs	r3, #0
-ARM GAS  /tmp/ccHEr0ck.s 			page 20
+ARM GAS  /tmp/cc3pqADL.s 			page 20
 
 
  781 0010 2370     		strb	r3, [r4]
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  829 001a 0123     		movs	r3, #1
  830 001c 2372     		strb	r3, [r4, #8]
  253:Src/max2871.c **** 	max2871Status->RF_CHIP_EN = 1;
-ARM GAS  /tmp/ccHEr0ck.s 			page 21
+ARM GAS  /tmp/cc3pqADL.s 			page 21
 
 
  831              		.loc 1 253 0
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  879 0014 0023     		movs	r3, #0
  880 0016 2372     		strb	r3, [r4, #8]
  262:Src/max2871.c **** 	max2871Status->RF_CHIP_EN = 0;
-ARM GAS  /tmp/ccHEr0ck.s 			page 22
+ARM GAS  /tmp/cc3pqADL.s 			page 22
 
 
  881              		.loc 1 262 0
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  931 0015 16       		.byte	(.L65-.L67)/2
  932 0016 16       		.byte	(.L65-.L67)/2
  933 0017 13       		.byte	(.L70-.L67)/2
-ARM GAS  /tmp/ccHEr0ck.s 			page 23
+ARM GAS  /tmp/cc3pqADL.s 			page 23
 
 
  934              		.p2align 1
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  961              		.loc 1 280 0
  962 0032 F3E7     		b	.L71
  963              	.L70:
-ARM GAS  /tmp/ccHEr0ck.s 			page 24
+ARM GAS  /tmp/cc3pqADL.s 			page 24
 
 
  283:Src/max2871.c **** 			break;
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  1011 000e 08B1     		cbz	r0, .L77
  298:Src/max2871.c **** 		return 1;
  1012              		.loc 1 298 0
-ARM GAS  /tmp/ccHEr0ck.s 			page 25
+ARM GAS  /tmp/cc3pqADL.s 			page 25
 
 
  1013 0010 0120     		movs	r0, #1
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  1061 0010 0022     		movs	r2, #0
  1062 0012 2021     		movs	r1, #32
  1063 0014 2046     		mov	r0, r4
-ARM GAS  /tmp/ccHEr0ck.s 			page 26
+ARM GAS  /tmp/cc3pqADL.s 			page 26
 
 
  1064 0016 FFF7FEFF 		bl	HAL_GPIO_WritePin
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  1108              		.loc 1 38 0
  1109 0050 052C     		cmp	r4, #5
  1110 0052 F5D1     		bne	.L83
-ARM GAS  /tmp/ccHEr0ck.s 			page 27
+ARM GAS  /tmp/cc3pqADL.s 			page 27
 
 
   38:Src/max2871.c **** 		}
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  1155              	.LVL156:
   49:Src/max2871.c **** 	max2871Set_P(1);
  1156              		.loc 1 49 0
-ARM GAS  /tmp/ccHEr0ck.s 			page 28
+ARM GAS  /tmp/cc3pqADL.s 			page 28
 
 
  1157 008c 0020     		movs	r0, #0
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  1200              		.loc 1 60 0
  1201 00d0 0020     		movs	r0, #0
  1202 00d2 FFF7FEFF 		bl	max2871Set_LDF
-ARM GAS  /tmp/ccHEr0ck.s 			page 29
+ARM GAS  /tmp/cc3pqADL.s 			page 29
 
 
  1203              	.LVL168:
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  1246 0114 FFF7FEFF 		bl	max2871Set_CDM
  1247              	.LVL179:
   72:Src/max2871.c **** 	max2871Set_SDLDO(0);
-ARM GAS  /tmp/ccHEr0ck.s 			page 30
+ARM GAS  /tmp/cc3pqADL.s 			page 30
 
 
  1248              		.loc 1 72 0
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
   83:Src/max2871.c **** 	max2871Set_RFA_EN(0);	// Begin with power off
  1292              		.loc 1 83 0
  1293 015c 0020     		movs	r0, #0
-ARM GAS  /tmp/ccHEr0ck.s 			page 31
+ARM GAS  /tmp/cc3pqADL.s 			page 31
 
 
  1294 015e FFF7FEFF 		bl	max2871Set_BPWR
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  1336 019a 3046     		mov	r0, r6
  1337 019c FFF7FEFF 		bl	max2871CheckLD
  1338              	.LVL200:
-ARM GAS  /tmp/ccHEr0ck.s 			page 32
+ARM GAS  /tmp/cc3pqADL.s 			page 32
 
 
  102:Src/max2871.c **** 
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  1385 000e 0E4E     		ldr	r6, .L96
  1386 0010 0346     		mov	r3, r0
  1387 0012 2A46     		mov	r2, r5
-ARM GAS  /tmp/ccHEr0ck.s 			page 33
+ARM GAS  /tmp/cc3pqADL.s 			page 33
 
 
  1388 0014 0D49     		ldr	r1, .L96+4
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  1431 0048 00000000 		.word	.LANCHOR0
  1432 004c 00000000 		.word	.LC3
  1433 0050 18000000 		.word	.LC4
-ARM GAS  /tmp/ccHEr0ck.s 			page 34
+ARM GAS  /tmp/cc3pqADL.s 			page 34
 
 
  1434              		.cfi_endproc
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  1481 0020 2278     		ldrb	r2, [r4]	@ zero_extendqisi2
  1482 0022 2649     		ldr	r1, .L102+8
  1483 0024 02A8     		add	r0, sp, #8
-ARM GAS  /tmp/ccHEr0ck.s 			page 35
+ARM GAS  /tmp/cc3pqADL.s 			page 35
 
 
  1484 0026 FFF7FEFF 		bl	sprintf
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  1527              	.LVL229:
  340:Src/max2871.c **** 
  341:Src/max2871.c **** 	sprintf(str1, "> RFA Enable = %d\n", max2871Status->RFA_EN);
-ARM GAS  /tmp/ccHEr0ck.s 			page 36
+ARM GAS  /tmp/cc3pqADL.s 			page 36
 
 
  1528              		.loc 1 341 0
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  1569              		@ sp needed
  1570 00aa 30BD     		pop	{r4, r5, pc}
  1571              	.LVL236:
-ARM GAS  /tmp/ccHEr0ck.s 			page 37
+ARM GAS  /tmp/cc3pqADL.s 			page 37
 
 
  1572              	.L101:
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  1618      65722036 
  1618      203D2030 
  1618      7825780A 
-ARM GAS  /tmp/ccHEr0ck.s 			page 38
+ARM GAS  /tmp/cc3pqADL.s 			page 38
 
 
  1619              		.section	.rodata.max2871PrintStatus.str1.4,"aMS",%progbits,1
@@ -2278,100 +2278,101 @@ ARM GAS  /tmp/ccHEr0ck.s 			page 1
  1641      64426D0A 
  1642              		.section	.rodata.max2871SetFrequency.str1.4,"aMS",%progbits,1
  1643              		.align	2
-ARM GAS  /tmp/ccHEr0ck.s 			page 39
+ARM GAS  /tmp/cc3pqADL.s 			page 39
 
 
  1644              	.LC1:
- 1645 0000 3E204261 		.ascii	"> Bad input frequency to max2871SetFrequency\000"
+ 1645 0000 3E204261 		.ascii	"> Bad input frequency to max2871SetFrequency\015\012"
  1645      6420696E 
  1645      70757420 
  1645      66726571 
  1645      75656E63 
- 1646              		.section	.rodata.max2871SetPower.str1.4,"aMS",%progbits,1
- 1647              		.align	2
- 1648              	.LC2:
- 1649 0000 3E204261 		.ascii	"> Bad input power to max2871SetPower\000"
- 1649      6420696E 
- 1649      70757420 
- 1649      706F7765 
- 1649      7220746F 
- 1650              		.text
- 1651              	.Letext0:
- 1652              		.file 3 "/usr/include/newlib/machine/_default_types.h"
- 1653              		.file 4 "/usr/include/newlib/sys/_stdint.h"
- 1654              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
- 1655              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 1656              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
- 1657              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 1658              		.file 9 "Inc/main.h"
- 1659              		.file 10 "Inc/max2871.h"
- 1660              		.file 11 "/usr/include/newlib/sys/lock.h"
- 1661              		.file 12 "/usr/include/newlib/sys/_types.h"
- 1662              		.file 13 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
- 1663              		.file 14 "/usr/include/newlib/sys/reent.h"
- 1664              		.file 15 "/usr/include/newlib/stdlib.h"
- 1665              		.file 16 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
- 1666              		.file 17 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
- 1667              		.file 18 "Inc/usbd_cdc_if.h"
- 1668              		.file 19 "/usr/include/newlib/math.h"
- 1669              		.file 20 "/usr/include/newlib/stdio.h"
- 1670              		.file 21 "Inc/max2871_registers.h"
- 1671              		.file 22 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
- 1672              		.file 23 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
- 1673              		.file 24 "<built-in>"
-ARM GAS  /tmp/ccHEr0ck.s 			page 40
+ 1646 002e 00       		.ascii	"\000"
+ 1647              		.section	.rodata.max2871SetPower.str1.4,"aMS",%progbits,1
+ 1648              		.align	2
+ 1649              	.LC2:
+ 1650 0000 3E204261 		.ascii	"> Bad input power to max2871SetPower\000"
+ 1650      6420696E 
+ 1650      70757420 
+ 1650      706F7765 
+ 1650      7220746F 
+ 1651              		.text
+ 1652              	.Letext0:
+ 1653              		.file 3 "/usr/include/newlib/machine/_default_types.h"
+ 1654              		.file 4 "/usr/include/newlib/sys/_stdint.h"
+ 1655              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
+ 1656              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 1657              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 1658              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 1659              		.file 9 "Inc/main.h"
+ 1660              		.file 10 "Inc/max2871.h"
+ 1661              		.file 11 "/usr/include/newlib/sys/lock.h"
+ 1662              		.file 12 "/usr/include/newlib/sys/_types.h"
+ 1663              		.file 13 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
+ 1664              		.file 14 "/usr/include/newlib/sys/reent.h"
+ 1665              		.file 15 "/usr/include/newlib/stdlib.h"
+ 1666              		.file 16 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
+ 1667              		.file 17 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
+ 1668              		.file 18 "Inc/usbd_cdc_if.h"
+ 1669              		.file 19 "/usr/include/newlib/math.h"
+ 1670              		.file 20 "/usr/include/newlib/stdio.h"
+ 1671              		.file 21 "Inc/max2871_registers.h"
+ 1672              		.file 22 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 1673              		.file 23 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
+ 1674              		.file 24 "<built-in>"
+ARM GAS  /tmp/cc3pqADL.s 			page 40
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 max2871.c
-     /tmp/ccHEr0ck.s:16     .text.max2871SpiWrite:0000000000000000 $t
-     /tmp/ccHEr0ck.s:23     .text.max2871SpiWrite:0000000000000000 max2871SpiWrite
-     /tmp/ccHEr0ck.s:177    .text.max2871SpiWrite:00000000000000b8 $d
-     /tmp/ccHEr0ck.s:185    .text.max2871SpiRead:0000000000000000 $t
-     /tmp/ccHEr0ck.s:192    .text.max2871SpiRead:0000000000000000 max2871SpiRead
-     /tmp/ccHEr0ck.s:302    .text.max2871SpiRead:0000000000000078 $d
-     /tmp/ccHEr0ck.s:310    .text.max2871WriteRegisters:0000000000000000 $t
-     /tmp/ccHEr0ck.s:317    .text.max2871WriteRegisters:0000000000000000 max2871WriteRegisters
-     /tmp/ccHEr0ck.s:368    .text.max2871SetFrequency:0000000000000000 $t
-     /tmp/ccHEr0ck.s:375    .text.max2871SetFrequency:0000000000000000 max2871SetFrequency
-     /tmp/ccHEr0ck.s:695    .text.max2871SetFrequency:00000000000001bc $d
-     /tmp/ccHEr0ck.s:711    .text.max2871ChipEnable:0000000000000000 $t
-     /tmp/ccHEr0ck.s:718    .text.max2871ChipEnable:0000000000000000 max2871ChipEnable
-     /tmp/ccHEr0ck.s:747    .text.max2871ChipEnable:0000000000000014 $d
-     /tmp/ccHEr0ck.s:752    .text.max2871ChipDisable:0000000000000000 $t
-     /tmp/ccHEr0ck.s:759    .text.max2871ChipDisable:0000000000000000 max2871ChipDisable
-     /tmp/ccHEr0ck.s:788    .text.max2871ChipDisable:0000000000000014 $d
-     /tmp/ccHEr0ck.s:793    .text.max2871RFEnable:0000000000000000 $t
-     /tmp/ccHEr0ck.s:800    .text.max2871RFEnable:0000000000000000 max2871RFEnable
-     /tmp/ccHEr0ck.s:842    .text.max2871RFEnable:0000000000000028 $d
-     /tmp/ccHEr0ck.s:847    .text.max2871RFDisable:0000000000000000 $t
-     /tmp/ccHEr0ck.s:854    .text.max2871RFDisable:0000000000000000 max2871RFDisable
-     /tmp/ccHEr0ck.s:892    .text.max2871RFDisable:0000000000000020 $d
-     /tmp/ccHEr0ck.s:897    .text.max2871SetPower:0000000000000000 $t
-     /tmp/ccHEr0ck.s:904    .text.max2871SetPower:0000000000000000 max2871SetPower
-     /tmp/ccHEr0ck.s:924    .text.max2871SetPower:000000000000000e $d
-     /tmp/ccHEr0ck.s:934    .text.max2871SetPower:0000000000000018 $t
-     /tmp/ccHEr0ck.s:978    .text.max2871SetPower:0000000000000044 $d
-     /tmp/ccHEr0ck.s:983    .text.max2871CheckLD:0000000000000000 $t
-     /tmp/ccHEr0ck.s:990    .text.max2871CheckLD:0000000000000000 max2871CheckLD
-     /tmp/ccHEr0ck.s:1025   .text.max2871CheckLD:000000000000001c $d
-     /tmp/ccHEr0ck.s:1030   .text.max2871Setup:0000000000000000 $t
-     /tmp/ccHEr0ck.s:1037   .text.max2871Setup:0000000000000000 max2871Setup
-     /tmp/ccHEr0ck.s:1345   .text.max2871Setup:00000000000001a4 $d
-     /tmp/ccHEr0ck.s:1352   .text.max2871PrintRegisters:0000000000000000 $t
-     /tmp/ccHEr0ck.s:1359   .text.max2871PrintRegisters:0000000000000000 max2871PrintRegisters
-     /tmp/ccHEr0ck.s:1431   .text.max2871PrintRegisters:0000000000000048 $d
-     /tmp/ccHEr0ck.s:1438   .text.max2871PrintStatus:0000000000000000 $t
-     /tmp/ccHEr0ck.s:1445   .text.max2871PrintStatus:0000000000000000 max2871PrintStatus
-     /tmp/ccHEr0ck.s:1583   .text.max2871PrintStatus:00000000000000b4 $d
+     /tmp/cc3pqADL.s:16     .text.max2871SpiWrite:0000000000000000 $t
+     /tmp/cc3pqADL.s:23     .text.max2871SpiWrite:0000000000000000 max2871SpiWrite
+     /tmp/cc3pqADL.s:177    .text.max2871SpiWrite:00000000000000b8 $d
+     /tmp/cc3pqADL.s:185    .text.max2871SpiRead:0000000000000000 $t
+     /tmp/cc3pqADL.s:192    .text.max2871SpiRead:0000000000000000 max2871SpiRead
+     /tmp/cc3pqADL.s:302    .text.max2871SpiRead:0000000000000078 $d
+     /tmp/cc3pqADL.s:310    .text.max2871WriteRegisters:0000000000000000 $t
+     /tmp/cc3pqADL.s:317    .text.max2871WriteRegisters:0000000000000000 max2871WriteRegisters
+     /tmp/cc3pqADL.s:368    .text.max2871SetFrequency:0000000000000000 $t
+     /tmp/cc3pqADL.s:375    .text.max2871SetFrequency:0000000000000000 max2871SetFrequency
+     /tmp/cc3pqADL.s:695    .text.max2871SetFrequency:00000000000001bc $d
+     /tmp/cc3pqADL.s:711    .text.max2871ChipEnable:0000000000000000 $t
+     /tmp/cc3pqADL.s:718    .text.max2871ChipEnable:0000000000000000 max2871ChipEnable
+     /tmp/cc3pqADL.s:747    .text.max2871ChipEnable:0000000000000014 $d
+     /tmp/cc3pqADL.s:752    .text.max2871ChipDisable:0000000000000000 $t
+     /tmp/cc3pqADL.s:759    .text.max2871ChipDisable:0000000000000000 max2871ChipDisable
+     /tmp/cc3pqADL.s:788    .text.max2871ChipDisable:0000000000000014 $d
+     /tmp/cc3pqADL.s:793    .text.max2871RFEnable:0000000000000000 $t
+     /tmp/cc3pqADL.s:800    .text.max2871RFEnable:0000000000000000 max2871RFEnable
+     /tmp/cc3pqADL.s:842    .text.max2871RFEnable:0000000000000028 $d
+     /tmp/cc3pqADL.s:847    .text.max2871RFDisable:0000000000000000 $t
+     /tmp/cc3pqADL.s:854    .text.max2871RFDisable:0000000000000000 max2871RFDisable
+     /tmp/cc3pqADL.s:892    .text.max2871RFDisable:0000000000000020 $d
+     /tmp/cc3pqADL.s:897    .text.max2871SetPower:0000000000000000 $t
+     /tmp/cc3pqADL.s:904    .text.max2871SetPower:0000000000000000 max2871SetPower
+     /tmp/cc3pqADL.s:924    .text.max2871SetPower:000000000000000e $d
+     /tmp/cc3pqADL.s:934    .text.max2871SetPower:0000000000000018 $t
+     /tmp/cc3pqADL.s:978    .text.max2871SetPower:0000000000000044 $d
+     /tmp/cc3pqADL.s:983    .text.max2871CheckLD:0000000000000000 $t
+     /tmp/cc3pqADL.s:990    .text.max2871CheckLD:0000000000000000 max2871CheckLD
+     /tmp/cc3pqADL.s:1025   .text.max2871CheckLD:000000000000001c $d
+     /tmp/cc3pqADL.s:1030   .text.max2871Setup:0000000000000000 $t
+     /tmp/cc3pqADL.s:1037   .text.max2871Setup:0000000000000000 max2871Setup
+     /tmp/cc3pqADL.s:1345   .text.max2871Setup:00000000000001a4 $d
+     /tmp/cc3pqADL.s:1352   .text.max2871PrintRegisters:0000000000000000 $t
+     /tmp/cc3pqADL.s:1359   .text.max2871PrintRegisters:0000000000000000 max2871PrintRegisters
+     /tmp/cc3pqADL.s:1431   .text.max2871PrintRegisters:0000000000000048 $d
+     /tmp/cc3pqADL.s:1438   .text.max2871PrintStatus:0000000000000000 $t
+     /tmp/cc3pqADL.s:1445   .text.max2871PrintStatus:0000000000000000 max2871PrintStatus
+     /tmp/cc3pqADL.s:1583   .text.max2871PrintStatus:00000000000000b4 $d
                             *COM*:000000000000000c max2871Status
-     /tmp/ccHEr0ck.s:1610   .bss.str1:0000000000000000 str1
-     /tmp/ccHEr0ck.s:1598   .rodata:0000000000000000 $d
-     /tmp/ccHEr0ck.s:1606   .bss.str1:0000000000000000 $d
-     /tmp/ccHEr0ck.s:1613   .rodata.max2871PrintRegisters.str1.4:0000000000000000 $d
-     /tmp/ccHEr0ck.s:1620   .rodata.max2871PrintStatus.str1.4:0000000000000000 $d
-     /tmp/ccHEr0ck.s:1643   .rodata.max2871SetFrequency.str1.4:0000000000000000 $d
-     /tmp/ccHEr0ck.s:1647   .rodata.max2871SetPower.str1.4:0000000000000000 $d
+     /tmp/cc3pqADL.s:1610   .bss.str1:0000000000000000 str1
+     /tmp/cc3pqADL.s:1598   .rodata:0000000000000000 $d
+     /tmp/cc3pqADL.s:1606   .bss.str1:0000000000000000 $d
+     /tmp/cc3pqADL.s:1613   .rodata.max2871PrintRegisters.str1.4:0000000000000000 $d
+     /tmp/cc3pqADL.s:1620   .rodata.max2871PrintStatus.str1.4:0000000000000000 $d
+     /tmp/cc3pqADL.s:1643   .rodata.max2871SetFrequency.str1.4:0000000000000000 $d
+     /tmp/cc3pqADL.s:1648   .rodata.max2871SetPower.str1.4:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 HAL_GPIO_WritePin
@@ -2379,7 +2380,7 @@ HAL_RCC_GetHCLKFreq
 HAL_GPIO_ReadPin
 max2871GetRegister
 __aeabi_fcmpge
-ARM GAS  /tmp/ccHEr0ck.s 			page 41
+ARM GAS  /tmp/cc3pqADL.s 			page 41
 
 
 __aeabi_fcmplt
@@ -2439,7 +2440,7 @@ max2871Set_BS
 max2871Set_FB
 max2871Set_SDVCO
 max2871Set_MTLD
-ARM GAS  /tmp/ccHEr0ck.s 			page 42
+ARM GAS  /tmp/cc3pqADL.s 			page 42
 
 
 max2871Set_BDIV
