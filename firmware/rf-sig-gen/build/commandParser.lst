@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cckoolMq.s 			page 1
+ARM GAS  /tmp/cccqAtJW.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
   42              		.cfi_offset 10, -12
   43              		.cfi_offset 11, -8
   44              		.cfi_offset 14, -4
-ARM GAS  /tmp/cckoolMq.s 			page 2
+ARM GAS  /tmp/cccqAtJW.s 			page 2
 
 
   45 0004 CBB0     		sub	sp, sp, #300
@@ -118,14 +118,14 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
   82              	.LVL6:
   83 0034 DBB2     		uxtb	r3, r3
   84              	.LVL7:
-ARM GAS  /tmp/cckoolMq.s 			page 3
+ARM GAS  /tmp/cccqAtJW.s 			page 3
 
 
   85              	.L2:
   27:Src/commandParser.c **** 	{
   86              		.loc 1 27 0 is_stmt 0 discriminator 1
   87 0036 13F0800F 		tst	r3, #128
-  88 003a 0CD1     		bne	.L37
+  88 003a 0CD1     		bne	.L38
   29:Src/commandParser.c **** 			usrMsg[i] = '\0';
   89              		.loc 1 29 0 is_stmt 1
   90 003c 1946     		mov	r1, r3
@@ -141,7 +141,7 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
   99 0050 2C28     		cmp	r0, #44
  100 0052 EED1     		bne	.L4
  101 0054 E8E7     		b	.L3
- 102              	.L37:
+ 102              	.L38:
  103              	.LBE2:
   31:Src/commandParser.c **** 	}
   32:Src/commandParser.c **** 
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  126              		.loc 1 22 0
  127 0072 0025     		movs	r5, #0
  128 0074 14E0     		b	.L8
-ARM GAS  /tmp/cckoolMq.s 			page 4
+ARM GAS  /tmp/cccqAtJW.s 			page 4
 
 
  129              	.LVL12:
@@ -238,19 +238,19 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  162              	.LVL18:
  163              	.L8:
  164              	.LBE3:
-ARM GAS  /tmp/cckoolMq.s 			page 5
+ARM GAS  /tmp/cccqAtJW.s 			page 5
 
 
   42:Src/commandParser.c **** 	{
  165              		.loc 1 42 0
  166 00a0 13F0800F 		tst	r3, #128
- 167 00a4 09D1     		bne	.L38
+ 167 00a4 09D1     		bne	.L39
   45:Src/commandParser.c **** 			i++;
  168              		.loc 1 45 0
  169 00a6 4AAA     		add	r2, sp, #296
  170 00a8 1A44     		add	r2, r2, r3
  171 00aa 12F8802C 		ldrb	r2, [r2, #-128]	@ zero_extendqisi2
- 172 00ae 12B9     		cbnz	r2, .L35
+ 172 00ae 12B9     		cbnz	r2, .L36
   46:Src/commandParser.c **** 		else
  173              		.loc 1 46 0
  174 00b0 0133     		adds	r3, r3, #1
@@ -258,13 +258,13 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  176 00b2 DBB2     		uxtb	r3, r3
  177              	.LVL20:
  178 00b4 F4E7     		b	.L8
- 179              	.L35:
+ 179              	.L36:
  180              	.LBB4:
   50:Src/commandParser.c **** 			while (usrMsg[i] != '\0')
  181              		.loc 1 50 0
  182 00b6 0022     		movs	r2, #0
  183 00b8 E6E7     		b	.L9
- 184              	.L38:
+ 184              	.L39:
  185              	.LBE4:
   59:Src/commandParser.c **** 		}
   60:Src/commandParser.c **** 
@@ -276,10 +276,10 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  186              		.loc 1 65 0
  187 00ba 0622     		movs	r2, #6
  188 00bc 22A9     		add	r1, sp, #136
- 189 00be B848     		ldr	r0, .L52
+ 189 00be B848     		ldr	r0, .L53
  190 00c0 FFF7FEFF 		bl	strncmp
  191              	.LVL21:
- 192 00c4 60B3     		cbz	r0, .L39
+ 192 00c4 60B3     		cbz	r0, .L40
   66:Src/commandParser.c **** 	{
   67:Src/commandParser.c **** 		sigGen(atof(args[0]), atof(args[1]), max2871Status, txStatus);
   68:Src/commandParser.c **** 
@@ -291,14 +291,14 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  193              		.loc 1 73 0
  194 00c6 0522     		movs	r2, #5
  195 00c8 22A9     		add	r1, sp, #136
- 196 00ca B648     		ldr	r0, .L52+4
+ 196 00ca B648     		ldr	r0, .L53+4
  197 00cc FFF7FEFF 		bl	strncmp
  198              	.LVL22:
  199 00d0 0028     		cmp	r0, #0
- 200 00d2 53D0     		beq	.L40
+ 200 00d2 53D0     		beq	.L41
   74:Src/commandParser.c **** 	{
   75:Src/commandParser.c **** 		sprintf((char *)txStr, "> Sweep: Start = %0.2f MHz, fFinish = %0.2f dBm Power = %0.2f dBm\n", ato
-ARM GAS  /tmp/cckoolMq.s 			page 6
+ARM GAS  /tmp/cccqAtJW.s 			page 6
 
 
   76:Src/commandParser.c **** 		printUSB(txStr);
@@ -314,11 +314,11 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  201              		.loc 1 85 0
  202 00d4 0822     		movs	r2, #8
  203 00d6 22A9     		add	r1, sp, #136
- 204 00d8 B348     		ldr	r0, .L52+8
+ 204 00d8 B348     		ldr	r0, .L53+8
  205 00da FFF7FEFF 		bl	strncmp
  206              	.LVL23:
  207 00de 0028     		cmp	r0, #0
- 208 00e0 00F0AB80 		beq	.L41
+ 208 00e0 00F0AB80 		beq	.L42
   86:Src/commandParser.c **** 	{
   87:Src/commandParser.c **** 		max2871RFEnable(max2871Status);
   88:Src/commandParser.c **** 		enablePA(txStatus);
@@ -329,11 +329,11 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  209              		.loc 1 92 0
  210 00e4 0922     		movs	r2, #9
  211 00e6 22A9     		add	r1, sp, #136
- 212 00e8 B048     		ldr	r0, .L52+12
+ 212 00e8 B048     		ldr	r0, .L53+12
  213 00ea FFF7FEFF 		bl	strncmp
  214              	.LVL24:
  215 00ee 0028     		cmp	r0, #0
- 216 00f0 00F0AD80 		beq	.L42
+ 216 00f0 00F0AD80 		beq	.L43
   93:Src/commandParser.c **** 	{
   94:Src/commandParser.c **** 		max2871RFDisable(max2871Status);
   95:Src/commandParser.c **** 		disablePA(txStatus);
@@ -344,7 +344,7 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  217              		.loc 1 99 0
  218 00f4 0622     		movs	r2, #6
  219 00f6 22A9     		add	r1, sp, #136
- 220 00f8 AD48     		ldr	r0, .L52+16
+ 220 00f8 AD48     		ldr	r0, .L53+16
  221 00fa FFF7FEFF 		bl	strncmp
  222              	.LVL25:
  223 00fe 0028     		cmp	r0, #0
@@ -354,11 +354,11 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  225              		.loc 1 101 0
  226 0104 9DF82830 		ldrb	r3, [sp, #40]	@ zero_extendqisi2
  227 0108 762B     		cmp	r3, #118
- 228 010a 00F0AA80 		beq	.L43
+ 228 010a 00F0AA80 		beq	.L44
  102:Src/commandParser.c **** 		{
  103:Src/commandParser.c **** 			args[0][0] = (int32_t) "";
  104:Src/commandParser.c **** 			max2871PrintStatus(VERBOSE,max2871Status);
-ARM GAS  /tmp/cckoolMq.s 			page 7
+ARM GAS  /tmp/cccqAtJW.s 			page 7
 
 
  105:Src/commandParser.c **** 			txChainPrintStatus(VERBOSE,txStatus);
@@ -378,7 +378,7 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  237 011a FFF7FEFF 		bl	txChainPrintStatus
  238              	.LVL27:
  239 011e 2AE0     		b	.L1
- 240              	.L39:
+ 240              	.L40:
   67:Src/commandParser.c **** 
  241              		.loc 1 67 0
  242 0120 0AA8     		add	r0, sp, #40
@@ -410,15 +410,15 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  267              	.LVL34:
  268 0154 0646     		mov	r6, r0
  269 0156 0F46     		mov	r7, r1
- 270 0158 964C     		ldr	r4, .L52+20
+ 270 0158 964C     		ldr	r4, .L53+20
  271 015a 2846     		mov	r0, r5
  272 015c FFF7FEFF 		bl	__aeabi_f2d
  273              	.LVL35:
  274 0160 CDE90001 		strd	r0, [sp]
  275 0164 3246     		mov	r2, r6
  276 0166 3B46     		mov	r3, r7
- 277 0168 9349     		ldr	r1, .L52+24
-ARM GAS  /tmp/cckoolMq.s 			page 8
+ 277 0168 9349     		ldr	r1, .L53+24
+ARM GAS  /tmp/cccqAtJW.s 			page 8
 
 
  278 016a 2046     		mov	r0, r4
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  156:Src/commandParser.c **** 	{
  157:Src/commandParser.c **** 		max2871RFEnable(max2871Status);
  158:Src/commandParser.c **** 		printUSB("> LO Enabled \r\n");
-ARM GAS  /tmp/cckoolMq.s 			page 9
+ARM GAS  /tmp/cccqAtJW.s 			page 9
 
 
  159:Src/commandParser.c **** 	}
@@ -529,19 +529,24 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  204:Src/commandParser.c **** 		printUSB((char *)"> enablePA\r\n");
  205:Src/commandParser.c **** 		printUSB((char *)"> disablePA\r\n");
  206:Src/commandParser.c **** 	}
- 207:Src/commandParser.c **** 	else
- 208:Src/commandParser.c **** 	{
- 209:Src/commandParser.c **** 		printUSB("> Not found, try again\r\n");
- 210:Src/commandParser.c **** 		sprintf((char *)txStr, "> %s\n", command);
- 211:Src/commandParser.c **** 		printUSB(txStr);
- 212:Src/commandParser.c **** 
- 213:Src/commandParser.c **** 	}
- 214:Src/commandParser.c **** 
- 215:Src/commandParser.c **** }
-ARM GAS  /tmp/cckoolMq.s 			page 10
+ 207:Src/commandParser.c **** 
+ 208:Src/commandParser.c **** 	else if (strncmp("\r\n", command, 2) == 0)
+ 209:Src/commandParser.c **** 	{
+ 210:Src/commandParser.c **** 		printUSB("> Break\r\n");
+ 211:Src/commandParser.c **** 	}
+ 212:Src/commandParser.c **** 	else
+ 213:Src/commandParser.c **** 	{
+ 214:Src/commandParser.c **** 		printUSB("> Not found, try again\r\n");
+ 215:Src/commandParser.c **** 		sprintf((char *)txStr, "> %s\n", command);
+ARM GAS  /tmp/cccqAtJW.s 			page 10
 
 
- 286              		.loc 1 215 0
+ 216:Src/commandParser.c **** 		printUSB(txStr);
+ 217:Src/commandParser.c **** 
+ 218:Src/commandParser.c **** 	}
+ 219:Src/commandParser.c **** 
+ 220:Src/commandParser.c **** }
+ 286              		.loc 1 220 0
  287 0176 4BB0     		add	sp, sp, #300
  288              	.LCFI2:
  289              		.cfi_remember_state
@@ -549,7 +554,7 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  291              		@ sp needed
  292 0178 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
  293              	.LVL38:
- 294              	.L40:
+ 294              	.L41:
  295              	.LCFI3:
  296              		.cfi_restore_state
   75:Src/commandParser.c **** 		printUSB(txStr);
@@ -568,12 +573,12 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  309 0190 12A8     		add	r0, sp, #72
  310 0192 FFF7FEFF 		bl	atof
  311              	.LVL42:
- 312 0196 DFF81C82 		ldr	r8, .L52+20
+ 312 0196 DFF81C82 		ldr	r8, .L53+20
  313 019a CDE90201 		strd	r0, [sp, #8]
  314 019e CDE90045 		strd	r4, [sp]
  315 01a2 3246     		mov	r2, r6
  316 01a4 3B46     		mov	r3, r7
- 317 01a6 8549     		ldr	r1, .L52+28
+ 317 01a6 8549     		ldr	r1, .L53+28
  318 01a8 4046     		mov	r0, r8
  319 01aa FFF7FEFF 		bl	sprintf
  320              	.LVL43:
@@ -593,14 +598,14 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  331              	.LVL45:
  332 01bc CDE90401 		strd	r0, [sp, #16]
  333 01c0 0EA8     		add	r0, sp, #56
+ARM GAS  /tmp/cccqAtJW.s 			page 11
+
+
  334 01c2 FFF7FEFF 		bl	atof
  335              	.LVL46:
  336 01c6 0446     		mov	r4, r0
  337 01c8 0D46     		mov	r5, r1
  338 01ca 12A8     		add	r0, sp, #72
-ARM GAS  /tmp/cckoolMq.s 			page 11
-
-
  339 01cc FFF7FEFF 		bl	atof
  340              	.LVL47:
  341 01d0 0646     		mov	r6, r0
@@ -648,19 +653,19 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  383              	.L16:
   78:Src/commandParser.c **** 		{
  384              		.loc 1 78 0
- 385 022e 644B     		ldr	r3, .L52+32
+ 385 022e 644B     		ldr	r3, .L53+32
  386 0230 93F88830 		ldrb	r3, [r3, #136]	@ zero_extendqisi2
  387 0234 002B     		cmp	r3, #0
  388 0236 BED0     		beq	.L17
  389 0238 9DE7     		b	.L1
+ARM GAS  /tmp/cccqAtJW.s 			page 12
+
+
  390              	.LVL56:
- 391              	.L41:
+ 391              	.L42:
   87:Src/commandParser.c **** 		enablePA(txStatus);
  392              		.loc 1 87 0
  393 023a 5846     		mov	r0, fp
-ARM GAS  /tmp/cckoolMq.s 			page 12
-
-
  394 023c FFF7FEFF 		bl	max2871RFEnable
  395              	.LVL57:
   88:Src/commandParser.c **** 		printUSB("> RF Enabled \r\n");
@@ -670,11 +675,11 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  399              	.LVL58:
   89:Src/commandParser.c **** 	}
  400              		.loc 1 89 0
- 401 0246 5F48     		ldr	r0, .L52+36
+ 401 0246 5F48     		ldr	r0, .L53+36
  402 0248 FFF7FEFF 		bl	printUSB
  403              	.LVL59:
  404 024c 93E7     		b	.L1
- 405              	.L42:
+ 405              	.L43:
   94:Src/commandParser.c **** 		disablePA(txStatus);
  406              		.loc 1 94 0
  407 024e 5846     		mov	r0, fp
@@ -687,14 +692,14 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  413              	.LVL61:
   96:Src/commandParser.c **** 	}
  414              		.loc 1 96 0
- 415 025a 5B48     		ldr	r0, .L52+40
+ 415 025a 5B48     		ldr	r0, .L53+40
  416 025c FFF7FEFF 		bl	printUSB
  417              	.LVL62:
  418 0260 89E7     		b	.L1
- 419              	.L43:
+ 419              	.L44:
  103:Src/commandParser.c **** 			max2871PrintStatus(VERBOSE,max2871Status);
  420              		.loc 1 103 0
- 421 0262 5A4B     		ldr	r3, .L52+44
+ 421 0262 5A4B     		ldr	r3, .L53+44
  422 0264 8DF82830 		strb	r3, [sp, #40]
  104:Src/commandParser.c **** 			txChainPrintStatus(VERBOSE,txStatus);
  423              		.loc 1 104 0
@@ -713,55 +718,55 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  114:Src/commandParser.c **** 	{
  435              		.loc 1 114 0
  436 027a 0522     		movs	r2, #5
+ARM GAS  /tmp/cccqAtJW.s 			page 13
+
+
  437 027c 22A9     		add	r1, sp, #136
- 438 027e 5448     		ldr	r0, .L52+48
+ 438 027e 5448     		ldr	r0, .L53+48
  439 0280 FFF7FEFF 		bl	strncmp
  440              	.LVL65:
  441 0284 0028     		cmp	r0, #0
-ARM GAS  /tmp/cckoolMq.s 			page 13
-
-
- 442 0286 37D0     		beq	.L44
+ 442 0286 37D0     		beq	.L45
  119:Src/commandParser.c **** 	{
  443              		.loc 1 119 0
  444 0288 0322     		movs	r2, #3
  445 028a 22A9     		add	r1, sp, #136
- 446 028c 5148     		ldr	r0, .L52+52
+ 446 028c 5148     		ldr	r0, .L53+52
  447 028e FFF7FEFF 		bl	strncmp
  448              	.LVL66:
  449 0292 0028     		cmp	r0, #0
- 450 0294 34D0     		beq	.L45
+ 450 0294 34D0     		beq	.L46
  124:Src/commandParser.c **** 	{
  451              		.loc 1 124 0
  452 0296 0722     		movs	r2, #7
  453 0298 22A9     		add	r1, sp, #136
- 454 029a 4F48     		ldr	r0, .L52+56
+ 454 029a 4F48     		ldr	r0, .L53+56
  455 029c FFF7FEFF 		bl	strncmp
  456              	.LVL67:
  457 02a0 0028     		cmp	r0, #0
- 458 02a2 34D0     		beq	.L46
+ 458 02a2 34D0     		beq	.L47
  129:Src/commandParser.c **** 	{
  459              		.loc 1 129 0
  460 02a4 0422     		movs	r2, #4
  461 02a6 22A9     		add	r1, sp, #136
- 462 02a8 4C48     		ldr	r0, .L52+60
+ 462 02a8 4C48     		ldr	r0, .L53+60
  463 02aa FFF7FEFF 		bl	strncmp
  464              	.LVL68:
  465 02ae 0028     		cmp	r0, #0
- 466 02b0 30D0     		beq	.L47
+ 466 02b0 30D0     		beq	.L48
  134:Src/commandParser.c **** 	{
  467              		.loc 1 134 0
  468 02b2 0622     		movs	r2, #6
  469 02b4 22A9     		add	r1, sp, #136
- 470 02b6 4A48     		ldr	r0, .L52+64
+ 470 02b6 4A48     		ldr	r0, .L53+64
  471 02b8 FFF7FEFF 		bl	strncmp
  472              	.LVL69:
- 473 02bc 68B3     		cbz	r0, .L48
+ 473 02bc 68B3     		cbz	r0, .L49
  140:Src/commandParser.c **** 	{
  474              		.loc 1 140 0
  475 02be 0B22     		movs	r2, #11
  476 02c0 22A9     		add	r1, sp, #136
- 477 02c2 4848     		ldr	r0, .L52+68
+ 477 02c2 4848     		ldr	r0, .L53+68
  478 02c4 FFF7FEFF 		bl	strncmp
  479              	.LVL70:
  480 02c8 50BB     		cbnz	r0, .L27
@@ -773,23 +778,23 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  485              	.LVL71:
  486 02d0 5946     		mov	r1, fp
  487 02d2 40B2     		sxtb	r0, r0
+ARM GAS  /tmp/cccqAtJW.s 			page 14
+
+
  488 02d4 FFF7FEFF 		bl	max2871SetPower
  489              	.LVL72:
  143:Src/commandParser.c **** 		sprintf((char *)txStr, "> Power set to: %d dBm\n", powerArray[max2871Status->rfPower]);
  490              		.loc 1 143 0 discriminator 3
  491 02d8 09AB     		add	r3, sp, #36
-ARM GAS  /tmp/cckoolMq.s 			page 14
-
-
- 492 02da 434A     		ldr	r2, .L52+72
+ 492 02da 434A     		ldr	r2, .L53+72
  493 02dc 1268     		ldr	r2, [r2]
  494 02de 0992     		str	r2, [sp, #36]
  144:Src/commandParser.c **** 		printUSB(txStr);
  495              		.loc 1 144 0 discriminator 3
  496 02e0 9BF80A20 		ldrb	r2, [fp, #10]	@ zero_extendqisi2
- 497 02e4 334C     		ldr	r4, .L52+20
+ 497 02e4 334C     		ldr	r4, .L53+20
  498 02e6 9A56     		ldrsb	r2, [r3, r2]
- 499 02e8 4049     		ldr	r1, .L52+76
+ 499 02e8 4049     		ldr	r1, .L53+76
  500 02ea 2046     		mov	r0, r4
  501 02ec FFF7FEFF 		bl	sprintf
  502              	.LVL73:
@@ -800,14 +805,14 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  506              	.LVL74:
  507              	.LBE5:
  508 02f6 3EE7     		b	.L1
- 509              	.L44:
+ 509              	.L45:
  116:Src/commandParser.c **** 	}
  510              		.loc 1 116 0
- 511 02f8 3D48     		ldr	r0, .L52+80
+ 511 02f8 3D48     		ldr	r0, .L53+80
  512 02fa FFF7FEFF 		bl	printUSB
  513              	.LVL75:
  514 02fe 3AE7     		b	.L1
- 515              	.L45:
+ 515              	.L46:
  121:Src/commandParser.c **** 	}
  516              		.loc 1 121 0
  517 0300 0AA8     		add	r0, sp, #40
@@ -817,58 +822,58 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  521 0308 FFF7FEFF 		bl	stpSpiTx
  522              	.LVL77:
  523 030c 33E7     		b	.L1
- 524              	.L46:
+ 524              	.L47:
  126:Src/commandParser.c **** 	}
  525              		.loc 1 126 0
  526 030e FFF7FEFF 		bl	rainbow
  527              	.LVL78:
  528 0312 30E7     		b	.L1
- 529              	.L47:
+ 529              	.L48:
  131:Src/commandParser.c **** 	}
  530              		.loc 1 131 0
  531 0314 FFF7FEFF 		bl	kitt
  532              	.LVL79:
  533 0318 2DE7     		b	.L1
- 534              	.L48:
+ 534              	.L49:
  136:Src/commandParser.c **** 	}
  535              		.loc 1 136 0
  536 031a FFF7FEFF 		bl	binary
+ARM GAS  /tmp/cccqAtJW.s 			page 15
+
+
  537              	.LVL80:
  538 031e 2AE7     		b	.L1
  539              	.L27:
  148:Src/commandParser.c **** 	{
  540              		.loc 1 148 0
-ARM GAS  /tmp/cckoolMq.s 			page 15
-
-
  541 0320 0E22     		movs	r2, #14
  542 0322 22A9     		add	r1, sp, #136
- 543 0324 3348     		ldr	r0, .L52+84
+ 543 0324 3348     		ldr	r0, .L53+84
  544 0326 FFF7FEFF 		bl	strncmp
  545              	.LVL81:
- 546 032a D0B1     		cbz	r0, .L49
+ 546 032a D0B1     		cbz	r0, .L50
  155:Src/commandParser.c **** 	{
  547              		.loc 1 155 0
  548 032c 0822     		movs	r2, #8
  549 032e 22A9     		add	r1, sp, #136
- 550 0330 3148     		ldr	r0, .L52+88
+ 550 0330 3148     		ldr	r0, .L53+88
  551 0332 FFF7FEFF 		bl	strncmp
  552              	.LVL82:
- 553 0336 58B3     		cbz	r0, .L50
+ 553 0336 58B3     		cbz	r0, .L51
  161:Src/commandParser.c **** 	{
  554              		.loc 1 161 0
  555 0338 0822     		movs	r2, #8
  556 033a 22A9     		add	r1, sp, #136
- 557 033c 2F48     		ldr	r0, .L52+92
+ 557 033c 2F48     		ldr	r0, .L53+92
  558 033e FFF7FEFF 		bl	strncmp
  559              	.LVL83:
  560 0342 0028     		cmp	r0, #0
- 561 0344 64D0     		beq	.L51
+ 561 0344 64D0     		beq	.L52
  167:Src/commandParser.c **** 	{
  562              		.loc 1 167 0
  563 0346 0822     		movs	r2, #8
  564 0348 22A9     		add	r1, sp, #136
- 565 034a 2D48     		ldr	r0, .L52+96
+ 565 034a 2D48     		ldr	r0, .L53+96
  566 034c FFF7FEFF 		bl	strncmp
  567              	.LVL84:
  568 0350 0028     		cmp	r0, #0
@@ -880,11 +885,11 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  573              	.LVL85:
  170:Src/commandParser.c **** 	}
  574              		.loc 1 170 0
- 575 035a 2A48     		ldr	r0, .L52+100
+ 575 035a 2A48     		ldr	r0, .L53+100
  576 035c FFF7FEFF 		bl	printUSB
  577              	.LVL86:
  578 0360 09E7     		b	.L1
- 579              	.L49:
+ 579              	.L50:
  150:Src/commandParser.c **** 		sprintf((char *)txStr, "> Attenuation set to: %0.2f dB\n", txStatus->attenuation);
  580              		.loc 1 150 0
  581 0362 0AA8     		add	r0, sp, #40
@@ -893,20 +898,20 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  584 0368 FFF7FEFF 		bl	__aeabi_d2f
  585              	.LVL88:
  586 036c 5146     		mov	r1, r10
+ARM GAS  /tmp/cccqAtJW.s 			page 16
+
+
  587 036e FFF7FEFF 		bl	setAttenuation
  588              	.LVL89:
  151:Src/commandParser.c **** 		printUSB(txStr);
  589              		.loc 1 151 0
  590 0372 DAF80800 		ldr	r0, [r10, #8]	@ float
-ARM GAS  /tmp/cckoolMq.s 			page 16
-
-
  591 0376 FFF7FEFF 		bl	__aeabi_f2d
  592              	.LVL90:
- 593 037a 0E4C     		ldr	r4, .L52+20
+ 593 037a 0E4C     		ldr	r4, .L53+20
  594 037c 0246     		mov	r2, r0
  595 037e 0B46     		mov	r3, r1
- 596 0380 2149     		ldr	r1, .L52+104
+ 596 0380 2149     		ldr	r1, .L53+104
  597 0382 2046     		mov	r0, r4
  598 0384 FFF7FEFF 		bl	sprintf
  599              	.LVL91:
@@ -916,7 +921,7 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  602 038a FFF7FEFF 		bl	printUSB
  603              	.LVL92:
  604 038e F2E6     		b	.L1
- 605              	.L50:
+ 605              	.L51:
  157:Src/commandParser.c **** 		printUSB("> LO Enabled \r\n");
  606              		.loc 1 157 0
  607 0390 5846     		mov	r0, fp
@@ -924,13 +929,13 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  609              	.LVL93:
  158:Src/commandParser.c **** 	}
  610              		.loc 1 158 0
- 611 0396 1D48     		ldr	r0, .L52+108
+ 611 0396 1D48     		ldr	r0, .L53+108
  612 0398 FFF7FEFF 		bl	printUSB
  613              	.LVL94:
  614 039c EBE6     		b	.L1
- 615              	.L53:
+ 615              	.L54:
  616 039e 00BF     		.align	2
- 617              	.L52:
+ 617              	.L53:
  618 03a0 00000000 		.word	.LC1
  619 03a4 48000000 		.word	.LC3
  620 03a8 94000000 		.word	.LC5
@@ -953,16 +958,16 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  637 03ec 2C010000 		.word	.LC18
  638 03f0 E4000000 		.word	.LC12
  639 03f4 44010000 		.word	.LC19
+ARM GAS  /tmp/cccqAtJW.s 			page 17
+
+
  640 03f8 74010000 		.word	.LC21
  641 03fc 90010000 		.word	.LC23
  642 0400 B0010000 		.word	.LC25
  643 0404 BC010000 		.word	.LC26
  644 0408 54010000 		.word	.LC20
-ARM GAS  /tmp/cckoolMq.s 			page 17
-
-
  645 040c 80010000 		.word	.LC22
- 646              	.L51:
+ 646              	.L52:
  163:Src/commandParser.c **** 		printUSB("> LO Disabled \r\n");
  647              		.loc 1 163 0
  648 0410 5846     		mov	r0, fp
@@ -970,7 +975,7 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  650              	.LVL95:
  164:Src/commandParser.c **** 	}
  651              		.loc 1 164 0
- 652 0416 3A48     		ldr	r0, .L54
+ 652 0416 3F48     		ldr	r0, .L55
  653 0418 FFF7FEFF 		bl	printUSB
  654              	.LVL96:
  655 041c ABE6     		b	.L1
@@ -979,7 +984,7 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  657              		.loc 1 173 0
  658 041e 0822     		movs	r2, #8
  659 0420 22A9     		add	r1, sp, #136
- 660 0422 3848     		ldr	r0, .L54+4
+ 660 0422 3D48     		ldr	r0, .L55+4
  661 0424 FFF7FEFF 		bl	strncmp
  662              	.LVL97:
  663 0428 30B9     		cbnz	r0, .L32
@@ -990,7 +995,7 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  667              	.LVL98:
  176:Src/commandParser.c **** 	}
  668              		.loc 1 176 0
- 669 0430 3548     		ldr	r0, .L54+8
+ 669 0430 3A48     		ldr	r0, .L55+8
  670 0432 FFF7FEFF 		bl	printUSB
  671              	.LVL99:
  672 0436 9EE6     		b	.L1
@@ -999,7 +1004,7 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  674              		.loc 1 179 0
  675 0438 0322     		movs	r2, #3
  676 043a 22A9     		add	r1, sp, #136
- 677 043c 3348     		ldr	r0, .L54+12
+ 677 043c 3848     		ldr	r0, .L55+12
  678 043e FFF7FEFF 		bl	strncmp
  679              	.LVL100:
  680 0442 F8B9     		cbnz	r0, .L33
@@ -1013,15 +1018,15 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  686 044a 5046     		mov	r0, r10
  687 044c FFF7FEFF 		bl	readAD8319
  688              	.LVL102:
+ARM GAS  /tmp/cccqAtJW.s 			page 18
+
+
  689 0450 FFF7FEFF 		bl	__aeabi_f2d
  690              	.LVL103:
- 691 0454 2E4C     		ldr	r4, .L54+16
+ 691 0454 334C     		ldr	r4, .L55+16
  692 0456 0246     		mov	r2, r0
  693 0458 0B46     		mov	r3, r1
-ARM GAS  /tmp/cckoolMq.s 			page 18
-
-
- 694 045a 2E49     		ldr	r1, .L54+20
+ 694 045a 3349     		ldr	r1, .L55+20
  695 045c 2046     		mov	r0, r4
  696 045e FFF7FEFF 		bl	sprintf
  697              	.LVL104:
@@ -1037,7 +1042,7 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  705              	.LVL106:
  706 0470 0246     		mov	r2, r0
  707 0472 0B46     		mov	r3, r1
- 708 0474 2849     		ldr	r1, .L54+24
+ 708 0474 2D49     		ldr	r1, .L55+24
  709 0476 2046     		mov	r0, r4
  710 0478 FFF7FEFF 		bl	sprintf
  711              	.LVL107:
@@ -1052,478 +1057,503 @@ ARM GAS  /tmp/cckoolMq.s 			page 1
  718              		.loc 1 190 0
  719 0484 0422     		movs	r2, #4
  720 0486 22A9     		add	r1, sp, #136
- 721 0488 2448     		ldr	r0, .L54+28
+ 721 0488 2948     		ldr	r0, .L55+28
  722 048a FFF7FEFF 		bl	strncmp
  723              	.LVL109:
  724 048e 50BB     		cbnz	r0, .L34
  192:Src/commandParser.c **** 		printUSB((char *)"> sigGen(frequency, power)\r\n");
  725              		.loc 1 192 0
- 726 0490 2348     		ldr	r0, .L54+32
+ 726 0490 2848     		ldr	r0, .L55+32
  727 0492 FFF7FEFF 		bl	printUSB
  728              	.LVL110:
  193:Src/commandParser.c **** 		printUSB((char *)"> sweep(startFreq, stopFreq, numSteps, power, time)\r\n");
  729              		.loc 1 193 0
- 730 0496 2348     		ldr	r0, .L54+36
+ 730 0496 2848     		ldr	r0, .L55+36
  731 0498 FFF7FEFF 		bl	printUSB
  732              	.LVL111:
  194:Src/commandParser.c **** 		printUSB((char *)"> enableRF\r\n");
  733              		.loc 1 194 0
- 734 049c 2248     		ldr	r0, .L54+40
+ 734 049c 2748     		ldr	r0, .L55+40
  735 049e FFF7FEFF 		bl	printUSB
  736              	.LVL112:
  195:Src/commandParser.c **** 		printUSB((char *)"> disableRF\r\n");
  737              		.loc 1 195 0
- 738 04a2 2248     		ldr	r0, .L54+44
+ARM GAS  /tmp/cccqAtJW.s 			page 19
+
+
+ 738 04a2 2748     		ldr	r0, .L55+44
  739 04a4 FFF7FEFF 		bl	printUSB
  740              	.LVL113:
  196:Src/commandParser.c **** 		printUSB((char *)"> status(verbose)\r\n");
  741              		.loc 1 196 0
-ARM GAS  /tmp/cckoolMq.s 			page 19
-
-
- 742 04a8 2148     		ldr	r0, .L54+48
+ 742 04a8 2648     		ldr	r0, .L55+48
  743 04aa FFF7FEFF 		bl	printUSB
  744              	.LVL114:
  197:Src/commandParser.c **** 		printUSB((char *)"> WHOAMI\r\n");
  745              		.loc 1 197 0
- 746 04ae 2148     		ldr	r0, .L54+52
+ 746 04ae 2648     		ldr	r0, .L55+52
  747 04b0 FFF7FEFF 		bl	printUSB
  748              	.LVL115:
  198:Src/commandParser.c **** 		printUSB((char *)"> --- Use the below at your own risk ---\r\n");
  749              		.loc 1 198 0
- 750 04b4 2048     		ldr	r0, .L54+56
+ 750 04b4 2548     		ldr	r0, .L55+56
  751 04b6 FFF7FEFF 		bl	printUSB
  752              	.LVL116:
  199:Src/commandParser.c **** 		printUSB((char *)"> setMaxPower(power(dBm))\r\n");
  753              		.loc 1 199 0
- 754 04ba 2048     		ldr	r0, .L54+60
+ 754 04ba 2548     		ldr	r0, .L55+60
  755 04bc FFF7FEFF 		bl	printUSB
  756              	.LVL117:
  200:Src/commandParser.c **** 		printUSB((char *)"> setAttenuation(atten(dB))\r\n");
  757              		.loc 1 200 0
- 758 04c0 1F48     		ldr	r0, .L54+64
+ 758 04c0 2448     		ldr	r0, .L55+64
  759 04c2 FFF7FEFF 		bl	printUSB
  760              	.LVL118:
  201:Src/commandParser.c **** 		printUSB((char *)"> enableLO\r\n");
  761              		.loc 1 201 0
- 762 04c6 1F48     		ldr	r0, .L54+68
+ 762 04c6 2448     		ldr	r0, .L55+68
  763 04c8 FFF7FEFF 		bl	printUSB
  764              	.LVL119:
  202:Src/commandParser.c **** 		printUSB((char *)"> disableLO\r\n");
  765              		.loc 1 202 0
- 766 04cc 1E48     		ldr	r0, .L54+72
+ 766 04cc 2348     		ldr	r0, .L55+72
  767 04ce FFF7FEFF 		bl	printUSB
  768              	.LVL120:
  203:Src/commandParser.c **** 		printUSB((char *)"> enablePA\r\n");
  769              		.loc 1 203 0
- 770 04d2 1E48     		ldr	r0, .L54+76
+ 770 04d2 2348     		ldr	r0, .L55+76
  771 04d4 FFF7FEFF 		bl	printUSB
  772              	.LVL121:
  204:Src/commandParser.c **** 		printUSB((char *)"> disablePA\r\n");
  773              		.loc 1 204 0
- 774 04d8 1D48     		ldr	r0, .L54+80
+ 774 04d8 2248     		ldr	r0, .L55+80
  775 04da FFF7FEFF 		bl	printUSB
  776              	.LVL122:
  205:Src/commandParser.c **** 	}
  777              		.loc 1 205 0
- 778 04de 1D48     		ldr	r0, .L54+84
+ 778 04de 2248     		ldr	r0, .L55+84
  779 04e0 FFF7FEFF 		bl	printUSB
  780              	.LVL123:
  781 04e4 47E6     		b	.L1
  782              	.L34:
- 209:Src/commandParser.c **** 		sprintf((char *)txStr, "> %s\n", command);
- 783              		.loc 1 209 0
- 784 04e6 1C48     		ldr	r0, .L54+88
- 785 04e8 FFF7FEFF 		bl	printUSB
- 786              	.LVL124:
- 210:Src/commandParser.c **** 		printUSB(txStr);
- 787              		.loc 1 210 0
-ARM GAS  /tmp/cckoolMq.s 			page 20
+ 208:Src/commandParser.c **** 	{
+ 783              		.loc 1 208 0
+ARM GAS  /tmp/cccqAtJW.s 			page 20
 
 
- 788 04ec 084C     		ldr	r4, .L54+16
- 789 04ee 22AA     		add	r2, sp, #136
- 790 04f0 1A49     		ldr	r1, .L54+92
- 791 04f2 2046     		mov	r0, r4
- 792 04f4 FFF7FEFF 		bl	sprintf
+ 784 04e6 0222     		movs	r2, #2
+ 785 04e8 22A9     		add	r1, sp, #136
+ 786 04ea 2048     		ldr	r0, .L55+88
+ 787 04ec FFF7FEFF 		bl	strncmp
+ 788              	.LVL124:
+ 789 04f0 18B9     		cbnz	r0, .L35
+ 210:Src/commandParser.c **** 	}
+ 790              		.loc 1 210 0
+ 791 04f2 1F48     		ldr	r0, .L55+92
+ 792 04f4 FFF7FEFF 		bl	printUSB
  793              	.LVL125:
- 211:Src/commandParser.c **** 
- 794              		.loc 1 211 0
- 795 04f8 2046     		mov	r0, r4
- 796 04fa FFF7FEFF 		bl	printUSB
- 797              	.LVL126:
- 798              		.loc 1 215 0
- 799 04fe 3AE6     		b	.L1
- 800              	.L55:
- 801              		.align	2
- 802              	.L54:
- 803 0500 9C010000 		.word	.LC24
- 804 0504 CC010000 		.word	.LC27
- 805 0508 D8010000 		.word	.LC28
- 806 050c EC010000 		.word	.LC29
- 807 0510 00000000 		.word	.LANCHOR0
- 808 0514 F0010000 		.word	.LC30
- 809 0518 10020000 		.word	.LC31
- 810 051c 34020000 		.word	.LC32
- 811 0520 3C020000 		.word	.LC33
- 812 0524 5C020000 		.word	.LC34
- 813 0528 7C020000 		.word	.LC35
- 814 052c B4020000 		.word	.LC36
- 815 0530 C4020000 		.word	.LC37
- 816 0534 D4020000 		.word	.LC38
- 817 0538 E8020000 		.word	.LC39
- 818 053c F4020000 		.word	.LC40
- 819 0540 20030000 		.word	.LC41
- 820 0544 3C030000 		.word	.LC42
- 821 0548 5C030000 		.word	.LC43
- 822 054c 6C030000 		.word	.LC44
- 823 0550 7C030000 		.word	.LC45
- 824 0554 8C030000 		.word	.LC46
- 825 0558 9C030000 		.word	.LC47
- 826 055c B8030000 		.word	.LC48
- 827              		.cfi_endproc
- 828              	.LFE69:
- 830              		.global	txStr
- 831              		.section	.rodata
- 832              		.align	2
- 833              		.set	.LANCHOR1,. + 0
- 834              	.LC0:
- 835 0000 FC       		.byte	-4
- 836 0001 FF       		.byte	-1
- 837 0002 02       		.byte	2
- 838 0003 05       		.byte	5
- 839              		.section	.bss.txStr,"aw",%nobits
- 840              		.align	2
- 841              		.set	.LANCHOR0,. + 0
- 844              	txStr:
- 845 0000 00000000 		.space	128
- 845      00000000 
-ARM GAS  /tmp/cckoolMq.s 			page 21
+ 794 04f8 3DE6     		b	.L1
+ 795              	.L35:
+ 214:Src/commandParser.c **** 		sprintf((char *)txStr, "> %s\n", command);
+ 796              		.loc 1 214 0
+ 797 04fa 1E48     		ldr	r0, .L55+96
+ 798 04fc FFF7FEFF 		bl	printUSB
+ 799              	.LVL126:
+ 215:Src/commandParser.c **** 		printUSB(txStr);
+ 800              		.loc 1 215 0
+ 801 0500 084C     		ldr	r4, .L55+16
+ 802 0502 22AA     		add	r2, sp, #136
+ 803 0504 1C49     		ldr	r1, .L55+100
+ 804 0506 2046     		mov	r0, r4
+ 805 0508 FFF7FEFF 		bl	sprintf
+ 806              	.LVL127:
+ 216:Src/commandParser.c **** 
+ 807              		.loc 1 216 0
+ 808 050c 2046     		mov	r0, r4
+ 809 050e FFF7FEFF 		bl	printUSB
+ 810              	.LVL128:
+ 811              		.loc 1 220 0
+ 812 0512 30E6     		b	.L1
+ 813              	.L56:
+ 814              		.align	2
+ 815              	.L55:
+ 816 0514 9C010000 		.word	.LC24
+ 817 0518 CC010000 		.word	.LC27
+ 818 051c D8010000 		.word	.LC28
+ 819 0520 EC010000 		.word	.LC29
+ 820 0524 00000000 		.word	.LANCHOR0
+ 821 0528 F0010000 		.word	.LC30
+ 822 052c 10020000 		.word	.LC31
+ 823 0530 34020000 		.word	.LC32
+ 824 0534 3C020000 		.word	.LC33
+ 825 0538 5C020000 		.word	.LC34
+ 826 053c 7C020000 		.word	.LC35
+ 827 0540 B4020000 		.word	.LC36
+ 828 0544 C4020000 		.word	.LC37
+ 829 0548 D4020000 		.word	.LC38
+ 830 054c E8020000 		.word	.LC39
+ 831 0550 F4020000 		.word	.LC40
+ 832 0554 20030000 		.word	.LC41
+ 833 0558 3C030000 		.word	.LC42
+ 834 055c 5C030000 		.word	.LC43
+ 835 0560 6C030000 		.word	.LC44
+ 836 0564 7C030000 		.word	.LC45
+ARM GAS  /tmp/cccqAtJW.s 			page 21
 
 
- 845      00000000 
- 845      00000000 
- 845      00000000 
- 846              		.section	.rodata.commandParser.str1.4,"aMS",%progbits,1
+ 837 0568 8C030000 		.word	.LC46
+ 838 056c 9C030000 		.word	.LC47
+ 839 0570 A0030000 		.word	.LC48
+ 840 0574 AC030000 		.word	.LC49
+ 841 0578 C8030000 		.word	.LC50
+ 842              		.cfi_endproc
+ 843              	.LFE69:
+ 845              		.global	txStr
+ 846              		.section	.rodata
  847              		.align	2
- 848              	.LC1:
- 849 0000 73696747 		.ascii	"sigGen\000"
- 849      656E00
- 850 0007 00       		.space	1
- 851              	.LC2:
- 852 0008 3E205369 		.ascii	"> Signal Generator: Frequency = %0.3f MHz, Power = "
- 852      676E616C 
- 852      2047656E 
- 852      65726174 
- 852      6F723A20 
- 853 003b 25302E32 		.ascii	"%0.2f dBm\012\000"
- 853      66206442 
- 853      6D0A00
- 854 0046 0000     		.space	2
- 855              	.LC3:
- 856 0048 73776565 		.ascii	"sweep\000"
- 856      7000
- 857 004e 0000     		.space	2
- 858              	.LC4:
- 859 0050 3E205377 		.ascii	"> Sweep: Start = %0.2f MHz, fFinish = %0.2f dBm Pow"
- 859      6565703A 
- 859      20537461 
- 859      7274203D 
- 859      2025302E 
- 860 0083 6572203D 		.ascii	"er = %0.2f dBm\012\000"
- 860      2025302E 
- 860      32662064 
- 860      426D0A00 
- 861 0093 00       		.space	1
- 862              	.LC5:
- 863 0094 656E6162 		.ascii	"enableRF\000"
- 863      6C655246 
- 863      00
- 864 009d 000000   		.space	3
- 865              	.LC6:
- 866 00a0 3E205246 		.ascii	"> RF Enabled \015\012\000"
- 866      20456E61 
- 866      626C6564 
- 866      200D0A00 
- 867              	.LC7:
- 868 00b0 64697361 		.ascii	"disableRF\000"
- 868      626C6552 
- 868      4600
- 869 00ba 0000     		.space	2
- 870              	.LC8:
- 871 00bc 3E205246 		.ascii	"> RF Disabled \015\012\000"
- 871      20446973 
- 871      61626C65 
- 871      64200D0A 
- 871      00
- 872 00cd 000000   		.space	3
- 873              	.LC9:
-ARM GAS  /tmp/cckoolMq.s 			page 22
+ 848              		.set	.LANCHOR1,. + 0
+ 849              	.LC0:
+ 850 0000 FC       		.byte	-4
+ 851 0001 FF       		.byte	-1
+ 852 0002 02       		.byte	2
+ 853 0003 05       		.byte	5
+ 854              		.section	.bss.txStr,"aw",%nobits
+ 855              		.align	2
+ 856              		.set	.LANCHOR0,. + 0
+ 859              	txStr:
+ 860 0000 00000000 		.space	128
+ 860      00000000 
+ 860      00000000 
+ 860      00000000 
+ 860      00000000 
+ 861              		.section	.rodata.commandParser.str1.4,"aMS",%progbits,1
+ 862              		.align	2
+ 863              	.LC1:
+ 864 0000 73696747 		.ascii	"sigGen\000"
+ 864      656E00
+ 865 0007 00       		.space	1
+ 866              	.LC2:
+ 867 0008 3E205369 		.ascii	"> Signal Generator: Frequency = %0.3f MHz, Power = "
+ 867      676E616C 
+ 867      2047656E 
+ 867      65726174 
+ 867      6F723A20 
+ 868 003b 25302E32 		.ascii	"%0.2f dBm\012\000"
+ 868      66206442 
+ 868      6D0A00
+ 869 0046 0000     		.space	2
+ 870              	.LC3:
+ 871 0048 73776565 		.ascii	"sweep\000"
+ 871      7000
+ 872 004e 0000     		.space	2
+ 873              	.LC4:
+ 874 0050 3E205377 		.ascii	"> Sweep: Start = %0.2f MHz, fFinish = %0.2f dBm Pow"
+ 874      6565703A 
+ 874      20537461 
+ 874      7274203D 
+ 874      2025302E 
+ 875 0083 6572203D 		.ascii	"er = %0.2f dBm\012\000"
+ 875      2025302E 
+ 875      32662064 
+ 875      426D0A00 
+ 876 0093 00       		.space	1
+ 877              	.LC5:
+ARM GAS  /tmp/cccqAtJW.s 			page 22
 
 
- 874 00d0 73746174 		.ascii	"status\000"
- 874      757300
- 875 00d7 00       		.space	1
- 876              	.LC10:
- 877 00d8 00       		.ascii	"\000"
- 878 00d9 000000   		.space	3
- 879              	.LC11:
- 880 00dc 57484F41 		.ascii	"WHOAMI\000"
- 880      4D4900
- 881 00e3 00       		.space	1
- 882              	.LC12:
- 883 00e4 3E204A6F 		.ascii	"> Josh's Signal Generator!\015\012\000"
- 883      73682773 
- 883      20536967 
- 883      6E616C20 
- 883      47656E65 
- 884 0101 000000   		.space	3
- 885              	.LC13:
- 886 0104 6C656400 		.ascii	"led\000"
- 887              	.LC14:
- 888 0108 7261696E 		.ascii	"rainbow\000"
- 888      626F7700 
- 889              	.LC15:
- 890 0110 6B697474 		.ascii	"kitt\000"
- 890      00
- 891 0115 000000   		.space	3
- 892              	.LC16:
- 893 0118 62696E61 		.ascii	"binary\000"
- 893      727900
- 894 011f 00       		.space	1
- 895              	.LC17:
- 896 0120 7365744D 		.ascii	"setMaxPower\000"
- 896      6178506F 
- 896      77657200 
- 897              	.LC18:
- 898 012c 3E20506F 		.ascii	"> Power set to: %d dBm\012\000"
- 898      77657220 
- 898      73657420 
- 898      746F3A20 
- 898      25642064 
- 899              	.LC19:
- 900 0144 73657441 		.ascii	"setAttenuation\000"
- 900      7474656E 
- 900      75617469 
- 900      6F6E00
- 901 0153 00       		.space	1
- 902              	.LC20:
- 903 0154 3E204174 		.ascii	"> Attenuation set to: %0.2f dB\012\000"
- 903      74656E75 
- 903      6174696F 
- 903      6E207365 
- 903      7420746F 
- 904              	.LC21:
- 905 0174 656E6162 		.ascii	"enableLO\000"
- 905      6C654C4F 
+ 878 0094 656E6162 		.ascii	"enableRF\000"
+ 878      6C655246 
+ 878      00
+ 879 009d 000000   		.space	3
+ 880              	.LC6:
+ 881 00a0 3E205246 		.ascii	"> RF Enabled \015\012\000"
+ 881      20456E61 
+ 881      626C6564 
+ 881      200D0A00 
+ 882              	.LC7:
+ 883 00b0 64697361 		.ascii	"disableRF\000"
+ 883      626C6552 
+ 883      4600
+ 884 00ba 0000     		.space	2
+ 885              	.LC8:
+ 886 00bc 3E205246 		.ascii	"> RF Disabled \015\012\000"
+ 886      20446973 
+ 886      61626C65 
+ 886      64200D0A 
+ 886      00
+ 887 00cd 000000   		.space	3
+ 888              	.LC9:
+ 889 00d0 73746174 		.ascii	"status\000"
+ 889      757300
+ 890 00d7 00       		.space	1
+ 891              	.LC10:
+ 892 00d8 00       		.ascii	"\000"
+ 893 00d9 000000   		.space	3
+ 894              	.LC11:
+ 895 00dc 57484F41 		.ascii	"WHOAMI\000"
+ 895      4D4900
+ 896 00e3 00       		.space	1
+ 897              	.LC12:
+ 898 00e4 3E204A6F 		.ascii	"> Josh's Signal Generator!\015\012\000"
+ 898      73682773 
+ 898      20536967 
+ 898      6E616C20 
+ 898      47656E65 
+ 899 0101 000000   		.space	3
+ 900              	.LC13:
+ 901 0104 6C656400 		.ascii	"led\000"
+ 902              	.LC14:
+ 903 0108 7261696E 		.ascii	"rainbow\000"
+ 903      626F7700 
+ 904              	.LC15:
+ 905 0110 6B697474 		.ascii	"kitt\000"
  905      00
- 906 017d 000000   		.space	3
-ARM GAS  /tmp/cckoolMq.s 			page 23
+ 906 0115 000000   		.space	3
+ 907              	.LC16:
+ 908 0118 62696E61 		.ascii	"binary\000"
+ 908      727900
+ 909 011f 00       		.space	1
+ 910              	.LC17:
+ 911 0120 7365744D 		.ascii	"setMaxPower\000"
+ 911      6178506F 
+ 911      77657200 
+ 912              	.LC18:
+ARM GAS  /tmp/cccqAtJW.s 			page 23
 
 
- 907              	.LC22:
- 908 0180 3E204C4F 		.ascii	"> LO Enabled \015\012\000"
- 908      20456E61 
- 908      626C6564 
- 908      200D0A00 
- 909              	.LC23:
- 910 0190 64697361 		.ascii	"disableLO\000"
- 910      626C654C 
- 910      4F00
- 911 019a 0000     		.space	2
- 912              	.LC24:
- 913 019c 3E204C4F 		.ascii	"> LO Disabled \015\012\000"
- 913      20446973 
- 913      61626C65 
- 913      64200D0A 
- 913      00
- 914 01ad 000000   		.space	3
- 915              	.LC25:
- 916 01b0 656E6162 		.ascii	"enablePA\000"
- 916      6C655041 
- 916      00
- 917 01b9 000000   		.space	3
- 918              	.LC26:
- 919 01bc 3E205041 		.ascii	"> PA Enabled \015\012\000"
- 919      20456E61 
- 919      626C6564 
- 919      200D0A00 
- 920              	.LC27:
- 921 01cc 64697361 		.ascii	"disablePA\000"
- 921      626C6550 
- 921      4100
- 922 01d6 0000     		.space	2
- 923              	.LC28:
- 924 01d8 3E205041 		.ascii	"> PA Disabled \015\012\000"
- 924      20446973 
- 924      61626C65 
- 924      64200D0A 
- 924      00
- 925 01e9 000000   		.space	3
- 926              	.LC29:
- 927 01ec 61646300 		.ascii	"adc\000"
- 928              	.LC30:
- 929 01f0 3E204D65 		.ascii	"> Measured Voltage= %0.2f V\012\000"
- 929      61737572 
- 929      65642056 
- 929      6F6C7461 
- 929      67653D20 
- 930 020d 000000   		.space	3
- 931              	.LC31:
- 932 0210 3E204F75 		.ascii	"> Output Power at SMA = %0.2f dBm\012\000"
- 932      74707574 
- 932      20506F77 
- 932      65722061 
- 932      7420534D 
- 933 0233 00       		.space	1
- 934              	.LC32:
- 935 0234 68656C70 		.ascii	"help\000"
-ARM GAS  /tmp/cckoolMq.s 			page 24
+ 913 012c 3E20506F 		.ascii	"> Power set to: %d dBm\012\000"
+ 913      77657220 
+ 913      73657420 
+ 913      746F3A20 
+ 913      25642064 
+ 914              	.LC19:
+ 915 0144 73657441 		.ascii	"setAttenuation\000"
+ 915      7474656E 
+ 915      75617469 
+ 915      6F6E00
+ 916 0153 00       		.space	1
+ 917              	.LC20:
+ 918 0154 3E204174 		.ascii	"> Attenuation set to: %0.2f dB\012\000"
+ 918      74656E75 
+ 918      6174696F 
+ 918      6E207365 
+ 918      7420746F 
+ 919              	.LC21:
+ 920 0174 656E6162 		.ascii	"enableLO\000"
+ 920      6C654C4F 
+ 920      00
+ 921 017d 000000   		.space	3
+ 922              	.LC22:
+ 923 0180 3E204C4F 		.ascii	"> LO Enabled \015\012\000"
+ 923      20456E61 
+ 923      626C6564 
+ 923      200D0A00 
+ 924              	.LC23:
+ 925 0190 64697361 		.ascii	"disableLO\000"
+ 925      626C654C 
+ 925      4F00
+ 926 019a 0000     		.space	2
+ 927              	.LC24:
+ 928 019c 3E204C4F 		.ascii	"> LO Disabled \015\012\000"
+ 928      20446973 
+ 928      61626C65 
+ 928      64200D0A 
+ 928      00
+ 929 01ad 000000   		.space	3
+ 930              	.LC25:
+ 931 01b0 656E6162 		.ascii	"enablePA\000"
+ 931      6C655041 
+ 931      00
+ 932 01b9 000000   		.space	3
+ 933              	.LC26:
+ 934 01bc 3E205041 		.ascii	"> PA Enabled \015\012\000"
+ 934      20456E61 
+ 934      626C6564 
+ 934      200D0A00 
+ 935              	.LC27:
+ 936 01cc 64697361 		.ascii	"disablePA\000"
+ 936      626C6550 
+ 936      4100
+ 937 01d6 0000     		.space	2
+ 938              	.LC28:
+ 939 01d8 3E205041 		.ascii	"> PA Disabled \015\012\000"
+ 939      20446973 
+ARM GAS  /tmp/cccqAtJW.s 			page 24
 
 
- 935      00
- 936 0239 000000   		.space	3
- 937              	.LC33:
- 938 023c 3E202D2D 		.ascii	"> --  Available Commands  --\015\012\000"
- 938      20204176 
- 938      61696C61 
- 938      626C6520 
- 938      436F6D6D 
- 939 025b 00       		.space	1
- 940              	.LC34:
- 941 025c 3E207369 		.ascii	"> sigGen(frequency, power)\015\012\000"
- 941      6747656E 
- 941      28667265 
- 941      7175656E 
- 941      63792C20 
- 942 0279 000000   		.space	3
- 943              	.LC35:
- 944 027c 3E207377 		.ascii	"> sweep(startFreq, stopFreq, numSteps, power, time)"
- 944      65657028 
- 944      73746172 
- 944      74467265 
- 944      712C2073 
- 945 02af 0D0A00   		.ascii	"\015\012\000"
- 946 02b2 0000     		.space	2
- 947              	.LC36:
- 948 02b4 3E20656E 		.ascii	"> enableRF\015\012\000"
- 948      61626C65 
- 948      52460D0A 
- 948      00
- 949 02c1 000000   		.space	3
- 950              	.LC37:
- 951 02c4 3E206469 		.ascii	"> disableRF\015\012\000"
- 951      7361626C 
- 951      6552460D 
- 951      0A00
- 952 02d2 0000     		.space	2
- 953              	.LC38:
- 954 02d4 3E207374 		.ascii	"> status(verbose)\015\012\000"
- 954      61747573 
- 954      28766572 
- 954      626F7365 
- 954      290D0A00 
- 955              	.LC39:
- 956 02e8 3E205748 		.ascii	"> WHOAMI\015\012\000"
- 956      4F414D49 
- 956      0D0A00
- 957 02f3 00       		.space	1
- 958              	.LC40:
- 959 02f4 3E202D2D 		.ascii	"> --- Use the below at your own risk ---\015\012\000"
- 959      2D205573 
- 959      65207468 
- 959      65206265 
- 959      6C6F7720 
- 960 031f 00       		.space	1
- 961              	.LC41:
- 962 0320 3E207365 		.ascii	"> setMaxPower(power(dBm))\015\012\000"
- 962      744D6178 
-ARM GAS  /tmp/cckoolMq.s 			page 25
+ 939      61626C65 
+ 939      64200D0A 
+ 939      00
+ 940 01e9 000000   		.space	3
+ 941              	.LC29:
+ 942 01ec 61646300 		.ascii	"adc\000"
+ 943              	.LC30:
+ 944 01f0 3E204D65 		.ascii	"> Measured Voltage= %0.2f V\012\000"
+ 944      61737572 
+ 944      65642056 
+ 944      6F6C7461 
+ 944      67653D20 
+ 945 020d 000000   		.space	3
+ 946              	.LC31:
+ 947 0210 3E204F75 		.ascii	"> Output Power at SMA = %0.2f dBm\012\000"
+ 947      74707574 
+ 947      20506F77 
+ 947      65722061 
+ 947      7420534D 
+ 948 0233 00       		.space	1
+ 949              	.LC32:
+ 950 0234 68656C70 		.ascii	"help\000"
+ 950      00
+ 951 0239 000000   		.space	3
+ 952              	.LC33:
+ 953 023c 3E202D2D 		.ascii	"> --  Available Commands  --\015\012\000"
+ 953      20204176 
+ 953      61696C61 
+ 953      626C6520 
+ 953      436F6D6D 
+ 954 025b 00       		.space	1
+ 955              	.LC34:
+ 956 025c 3E207369 		.ascii	"> sigGen(frequency, power)\015\012\000"
+ 956      6747656E 
+ 956      28667265 
+ 956      7175656E 
+ 956      63792C20 
+ 957 0279 000000   		.space	3
+ 958              	.LC35:
+ 959 027c 3E207377 		.ascii	"> sweep(startFreq, stopFreq, numSteps, power, time)"
+ 959      65657028 
+ 959      73746172 
+ 959      74467265 
+ 959      712C2073 
+ 960 02af 0D0A00   		.ascii	"\015\012\000"
+ 961 02b2 0000     		.space	2
+ 962              	.LC36:
+ 963 02b4 3E20656E 		.ascii	"> enableRF\015\012\000"
+ 963      61626C65 
+ 963      52460D0A 
+ 963      00
+ 964 02c1 000000   		.space	3
+ 965              	.LC37:
+ 966 02c4 3E206469 		.ascii	"> disableRF\015\012\000"
+ 966      7361626C 
+ 966      6552460D 
+ 966      0A00
+ARM GAS  /tmp/cccqAtJW.s 			page 25
 
 
- 962      506F7765 
- 962      7228706F 
- 962      77657228 
- 963              	.LC42:
- 964 033c 3E207365 		.ascii	"> setAttenuation(atten(dB))\015\012\000"
- 964      74417474 
- 964      656E7561 
- 964      74696F6E 
- 964      28617474 
- 965 035a 0000     		.space	2
- 966              	.LC43:
- 967 035c 3E20656E 		.ascii	"> enableLO\015\012\000"
- 967      61626C65 
- 967      4C4F0D0A 
- 967      00
- 968 0369 000000   		.space	3
- 969              	.LC44:
- 970 036c 3E206469 		.ascii	"> disableLO\015\012\000"
- 970      7361626C 
- 970      654C4F0D 
- 970      0A00
- 971 037a 0000     		.space	2
- 972              	.LC45:
- 973 037c 3E20656E 		.ascii	"> enablePA\015\012\000"
- 973      61626C65 
- 973      50410D0A 
- 973      00
- 974 0389 000000   		.space	3
- 975              	.LC46:
- 976 038c 3E206469 		.ascii	"> disablePA\015\012\000"
- 976      7361626C 
- 976      6550410D 
- 976      0A00
- 977 039a 0000     		.space	2
- 978              	.LC47:
- 979 039c 3E204E6F 		.ascii	"> Not found, try again\015\012\000"
- 979      7420666F 
- 979      756E642C 
- 979      20747279 
- 979      20616761 
- 980 03b5 000000   		.space	3
- 981              	.LC48:
- 982 03b8 3E202573 		.ascii	"> %s\012\000"
- 982      0A00
- 983              		.text
- 984              	.Letext0:
- 985              		.file 2 "/usr/include/newlib/machine/_default_types.h"
- 986              		.file 3 "/usr/include/newlib/sys/_stdint.h"
- 987              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
- 988              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 989              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 990              		.file 7 "Inc/main.h"
- 991              		.file 8 "Inc/max2871.h"
- 992              		.file 9 "Inc/commandParser.h"
- 993              		.file 10 "Inc/txChain.h"
- 994              		.file 11 "/usr/include/newlib/sys/lock.h"
- 995              		.file 12 "/usr/include/newlib/sys/_types.h"
-ARM GAS  /tmp/cckoolMq.s 			page 26
+ 967 02d2 0000     		.space	2
+ 968              	.LC38:
+ 969 02d4 3E207374 		.ascii	"> status(verbose)\015\012\000"
+ 969      61747573 
+ 969      28766572 
+ 969      626F7365 
+ 969      290D0A00 
+ 970              	.LC39:
+ 971 02e8 3E205748 		.ascii	"> WHOAMI\015\012\000"
+ 971      4F414D49 
+ 971      0D0A00
+ 972 02f3 00       		.space	1
+ 973              	.LC40:
+ 974 02f4 3E202D2D 		.ascii	"> --- Use the below at your own risk ---\015\012\000"
+ 974      2D205573 
+ 974      65207468 
+ 974      65206265 
+ 974      6C6F7720 
+ 975 031f 00       		.space	1
+ 976              	.LC41:
+ 977 0320 3E207365 		.ascii	"> setMaxPower(power(dBm))\015\012\000"
+ 977      744D6178 
+ 977      506F7765 
+ 977      7228706F 
+ 977      77657228 
+ 978              	.LC42:
+ 979 033c 3E207365 		.ascii	"> setAttenuation(atten(dB))\015\012\000"
+ 979      74417474 
+ 979      656E7561 
+ 979      74696F6E 
+ 979      28617474 
+ 980 035a 0000     		.space	2
+ 981              	.LC43:
+ 982 035c 3E20656E 		.ascii	"> enableLO\015\012\000"
+ 982      61626C65 
+ 982      4C4F0D0A 
+ 982      00
+ 983 0369 000000   		.space	3
+ 984              	.LC44:
+ 985 036c 3E206469 		.ascii	"> disableLO\015\012\000"
+ 985      7361626C 
+ 985      654C4F0D 
+ 985      0A00
+ 986 037a 0000     		.space	2
+ 987              	.LC45:
+ 988 037c 3E20656E 		.ascii	"> enablePA\015\012\000"
+ 988      61626C65 
+ 988      50410D0A 
+ 988      00
+ 989 0389 000000   		.space	3
+ 990              	.LC46:
+ 991 038c 3E206469 		.ascii	"> disablePA\015\012\000"
+ 991      7361626C 
+ 991      6550410D 
+ 991      0A00
+ 992 039a 0000     		.space	2
+ 993              	.LC47:
+ARM GAS  /tmp/cccqAtJW.s 			page 26
 
 
- 996              		.file 13 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
- 997              		.file 14 "/usr/include/newlib/sys/reent.h"
- 998              		.file 15 "/usr/include/newlib/stdlib.h"
- 999              		.file 16 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
- 1000              		.file 17 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
- 1001              		.file 18 "Inc/usbd_cdc_if.h"
- 1002              		.file 19 "/usr/include/newlib/stdio.h"
- 1003              		.file 20 "/usr/include/newlib/string.h"
- 1004              		.file 21 "Inc/STP08CP05.h"
-ARM GAS  /tmp/cckoolMq.s 			page 27
+ 994 039c 0D0A00   		.ascii	"\015\012\000"
+ 995 039f 00       		.space	1
+ 996              	.LC48:
+ 997 03a0 3E204272 		.ascii	"> Break\015\012\000"
+ 997      65616B0D 
+ 997      0A00
+ 998 03aa 0000     		.space	2
+ 999              	.LC49:
+ 1000 03ac 3E204E6F 		.ascii	"> Not found, try again\015\012\000"
+ 1000      7420666F 
+ 1000      756E642C 
+ 1000      20747279 
+ 1000      20616761 
+ 1001 03c5 000000   		.space	3
+ 1002              	.LC50:
+ 1003 03c8 3E202573 		.ascii	"> %s\012\000"
+ 1003      0A00
+ 1004              		.text
+ 1005              	.Letext0:
+ 1006              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 1007              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 1008              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 1009              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 1010              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 1011              		.file 7 "Inc/main.h"
+ 1012              		.file 8 "Inc/max2871.h"
+ 1013              		.file 9 "Inc/commandParser.h"
+ 1014              		.file 10 "Inc/txChain.h"
+ 1015              		.file 11 "/usr/include/newlib/sys/lock.h"
+ 1016              		.file 12 "/usr/include/newlib/sys/_types.h"
+ 1017              		.file 13 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
+ 1018              		.file 14 "/usr/include/newlib/sys/reent.h"
+ 1019              		.file 15 "/usr/include/newlib/stdlib.h"
+ 1020              		.file 16 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
+ 1021              		.file 17 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
+ 1022              		.file 18 "Inc/usbd_cdc_if.h"
+ 1023              		.file 19 "/usr/include/newlib/stdio.h"
+ 1024              		.file 20 "/usr/include/newlib/string.h"
+ 1025              		.file 21 "Inc/STP08CP05.h"
+ARM GAS  /tmp/cccqAtJW.s 			page 27
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 commandParser.c
-     /tmp/cckoolMq.s:18     .text.commandParser:0000000000000000 $t
-     /tmp/cckoolMq.s:25     .text.commandParser:0000000000000000 commandParser
-     /tmp/cckoolMq.s:618    .text.commandParser:00000000000003a0 $d
-     /tmp/cckoolMq.s:648    .text.commandParser:0000000000000410 $t
-     /tmp/cckoolMq.s:803    .text.commandParser:0000000000000500 $d
-     /tmp/cckoolMq.s:844    .bss.txStr:0000000000000000 txStr
-     /tmp/cckoolMq.s:832    .rodata:0000000000000000 $d
-     /tmp/cckoolMq.s:840    .bss.txStr:0000000000000000 $d
-     /tmp/cckoolMq.s:847    .rodata.commandParser.str1.4:0000000000000000 $d
+     /tmp/cccqAtJW.s:18     .text.commandParser:0000000000000000 $t
+     /tmp/cccqAtJW.s:25     .text.commandParser:0000000000000000 commandParser
+     /tmp/cccqAtJW.s:618    .text.commandParser:00000000000003a0 $d
+     /tmp/cccqAtJW.s:648    .text.commandParser:0000000000000410 $t
+     /tmp/cccqAtJW.s:816    .text.commandParser:0000000000000514 $d
+     /tmp/cccqAtJW.s:859    .bss.txStr:0000000000000000 txStr
+     /tmp/cccqAtJW.s:847    .rodata:0000000000000000 $d
+     /tmp/cccqAtJW.s:855    .bss.txStr:0000000000000000 $d
+     /tmp/cccqAtJW.s:862    .rodata.commandParser.str1.4:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 __aeabi_d2f

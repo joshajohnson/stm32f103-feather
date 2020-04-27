@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccByiixK.s 			page 1
+ARM GAS  /tmp/ccH32pLR.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
   29:Src/txChain.c **** }
   30:Src/txChain.c **** 
   31:Src/txChain.c **** // Sweeps through frequencies
-ARM GAS  /tmp/ccByiixK.s 			page 2
+ARM GAS  /tmp/ccH32pLR.s 			page 2
 
 
   32:Src/txChain.c **** void sweep(float lowerFreq, float higherFreq, float numSteps, float power, float sweepTime, struct 
@@ -71,25 +71,30 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
   39:Src/txChain.c **** 	while (currentFrequency <= higherFreq)
   40:Src/txChain.c **** 	{
   41:Src/txChain.c **** 		sigGen(currentFrequency, power, max2871Status, txStatus);
-  42:Src/txChain.c **** 		DWT_Delay_us(delay);
-  43:Src/txChain.c **** 		currentFrequency += stepSize;
-  44:Src/txChain.c **** 		if (RX_FIFO.dataReady == 1) break;
-  45:Src/txChain.c **** 
-  46:Src/txChain.c **** 	}
-  47:Src/txChain.c **** }
-  48:Src/txChain.c **** 
-  49:Src/txChain.c **** void txChainInit(struct MAX2871Struct *max2871Status, struct txStruct *txStatus)
-  50:Src/txChain.c **** {
-  51:Src/txChain.c **** 	max2871RFDisable(max2871Status);
-  52:Src/txChain.c **** 	disablePA(txStatus);
-  53:Src/txChain.c **** 	setAttenuation(MAX_ATTENUATION,txStatus);
-  54:Src/txChain.c **** 	max2871Setup(max2871Status);
-  55:Src/txChain.c **** }
-  56:Src/txChain.c **** 
-  57:Src/txChain.c **** // Sets attenuation for a SKY12347 attenuator
-  58:Src/txChain.c **** void setAttenuation(float atten, struct txStruct *txStatus)
-  59:Src/txChain.c **** {
-  28              		.loc 1 59 0
+  42:Src/txChain.c **** 
+  43:Src/txChain.c **** 		char txStr[128] = "";
+  44:Src/txChain.c **** 		sprintf((char *)txStr, "> Frequency = %0.3f MHz, Power = %0.2f dBm\n", max2871Status->frequency, 
+  45:Src/txChain.c **** 		printUSB(txStr);
+  46:Src/txChain.c **** 		
+  47:Src/txChain.c **** 		DWT_Delay_us(delay);
+  48:Src/txChain.c **** 		currentFrequency += stepSize;
+  49:Src/txChain.c **** 		if (RX_FIFO.dataReady == 1) break;
+  50:Src/txChain.c **** 
+  51:Src/txChain.c **** 	}
+  52:Src/txChain.c **** }
+  53:Src/txChain.c **** 
+  54:Src/txChain.c **** void txChainInit(struct MAX2871Struct *max2871Status, struct txStruct *txStatus)
+  55:Src/txChain.c **** {
+  56:Src/txChain.c **** 	max2871RFDisable(max2871Status);
+  57:Src/txChain.c **** 	disablePA(txStatus);
+  58:Src/txChain.c **** 	setAttenuation(MAX_ATTENUATION,txStatus);
+  59:Src/txChain.c **** 	max2871Setup(max2871Status);
+  60:Src/txChain.c **** }
+  61:Src/txChain.c **** 
+  62:Src/txChain.c **** // Sets attenuation for a SKY12347 attenuator
+  63:Src/txChain.c **** void setAttenuation(float atten, struct txStruct *txStatus)
+  64:Src/txChain.c **** {
+  28              		.loc 1 64 0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -101,33 +106,33 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
   37              		.cfi_offset 5, -12
   38              		.cfi_offset 6, -8
   39              		.cfi_offset 14, -4
-  60:Src/txChain.c **** 	// Convert given attenuation value to the 8 bits which SKY12347 wants
-  61:Src/txChain.c **** 	txStatus->attenuation = atten;
-  40              		.loc 1 61 0
+  65:Src/txChain.c **** 	// Convert given attenuation value to the 8 bits which SKY12347 wants
+  66:Src/txChain.c **** 	txStatus->attenuation = atten;
+  40              		.loc 1 66 0
   41 0002 8860     		str	r0, [r1, #8]	@ float
-  62:Src/txChain.c **** 	uint8_t bitSequence = (atten * 4);
-  42              		.loc 1 62 0
+  67:Src/txChain.c **** 	uint8_t bitSequence = (atten * 4);
+  42              		.loc 1 67 0
   43 0004 4FF08141 		mov	r1, #1082130432
   44              	.LVL1:
   45 0008 FFF7FEFF 		bl	__aeabi_fmul
   46              	.LVL2:
   47 000c FFF7FEFF 		bl	__aeabi_f2uiz
   48              	.LVL3:
+ARM GAS  /tmp/ccH32pLR.s 			page 3
+
+
   49 0010 C6B2     		uxtb	r6, r0
   50              	.LVL4:
-  63:Src/txChain.c **** 	bitSequence = ~bitSequence;
-  51              		.loc 1 63 0
+  68:Src/txChain.c **** 	bitSequence = ~bitSequence;
+  51              		.loc 1 68 0
   52 0012 F643     		mvns	r6, r6
-ARM GAS  /tmp/ccByiixK.s 			page 3
-
-
   53              	.LVL5:
   54 0014 F6B2     		uxtb	r6, r6
   55              	.LVL6:
-  64:Src/txChain.c **** 
-  65:Src/txChain.c **** 	// Init attenuator LE high
-  66:Src/txChain.c **** 	HAL_GPIO_WritePin(ATTEN_LE_GPIO_Port,ATTEN_LE_Pin,1);
-  56              		.loc 1 66 0
+  69:Src/txChain.c **** 
+  70:Src/txChain.c **** 	// Init attenuator LE high
+  71:Src/txChain.c **** 	HAL_GPIO_WritePin(ATTEN_LE_GPIO_Port,ATTEN_LE_Pin,1);
+  56              		.loc 1 71 0
   57 0016 0122     		movs	r2, #1
   58 0018 4021     		movs	r1, #64
   59 001a 3748     		ldr	r0, .L10
@@ -173,14 +178,14 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
   72 0026 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
   73              	.LVL10:
   74 002a 354B     		ldr	r3, .L10+8
+ARM GAS  /tmp/ccH32pLR.s 			page 4
+
+
   75 002c A3FB0023 		umull	r2, r3, r3, r0
   76 0030 9B0C     		lsrs	r3, r3, #18
   77 0032 04FB03F4 		mul	r4, r4, r3
   78              	.L2:
   28:Inc/dwt_stm32_delay.h **** 
-ARM GAS  /tmp/ccByiixK.s 			page 4
-
-
   29:Inc/dwt_stm32_delay.h ****   /* Delay till end */
   30:Inc/dwt_stm32_delay.h ****   while ((DWT->CYCCNT - clk_cycle_start) < microseconds);
   79              		.loc 2 30 0
@@ -192,10 +197,10 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
   85              	.LVL11:
   86              	.LBE14:
   87              	.LBE13:
-  67:Src/txChain.c **** 	DWT_Delay_us(10);
-  68:Src/txChain.c **** 	// Begin by bringing LE low
-  69:Src/txChain.c **** 	HAL_GPIO_WritePin(ATTEN_LE_GPIO_Port, ATTEN_LE_Pin, 0);
-  88              		.loc 1 69 0
+  72:Src/txChain.c **** 	DWT_Delay_us(10);
+  73:Src/txChain.c **** 	// Begin by bringing LE low
+  74:Src/txChain.c **** 	HAL_GPIO_WritePin(ATTEN_LE_GPIO_Port, ATTEN_LE_Pin, 0);
+  88              		.loc 1 74 0
   89 0040 0022     		movs	r2, #0
   90 0042 4021     		movs	r1, #64
   91 0044 2C48     		ldr	r0, .L10
@@ -225,22 +230,22 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  113              	.LBE16:
  114              	.LBE15:
  115              	.LBB17:
-  70:Src/txChain.c **** 	DWT_Delay_us(1);
-  71:Src/txChain.c **** 
-  72:Src/txChain.c **** 	// Transfer the bits
-  73:Src/txChain.c **** 	for (uint8_t i = 6; i > 0 ; i--)
- 116              		.loc 1 73 0
+  75:Src/txChain.c **** 	DWT_Delay_us(1);
+  76:Src/txChain.c **** 
+  77:Src/txChain.c **** 	// Transfer the bits
+  78:Src/txChain.c **** 	for (uint8_t i = 6; i > 0 ; i--)
+ 116              		.loc 1 78 0
  117 0064 0625     		movs	r5, #6
  118 0066 2DE0     		b	.L4
  119              	.LVL15:
+ARM GAS  /tmp/ccH32pLR.s 			page 5
+
+
  120              	.L7:
-  74:Src/txChain.c **** 	{
-  75:Src/txChain.c **** 		HAL_GPIO_WritePin(ATTEN_SDO_GPIO_Port, ATTEN_SDO_Pin, bitSequence & (1 << i));
- 121              		.loc 1 75 0 discriminator 3
+  79:Src/txChain.c **** 	{
+  80:Src/txChain.c **** 		HAL_GPIO_WritePin(ATTEN_SDO_GPIO_Port, ATTEN_SDO_Pin, bitSequence & (1 << i));
+ 121              		.loc 1 80 0 discriminator 3
  122 0068 0124     		movs	r4, #1
-ARM GAS  /tmp/ccByiixK.s 			page 5
-
-
  123 006a 04FA05F2 		lsl	r2, r4, r5
  124 006e 3240     		ands	r2, r2, r6
  125 0070 8021     		movs	r1, #128
@@ -271,9 +276,9 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  148              	.LVL19:
  149              	.LBE19:
  150              	.LBE18:
-  76:Src/txChain.c **** 		DWT_Delay_us(1);
-  77:Src/txChain.c **** 		HAL_GPIO_WritePin(ATTEN_CLK_GPIO_Port, ATTEN_CLK_Pin, 1);
- 151              		.loc 1 77 0 discriminator 3
+  81:Src/txChain.c **** 		DWT_Delay_us(1);
+  82:Src/txChain.c **** 		HAL_GPIO_WritePin(ATTEN_CLK_GPIO_Port, ATTEN_CLK_Pin, 1);
+ 151              		.loc 1 82 0 discriminator 3
  152 0092 0122     		movs	r2, #1
  153 0094 1146     		mov	r1, r2
  154 0096 1B48     		ldr	r0, .L10+12
@@ -293,42 +298,42 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  166 00a4 164B     		ldr	r3, .L10+8
  167 00a6 A3FB0030 		umull	r3, r0, r3, r0
  168 00aa 800C     		lsrs	r0, r0, #18
+ARM GAS  /tmp/ccH32pLR.s 			page 6
+
+
  169              	.L6:
  170              		.loc 2 30 0
  171 00ac 134B     		ldr	r3, .L10+4
  172 00ae 5B68     		ldr	r3, [r3, #4]
  173 00b0 1B1B     		subs	r3, r3, r4
-ARM GAS  /tmp/ccByiixK.s 			page 6
-
-
  174 00b2 8342     		cmp	r3, r0
  175 00b4 FAD3     		bcc	.L6
  176              	.LVL23:
  177              	.LBE21:
  178              	.LBE20:
-  78:Src/txChain.c **** 		DWT_Delay_us(1);
-  79:Src/txChain.c **** 		HAL_GPIO_WritePin(ATTEN_CLK_GPIO_Port, ATTEN_CLK_Pin, 0);
- 179              		.loc 1 79 0 discriminator 3
+  83:Src/txChain.c **** 		DWT_Delay_us(1);
+  84:Src/txChain.c **** 		HAL_GPIO_WritePin(ATTEN_CLK_GPIO_Port, ATTEN_CLK_Pin, 0);
+ 179              		.loc 1 84 0 discriminator 3
  180 00b6 0022     		movs	r2, #0
  181 00b8 0121     		movs	r1, #1
  182 00ba 1248     		ldr	r0, .L10+12
  183 00bc FFF7FEFF 		bl	HAL_GPIO_WritePin
  184              	.LVL24:
-  73:Src/txChain.c **** 	{
- 185              		.loc 1 73 0 discriminator 3
+  78:Src/txChain.c **** 	{
+ 185              		.loc 1 78 0 discriminator 3
  186 00c0 013D     		subs	r5, r5, #1
  187              	.LVL25:
  188 00c2 EDB2     		uxtb	r5, r5
  189              	.LVL26:
  190              	.L4:
-  73:Src/txChain.c **** 	{
- 191              		.loc 1 73 0 is_stmt 0 discriminator 1
+  78:Src/txChain.c **** 	{
+ 191              		.loc 1 78 0 is_stmt 0 discriminator 1
  192 00c4 002D     		cmp	r5, #0
  193 00c6 CFD1     		bne	.L7
  194              	.LBE17:
-  80:Src/txChain.c **** 	}
-  81:Src/txChain.c **** 	HAL_GPIO_WritePin(ATTEN_SDO_GPIO_Port, ATTEN_SDO_Pin, 0);
- 195              		.loc 1 81 0 is_stmt 1
+  85:Src/txChain.c **** 	}
+  86:Src/txChain.c **** 	HAL_GPIO_WritePin(ATTEN_SDO_GPIO_Port, ATTEN_SDO_Pin, 0);
+ 195              		.loc 1 86 0 is_stmt 1
  196 00c8 0022     		movs	r2, #0
  197 00ca 8021     		movs	r1, #128
  198 00cc 0A48     		ldr	r0, .L10
@@ -353,25 +358,25 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  215 00e2 064B     		ldr	r3, .L10+4
  216 00e4 5B68     		ldr	r3, [r3, #4]
  217 00e6 1B1B     		subs	r3, r3, r4
+ARM GAS  /tmp/ccH32pLR.s 			page 7
+
+
  218 00e8 9342     		cmp	r3, r2
  219 00ea FAD3     		bcc	.L8
  220              	.LVL30:
  221              	.LBE23:
  222              	.LBE22:
-ARM GAS  /tmp/ccByiixK.s 			page 7
-
-
-  82:Src/txChain.c **** 	// Shift data in by bringing LE high
-  83:Src/txChain.c **** 	DWT_Delay_us(1);
-  84:Src/txChain.c **** 	HAL_GPIO_WritePin(ATTEN_LE_GPIO_Port, ATTEN_LE_Pin, 1);
- 223              		.loc 1 84 0
+  87:Src/txChain.c **** 	// Shift data in by bringing LE high
+  88:Src/txChain.c **** 	DWT_Delay_us(1);
+  89:Src/txChain.c **** 	HAL_GPIO_WritePin(ATTEN_LE_GPIO_Port, ATTEN_LE_Pin, 1);
+ 223              		.loc 1 89 0
  224 00ec 0122     		movs	r2, #1
  225 00ee 4021     		movs	r1, #64
  226 00f0 0148     		ldr	r0, .L10
  227 00f2 FFF7FEFF 		bl	HAL_GPIO_WritePin
  228              	.LVL31:
-  85:Src/txChain.c **** }
- 229              		.loc 1 85 0
+  90:Src/txChain.c **** }
+ 229              		.loc 1 90 0
  230 00f6 70BD     		pop	{r4, r5, r6, pc}
  231              	.LVL32:
  232              	.L11:
@@ -397,69 +402,69 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  253              		.fpu softvfp
  255              	readAD8319:
  256              	.LFB74:
-  86:Src/txChain.c **** 
-  87:Src/txChain.c **** // Very simple control of attenuator to set desired output power.
-  88:Src/txChain.c **** // Changes attenuation until AD8319 reads correct value or runs out of attenuation.
-  89:Src/txChain.c **** void setOutputPower(float setPower, struct MAX2871Struct *max2871Status, struct txStruct *txStatus)
-  90:Src/txChain.c **** {
-  91:Src/txChain.c **** 	if (setPower >= 0)
-  92:Src/txChain.c **** 		max2871SetPower(5, max2871Status);
-  93:Src/txChain.c **** 	else
-  94:Src/txChain.c **** 		max2871SetPower(-4, max2871Status);
-  95:Src/txChain.c **** 
-  96:Src/txChain.c **** 	txStatus->setOutputPower = setPower;
-  97:Src/txChain.c **** 	readAD8319(txStatus);
-  98:Src/txChain.c **** 
-  99:Src/txChain.c **** 	// If power too high
- 100:Src/txChain.c **** 	if (txStatus->measOutputPower > (txStatus->setOutputPower + STEP_ATTENUATION / 2))
- 101:Src/txChain.c **** 	{
- 102:Src/txChain.c **** 		// While power too high
- 103:Src/txChain.c **** 		while (txStatus->measOutputPower > (txStatus->setOutputPower + STEP_ATTENUATION / 2))
- 104:Src/txChain.c **** 		{
- 105:Src/txChain.c **** 			if (txStatus->attenuation < MAX_ATTENUATION)
- 106:Src/txChain.c **** 			{
-ARM GAS  /tmp/ccByiixK.s 			page 8
+  91:Src/txChain.c **** 
+  92:Src/txChain.c **** // Very simple control of attenuator to set desired output power.
+  93:Src/txChain.c **** // Changes attenuation until AD8319 reads correct value or runs out of attenuation.
+  94:Src/txChain.c **** void setOutputPower(float setPower, struct MAX2871Struct *max2871Status, struct txStruct *txStatus)
+  95:Src/txChain.c **** {
+  96:Src/txChain.c **** 	if (setPower >= 0)
+  97:Src/txChain.c **** 		max2871SetPower(5, max2871Status);
+  98:Src/txChain.c **** 	else
+  99:Src/txChain.c **** 		max2871SetPower(-4, max2871Status);
+ 100:Src/txChain.c **** 
+ 101:Src/txChain.c **** 	txStatus->setOutputPower = setPower;
+ 102:Src/txChain.c **** 	readAD8319(txStatus);
+ 103:Src/txChain.c **** 
+ 104:Src/txChain.c **** 	// If power too high
+ 105:Src/txChain.c **** 	if (txStatus->measOutputPower > (txStatus->setOutputPower + STEP_ATTENUATION / 2))
+ 106:Src/txChain.c **** 	{
+ARM GAS  /tmp/ccH32pLR.s 			page 8
 
 
- 107:Src/txChain.c **** 				setAttenuation(txStatus->attenuation += STEP_ATTENUATION, txStatus);
- 108:Src/txChain.c **** 				DWT_Delay_us(1);
- 109:Src/txChain.c **** 				readAD8319(txStatus);
- 110:Src/txChain.c **** 			}
- 111:Src/txChain.c **** 			else
- 112:Src/txChain.c **** 			{
- 113:Src/txChain.c **** 				printUSB((char *) "> Ran out of attenuation!\r\n");
- 114:Src/txChain.c **** 				break;
+ 107:Src/txChain.c **** 		// While power too high
+ 108:Src/txChain.c **** 		while (txStatus->measOutputPower > (txStatus->setOutputPower + STEP_ATTENUATION / 2))
+ 109:Src/txChain.c **** 		{
+ 110:Src/txChain.c **** 			if (txStatus->attenuation < MAX_ATTENUATION)
+ 111:Src/txChain.c **** 			{
+ 112:Src/txChain.c **** 				setAttenuation(txStatus->attenuation += STEP_ATTENUATION, txStatus);
+ 113:Src/txChain.c **** 				DWT_Delay_us(1);
+ 114:Src/txChain.c **** 				readAD8319(txStatus);
  115:Src/txChain.c **** 			}
- 116:Src/txChain.c **** 		}
- 117:Src/txChain.c **** 	}
- 118:Src/txChain.c **** 	// If power too low
- 119:Src/txChain.c **** 	else if (txStatus->measOutputPower < (txStatus->setOutputPower - STEP_ATTENUATION / 2))
- 120:Src/txChain.c **** 	{
- 121:Src/txChain.c **** 		// While power too low
- 122:Src/txChain.c **** 		while (txStatus->measOutputPower < (txStatus->setOutputPower - STEP_ATTENUATION / 2))
- 123:Src/txChain.c **** 		{
- 124:Src/txChain.c **** 			if (txStatus->attenuation > MIN_ATTENUATION)
- 125:Src/txChain.c **** 			{
- 126:Src/txChain.c **** 				setAttenuation(txStatus->attenuation -= STEP_ATTENUATION, txStatus);
- 127:Src/txChain.c **** 				DWT_Delay_us(1);
- 128:Src/txChain.c **** 				readAD8319(txStatus);
- 129:Src/txChain.c **** 			}
- 130:Src/txChain.c **** 			else
- 131:Src/txChain.c **** 			{
- 132:Src/txChain.c **** 				printUSB((char *) "> Ran out of attenuation!\r\n");
- 133:Src/txChain.c **** 				break;
+ 116:Src/txChain.c **** 			else
+ 117:Src/txChain.c **** 			{
+ 118:Src/txChain.c **** 				printUSB((char *) "> Ran out of attenuation!\r\n");
+ 119:Src/txChain.c **** 				break;
+ 120:Src/txChain.c **** 			}
+ 121:Src/txChain.c **** 		}
+ 122:Src/txChain.c **** 	}
+ 123:Src/txChain.c **** 	// If power too low
+ 124:Src/txChain.c **** 	else if (txStatus->measOutputPower < (txStatus->setOutputPower - STEP_ATTENUATION / 2))
+ 125:Src/txChain.c **** 	{
+ 126:Src/txChain.c **** 		// While power too low
+ 127:Src/txChain.c **** 		while (txStatus->measOutputPower < (txStatus->setOutputPower - STEP_ATTENUATION / 2))
+ 128:Src/txChain.c **** 		{
+ 129:Src/txChain.c **** 			if (txStatus->attenuation > MIN_ATTENUATION)
+ 130:Src/txChain.c **** 			{
+ 131:Src/txChain.c **** 				setAttenuation(txStatus->attenuation -= STEP_ATTENUATION, txStatus);
+ 132:Src/txChain.c **** 				DWT_Delay_us(1);
+ 133:Src/txChain.c **** 				readAD8319(txStatus);
  134:Src/txChain.c **** 			}
- 135:Src/txChain.c **** 		}
- 136:Src/txChain.c **** 	}
- 137:Src/txChain.c **** 
- 138:Src/txChain.c **** }
- 139:Src/txChain.c **** 
- 140:Src/txChain.c **** // Sets power value in the txStatus struct
- 141:Src/txChain.c **** // Accounts for losses before AD8319, however need to confirm through measurements
- 142:Src/txChain.c **** // Returns voltage measured from the AD8319
- 143:Src/txChain.c **** float readAD8319(struct txStruct *txStatus)
- 144:Src/txChain.c **** {
- 257              		.loc 1 144 0
+ 135:Src/txChain.c **** 			else
+ 136:Src/txChain.c **** 			{
+ 137:Src/txChain.c **** 				printUSB((char *) "> Ran out of attenuation!\r\n");
+ 138:Src/txChain.c **** 				break;
+ 139:Src/txChain.c **** 			}
+ 140:Src/txChain.c **** 		}
+ 141:Src/txChain.c **** 	}
+ 142:Src/txChain.c **** 
+ 143:Src/txChain.c **** }
+ 144:Src/txChain.c **** 
+ 145:Src/txChain.c **** // Sets power value in the txStatus struct
+ 146:Src/txChain.c **** // Accounts for losses before AD8319, however need to confirm through measurements
+ 147:Src/txChain.c **** // Returns voltage measured from the AD8319
+ 148:Src/txChain.c **** float readAD8319(struct txStruct *txStatus)
+ 149:Src/txChain.c **** {
+ 257              		.loc 1 149 0
  258              		.cfi_startproc
  259              		@ args = 0, pretend = 0, frame = 0
  260              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -473,76 +478,76 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  268              		.cfi_offset 14, -4
  269 0002 0646     		mov	r6, r0
  270              	.LVL34:
+ARM GAS  /tmp/ccH32pLR.s 			page 9
+
+
  271              	.LBB24:
- 145:Src/txChain.c **** 	float voltage, power;
- 146:Src/txChain.c **** 	uint32_t adcValue = 0;
- 147:Src/txChain.c **** 	uint32_t ch;
- 148:Src/txChain.c **** 	uint16_t retVal;
-ARM GAS  /tmp/ccByiixK.s 			page 9
-
-
- 149:Src/txChain.c **** 
- 150:Src/txChain.c **** 
- 151:Src/txChain.c **** 	// Get a 8 sample average of the ADC data
- 152:Src/txChain.c **** 	for (uint8_t i = 8; i > 0; i--)
- 272              		.loc 1 152 0
+ 150:Src/txChain.c **** 	float voltage, power;
+ 151:Src/txChain.c **** 	uint32_t adcValue = 0;
+ 152:Src/txChain.c **** 	uint32_t ch;
+ 153:Src/txChain.c **** 	uint16_t retVal;
+ 154:Src/txChain.c **** 
+ 155:Src/txChain.c **** 
+ 156:Src/txChain.c **** 	// Get a 8 sample average of the ADC data
+ 157:Src/txChain.c **** 	for (uint8_t i = 8; i > 0; i--)
+ 272              		.loc 1 157 0
  273 0004 0824     		movs	r4, #8
  274              	.LBE24:
- 146:Src/txChain.c **** 	uint32_t ch;
- 275              		.loc 1 146 0
+ 151:Src/txChain.c **** 	uint32_t ch;
+ 275              		.loc 1 151 0
  276 0006 0025     		movs	r5, #0
  277              	.LBB25:
- 278              		.loc 1 152 0
+ 278              		.loc 1 157 0
  279 0008 04E0     		b	.L13
  280              	.LVL35:
  281              	.L15:
- 153:Src/txChain.c **** 	{
- 154:Src/txChain.c **** 		while(HAL_ADC_PollForConversion(&hadc1, 1000) != HAL_OK)
- 155:Src/txChain.c **** 		{
- 156:Src/txChain.c **** 			// Wait
- 157:Src/txChain.c **** 		}
- 158:Src/txChain.c **** 
- 159:Src/txChain.c **** 		if(HAL_ADC_PollForConversion(&hadc1, 1000) == HAL_OK)
+ 158:Src/txChain.c **** 	{
+ 159:Src/txChain.c **** 		while(HAL_ADC_PollForConversion(&hadc1, 1000) != HAL_OK)
  160:Src/txChain.c **** 		{
- 161:Src/txChain.c **** 			adcValue += HAL_ADC_GetValue(&hadc1);
+ 161:Src/txChain.c **** 			// Wait
  162:Src/txChain.c **** 		}
- 163:Src/txChain.c **** 		HAL_Delay(1);
- 282              		.loc 1 163 0 discriminator 2
+ 163:Src/txChain.c **** 
+ 164:Src/txChain.c **** 		if(HAL_ADC_PollForConversion(&hadc1, 1000) == HAL_OK)
+ 165:Src/txChain.c **** 		{
+ 166:Src/txChain.c **** 			adcValue += HAL_ADC_GetValue(&hadc1);
+ 167:Src/txChain.c **** 		}
+ 168:Src/txChain.c **** 		HAL_Delay(1);
+ 282              		.loc 1 168 0 discriminator 2
  283 000a 0120     		movs	r0, #1
  284 000c FFF7FEFF 		bl	HAL_Delay
  285              	.LVL36:
- 152:Src/txChain.c **** 	{
- 286              		.loc 1 152 0 discriminator 2
+ 157:Src/txChain.c **** 	{
+ 286              		.loc 1 157 0 discriminator 2
  287 0010 013C     		subs	r4, r4, #1
  288              	.LVL37:
  289 0012 E4B2     		uxtb	r4, r4
  290              	.LVL38:
  291              	.L13:
- 152:Src/txChain.c **** 	{
- 292              		.loc 1 152 0 is_stmt 0 discriminator 1
+ 157:Src/txChain.c **** 	{
+ 292              		.loc 1 157 0 is_stmt 0 discriminator 1
  293 0014 94B1     		cbz	r4, .L17
  294              	.L14:
- 154:Src/txChain.c **** 		{
- 295              		.loc 1 154 0 is_stmt 1 discriminator 1
+ 159:Src/txChain.c **** 		{
+ 295              		.loc 1 159 0 is_stmt 1 discriminator 1
  296 0016 4FF47A71 		mov	r1, #1000
  297 001a 1D48     		ldr	r0, .L18+16
  298 001c FFF7FEFF 		bl	HAL_ADC_PollForConversion
  299              	.LVL39:
  300 0020 0028     		cmp	r0, #0
  301 0022 F8D1     		bne	.L14
- 159:Src/txChain.c **** 		{
- 302              		.loc 1 159 0
+ 164:Src/txChain.c **** 		{
+ 302              		.loc 1 164 0
  303 0024 4FF47A71 		mov	r1, #1000
+ARM GAS  /tmp/ccH32pLR.s 			page 10
+
+
  304 0028 1948     		ldr	r0, .L18+16
  305 002a FFF7FEFF 		bl	HAL_ADC_PollForConversion
  306              	.LVL40:
  307 002e 0028     		cmp	r0, #0
  308 0030 EBD1     		bne	.L15
-ARM GAS  /tmp/ccByiixK.s 			page 10
-
-
- 161:Src/txChain.c **** 		}
- 309              		.loc 1 161 0
+ 166:Src/txChain.c **** 		}
+ 309              		.loc 1 166 0
  310 0032 1748     		ldr	r0, .L18+16
  311 0034 FFF7FEFF 		bl	HAL_ADC_GetValue
  312              	.LVL41:
@@ -552,12 +557,12 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  316              	.L17:
  317              	.LVL43:
  318              	.LBE25:
- 164:Src/txChain.c **** 	}
- 165:Src/txChain.c **** 
- 166:Src/txChain.c **** 	adcValue /= 8; // Divide by 8 to get average value
- 167:Src/txChain.c **** 
- 168:Src/txChain.c **** 	voltage = (VREF * adcValue) / NUM_STATES_12_BIT;	// Convert to voltage
- 319              		.loc 1 168 0
+ 169:Src/txChain.c **** 	}
+ 170:Src/txChain.c **** 
+ 171:Src/txChain.c **** 	adcValue /= 8; // Divide by 8 to get average value
+ 172:Src/txChain.c **** 
+ 173:Src/txChain.c **** 	voltage = (VREF * adcValue) / NUM_STATES_12_BIT;	// Convert to voltage
+ 319              		.loc 1 173 0
  320 003c E808     		lsrs	r0, r5, #3
  321              	.LVL44:
  322 003e FFF7FEFF 		bl	__aeabi_ui2d
@@ -574,9 +579,9 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  333              	.LVL48:
  334 0058 0446     		mov	r4, r0
  335              	.LVL49:
- 169:Src/txChain.c **** 
- 170:Src/txChain.c **** 	power = -44.4 * voltage + 33; 				// Voltage to power at SMA
- 336              		.loc 1 170 0
+ 174:Src/txChain.c **** 
+ 175:Src/txChain.c **** 	power = -44.4 * voltage + 33; 				// Voltage to power at SMA
+ 336              		.loc 1 175 0
  337 005a FFF7FEFF 		bl	__aeabi_f2d
  338              	.LVL50:
  339 005e 0AA3     		adr	r3, .L18+8
@@ -589,18 +594,18 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  346              	.LVL52:
  347 0070 FFF7FEFF 		bl	__aeabi_d2f
  348              	.LVL53:
- 171:Src/txChain.c **** 
- 172:Src/txChain.c **** 	txStatus->measOutputPower = power;
- 349              		.loc 1 172 0
+ 176:Src/txChain.c **** 
+ 177:Src/txChain.c **** 	txStatus->measOutputPower = power;
+ 349              		.loc 1 177 0
  350 0074 3060     		str	r0, [r6]	@ float
- 173:Src/txChain.c **** 
- 174:Src/txChain.c **** 	return voltage;
- 175:Src/txChain.c **** }
- 351              		.loc 1 175 0
+ARM GAS  /tmp/ccH32pLR.s 			page 11
+
+
+ 178:Src/txChain.c **** 
+ 179:Src/txChain.c **** 	return voltage;
+ 180:Src/txChain.c **** }
+ 351              		.loc 1 180 0
  352 0076 2046     		mov	r0, r4
-ARM GAS  /tmp/ccByiixK.s 			page 11
-
-
  353              	.LVL54:
  354 0078 70BD     		pop	{r4, r5, r6, pc}
  355              	.LVL55:
@@ -634,8 +639,8 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  383              		.fpu softvfp
  385              	setOutputPower:
  386              	.LFB73:
-  90:Src/txChain.c **** 	if (setPower >= 0)
- 387              		.loc 1 90 0
+  95:Src/txChain.c **** 	if (setPower >= 0)
+ 387              		.loc 1 95 0
  388              		.cfi_startproc
  389              		@ args = 0, pretend = 0, frame = 0
  390              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -653,35 +658,35 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  402              		.cfi_offset 14, -4
  403 0004 0546     		mov	r5, r0
  404 0006 0E46     		mov	r6, r1
+ARM GAS  /tmp/ccH32pLR.s 			page 12
+
+
  405 0008 1446     		mov	r4, r2
-  91:Src/txChain.c **** 		max2871SetPower(5, max2871Status);
- 406              		.loc 1 91 0
+  96:Src/txChain.c **** 		max2871SetPower(5, max2871Status);
+ 406              		.loc 1 96 0
  407 000a 0021     		movs	r1, #0
  408              	.LVL57:
-ARM GAS  /tmp/ccByiixK.s 			page 12
-
-
  409 000c FFF7FEFF 		bl	__aeabi_fcmpge
  410              	.LVL58:
  411 0010 0028     		cmp	r0, #0
  412 0012 5FD0     		beq	.L39
-  92:Src/txChain.c **** 	else
- 413              		.loc 1 92 0
+  97:Src/txChain.c **** 	else
+ 413              		.loc 1 97 0
  414 0014 3146     		mov	r1, r6
  415 0016 0520     		movs	r0, #5
  416 0018 FFF7FEFF 		bl	max2871SetPower
  417              	.LVL59:
  418              	.L23:
-  96:Src/txChain.c **** 	readAD8319(txStatus);
- 419              		.loc 1 96 0
+ 101:Src/txChain.c **** 	readAD8319(txStatus);
+ 419              		.loc 1 101 0
  420 001c 6560     		str	r5, [r4, #4]	@ float
-  97:Src/txChain.c **** 
- 421              		.loc 1 97 0
+ 102:Src/txChain.c **** 
+ 421              		.loc 1 102 0
  422 001e 2046     		mov	r0, r4
  423 0020 FFF7FEFF 		bl	readAD8319
  424              	.LVL60:
- 100:Src/txChain.c **** 	{
- 425              		.loc 1 100 0
+ 105:Src/txChain.c **** 	{
+ 425              		.loc 1 105 0
  426 0024 2068     		ldr	r0, [r4]	@ float
  427 0026 FFF7FEFF 		bl	__aeabi_f2d
  428              	.LVL61:
@@ -705,29 +710,29 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  446              	.LVL65:
  447 004c 0028     		cmp	r0, #0
  448 004e 4CD1     		bne	.L24
- 119:Src/txChain.c **** 	{
- 449              		.loc 1 119 0
+ 124:Src/txChain.c **** 	{
+ 449              		.loc 1 124 0
  450 0050 0022     		movs	r2, #0
  451 0052 424B     		ldr	r3, .L44
  452 0054 4046     		mov	r0, r8
  453 0056 4946     		mov	r1, r9
  454 0058 FFF7FEFF 		bl	__aeabi_dsub
  455              	.LVL66:
+ARM GAS  /tmp/ccH32pLR.s 			page 13
+
+
  456 005c 0246     		mov	r2, r0
  457 005e 0B46     		mov	r3, r1
  458 0060 3046     		mov	r0, r6
  459 0062 3946     		mov	r1, r7
  460 0064 FFF7FEFF 		bl	__aeabi_dcmplt
-ARM GAS  /tmp/ccByiixK.s 			page 13
-
-
  461              	.LVL67:
  462 0068 0028     		cmp	r0, #0
  463 006a 3CD0     		beq	.L20
  464              	.LVL68:
  465              	.L31:
- 122:Src/txChain.c **** 		{
- 466              		.loc 1 122 0
+ 127:Src/txChain.c **** 		{
+ 466              		.loc 1 127 0
  467 006c 2068     		ldr	r0, [r4]	@ float
  468 006e FFF7FEFF 		bl	__aeabi_f2d
  469              	.LVL69:
@@ -747,8 +752,8 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  483 008c FFF7FEFF 		bl	__aeabi_dcmplt
  484              	.LVL72:
  485 0090 48B3     		cbz	r0, .L20
- 124:Src/txChain.c **** 			{
- 486              		.loc 1 124 0
+ 129:Src/txChain.c **** 			{
+ 486              		.loc 1 129 0
  487 0092 A568     		ldr	r5, [r4, #8]	@ float
  488 0094 0021     		movs	r1, #0
  489 0096 2846     		mov	r0, r5
@@ -756,8 +761,8 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  491              	.LVL73:
  492 009c 0028     		cmp	r0, #0
  493 009e 59D0     		beq	.L42
- 126:Src/txChain.c **** 				DWT_Delay_us(1);
- 494              		.loc 1 126 0
+ 131:Src/txChain.c **** 				DWT_Delay_us(1);
+ 494              		.loc 1 131 0
  495 00a0 4FF07C51 		mov	r1, #1056964608
  496 00a4 2846     		mov	r0, r5
  497 00a6 FFF7FEFF 		bl	__aeabi_fsub
@@ -773,14 +778,14 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  506 00b2 2B4B     		ldr	r3, .L44+4
  507 00b4 5D68     		ldr	r5, [r3, #4]
  508              	.LVL76:
+ARM GAS  /tmp/ccH32pLR.s 			page 14
+
+
   27:Inc/dwt_stm32_delay.h **** 
  509              		.loc 2 27 0
  510 00b6 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
  511              	.LVL77:
  512 00ba 2A4B     		ldr	r3, .L44+8
-ARM GAS  /tmp/ccByiixK.s 			page 14
-
-
  513 00bc A3FB0030 		umull	r3, r0, r3, r0
  514 00c0 800C     		lsrs	r0, r0, #18
  515              	.L34:
@@ -793,16 +798,16 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  522              	.LVL78:
  523              	.LBE31:
  524              	.LBE30:
- 128:Src/txChain.c **** 			}
- 525              		.loc 1 128 0
+ 133:Src/txChain.c **** 			}
+ 525              		.loc 1 133 0
  526 00cc 2046     		mov	r0, r4
  527 00ce FFF7FEFF 		bl	readAD8319
  528              	.LVL79:
  529 00d2 CBE7     		b	.L31
  530              	.LVL80:
  531              	.L39:
-  94:Src/txChain.c **** 
- 532              		.loc 1 94 0
+  99:Src/txChain.c **** 
+ 532              		.loc 1 99 0
  533 00d4 3146     		mov	r1, r6
  534 00d6 6FF00300 		mvn	r0, #3
  535 00da FFF7FEFF 		bl	max2871SetPower
@@ -810,19 +815,19 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  537 00de 9DE7     		b	.L23
  538              	.LVL82:
  539              	.L41:
- 113:Src/txChain.c **** 				break;
- 540              		.loc 1 113 0
+ 118:Src/txChain.c **** 				break;
+ 540              		.loc 1 118 0
  541 00e0 2148     		ldr	r0, .L44+12
  542 00e2 FFF7FEFF 		bl	printUSB
  543              	.LVL83:
  544              	.L20:
- 138:Src/txChain.c **** 
- 545              		.loc 1 138 0
+ 143:Src/txChain.c **** 
+ 545              		.loc 1 143 0
  546 00e6 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
  547              	.LVL84:
  548              	.L24:
- 103:Src/txChain.c **** 		{
- 549              		.loc 1 103 0
+ 108:Src/txChain.c **** 		{
+ 549              		.loc 1 108 0
  550 00ea 2068     		ldr	r0, [r4]	@ float
  551 00ec FFF7FEFF 		bl	__aeabi_f2d
  552              	.LVL85:
@@ -833,21 +838,21 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  557              	.LVL86:
  558 00fa 0022     		movs	r2, #0
  559 00fc 174B     		ldr	r3, .L44
+ARM GAS  /tmp/ccH32pLR.s 			page 15
+
+
  560 00fe FFF7FEFF 		bl	__aeabi_dadd
  561              	.LVL87:
  562 0102 0246     		mov	r2, r0
  563 0104 0B46     		mov	r3, r1
  564 0106 3046     		mov	r0, r6
-ARM GAS  /tmp/ccByiixK.s 			page 15
-
-
  565 0108 3946     		mov	r1, r7
  566 010a FFF7FEFF 		bl	__aeabi_dcmpgt
  567              	.LVL88:
  568 010e 0028     		cmp	r0, #0
  569 0110 E9D0     		beq	.L20
- 105:Src/txChain.c **** 			{
- 570              		.loc 1 105 0
+ 110:Src/txChain.c **** 			{
+ 570              		.loc 1 110 0
  571 0112 A568     		ldr	r5, [r4, #8]	@ float
  572 0114 1549     		ldr	r1, .L44+16
  573 0116 2846     		mov	r0, r5
@@ -855,8 +860,8 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  575              	.LVL89:
  576 011c 0028     		cmp	r0, #0
  577 011e DFD0     		beq	.L41
- 107:Src/txChain.c **** 				DWT_Delay_us(1);
- 578              		.loc 1 107 0
+ 112:Src/txChain.c **** 				DWT_Delay_us(1);
+ 578              		.loc 1 112 0
  579 0120 4FF07C51 		mov	r1, #1056964608
  580 0124 2846     		mov	r0, r5
  581 0126 FFF7FEFF 		bl	__aeabi_fadd
@@ -889,23 +894,23 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  606              	.LVL94:
  607              	.LBE33:
  608              	.LBE32:
- 109:Src/txChain.c **** 			}
- 609              		.loc 1 109 0
+ 114:Src/txChain.c **** 			}
+ 609              		.loc 1 114 0
  610 014c 2046     		mov	r0, r4
  611 014e FFF7FEFF 		bl	readAD8319
+ARM GAS  /tmp/ccH32pLR.s 			page 16
+
+
  612              	.LVL95:
  613 0152 CAE7     		b	.L24
  614              	.L42:
- 132:Src/txChain.c **** 				break;
- 615              		.loc 1 132 0
-ARM GAS  /tmp/ccByiixK.s 			page 16
-
-
+ 137:Src/txChain.c **** 				break;
+ 615              		.loc 1 137 0
  616 0154 0448     		ldr	r0, .L44+12
  617 0156 FFF7FEFF 		bl	printUSB
  618              	.LVL96:
- 133:Src/txChain.c **** 			}
- 619              		.loc 1 133 0
+ 138:Src/txChain.c **** 			}
+ 619              		.loc 1 138 0
  620 015a C4E7     		b	.L20
  621              	.L45:
  622              		.align	2
@@ -926,10 +931,10 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  638              		.fpu softvfp
  640              	enablePA:
  641              	.LFB75:
- 176:Src/txChain.c **** 
- 177:Src/txChain.c **** void enablePA(struct txStruct *txStatus)
- 178:Src/txChain.c **** {
- 642              		.loc 1 178 0
+ 181:Src/txChain.c **** 
+ 182:Src/txChain.c **** void enablePA(struct txStruct *txStatus)
+ 183:Src/txChain.c **** {
+ 642              		.loc 1 183 0
  643              		.cfi_startproc
  644              		@ args = 0, pretend = 0, frame = 0
  645              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -940,27 +945,27 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  650              		.cfi_offset 4, -8
  651              		.cfi_offset 14, -4
  652 0002 0446     		mov	r4, r0
- 179:Src/txChain.c **** 	HAL_GPIO_WritePin(PA_PWDN_GPIO_Port,PA_PWDN_Pin,0);
- 653              		.loc 1 179 0
+ 184:Src/txChain.c **** 	HAL_GPIO_WritePin(PA_PWDN_GPIO_Port,PA_PWDN_Pin,0);
+ 653              		.loc 1 184 0
  654 0004 0022     		movs	r2, #0
  655 0006 4FF40071 		mov	r1, #512
  656 000a 0348     		ldr	r0, .L48
  657              	.LVL98:
  658 000c FFF7FEFF 		bl	HAL_GPIO_WritePin
  659              	.LVL99:
- 180:Src/txChain.c **** 	txStatus->paPwdn = 0;
- 660              		.loc 1 180 0
+ 185:Src/txChain.c **** 	txStatus->paPwdn = 0;
+ 660              		.loc 1 185 0
  661 0010 0023     		movs	r3, #0
  662 0012 2373     		strb	r3, [r4, #12]
- 181:Src/txChain.c **** }
- 663              		.loc 1 181 0
+ 186:Src/txChain.c **** }
+ARM GAS  /tmp/ccH32pLR.s 			page 17
+
+
+ 663              		.loc 1 186 0
  664 0014 10BD     		pop	{r4, pc}
  665              	.LVL100:
  666              	.L49:
  667 0016 00BF     		.align	2
-ARM GAS  /tmp/ccByiixK.s 			page 17
-
-
  668              	.L48:
  669 0018 000C0140 		.word	1073810432
  670              		.cfi_endproc
@@ -1013,14 +1018,14 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
  715              	.LVL105:
   23:Src/txChain.c **** 
  716              		.loc 1 23 0
+ARM GAS  /tmp/ccH32pLR.s 			page 18
+
+
  717 0020 3046     		mov	r0, r6
  718 0022 FFF7FEFF 		bl	freqToLed
  719              	.LVL106:
  720 0026 FFF7FEFF 		bl	stpSpiTx
  721              	.LVL107:
-ARM GAS  /tmp/ccByiixK.s 			page 18
-
-
  722              	.L51:
   25:Src/txChain.c **** 	// Don't go any further until PLL has lock
  723              		.loc 1 25 0 discriminator 1
@@ -1055,534 +1060,591 @@ ARM GAS  /tmp/ccByiixK.s 			page 1
   33:Src/txChain.c **** 	float stepSize = ((higherFreq - lowerFreq) / numSteps);
  752              		.loc 1 33 0
  753              		.cfi_startproc
- 754              		@ args = 12, pretend = 0, frame = 0
+ 754              		@ args = 12, pretend = 0, frame = 136
  755              		@ frame_needed = 0, uses_anonymous_args = 0
  756              	.LVL110:
- 757 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 757 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
  758              	.LCFI5:
- 759              		.cfi_def_cfa_offset 32
- 760              		.cfi_offset 3, -32
- 761              		.cfi_offset 4, -28
- 762              		.cfi_offset 5, -24
- 763              		.cfi_offset 6, -20
- 764              		.cfi_offset 7, -16
- 765              		.cfi_offset 8, -12
- 766              		.cfi_offset 9, -8
- 767              		.cfi_offset 14, -4
- 768 0004 0546     		mov	r5, r0
- 769 0006 0F46     		mov	r7, r1
- 770 0008 1446     		mov	r4, r2
- 771 000a 9946     		mov	r9, r3
+ 759              		.cfi_def_cfa_offset 36
+ 760              		.cfi_offset 4, -36
+ 761              		.cfi_offset 5, -32
+ 762              		.cfi_offset 6, -28
+ 763              		.cfi_offset 7, -24
+ 764              		.cfi_offset 8, -20
+ 765              		.cfi_offset 9, -16
+ 766              		.cfi_offset 10, -12
+ 767              		.cfi_offset 11, -8
+ 768              		.cfi_offset 14, -4
+ 769 0004 A5B0     		sub	sp, sp, #148
+ 770              	.LCFI6:
+ 771              		.cfi_def_cfa_offset 184
+ARM GAS  /tmp/ccH32pLR.s 			page 19
+
+
+ 772 0006 0446     		mov	r4, r0
+ 773 0008 8B46     		mov	fp, r1
+ 774 000a 1546     		mov	r5, r2
+ 775 000c 0393     		str	r3, [sp, #12]	@ float
+ 776 000e 2F9F     		ldr	r7, [sp, #188]
+ 777 0010 309E     		ldr	r6, [sp, #192]
   34:Src/txChain.c **** 	uint32_t delay = sweepTime * 1000000 / numSteps; 	// Delay is in uS
- 772              		.loc 1 34 0
- 773 000c 0146     		mov	r1, r0
- 774              	.LVL111:
- 775 000e 3846     		mov	r0, r7
-ARM GAS  /tmp/ccByiixK.s 			page 19
-
-
- 776              	.LVL112:
- 777 0010 FFF7FEFF 		bl	__aeabi_fsub
- 778              	.LVL113:
- 779 0014 2146     		mov	r1, r4
- 780 0016 FFF7FEFF 		bl	__aeabi_fdiv
- 781              	.LVL114:
- 782 001a 8046     		mov	r8, r0
- 783              	.LVL115:
+ 778              		.loc 1 34 0
+ 779 0012 0146     		mov	r1, r0
+ 780              	.LVL111:
+ 781 0014 5846     		mov	r0, fp
+ 782              	.LVL112:
+ 783 0016 FFF7FEFF 		bl	__aeabi_fsub
+ 784              	.LVL113:
+ 785 001a 2946     		mov	r1, r5
+ 786 001c FFF7FEFF 		bl	__aeabi_fdiv
+ 787              	.LVL114:
+ 788 0020 0290     		str	r0, [sp, #8]	@ float
+ 789              	.LVL115:
   35:Src/txChain.c **** 
- 784              		.loc 1 35 0
- 785 001c 1749     		ldr	r1, .L59
- 786 001e 0898     		ldr	r0, [sp, #32]	@ float
- 787              	.LVL116:
- 788 0020 FFF7FEFF 		bl	__aeabi_fmul
- 789              	.LVL117:
- 790 0024 2146     		mov	r1, r4
- 791 0026 FFF7FEFF 		bl	__aeabi_fdiv
- 792              	.LVL118:
- 793 002a FFF7FEFF 		bl	__aeabi_f2uiz
- 794              	.LVL119:
- 795 002e 0646     		mov	r6, r0
- 796              	.LVL120:
- 797              	.L54:
+ 790              		.loc 1 35 0
+ 791 0022 2749     		ldr	r1, .L60
+ 792 0024 2E98     		ldr	r0, [sp, #184]	@ float
+ 793              	.LVL116:
+ 794 0026 FFF7FEFF 		bl	__aeabi_fmul
+ 795              	.LVL117:
+ 796 002a 2946     		mov	r1, r5
+ 797 002c FFF7FEFF 		bl	__aeabi_fdiv
+ 798              	.LVL118:
+ 799 0030 FFF7FEFF 		bl	__aeabi_f2uiz
+ 800              	.LVL119:
+ 801 0034 0546     		mov	r5, r0
+ 802              	.LVL120:
+ 803              	.L54:
   39:Src/txChain.c **** 	{
- 798              		.loc 1 39 0
- 799 0030 3946     		mov	r1, r7
- 800 0032 2846     		mov	r0, r5
- 801 0034 FFF7FEFF 		bl	__aeabi_fcmple
- 802              	.LVL121:
- 803 0038 F0B1     		cbz	r0, .L53
-  41:Src/txChain.c **** 		DWT_Delay_us(delay);
- 804              		.loc 1 41 0
- 805 003a 0A9B     		ldr	r3, [sp, #40]
- 806 003c 099A     		ldr	r2, [sp, #36]
- 807 003e 4946     		mov	r1, r9
- 808 0040 2846     		mov	r0, r5
- 809 0042 FFF7FEFF 		bl	sigGen
- 810              	.LVL122:
- 811              	.LBB36:
- 812              	.LBB37:
+ 804              		.loc 1 39 0
+ 805 0036 5946     		mov	r1, fp
+ 806 0038 2046     		mov	r0, r4
+ 807 003a FFF7FEFF 		bl	__aeabi_fcmple
+ 808              	.LVL121:
+ 809 003e 0028     		cmp	r0, #0
+ 810 0040 3BD0     		beq	.L53
+ 811              	.LBB37:
+  41:Src/txChain.c **** 
+ 812              		.loc 1 41 0
+ 813 0042 3346     		mov	r3, r6
+ 814 0044 3A46     		mov	r2, r7
+ 815 0046 0399     		ldr	r1, [sp, #12]	@ float
+ 816 0048 2046     		mov	r0, r4
+ 817 004a FFF7FEFF 		bl	sigGen
+ 818              	.LVL122:
+  43:Src/txChain.c **** 		sprintf((char *)txStr, "> Frequency = %0.3f MHz, Power = %0.2f dBm\n", max2871Status->frequency, 
+ 819              		.loc 1 43 0
+ 820 004e 0021     		movs	r1, #0
+ 821 0050 0491     		str	r1, [sp, #16]
+ 822 0052 7C22     		movs	r2, #124
+ 823 0054 05A8     		add	r0, sp, #20
+ARM GAS  /tmp/ccH32pLR.s 			page 20
+
+
+ 824 0056 FFF7FEFF 		bl	memset
+ 825              	.LVL123:
+  44:Src/txChain.c **** 		printUSB(txStr);
+ 826              		.loc 1 44 0
+ 827 005a D6F800A0 		ldr	r10, [r6]	@ float
+ 828 005e 7868     		ldr	r0, [r7, #4]	@ float
+ 829 0060 FFF7FEFF 		bl	__aeabi_f2d
+ 830              	.LVL124:
+ 831 0064 8046     		mov	r8, r0
+ 832 0066 8946     		mov	r9, r1
+ 833 0068 5046     		mov	r0, r10
+ 834 006a FFF7FEFF 		bl	__aeabi_f2d
+ 835              	.LVL125:
+ 836 006e CDE90001 		strd	r0, [sp]
+ 837 0072 4246     		mov	r2, r8
+ 838 0074 4B46     		mov	r3, r9
+ 839 0076 1349     		ldr	r1, .L60+4
+ 840 0078 04A8     		add	r0, sp, #16
+ 841 007a FFF7FEFF 		bl	sprintf
+ 842              	.LVL126:
+  45:Src/txChain.c **** 		
+ 843              		.loc 1 45 0
+ 844 007e 04A8     		add	r0, sp, #16
+ 845 0080 FFF7FEFF 		bl	printUSB
+ 846              	.LVL127:
+ 847              	.LBB38:
+ 848              	.LBB39:
   24:Inc/dwt_stm32_delay.h **** 
- 813              		.loc 2 24 0
- 814 0046 0E4B     		ldr	r3, .L59+4
- 815 0048 5C68     		ldr	r4, [r3, #4]
- 816              	.LVL123:
+ 849              		.loc 2 24 0
+ 850 0084 104B     		ldr	r3, .L60+8
+ 851 0086 D3F80480 		ldr	r8, [r3, #4]
+ 852              	.LVL128:
   27:Inc/dwt_stm32_delay.h **** 
- 817              		.loc 2 27 0
- 818 004a FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
- 819              	.LVL124:
- 820 004e 0D4A     		ldr	r2, .L59+8
- 821 0050 A2FB0032 		umull	r3, r2, r2, r0
- 822 0054 920C     		lsrs	r2, r2, #18
- 823 0056 06FB02F2 		mul	r2, r6, r2
- 824              	.L55:
- 825              		.loc 2 30 0
- 826 005a 094B     		ldr	r3, .L59+4
- 827 005c 5B68     		ldr	r3, [r3, #4]
-ARM GAS  /tmp/ccByiixK.s 			page 20
+ 853              		.loc 2 27 0
+ 854 008a FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
+ 855              	.LVL129:
+ 856 008e 0F4A     		ldr	r2, .L60+12
+ 857 0090 A2FB0032 		umull	r3, r2, r2, r0
+ 858 0094 920C     		lsrs	r2, r2, #18
+ 859 0096 05FB02F2 		mul	r2, r5, r2
+ 860              	.L55:
+ 861              		.loc 2 30 0
+ 862 009a 0B4B     		ldr	r3, .L60+8
+ 863 009c 5B68     		ldr	r3, [r3, #4]
+ 864 009e A3EB0803 		sub	r3, r3, r8
+ 865 00a2 9342     		cmp	r3, r2
+ 866 00a4 F9D3     		bcc	.L55
+ 867              	.LVL130:
+ 868              	.LBE39:
+ 869              	.LBE38:
+  48:Src/txChain.c **** 		if (RX_FIFO.dataReady == 1) break;
+ 870              		.loc 1 48 0
+ 871 00a6 0299     		ldr	r1, [sp, #8]	@ float
+ 872 00a8 2046     		mov	r0, r4
+ 873 00aa FFF7FEFF 		bl	__aeabi_fadd
+ 874              	.LVL131:
+ 875 00ae 0446     		mov	r4, r0
+ARM GAS  /tmp/ccH32pLR.s 			page 21
 
 
- 828 005e 1B1B     		subs	r3, r3, r4
- 829 0060 9342     		cmp	r3, r2
- 830 0062 FAD3     		bcc	.L55
- 831              	.LVL125:
- 832              	.LBE37:
- 833              	.LBE36:
-  43:Src/txChain.c **** 		if (RX_FIFO.dataReady == 1) break;
- 834              		.loc 1 43 0
- 835 0064 4146     		mov	r1, r8
- 836 0066 2846     		mov	r0, r5
- 837 0068 FFF7FEFF 		bl	__aeabi_fadd
- 838              	.LVL126:
- 839 006c 0546     		mov	r5, r0
- 840              	.LVL127:
-  44:Src/txChain.c **** 
- 841              		.loc 1 44 0
- 842 006e 064B     		ldr	r3, .L59+12
- 843 0070 93F88830 		ldrb	r3, [r3, #136]	@ zero_extendqisi2
- 844 0074 012B     		cmp	r3, #1
- 845 0076 DBD1     		bne	.L54
- 846              	.LVL128:
- 847              	.L53:
-  47:Src/txChain.c **** 
- 848              		.loc 1 47 0
- 849 0078 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
- 850              	.LVL129:
- 851              	.L60:
- 852              		.align	2
- 853              	.L59:
- 854 007c 00247449 		.word	1232348160
- 855 0080 001000E0 		.word	-536866816
- 856 0084 83DE1B43 		.word	1125899907
- 857 0088 00000000 		.word	RX_FIFO
- 858              		.cfi_endproc
- 859              	.LFE70:
- 861              		.section	.text.disablePA,"ax",%progbits
- 862              		.align	1
- 863              		.global	disablePA
- 864              		.syntax unified
- 865              		.thumb
- 866              		.thumb_func
- 867              		.fpu softvfp
- 869              	disablePA:
- 870              	.LFB76:
- 182:Src/txChain.c **** 
- 183:Src/txChain.c **** void disablePA(struct txStruct *txStatus)
- 184:Src/txChain.c **** {
- 871              		.loc 1 184 0
- 872              		.cfi_startproc
- 873              		@ args = 0, pretend = 0, frame = 0
- 874              		@ frame_needed = 0, uses_anonymous_args = 0
- 875              	.LVL130:
- 876 0000 10B5     		push	{r4, lr}
- 877              	.LCFI6:
- 878              		.cfi_def_cfa_offset 8
- 879              		.cfi_offset 4, -8
- 880              		.cfi_offset 14, -4
-ARM GAS  /tmp/ccByiixK.s 			page 21
+ 876              	.LVL132:
+  49:Src/txChain.c **** 
+ 877              		.loc 1 49 0
+ 878 00b0 074B     		ldr	r3, .L60+16
+ 879 00b2 93F88830 		ldrb	r3, [r3, #136]	@ zero_extendqisi2
+ 880 00b6 012B     		cmp	r3, #1
+ 881 00b8 BDD1     		bne	.L54
+ 882              	.LVL133:
+ 883              	.L53:
+ 884              	.LBE37:
+  52:Src/txChain.c **** 
+ 885              		.loc 1 52 0
+ 886 00ba 25B0     		add	sp, sp, #148
+ 887              	.LCFI7:
+ 888              		.cfi_def_cfa_offset 36
+ 889              		@ sp needed
+ 890 00bc BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 891              	.LVL134:
+ 892              	.L61:
+ 893              		.align	2
+ 894              	.L60:
+ 895 00c0 00247449 		.word	1232348160
+ 896 00c4 00000000 		.word	.LC1
+ 897 00c8 001000E0 		.word	-536866816
+ 898 00cc 83DE1B43 		.word	1125899907
+ 899 00d0 00000000 		.word	RX_FIFO
+ 900              		.cfi_endproc
+ 901              	.LFE70:
+ 903              		.section	.text.disablePA,"ax",%progbits
+ 904              		.align	1
+ 905              		.global	disablePA
+ 906              		.syntax unified
+ 907              		.thumb
+ 908              		.thumb_func
+ 909              		.fpu softvfp
+ 911              	disablePA:
+ 912              	.LFB76:
+ 187:Src/txChain.c **** 
+ 188:Src/txChain.c **** void disablePA(struct txStruct *txStatus)
+ 189:Src/txChain.c **** {
+ 913              		.loc 1 189 0
+ 914              		.cfi_startproc
+ 915              		@ args = 0, pretend = 0, frame = 0
+ 916              		@ frame_needed = 0, uses_anonymous_args = 0
+ 917              	.LVL135:
+ 918 0000 10B5     		push	{r4, lr}
+ 919              	.LCFI8:
+ 920              		.cfi_def_cfa_offset 8
+ 921              		.cfi_offset 4, -8
+ 922              		.cfi_offset 14, -4
+ 923 0002 0446     		mov	r4, r0
+ 190:Src/txChain.c **** 	HAL_GPIO_WritePin(PA_PWDN_GPIO_Port,PA_PWDN_Pin,1);
+ 924              		.loc 1 190 0
+ 925 0004 0122     		movs	r2, #1
+ 926 0006 4FF40071 		mov	r1, #512
+ 927 000a 0348     		ldr	r0, .L64
+ 928              	.LVL136:
+ARM GAS  /tmp/ccH32pLR.s 			page 22
 
 
- 881 0002 0446     		mov	r4, r0
- 185:Src/txChain.c **** 	HAL_GPIO_WritePin(PA_PWDN_GPIO_Port,PA_PWDN_Pin,1);
- 882              		.loc 1 185 0
- 883 0004 0122     		movs	r2, #1
- 884 0006 4FF40071 		mov	r1, #512
- 885 000a 0348     		ldr	r0, .L63
- 886              	.LVL131:
- 887 000c FFF7FEFF 		bl	HAL_GPIO_WritePin
- 888              	.LVL132:
- 186:Src/txChain.c **** 	txStatus->paPwdn = 1;
- 889              		.loc 1 186 0
- 890 0010 0123     		movs	r3, #1
- 891 0012 2373     		strb	r3, [r4, #12]
- 187:Src/txChain.c **** }
- 892              		.loc 1 187 0
- 893 0014 10BD     		pop	{r4, pc}
- 894              	.LVL133:
- 895              	.L64:
- 896 0016 00BF     		.align	2
- 897              	.L63:
- 898 0018 000C0140 		.word	1073810432
- 899              		.cfi_endproc
- 900              	.LFE76:
- 902              		.section	.text.txChainInit,"ax",%progbits
- 903              		.align	1
- 904              		.global	txChainInit
- 905              		.syntax unified
- 906              		.thumb
- 907              		.thumb_func
- 908              		.fpu softvfp
- 910              	txChainInit:
- 911              	.LFB71:
-  50:Src/txChain.c **** 	max2871RFDisable(max2871Status);
- 912              		.loc 1 50 0
- 913              		.cfi_startproc
- 914              		@ args = 0, pretend = 0, frame = 0
- 915              		@ frame_needed = 0, uses_anonymous_args = 0
- 916              	.LVL134:
- 917 0000 38B5     		push	{r3, r4, r5, lr}
- 918              	.LCFI7:
- 919              		.cfi_def_cfa_offset 16
- 920              		.cfi_offset 3, -16
- 921              		.cfi_offset 4, -12
- 922              		.cfi_offset 5, -8
- 923              		.cfi_offset 14, -4
- 924 0002 0546     		mov	r5, r0
- 925 0004 0C46     		mov	r4, r1
-  51:Src/txChain.c **** 	disablePA(txStatus);
- 926              		.loc 1 51 0
- 927 0006 FFF7FEFF 		bl	max2871RFDisable
- 928              	.LVL135:
-  52:Src/txChain.c **** 	setAttenuation(MAX_ATTENUATION,txStatus);
- 929              		.loc 1 52 0
- 930 000a 2046     		mov	r0, r4
- 931 000c FFF7FEFF 		bl	disablePA
- 932              	.LVL136:
-  53:Src/txChain.c **** 	max2871Setup(max2871Status);
-ARM GAS  /tmp/ccByiixK.s 			page 22
+ 929 000c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 930              	.LVL137:
+ 191:Src/txChain.c **** 	txStatus->paPwdn = 1;
+ 931              		.loc 1 191 0
+ 932 0010 0123     		movs	r3, #1
+ 933 0012 2373     		strb	r3, [r4, #12]
+ 192:Src/txChain.c **** }
+ 934              		.loc 1 192 0
+ 935 0014 10BD     		pop	{r4, pc}
+ 936              	.LVL138:
+ 937              	.L65:
+ 938 0016 00BF     		.align	2
+ 939              	.L64:
+ 940 0018 000C0140 		.word	1073810432
+ 941              		.cfi_endproc
+ 942              	.LFE76:
+ 944              		.section	.text.txChainInit,"ax",%progbits
+ 945              		.align	1
+ 946              		.global	txChainInit
+ 947              		.syntax unified
+ 948              		.thumb
+ 949              		.thumb_func
+ 950              		.fpu softvfp
+ 952              	txChainInit:
+ 953              	.LFB71:
+  55:Src/txChain.c **** 	max2871RFDisable(max2871Status);
+ 954              		.loc 1 55 0
+ 955              		.cfi_startproc
+ 956              		@ args = 0, pretend = 0, frame = 0
+ 957              		@ frame_needed = 0, uses_anonymous_args = 0
+ 958              	.LVL139:
+ 959 0000 38B5     		push	{r3, r4, r5, lr}
+ 960              	.LCFI9:
+ 961              		.cfi_def_cfa_offset 16
+ 962              		.cfi_offset 3, -16
+ 963              		.cfi_offset 4, -12
+ 964              		.cfi_offset 5, -8
+ 965              		.cfi_offset 14, -4
+ 966 0002 0546     		mov	r5, r0
+ 967 0004 0C46     		mov	r4, r1
+  56:Src/txChain.c **** 	disablePA(txStatus);
+ 968              		.loc 1 56 0
+ 969 0006 FFF7FEFF 		bl	max2871RFDisable
+ 970              	.LVL140:
+  57:Src/txChain.c **** 	setAttenuation(MAX_ATTENUATION,txStatus);
+ 971              		.loc 1 57 0
+ 972 000a 2046     		mov	r0, r4
+ 973 000c FFF7FEFF 		bl	disablePA
+ 974              	.LVL141:
+  58:Src/txChain.c **** 	max2871Setup(max2871Status);
+ 975              		.loc 1 58 0
+ 976 0010 2146     		mov	r1, r4
+ 977 0012 0348     		ldr	r0, .L68
+ 978 0014 FFF7FEFF 		bl	setAttenuation
+ 979              	.LVL142:
+  59:Src/txChain.c **** }
+ 980              		.loc 1 59 0
+ARM GAS  /tmp/ccH32pLR.s 			page 23
 
 
- 933              		.loc 1 53 0
- 934 0010 2146     		mov	r1, r4
- 935 0012 0348     		ldr	r0, .L67
- 936 0014 FFF7FEFF 		bl	setAttenuation
- 937              	.LVL137:
-  54:Src/txChain.c **** }
- 938              		.loc 1 54 0
- 939 0018 2846     		mov	r0, r5
- 940 001a FFF7FEFF 		bl	max2871Setup
- 941              	.LVL138:
-  55:Src/txChain.c **** 
- 942              		.loc 1 55 0
- 943 001e 38BD     		pop	{r3, r4, r5, pc}
- 944              	.LVL139:
- 945              	.L68:
- 946              		.align	2
- 947              	.L67:
- 948 0020 0000FC41 		.word	1107034112
- 949              		.cfi_endproc
- 950              	.LFE71:
- 952              		.section	.text.txChainPrintStatus,"ax",%progbits
- 953              		.align	1
- 954              		.global	txChainPrintStatus
- 955              		.syntax unified
- 956              		.thumb
- 957              		.thumb_func
- 958              		.fpu softvfp
- 960              	txChainPrintStatus:
- 961              	.LFB77:
- 188:Src/txChain.c **** 
- 189:Src/txChain.c **** 
- 190:Src/txChain.c **** void txChainPrintStatus(uint8_t verbose, struct txStruct *txStatus)
- 191:Src/txChain.c **** {
- 962              		.loc 1 191 0
- 963              		.cfi_startproc
- 964              		@ args = 0, pretend = 0, frame = 128
- 965              		@ frame_needed = 0, uses_anonymous_args = 0
- 966              	.LVL140:
- 967 0000 30B5     		push	{r4, r5, lr}
- 968              	.LCFI8:
- 969              		.cfi_def_cfa_offset 12
- 970              		.cfi_offset 4, -12
- 971              		.cfi_offset 5, -8
- 972              		.cfi_offset 14, -4
- 973 0002 A1B0     		sub	sp, sp, #132
- 974              	.LCFI9:
- 975              		.cfi_def_cfa_offset 144
- 976 0004 0546     		mov	r5, r0
- 977 0006 0C46     		mov	r4, r1
- 192:Src/txChain.c **** 
- 193:Src/txChain.c **** 	char str1[128] = "";
- 978              		.loc 1 193 0
- 979 0008 0021     		movs	r1, #0
- 980              	.LVL141:
- 981 000a 0091     		str	r1, [sp]
- 982 000c 7C22     		movs	r2, #124
- 983 000e 01A8     		add	r0, sp, #4
-ARM GAS  /tmp/ccByiixK.s 			page 23
-
-
- 984              	.LVL142:
- 985 0010 FFF7FEFF 		bl	memset
- 986              	.LVL143:
+ 981 0018 2846     		mov	r0, r5
+ 982 001a FFF7FEFF 		bl	max2871Setup
+ 983              	.LVL143:
+  60:Src/txChain.c **** 
+ 984              		.loc 1 60 0
+ 985 001e 38BD     		pop	{r3, r4, r5, pc}
+ 986              	.LVL144:
+ 987              	.L69:
+ 988              		.align	2
+ 989              	.L68:
+ 990 0020 0000FC41 		.word	1107034112
+ 991              		.cfi_endproc
+ 992              	.LFE71:
+ 994              		.section	.text.txChainPrintStatus,"ax",%progbits
+ 995              		.align	1
+ 996              		.global	txChainPrintStatus
+ 997              		.syntax unified
+ 998              		.thumb
+ 999              		.thumb_func
+ 1000              		.fpu softvfp
+ 1002              	txChainPrintStatus:
+ 1003              	.LFB77:
+ 193:Src/txChain.c **** 
  194:Src/txChain.c **** 
- 195:Src/txChain.c **** 	printUSB((char *)"> ----  TX Chain  ----\n");
- 987              		.loc 1 195 0
- 988 0014 2448     		ldr	r0, .L73
- 989 0016 FFF7FEFF 		bl	printUSB
- 990              	.LVL144:
- 196:Src/txChain.c **** 
- 197:Src/txChain.c **** 	sprintf((char *)str1, "> Attenuation = %0.1f dB\n", txStatus->attenuation);
- 991              		.loc 1 197 0
- 992 001a A068     		ldr	r0, [r4, #8]	@ float
- 993 001c FFF7FEFF 		bl	__aeabi_f2d
- 994              	.LVL145:
- 995 0020 0246     		mov	r2, r0
- 996 0022 0B46     		mov	r3, r1
- 997 0024 2149     		ldr	r1, .L73+4
- 998 0026 6846     		mov	r0, sp
- 999 0028 FFF7FEFF 		bl	sprintf
- 1000              	.LVL146:
- 198:Src/txChain.c **** 	printUSB(str1);
- 1001              		.loc 1 198 0
- 1002 002c 6846     		mov	r0, sp
- 1003 002e FFF7FEFF 		bl	printUSB
- 1004              	.LVL147:
+ 195:Src/txChain.c **** void txChainPrintStatus(uint8_t verbose, struct txStruct *txStatus)
+ 196:Src/txChain.c **** {
+ 1004              		.loc 1 196 0
+ 1005              		.cfi_startproc
+ 1006              		@ args = 0, pretend = 0, frame = 128
+ 1007              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1008              	.LVL145:
+ 1009 0000 30B5     		push	{r4, r5, lr}
+ 1010              	.LCFI10:
+ 1011              		.cfi_def_cfa_offset 12
+ 1012              		.cfi_offset 4, -12
+ 1013              		.cfi_offset 5, -8
+ 1014              		.cfi_offset 14, -4
+ 1015 0002 A1B0     		sub	sp, sp, #132
+ 1016              	.LCFI11:
+ 1017              		.cfi_def_cfa_offset 144
+ 1018 0004 0546     		mov	r5, r0
+ 1019 0006 0C46     		mov	r4, r1
+ 197:Src/txChain.c **** 
+ 198:Src/txChain.c **** 	char str1[128] = "";
+ 1020              		.loc 1 198 0
+ 1021 0008 0021     		movs	r1, #0
+ 1022              	.LVL146:
+ 1023 000a 0091     		str	r1, [sp]
+ 1024 000c 7C22     		movs	r2, #124
+ 1025 000e 01A8     		add	r0, sp, #4
+ 1026              	.LVL147:
+ 1027 0010 FFF7FEFF 		bl	memset
+ 1028              	.LVL148:
  199:Src/txChain.c **** 
- 200:Src/txChain.c **** 	sprintf((char *)str1, "> PA Enabled = %d\n", !txStatus->paPwdn);
- 1005              		.loc 1 200 0
- 1006 0032 227B     		ldrb	r2, [r4, #12]	@ zero_extendqisi2
- 1007 0034 B2FA82F2 		clz	r2, r2
- 1008 0038 5209     		lsrs	r2, r2, #5
- 1009 003a 1D49     		ldr	r1, .L73+8
- 1010 003c 6846     		mov	r0, sp
- 1011 003e FFF7FEFF 		bl	sprintf
- 1012              	.LVL148:
- 201:Src/txChain.c **** 	printUSB(str1);
- 1013              		.loc 1 201 0
- 1014 0042 6846     		mov	r0, sp
- 1015 0044 FFF7FEFF 		bl	printUSB
- 1016              	.LVL149:
- 202:Src/txChain.c **** 
- 203:Src/txChain.c **** 	sprintf((char *)str1, "> Set Output Power= %0.2f dBm\n", txStatus->setOutputPower);
- 1017              		.loc 1 203 0
- 1018 0048 6068     		ldr	r0, [r4, #4]	@ float
- 1019 004a FFF7FEFF 		bl	__aeabi_f2d
- 1020              	.LVL150:
- 1021 004e 0246     		mov	r2, r0
- 1022 0050 0B46     		mov	r3, r1
- 1023 0052 1849     		ldr	r1, .L73+12
- 1024 0054 6846     		mov	r0, sp
- 1025 0056 FFF7FEFF 		bl	sprintf
- 1026              	.LVL151:
- 204:Src/txChain.c **** 	printUSB(str1);
- 1027              		.loc 1 204 0
- 1028 005a 6846     		mov	r0, sp
- 1029 005c FFF7FEFF 		bl	printUSB
-ARM GAS  /tmp/ccByiixK.s 			page 24
+ 200:Src/txChain.c **** 	printUSB((char *)"> ----  TX Chain  ----\n");
+ 1029              		.loc 1 200 0
+ 1030 0014 2448     		ldr	r0, .L74
+ARM GAS  /tmp/ccH32pLR.s 			page 24
 
 
- 1030              	.LVL152:
- 205:Src/txChain.c **** 
- 206:Src/txChain.c **** 	readAD8319(txStatus);
- 1031              		.loc 1 206 0
- 1032 0060 2046     		mov	r0, r4
- 1033 0062 FFF7FEFF 		bl	readAD8319
- 1034              	.LVL153:
+ 1031 0016 FFF7FEFF 		bl	printUSB
+ 1032              	.LVL149:
+ 201:Src/txChain.c **** 
+ 202:Src/txChain.c **** 	sprintf((char *)str1, "> Attenuation = %0.1f dB\n", txStatus->attenuation);
+ 1033              		.loc 1 202 0
+ 1034 001a A068     		ldr	r0, [r4, #8]	@ float
+ 1035 001c FFF7FEFF 		bl	__aeabi_f2d
+ 1036              	.LVL150:
+ 1037 0020 0246     		mov	r2, r0
+ 1038 0022 0B46     		mov	r3, r1
+ 1039 0024 2149     		ldr	r1, .L74+4
+ 1040 0026 6846     		mov	r0, sp
+ 1041 0028 FFF7FEFF 		bl	sprintf
+ 1042              	.LVL151:
+ 203:Src/txChain.c **** 	printUSB(str1);
+ 1043              		.loc 1 203 0
+ 1044 002c 6846     		mov	r0, sp
+ 1045 002e FFF7FEFF 		bl	printUSB
+ 1046              	.LVL152:
+ 204:Src/txChain.c **** 
+ 205:Src/txChain.c **** 	sprintf((char *)str1, "> PA Enabled = %d\n", !txStatus->paPwdn);
+ 1047              		.loc 1 205 0
+ 1048 0032 227B     		ldrb	r2, [r4, #12]	@ zero_extendqisi2
+ 1049 0034 B2FA82F2 		clz	r2, r2
+ 1050 0038 5209     		lsrs	r2, r2, #5
+ 1051 003a 1D49     		ldr	r1, .L74+8
+ 1052 003c 6846     		mov	r0, sp
+ 1053 003e FFF7FEFF 		bl	sprintf
+ 1054              	.LVL153:
+ 206:Src/txChain.c **** 	printUSB(str1);
+ 1055              		.loc 1 206 0
+ 1056 0042 6846     		mov	r0, sp
+ 1057 0044 FFF7FEFF 		bl	printUSB
+ 1058              	.LVL154:
  207:Src/txChain.c **** 
- 208:Src/txChain.c **** 	sprintf((char *)str1, "> Measured Output Power = %0.2f dBm\n", txStatus->measOutputPower);
- 1035              		.loc 1 208 0
- 1036 0066 2068     		ldr	r0, [r4]	@ float
- 1037 0068 FFF7FEFF 		bl	__aeabi_f2d
- 1038              	.LVL154:
- 1039 006c 0246     		mov	r2, r0
- 1040 006e 0B46     		mov	r3, r1
- 1041 0070 1149     		ldr	r1, .L73+16
- 1042 0072 6846     		mov	r0, sp
- 1043 0074 FFF7FEFF 		bl	sprintf
- 1044              	.LVL155:
+ 208:Src/txChain.c **** 	sprintf((char *)str1, "> Set Output Power= %0.2f dBm\n", txStatus->setOutputPower);
+ 1059              		.loc 1 208 0
+ 1060 0048 6068     		ldr	r0, [r4, #4]	@ float
+ 1061 004a FFF7FEFF 		bl	__aeabi_f2d
+ 1062              	.LVL155:
+ 1063 004e 0246     		mov	r2, r0
+ 1064 0050 0B46     		mov	r3, r1
+ 1065 0052 1849     		ldr	r1, .L74+12
+ 1066 0054 6846     		mov	r0, sp
+ 1067 0056 FFF7FEFF 		bl	sprintf
+ 1068              	.LVL156:
  209:Src/txChain.c **** 	printUSB(str1);
- 1045              		.loc 1 209 0
- 1046 0078 6846     		mov	r0, sp
- 1047 007a FFF7FEFF 		bl	printUSB
- 1048              	.LVL156:
+ 1069              		.loc 1 209 0
+ 1070 005a 6846     		mov	r0, sp
+ 1071 005c FFF7FEFF 		bl	printUSB
+ 1072              	.LVL157:
  210:Src/txChain.c **** 
- 211:Src/txChain.c **** 	if (verbose)
- 1049              		.loc 1 211 0
- 1050 007e 0DB9     		cbnz	r5, .L72
- 1051              	.L69:
- 212:Src/txChain.c **** 	{
- 213:Src/txChain.c **** 		readAD8319(txStatus);
- 214:Src/txChain.c **** 		sprintf((char *)str1, "> Measured Voltage= %0.2f V\n", readAD8319(txStatus));
- 215:Src/txChain.c **** 		printUSB(str1);
- 216:Src/txChain.c **** 	}
- 217:Src/txChain.c **** }
- 1052              		.loc 1 217 0
- 1053 0080 21B0     		add	sp, sp, #132
- 1054              	.LCFI10:
- 1055              		.cfi_remember_state
- 1056              		.cfi_def_cfa_offset 12
- 1057              		@ sp needed
- 1058 0082 30BD     		pop	{r4, r5, pc}
- 1059              	.LVL157:
- 1060              	.L72:
- 1061              	.LCFI11:
- 1062              		.cfi_restore_state
- 213:Src/txChain.c **** 		sprintf((char *)str1, "> Measured Voltage= %0.2f V\n", readAD8319(txStatus));
- 1063              		.loc 1 213 0
- 1064 0084 2046     		mov	r0, r4
- 1065 0086 FFF7FEFF 		bl	readAD8319
- 1066              	.LVL158:
- 214:Src/txChain.c **** 		printUSB(str1);
- 1067              		.loc 1 214 0
- 1068 008a 2046     		mov	r0, r4
- 1069 008c FFF7FEFF 		bl	readAD8319
- 1070              	.LVL159:
- 1071 0090 FFF7FEFF 		bl	__aeabi_f2d
-ARM GAS  /tmp/ccByiixK.s 			page 25
+ 211:Src/txChain.c **** 	readAD8319(txStatus);
+ 1073              		.loc 1 211 0
+ 1074 0060 2046     		mov	r0, r4
+ 1075 0062 FFF7FEFF 		bl	readAD8319
+ 1076              	.LVL158:
+ARM GAS  /tmp/ccH32pLR.s 			page 25
 
 
- 1072              	.LVL160:
- 1073 0094 0246     		mov	r2, r0
- 1074 0096 0B46     		mov	r3, r1
- 1075 0098 0849     		ldr	r1, .L73+20
- 1076 009a 6846     		mov	r0, sp
- 1077 009c FFF7FEFF 		bl	sprintf
- 1078              	.LVL161:
- 215:Src/txChain.c **** 	}
- 1079              		.loc 1 215 0
- 1080 00a0 6846     		mov	r0, sp
- 1081 00a2 FFF7FEFF 		bl	printUSB
- 1082              	.LVL162:
- 1083              		.loc 1 217 0
- 1084 00a6 EBE7     		b	.L69
- 1085              	.L74:
- 1086              		.align	2
- 1087              	.L73:
- 1088 00a8 00000000 		.word	.LC1
- 1089 00ac 18000000 		.word	.LC2
- 1090 00b0 34000000 		.word	.LC3
- 1091 00b4 48000000 		.word	.LC4
- 1092 00b8 68000000 		.word	.LC5
- 1093 00bc 90000000 		.word	.LC6
- 1094              		.cfi_endproc
- 1095              	.LFE77:
- 1097              		.comm	txStatus,16,4
- 1098              		.section	.rodata.setOutputPower.str1.4,"aMS",%progbits,1
- 1099              		.align	2
- 1100              	.LC0:
- 1101 0000 3E205261 		.ascii	"> Ran out of attenuation!\015\012\000"
- 1101      6E206F75 
- 1101      74206F66 
- 1101      20617474 
- 1101      656E7561 
- 1102              		.section	.rodata.txChainPrintStatus.str1.4,"aMS",%progbits,1
- 1103              		.align	2
- 1104              	.LC1:
- 1105 0000 3E202D2D 		.ascii	"> ----  TX Chain  ----\012\000"
- 1105      2D2D2020 
- 1105      54582043 
- 1105      6861696E 
- 1105      20202D2D 
- 1106              	.LC2:
- 1107 0018 3E204174 		.ascii	"> Attenuation = %0.1f dB\012\000"
- 1107      74656E75 
- 1107      6174696F 
- 1107      6E203D20 
- 1107      25302E31 
- 1108 0032 0000     		.space	2
- 1109              	.LC3:
- 1110 0034 3E205041 		.ascii	"> PA Enabled = %d\012\000"
- 1110      20456E61 
- 1110      626C6564 
- 1110      203D2025 
- 1110      640A00
- 1111 0047 00       		.space	1
- 1112              	.LC4:
-ARM GAS  /tmp/ccByiixK.s 			page 26
+ 212:Src/txChain.c **** 
+ 213:Src/txChain.c **** 	sprintf((char *)str1, "> Measured Output Power = %0.2f dBm\n", txStatus->measOutputPower);
+ 1077              		.loc 1 213 0
+ 1078 0066 2068     		ldr	r0, [r4]	@ float
+ 1079 0068 FFF7FEFF 		bl	__aeabi_f2d
+ 1080              	.LVL159:
+ 1081 006c 0246     		mov	r2, r0
+ 1082 006e 0B46     		mov	r3, r1
+ 1083 0070 1149     		ldr	r1, .L74+16
+ 1084 0072 6846     		mov	r0, sp
+ 1085 0074 FFF7FEFF 		bl	sprintf
+ 1086              	.LVL160:
+ 214:Src/txChain.c **** 	printUSB(str1);
+ 1087              		.loc 1 214 0
+ 1088 0078 6846     		mov	r0, sp
+ 1089 007a FFF7FEFF 		bl	printUSB
+ 1090              	.LVL161:
+ 215:Src/txChain.c **** 
+ 216:Src/txChain.c **** 	if (verbose)
+ 1091              		.loc 1 216 0
+ 1092 007e 0DB9     		cbnz	r5, .L73
+ 1093              	.L70:
+ 217:Src/txChain.c **** 	{
+ 218:Src/txChain.c **** 		readAD8319(txStatus);
+ 219:Src/txChain.c **** 		sprintf((char *)str1, "> Measured Voltage= %0.2f V\n", readAD8319(txStatus));
+ 220:Src/txChain.c **** 		printUSB(str1);
+ 221:Src/txChain.c **** 	}
+ 222:Src/txChain.c **** }
+ 1094              		.loc 1 222 0
+ 1095 0080 21B0     		add	sp, sp, #132
+ 1096              	.LCFI12:
+ 1097              		.cfi_remember_state
+ 1098              		.cfi_def_cfa_offset 12
+ 1099              		@ sp needed
+ 1100 0082 30BD     		pop	{r4, r5, pc}
+ 1101              	.LVL162:
+ 1102              	.L73:
+ 1103              	.LCFI13:
+ 1104              		.cfi_restore_state
+ 218:Src/txChain.c **** 		sprintf((char *)str1, "> Measured Voltage= %0.2f V\n", readAD8319(txStatus));
+ 1105              		.loc 1 218 0
+ 1106 0084 2046     		mov	r0, r4
+ 1107 0086 FFF7FEFF 		bl	readAD8319
+ 1108              	.LVL163:
+ 219:Src/txChain.c **** 		printUSB(str1);
+ 1109              		.loc 1 219 0
+ 1110 008a 2046     		mov	r0, r4
+ 1111 008c FFF7FEFF 		bl	readAD8319
+ 1112              	.LVL164:
+ 1113 0090 FFF7FEFF 		bl	__aeabi_f2d
+ 1114              	.LVL165:
+ 1115 0094 0246     		mov	r2, r0
+ 1116 0096 0B46     		mov	r3, r1
+ 1117 0098 0849     		ldr	r1, .L74+20
+ 1118 009a 6846     		mov	r0, sp
+ 1119 009c FFF7FEFF 		bl	sprintf
+ 1120              	.LVL166:
+ARM GAS  /tmp/ccH32pLR.s 			page 26
 
 
- 1113 0048 3E205365 		.ascii	"> Set Output Power= %0.2f dBm\012\000"
- 1113      74204F75 
- 1113      74707574 
- 1113      20506F77 
- 1113      65723D20 
- 1114 0067 00       		.space	1
- 1115              	.LC5:
- 1116 0068 3E204D65 		.ascii	"> Measured Output Power = %0.2f dBm\012\000"
- 1116      61737572 
- 1116      6564204F 
- 1116      75747075 
- 1116      7420506F 
- 1117 008d 000000   		.space	3
- 1118              	.LC6:
- 1119 0090 3E204D65 		.ascii	"> Measured Voltage= %0.2f V\012\000"
- 1119      61737572 
- 1119      65642056 
- 1119      6F6C7461 
- 1119      67653D20 
- 1120              		.text
- 1121              	.Letext0:
- 1122              		.file 3 "/usr/include/newlib/machine/_default_types.h"
- 1123              		.file 4 "/usr/include/newlib/sys/_stdint.h"
- 1124              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
- 1125              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 1126              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
- 1127              		.file 8 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
- 1128              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
- 1129              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
- 1130              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h"
- 1131              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 1132              		.file 13 "Inc/main.h"
- 1133              		.file 14 "Inc/max2871.h"
- 1134              		.file 15 "Inc/txChain.h"
- 1135              		.file 16 "/usr/include/newlib/sys/lock.h"
- 1136              		.file 17 "/usr/include/newlib/sys/_types.h"
- 1137              		.file 18 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
- 1138              		.file 19 "/usr/include/newlib/sys/reent.h"
- 1139              		.file 20 "/usr/include/newlib/stdlib.h"
- 1140              		.file 21 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
- 1141              		.file 22 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
- 1142              		.file 23 "Inc/usbd_cdc_if.h"
- 1143              		.file 24 "/usr/include/newlib/math.h"
- 1144              		.file 25 "/usr/include/newlib/stdio.h"
- 1145              		.file 26 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
- 1146              		.file 27 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
- 1147              		.file 28 "Inc/STP08CP05.h"
- 1148              		.file 29 "<built-in>"
-ARM GAS  /tmp/ccByiixK.s 			page 27
+ 220:Src/txChain.c **** 	}
+ 1121              		.loc 1 220 0
+ 1122 00a0 6846     		mov	r0, sp
+ 1123 00a2 FFF7FEFF 		bl	printUSB
+ 1124              	.LVL167:
+ 1125              		.loc 1 222 0
+ 1126 00a6 EBE7     		b	.L70
+ 1127              	.L75:
+ 1128              		.align	2
+ 1129              	.L74:
+ 1130 00a8 00000000 		.word	.LC2
+ 1131 00ac 18000000 		.word	.LC3
+ 1132 00b0 34000000 		.word	.LC4
+ 1133 00b4 48000000 		.word	.LC5
+ 1134 00b8 68000000 		.word	.LC6
+ 1135 00bc 90000000 		.word	.LC7
+ 1136              		.cfi_endproc
+ 1137              	.LFE77:
+ 1139              		.comm	txStatus,16,4
+ 1140              		.section	.rodata.setOutputPower.str1.4,"aMS",%progbits,1
+ 1141              		.align	2
+ 1142              	.LC0:
+ 1143 0000 3E205261 		.ascii	"> Ran out of attenuation!\015\012\000"
+ 1143      6E206F75 
+ 1143      74206F66 
+ 1143      20617474 
+ 1143      656E7561 
+ 1144              		.section	.rodata.sweep.str1.4,"aMS",%progbits,1
+ 1145              		.align	2
+ 1146              	.LC1:
+ 1147 0000 3E204672 		.ascii	"> Frequency = %0.3f MHz, Power = %0.2f dBm\012\000"
+ 1147      65717565 
+ 1147      6E637920 
+ 1147      3D202530 
+ 1147      2E336620 
+ 1148              		.section	.rodata.txChainPrintStatus.str1.4,"aMS",%progbits,1
+ 1149              		.align	2
+ 1150              	.LC2:
+ 1151 0000 3E202D2D 		.ascii	"> ----  TX Chain  ----\012\000"
+ 1151      2D2D2020 
+ 1151      54582043 
+ 1151      6861696E 
+ 1151      20202D2D 
+ 1152              	.LC3:
+ 1153 0018 3E204174 		.ascii	"> Attenuation = %0.1f dB\012\000"
+ 1153      74656E75 
+ 1153      6174696F 
+ 1153      6E203D20 
+ 1153      25302E31 
+ 1154 0032 0000     		.space	2
+ 1155              	.LC4:
+ 1156 0034 3E205041 		.ascii	"> PA Enabled = %d\012\000"
+ 1156      20456E61 
+ 1156      626C6564 
+ 1156      203D2025 
+ 1156      640A00
+ 1157 0047 00       		.space	1
+ARM GAS  /tmp/ccH32pLR.s 			page 27
+
+
+ 1158              	.LC5:
+ 1159 0048 3E205365 		.ascii	"> Set Output Power= %0.2f dBm\012\000"
+ 1159      74204F75 
+ 1159      74707574 
+ 1159      20506F77 
+ 1159      65723D20 
+ 1160 0067 00       		.space	1
+ 1161              	.LC6:
+ 1162 0068 3E204D65 		.ascii	"> Measured Output Power = %0.2f dBm\012\000"
+ 1162      61737572 
+ 1162      6564204F 
+ 1162      75747075 
+ 1162      7420506F 
+ 1163 008d 000000   		.space	3
+ 1164              	.LC7:
+ 1165 0090 3E204D65 		.ascii	"> Measured Voltage= %0.2f V\012\000"
+ 1165      61737572 
+ 1165      65642056 
+ 1165      6F6C7461 
+ 1165      67653D20 
+ 1166              		.text
+ 1167              	.Letext0:
+ 1168              		.file 3 "/usr/include/newlib/machine/_default_types.h"
+ 1169              		.file 4 "/usr/include/newlib/sys/_stdint.h"
+ 1170              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
+ 1171              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 1172              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 1173              		.file 8 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
+ 1174              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 1175              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 1176              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h"
+ 1177              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 1178              		.file 13 "Inc/main.h"
+ 1179              		.file 14 "Inc/max2871.h"
+ 1180              		.file 15 "Inc/txChain.h"
+ 1181              		.file 16 "/usr/include/newlib/sys/lock.h"
+ 1182              		.file 17 "/usr/include/newlib/sys/_types.h"
+ 1183              		.file 18 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
+ 1184              		.file 19 "/usr/include/newlib/sys/reent.h"
+ 1185              		.file 20 "/usr/include/newlib/stdlib.h"
+ 1186              		.file 21 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
+ 1187              		.file 22 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
+ 1188              		.file 23 "Inc/usbd_cdc_if.h"
+ 1189              		.file 24 "/usr/include/newlib/math.h"
+ 1190              		.file 25 "/usr/include/newlib/stdio.h"
+ 1191              		.file 26 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 1192              		.file 27 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
+ 1193              		.file 28 "Inc/STP08CP05.h"
+ 1194              		.file 29 "<built-in>"
+ARM GAS  /tmp/ccH32pLR.s 			page 28
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 txChain.c
-     /tmp/ccByiixK.s:18     .text.setAttenuation:0000000000000000 $t
-     /tmp/ccByiixK.s:25     .text.setAttenuation:0000000000000000 setAttenuation
-     /tmp/ccByiixK.s:235    .text.setAttenuation:00000000000000f8 $d
-     /tmp/ccByiixK.s:248    .text.readAD8319:0000000000000000 $t
-     /tmp/ccByiixK.s:255    .text.readAD8319:0000000000000000 readAD8319
-     /tmp/ccByiixK.s:359    .text.readAD8319:0000000000000080 $d
-     /tmp/ccByiixK.s:378    .text.setOutputPower:0000000000000000 $t
-     /tmp/ccByiixK.s:385    .text.setOutputPower:0000000000000000 setOutputPower
-     /tmp/ccByiixK.s:624    .text.setOutputPower:000000000000015c $d
-     /tmp/ccByiixK.s:633    .text.enablePA:0000000000000000 $t
-     /tmp/ccByiixK.s:640    .text.enablePA:0000000000000000 enablePA
-     /tmp/ccByiixK.s:669    .text.enablePA:0000000000000018 $d
-     /tmp/ccByiixK.s:674    .text.sigGen:0000000000000000 $t
-     /tmp/ccByiixK.s:681    .text.sigGen:0000000000000000 sigGen
-     /tmp/ccByiixK.s:743    .text.sweep:0000000000000000 $t
-     /tmp/ccByiixK.s:750    .text.sweep:0000000000000000 sweep
-     /tmp/ccByiixK.s:854    .text.sweep:000000000000007c $d
-     /tmp/ccByiixK.s:862    .text.disablePA:0000000000000000 $t
-     /tmp/ccByiixK.s:869    .text.disablePA:0000000000000000 disablePA
-     /tmp/ccByiixK.s:898    .text.disablePA:0000000000000018 $d
-     /tmp/ccByiixK.s:903    .text.txChainInit:0000000000000000 $t
-     /tmp/ccByiixK.s:910    .text.txChainInit:0000000000000000 txChainInit
-     /tmp/ccByiixK.s:948    .text.txChainInit:0000000000000020 $d
-     /tmp/ccByiixK.s:953    .text.txChainPrintStatus:0000000000000000 $t
-     /tmp/ccByiixK.s:960    .text.txChainPrintStatus:0000000000000000 txChainPrintStatus
-     /tmp/ccByiixK.s:1088   .text.txChainPrintStatus:00000000000000a8 $d
+     /tmp/ccH32pLR.s:18     .text.setAttenuation:0000000000000000 $t
+     /tmp/ccH32pLR.s:25     .text.setAttenuation:0000000000000000 setAttenuation
+     /tmp/ccH32pLR.s:235    .text.setAttenuation:00000000000000f8 $d
+     /tmp/ccH32pLR.s:248    .text.readAD8319:0000000000000000 $t
+     /tmp/ccH32pLR.s:255    .text.readAD8319:0000000000000000 readAD8319
+     /tmp/ccH32pLR.s:359    .text.readAD8319:0000000000000080 $d
+     /tmp/ccH32pLR.s:378    .text.setOutputPower:0000000000000000 $t
+     /tmp/ccH32pLR.s:385    .text.setOutputPower:0000000000000000 setOutputPower
+     /tmp/ccH32pLR.s:624    .text.setOutputPower:000000000000015c $d
+     /tmp/ccH32pLR.s:633    .text.enablePA:0000000000000000 $t
+     /tmp/ccH32pLR.s:640    .text.enablePA:0000000000000000 enablePA
+     /tmp/ccH32pLR.s:669    .text.enablePA:0000000000000018 $d
+     /tmp/ccH32pLR.s:674    .text.sigGen:0000000000000000 $t
+     /tmp/ccH32pLR.s:681    .text.sigGen:0000000000000000 sigGen
+     /tmp/ccH32pLR.s:743    .text.sweep:0000000000000000 $t
+     /tmp/ccH32pLR.s:750    .text.sweep:0000000000000000 sweep
+     /tmp/ccH32pLR.s:895    .text.sweep:00000000000000c0 $d
+     /tmp/ccH32pLR.s:904    .text.disablePA:0000000000000000 $t
+     /tmp/ccH32pLR.s:911    .text.disablePA:0000000000000000 disablePA
+     /tmp/ccH32pLR.s:940    .text.disablePA:0000000000000018 $d
+     /tmp/ccH32pLR.s:945    .text.txChainInit:0000000000000000 $t
+     /tmp/ccH32pLR.s:952    .text.txChainInit:0000000000000000 txChainInit
+     /tmp/ccH32pLR.s:990    .text.txChainInit:0000000000000020 $d
+     /tmp/ccH32pLR.s:995    .text.txChainPrintStatus:0000000000000000 $t
+     /tmp/ccH32pLR.s:1002   .text.txChainPrintStatus:0000000000000000 txChainPrintStatus
+     /tmp/ccH32pLR.s:1130   .text.txChainPrintStatus:00000000000000a8 $d
                             *COM*:0000000000000010 txStatus
-     /tmp/ccByiixK.s:1099   .rodata.setOutputPower.str1.4:0000000000000000 $d
-     /tmp/ccByiixK.s:1103   .rodata.txChainPrintStatus.str1.4:0000000000000000 $d
+     /tmp/ccH32pLR.s:1141   .rodata.setOutputPower.str1.4:0000000000000000 $d
+     /tmp/ccH32pLR.s:1145   .rodata.sweep.str1.4:0000000000000000 $d
+     /tmp/ccH32pLR.s:1149   .rodata.txChainPrintStatus.str1.4:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 __aeabi_fmul
@@ -1608,18 +1670,18 @@ __aeabi_fcmpgt
 __aeabi_fsub
 max2871SetPower
 printUSB
+ARM GAS  /tmp/ccH32pLR.s 			page 29
+
+
 max2871RFEnable
-ARM GAS  /tmp/ccByiixK.s 			page 28
-
-
 max2871SetFrequency
 freqToLed
 stpSpiTx
 max2871CheckLD
 __aeabi_fdiv
 __aeabi_fcmple
+memset
+sprintf
 RX_FIFO
 max2871RFDisable
 max2871Setup
-memset
-sprintf

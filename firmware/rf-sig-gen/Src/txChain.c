@@ -39,6 +39,11 @@ void sweep(float lowerFreq, float higherFreq, float numSteps, float power, float
 	while (currentFrequency <= higherFreq)
 	{
 		sigGen(currentFrequency, power, max2871Status, txStatus);
+
+		char txStr[128] = "";
+		sprintf((char *)txStr, "> Frequency = %0.3f MHz, Power = %0.2f dBm\n", max2871Status->frequency, txStatus->measOutputPower);
+		printUSB(txStr);
+		
 		DWT_Delay_us(delay);
 		currentFrequency += stepSize;
 		if (RX_FIFO.dataReady == 1) break;

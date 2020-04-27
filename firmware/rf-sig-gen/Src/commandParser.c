@@ -204,6 +204,11 @@ void commandParser(struct MAX2871Struct *max2871Status, struct txStruct *txStatu
 		printUSB((char *)"> enablePA\r\n");
 		printUSB((char *)"> disablePA\r\n");
 	}
+
+	else if (strncmp("\r\n", command, 2) == 0)
+	{
+		printUSB("> Break\r\n");
+	}
 	else
 	{
 		printUSB("> Not found, try again\r\n");
